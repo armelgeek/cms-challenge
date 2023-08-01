@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/global.css" />
+    <title>CMS</title>
+  </head>
+  <body>
+
+    <main>
+        <header class="intro">
+            <h1 class="intro__heading">Done list</h1>
+            <p class="intro__summary">A list of things that you have achieved today.</p>
+            <p class="intro__summary"><b>Note:</b> The data isn't stored, so it will disappear if you reload!</p>
+        </header>
+        <section class="app">
+            <section class="app__input">
+                <h2 class="app__heading">What you've done</h2>
+                <div class="js-items" aria-live="polite" aria-label="A list of items you have done"></div>
+                <form class="new-item boilerform js-form">
+                    <div class="boilerform">
+                        <!-- Form styles from the https://boilerform.design boilerplate -->
+                        <label for="new-item-field" class="new-item__label c-label">Add a new item</label>
+                        <input type="text" class="new-item__details c-input-field" id="new-item-field" autocomplete="off" />
+                        <button class="c-button  new-item__button">Save</button>
+                    </div>
+                </form>
+            </section>
+            <aside class="app__status">
+                <p role="status" class="visually-hidden">You have done <span class="js-status">1 thing</span> today!</p>
+                <div class="app__decor js-count" aria-hidden="true">
+                    <small>You've done</small>
+                    <span>0</span>
+                    <small>things today 😢</small>
+                </div>
+            </aside>
+        </section>
+    </main>
+    <script type="module" src="js/main.js"></script>
+
+    <script>
+      const costum = {
+        header: {},
+        pages: [
+          {
+            title: "",
+            url: "",
+            icon: "",
+            tags: [],
+            blocks: [
+              {
+                id: "block",
+                category: "tag simple",
+                domTree: {
+                  tagName: "div",
+                  attributes: { class: "outer-container" },
+                  children: [
+                    {
+                      tagName: "div",
+                      attributes: { class: "inner-container" },
+                      children: [
+                        {
+                          tagName: "div",
+                          attributes: { class: "box box-1" },
+                          children: [
+                            {
+                              tagName: "p",
+                              attributes: {},
+                              children: [
+                                {
+                                  tagName: "#text",
+                                  value: "This is box 1.",
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                        {
+                          tagName: "div",
+                          attributes: { class: "box box-2" },
+                          children: [
+                            {
+                              tagName: "p",
+                              attributes: {},
+                              children: [
+                                {
+                                  tagName: "#text",
+                                  value: "This is box 2.",
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+        footer: {},
+      };
+    </script>
+  </body>
+</html>
