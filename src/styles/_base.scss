@@ -1,0 +1,177 @@
+body {
+  @apply bg-slate-50  text-slate-700 dark:bg-slate-900 dark:text-slate-200;
+
+  // &:has(.modal.show) {
+  //   @apply overflow-hidden;
+  // }
+
+  #app {
+    @apply min-h-screen w-full;
+  }
+
+  .wrapper {
+    @apply flex flex-1 flex-col transition-margin duration-300 ease-in-out lg:ml-64;
+
+    &.expanded {
+      @apply lg:ml-20;
+    }
+
+    .header {
+      @apply sticky top-0 z-50 flex h-12 w-full items-center overflow-visible drop-shadow-sm dark:bg-slate-800;
+    }
+
+    .content {
+      @apply flex w-full flex-col scroll-smooth;
+      min-height: calc(100vh - 4rem);
+    }
+
+    .footer {
+      @apply mt-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-2 bg-white px-4 py-5 text-slate-500 dark:bg-slate-800 sm:justify-between sm:px-6;
+    }
+
+  }
+}
+
+.custom-underline{
+  font-size: 18px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  text-transform: capitalize;
+  position: relative;
+  &:after{
+    width: 100px;
+    height: 5px;
+    content: "";
+    position: absolute !important;
+    bottom: 0;
+    left: -15px;
+    z-index: 0;
+    background: -webkit-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%);
+    background: -moz-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%);
+    background: -ms-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%);
+    background: -o-radial-gradient(50% 50%, ellipse closest-side, #3bc8e7, rgba(255, 42, 112, 0) 60%)
+  }
+}
+
+.volume-dragger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.volume-dragger .volume-icon-box {
+  width: 45px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.volume-dragger .volume-icon-box.pointer {
+  cursor: pointer;
+}
+.volume-dragger .volume-wrapper {
+  width: calc(100% - 20px);
+  height: 5px;
+  border-radius: 50px;
+  background-color: #545454;
+  position: relative;
+}
+.volume-wrapper {
+  width: calc(100% - 20px);
+  height: 5px;
+  border-radius: 50px;
+  background-color: #545454;
+  position: relative;
+}
+.volume-wrapper:hover .current-volume {
+  background-color: #34eb6b;
+}
+.volume-wrapper:hover .current-volume::before {
+  visibility: visible;
+}
+.volume-wrapper .current-volume {
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 50px;
+}
+.volume-wrapper .current-volume::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -2.2px);
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  visibility: hidden;
+  border-radius: 50%;
+}
+
+.player-dragger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-dragger .timelapse {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  width: 50px;
+  cursor: default;
+  color: rgb(202, 202, 202);
+}
+.player-dragger .timelapse::-moz-selection {
+  background: none;
+}
+.player-dragger .timelapse::selection {
+  background: none;
+}
+.player-dragger .timelapse:nth-child(1) {
+  transform: translateX(-10px);
+}
+.player-dragger .timeline-wrapper {
+  width: 100%;
+  height: 5px;
+  border-radius: 50px;
+  background-color: #545454;
+  position: relative;
+}
+.player-dragger .timeline-wrapper.forbidden {
+  cursor: not-allowed;
+}
+.player-dragger .timeline-wrapper:hover .current-drag {
+  background-color: #34eb6b;
+}
+.player-dragger .timeline-wrapper:hover .current-drag::before {
+  visibility: visible;
+}
+.player-dragger .timeline-wrapper .current-drag {
+  position: absolute;
+  background-color: #fff;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: 50px;
+}
+.player-dragger .timeline-wrapper .current-drag::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%, -2.2px);
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  visibility: hidden;
+  border-radius: 50%;
+}

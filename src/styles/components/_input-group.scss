@@ -1,0 +1,33 @@
+@layer components {
+  .input-group {
+    $input-group: &;
+    @apply relative flex w-full flex-wrap;
+
+    & > &-text {
+      @apply border border-r-0 dark:border-slate-50 border-slate-500  inline-flex items-center gap-2 whitespace-nowrap  px-2.5 text-sm text-slate-500;
+    }
+
+    & > .input,
+    & > .select,
+    & > .tom-select,
+    & > .textarea {
+      @apply border-l-0 pl-0 rounded-sm relative w-[1%] min-w-0 shrink flex-grow basis-auto;
+    }
+   
+    & > :not(:first-child),
+    & > :not(:first-child).tom-select > .ts-control {
+      @apply ml-[-1px] rounded-bl-none rounded-tl-none;
+    }
+
+    & > :not(:last-child),
+    & > :not(:last-child).tom-select > .ts-control {
+      @apply rounded-br-none rounded-tr-none;
+    }
+
+    &-disabled {
+      & > #{$input-group}-text {
+        @apply cursor-not-allowed opacity-50;
+      }
+    }
+  }
+}
