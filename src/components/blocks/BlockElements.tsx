@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Element from '../../utils/tail/element';
 import { useDispatch, useGetter } from '../../store';
 import {MdOutlineExpandLess, MdOutlineExpandMore} from "react-icons/md";
+import BlockLibrary from './components/BlockLibrary';
 const BlockElements = () => {
   const [gr,setGr] =useState('');
   const editor = useGetter("editor","data",[]);
@@ -53,7 +54,7 @@ const BlockElements = () => {
         </div>
         {gr === 'snippets' && (
           <div className="relative w-full cursor-pointer">
-            {/**<BlockLibrary />**/}
+            <BlockLibrary />
           </div>
         )}
       </div>

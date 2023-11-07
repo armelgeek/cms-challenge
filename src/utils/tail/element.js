@@ -6,8 +6,15 @@ export default class Element {
         this.blocks = []
         this.css = {
             css: "",
-            container: ""
+            container: "",
         }
+        this.cssObject={
+            base: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        },
         this.tailwind = {}
         this.font = ""
         this.style = ""

@@ -1,5 +1,6 @@
 const initialState = {
   elements: null,
+  pages: [],
   document: null,
   project: null,
   selected: null,

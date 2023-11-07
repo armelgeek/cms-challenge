@@ -8,13 +8,15 @@ const Editor = () => {
     const editor = useGetter('editor','data',[]);
     const setCurrentTab = useDispatch('editor','showSidebar');
     const closeSidebar = useDispatch('editor','closeSidebar');
+    console.log('editor',editor);
     return (
         <div className="overflow-hidden max-h-screen h-screen mt-8 inset-0 editor-main-container">
             <div className="editor-container min-h-screen top-0 right-0 left-0 bottom-0 flex flex-row">
                 <div className="w-full overflow-y-hidden overflow-x-hidden">
                     <div className="w-full grid grid-cols-12 relative">
                         <div className="col-span-12 relative md:col-span-12 lg:col-span-12 mr-10 min-h-screen pb-20">
-                                <div className="flex flex-col absolute inset-0 mb-10">
+                          
+                                <div className="flex flex-col absolute inset-0 mb-10 laptop-view">
                                     <BlockEditor/>
                                 </div>
                         </div>

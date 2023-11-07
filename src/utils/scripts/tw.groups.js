@@ -56,7 +56,7 @@ const twgroups = [
             { name: 'Button' , group: 'text-decoration' , attr: 'uppercase' , title : 'uppercase' , icon: 'arrow_upward', css: 'float-left'},
             { name: 'Button' , group: 'text-decoration' , attr: 'lowercase' , title : 'lowercase' , icon: 'arrow_downward', css: 'float-left'},
             { name: 'Button' , group: 'text-decoration' , attr: 'capitalize' , title : 'capitalize' , icon: 'text_fields' , css: 'float-none'},
-            //{ name: 'Color' , attr: 'textcolor' },
+            { name: 'Color' , attr: 'textcolor' },
             { name: 'Options' , attr: 'textSize' , title: 'size' },
             { name: 'Options' , attr: 'textAlign' , title: 'Align' },
             { name: 'Options' , attr: 'fontWeight' , title: 'weight' },
@@ -66,7 +66,7 @@ const twgroups = [
             { name: 'TextFont' , attr: 'textfont' },
         ]},
     { label: 'background' , components: [
-            //{ name: 'Color' , attr: 'bgcolor'},
+            { name: 'Color' , attr: 'bgcolor'},
             { name: 'Range' , attr: 'bgOpacity' , title: 'opacity' },
             { name: 'BgPosition' , attr: 'bgposition' },
             { name: 'Options' , attr: 'blur' , title: 'filter blur' }

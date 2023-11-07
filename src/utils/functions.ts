@@ -1,4 +1,4 @@
-export const displayDate = (timestamp:any) => {
+export const displayDate = (timestamp: any) => {
   const date = new Date(timestamp);
 
   const monthNames = [
@@ -24,7 +24,7 @@ export const displayDate = (timestamp:any) => {
   return ` ${day} ${monthNames[monthIndex]} ${year}`;
 };
 
-export const displayMoney = (n:any) => {
+export const displayMoney = (n: any) => {
   const format = new Intl.NumberFormat("fr-MG", {
     style: "currency",
     currency: "MGA",
@@ -34,25 +34,32 @@ export const displayMoney = (n:any) => {
   return format.format(n);
 };
 
-export const calculateTotal = (arr:any) => {
+export const calculateTotal = (arr: any) => {
   if (!arr || arr?.length === 0) return 0;
 
-  const total = arr.reduce((acc:any, val:any) => acc + val, 0);
+  const total = arr.reduce((acc: any, val: any) => acc + val, 0);
 
   return total;
 };
 
 
-function strOp(str:string) {
+function strOp(str: string) {
   return str.toString().replace(/\s/g, "").toLowerCase();
 }
 
-export const checkHasExistText = (text:string, textCheck:string) => {
+export const checkHasExistText = (text: string, textCheck: string) => {
   if (strOp(text).includes(strOp(textCheck))) {
     return true;
   }
 };
-export const displayShortMonth = (timestamp:any) => {
+export const removeLeadingNegativeSign = (text: string) => {
+  let x = text.startsWith('-');
+  return {
+    negative: x ? 1 : 0,
+    attribute: text.substr(x ? 1 : 0)
+  };
+}
+export const displayShortMonth = (timestamp: any) => {
   const date = new Date(timestamp);
 
   const monthNames = [
@@ -74,3 +81,21 @@ export const displayShortMonth = (timestamp:any) => {
   return `${monthNames[monthIndex]}`;
 };
 
+
+export function removeClassesByType(originalString: string, classType: string) {
+  const regex = new RegExp(`\\b${classType}-\\w+\\s*`, 'g');
+  const newString = originalString.replace(regex, '');
+  const cleanedString = newString.trim().replace(/\s+/g, ' ');
+
+  return cleanedString;
+}
+export const clean = function (str = '') {
+  if (!str) return ''
+  str = str.replace(/\s\s+/g, ' ')
+  return [...new Set(str.split(' '))].join(' ')
+}
+export function toCamelCase(str:string) {
+  return str.replace(/-([a-z])/g, function(match, p1) {
+      return p1.toUpperCase();
+  });
+}

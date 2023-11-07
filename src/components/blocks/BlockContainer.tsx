@@ -13,11 +13,11 @@ const BlockContainer = ({ doc, level }: any) => {
   const setInfo = useDispatch('editor', 'setInfo');
   const classe = () => {
     let css = '';
+   // console.log('doccss',doc.css);
      css = doc.css && Object.values(doc.css).join(" ");
   //  css += " " + doc.css.container;
     css += " z-" + level;
     doc.tag === "document" ? (css += " p-2") : null;
-    css = css.replace('modal', '')
     return css;
   };
   const stile = () => {
@@ -32,11 +32,11 @@ const BlockContainer = ({ doc, level }: any) => {
     let cls = "z-" + level;
     if (editor.current && editor.current.id === doc.id) {
       doc.tag === 'document' ?
-        cls += 'right-0 border-2 border-primary-500' :
+        cls += ' right-0 border-2 border-primary-500' :
         cls += ' right-0 border border-red-400'
     } else {
       doc.tag === 'document' ?
-        cls += 'right-0   border-2 border-transparent shadow ' :
+        cls += ' right-0   border-2 border-transparent shadow ' :
         cls += '  right-0  border border-dashed border-transparent hover:border-red-400'
     }
 
@@ -95,7 +95,7 @@ const BlockContainer = ({ doc, level }: any) => {
   }
   useEffect(()=> {
       if(editor.current && editor.current.id == doc.id){
-        console.log('it works',editor);
+        //console.log('it works',editor);
        /** updateBlockInfo({
           id: doc.id,
           style: editor.current.css
@@ -105,7 +105,7 @@ const BlockContainer = ({ doc, level }: any) => {
   return (
     <div
     //style={stile()}
-      className={`${classe()} relative cursor-pointer border-2   border-gray-600 p-1 `} >
+      className={`${classe()} block-container relative cursor-pointer border-2   border-gray-600 p-1 `} >
       {doc.blocks.length ? null : doc.element}
       {doc.blocks.map((block: any) => {
         if (

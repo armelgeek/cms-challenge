@@ -8,9 +8,7 @@ import Routes from './routes';
 import AppStoreProvider from "./store/Provider/Provider";
 import {AuthProvider} from "./context/AuthContext";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <AuthProvider>
         <AppStoreProvider>
         <Routes/>
         </AppStoreProvider>
-    </AuthProvider>
 );

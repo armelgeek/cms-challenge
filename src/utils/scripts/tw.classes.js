@@ -31,7 +31,7 @@ const percs =  [ 'full','1/2',
     '11/12'
 ]
 
-const colors = [ 'gray' , 'bluegray' , 'brown' , 'red', 'yellow' , 'orange' , 'green' , 'lime' , 'teal' , 'blue' , 'indigo' , 'purple' , 'pink' ]
+const colors = [ 'slate' , 'gray' , 'zinc' , 'neutral', 'stone' , 'red' , 'orange' , 'amber' , 'yellow' , 'lime' , 'green' , 'purple' , 'teal', 'cyan','sky','blue','indigo','violet','purple','fuchsia','pink','rose' ]
 
 function setPercs ( prefix ){
     let arr = []

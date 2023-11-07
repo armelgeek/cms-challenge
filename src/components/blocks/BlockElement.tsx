@@ -47,8 +47,34 @@ const BlockElement = (props: any) => {
     }
     return cls
   }
+  console.log('typetype',props.element.element)
+  const renderElement=()=>{
+    const commonProps = {
+      'data-id': props.element.id,
+      'data-type': props.element.type,
+      className: `relative ${classe()}`,
+      onClick: () => setCurrent(props.element),
+      contentEditable: props.element.editable,
+      'data-element-tag': `${props.element.type}`,
+      'data-icon': props.element.data && props.element.data.tag === 'iconify' ? props.element.data.icon : null,
+    };
+
+    switch (props.element.element) {
+      case 'div':
+        return <div {...commonProps}>{props.element.content}</div>;
+      case 'img':
+        return <img {...commonProps} src={props.element.content.src} alt={props.element.content.alt} />;
+      case 'p':
+        return <p {...commonProps}>{props.element.content}</p>;
+      case 'h1':
+        return <h1 {...commonProps}>{props.element.content}</h1>;
+      case 'span':
+        return <span {...commonProps}>{props.element.content}</span>;
+      default:
+        return <div {...commonProps}>{props.element.content}</div>;
+    }
+  }
   const setCurrent = (block: any) => {
-    console.log('set currantiz', block);
     editor.current && editor.current.id === block.id ?
         setInfo({
           prop: 'current',
@@ -77,34 +103,7 @@ const BlockElement = (props: any) => {
      this.editor.current.image = { url: this.editor.current.image } : null
      **/
   }
-  useEffect(()=>{
-    /**if ( props.element.data.hasOwnProperty ( 'options') ){
-      if ( !$refs[props.element.id].options.length ){
-          props.element.data.options.forEach ( option => {
-              let selectOption = document.createElement ( 'option' )
-              selectOption.value = option
-              selectOption.text = option
-              this.$refs[this.element.id].add ( selectOption )
-          })
-      }
-  }**/
-  },[])
-  return props.element ? (
-    <div
-        data-id={props.element.id}
-        data-type={props.element.id}
-        className={`relative ${classe()}`}
-        onClick={()=>{
-          setCurrent(props.element);
-        }}
-        contenteditable={props.element.editable}
-        data-element-tag={`${props.element.type}` + ' ' +  `${props.element.element}`}
-        data-icon={`${props.element.tag==='iconify' ? props.element.data.icon:null}`}
-     // style={stile()}
-    >
-      {props.element.content}
-    </div>
-  ) : null;
+  return props.element ? renderElement() : null;
 };
 
 export default BlockElement;

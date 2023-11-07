@@ -24,6 +24,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Mali', ...defaultTheme.fontFamily.sans],
+      'poppins': ['Poppins', 'sans-serif']
     },
     container: {
       center: true,

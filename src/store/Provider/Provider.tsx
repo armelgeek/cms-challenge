@@ -5,7 +5,7 @@ class AppStoreProvider extends PureComponent {
   render() {
     // @ts-ignore
     const { children } = this.props;
-    let { store, persistor } = createStore();
+    let { store } = createStore();
     return (
       <Provider store={store}>
           {children}

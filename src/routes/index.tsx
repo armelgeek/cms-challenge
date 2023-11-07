@@ -10,6 +10,7 @@ import Element from "../utils/tail/element";
 import { useEffect } from "react";
 import { useDispatch, useGetter } from "../store";
 import Editor from "../Editor";
+import Pallete from "../components/blocks/components/Pallete";
 const Index = () => {
   const groups = new Element().Groups()
   const dispatch = useDispatch('editor','setInfo');
@@ -30,7 +31,7 @@ const Index = () => {
           <Route path="/" exact component={Editor}/>
         </Switch>
       </Router>
-
+      
   </>
   );
 };

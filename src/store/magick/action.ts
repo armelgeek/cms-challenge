@@ -5,6 +5,10 @@ export const mergeActions = (modules:any, moduleName:string) => {
   const setLoading = (payload:any) => async (dispatch:any) => {
     dispatch({ type: `${moduleName}__loading`, payload: payload });
   };
+  const addItemToProp = ({ prop, value }:any) =>
+  async (dispatch:any) => {
+    dispatch({ type: `${moduleName}__add__item_to_prop`, payload: { prop, value } });
+  };
   const setInfo =
     ({ prop, value }:any) =>
     async (dispatch:any) => {
@@ -21,6 +25,8 @@ export const mergeActions = (modules:any, moduleName:string) => {
       payload: payload,
     });
   };
+
+  
   const setSelected = (payload:any) => async (dispatch:any) => {
     dispatch({
       type: `${moduleName}__selected_item`,
@@ -271,6 +277,7 @@ export const mergeActions = (modules:any, moduleName:string) => {
       create,
       update,
       destroy,
+      addItemToProp
     },
   };
 };

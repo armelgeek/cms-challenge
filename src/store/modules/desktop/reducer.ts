@@ -1,5 +1,5 @@
 const initialState = {
-    mode: 'full',
+    mode: 'base',
     message: '',
     filter: '',
     tabs: [],
