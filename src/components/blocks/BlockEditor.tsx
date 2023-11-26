@@ -112,7 +112,7 @@ const BlockEditor = () => {
     if(floatRef == null) return;
     if (coords) {
       let containerCoords = {
-        top: coords.top  + window.scrollY - floatRef.current.offsetHeight,
+        top: coords.top  + window.scrollY - floatRef.current?.offsetHeight,
         left: coords.left + window.scrollX +  coords.width / 2 - elementWidth / 2,
 
       }
@@ -194,8 +194,6 @@ const BlockEditor = () => {
             </pre>
           )}**/}
         </Test>
-
-       <EditorFooter blockEditor={blockEditor.current} />
       </div>
     );
   } else {

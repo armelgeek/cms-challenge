@@ -20,12 +20,12 @@ const BlockLibrary = () => {
   }
   return (
     <>{templates && (
-      <div className="relative min-h-screen top-0 mt-8 overflow-y-auto w-full">
+      <div className="relative min-h-full overflow-y-auto w-full">
          <div className="flex flex-wrap items-center justify-center cursor-pointer">
           {Object.keys(templatesIcon).map( (template:string) =>(
           <div 
           key={template} 
-          className="bg-gray-100 m-1 hover:bg-gray-300 flex flex-col items-center h-16 w-16 ml-01 text-xs justify-center text-center text-gray-500 rounded hover:text-indigo-500 shadow" onClick={()=> library(templatesIcon[template].template)} title={template}>
+          className="bg-gray-100 m-1 hover:bg-gray-300 flex flex-col items-center h-16 w-16 text-xs justify-center text-center text-gray-500 rounded hover:text-indigo-500 shadow" onClick={()=> library(templatesIcon[template].template)} title={template}>
           <span className="text-xs">{/**templatesIcon[template].icon**/}{template}</span>
       </div>
           ))}

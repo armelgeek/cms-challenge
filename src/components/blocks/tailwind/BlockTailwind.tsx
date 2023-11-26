@@ -62,7 +62,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                     {twGroups.map((group) => (
                         <>
                             {isEnabled(group) && (
-                                <div key={group.label} className={`${gr === group.label ? 'bg-bluegray-300 text-gray-200' : ''} flex items-center capitalize cursor-pointer p-2 text-gray-700 text-base`} onClick={() => setControl(group)}>
+                                <div key={group.label} className={`${gr === group.label ? 'bg-primary-500 text-white' : ''} flex items-center capitalize cursor-pointer p-2 text-gray-700 text-base`} onClick={() => setControl(group)}>
                                     {group.label}
                                     <FaChevronCircleRight className="absolute right-0 m-1" />
                                 </div>
@@ -73,8 +73,8 @@ const BlockTailwind = ({ css, cid }: any) => {
             )}
             {controls != null && (
                 <>
-                    <div className="bg-primary-400 text-gray-500 border-b border-gray-900 top-0 absolute w-full z-10 left-0 right-0 bottom-0">
-                        <div className="bg-indigo-500 flex flex-row p-1 items-center capitalize cursor-pointer text-white" onClick={() => {
+                    <div className="bg-slate-100 text-gray-500 border-b border-gray-900 top-0 absolute w-full z-10 left-0 right-0 bottom-0">
+                        <div className="bg-primary-500 flex flex-row p-1 items-center capitalize cursor-pointer text-white" onClick={() => {
                             setControls(null);
                             setInfo({
                                 prop: 'customizeTab',

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ComponentsGallery = ({ pages, skip, limit, addKitBlockInPage,editKitBlockInPage }: any) => {
-
+    console.log('pages',pages);
     return (
         <div className="flex flex-col flex-wrap cursor-pointer overflow-y-auto z-highest transition-all duration-500 my-3">
             {pages.map((p: any, index: any) => (

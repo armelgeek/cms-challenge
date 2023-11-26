@@ -118,7 +118,7 @@ export const loadUIKit = (kit: any) => async (dispatch: any, getState: any) => {
 export const addToUKit = (blockEditor:any) => async (dispatch: any, getState: any) => {
 
   let library = getState().desktop.library;
-  console.log('library', library);
+  console.log('page: ',library);
   let page = getState().editor.page;
   /**let screenshoot = '';
   (async (done) => {
@@ -131,7 +131,6 @@ export const addToUKit = (blockEditor:any) => async (dispatch: any, getState: an
     }
   })
   library.templates.push(page)
-  window.localStorage.setItem ( 'whoobe-ui-kit' , JSON.stringify( library) );
   dispatch({
     type: 'editor__item__info',
     payload: {

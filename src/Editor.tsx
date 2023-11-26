@@ -8,7 +8,7 @@ import EditorFooter from './Footer';
 
 const Editor = () => {
     return (
-        <div className="overflow-hidden max-h-screen h-screen inset-0 editor-main-container">
+        <div className="overflow-hidden max-h-screen h-screen">
             <div className="editor-container min-h-screen top-0 right-0 left-0 bottom-0 flex flex-row">
                 <div className="w-full overflow-y-hidden overflow-x-hidden">
                     <div className="w-full grid grid-cols-12 relative">

@@ -170,13 +170,15 @@ const Test = ({ children, setCurrent }: any) => {
 
           {choice == 0 && (
             <>
-              <ul className="tree">
+              <ul className="tree relative">
                 <BlockTree editor={editor.document} setCurrent={setCurrent} />
               </ul>
             </>
           )}
           {choice == 1 && (
-            <UserLibrary />
+            <div className="relative">
+              <UserLibrary />
+            </div>
           )}
         </div>
 
@@ -190,21 +192,18 @@ const Test = ({ children, setCurrent }: any) => {
             {children}
           </div>
         </div>
-        <div className="w-1/6  bg-white">
+        <div className="w-1/6  ">
           <div className="flex flex-col">
-
-            <div className="flex flex-row">
-              {editor.sidebar.show && (
-                <div className=" z-50  bg-white w-52">
-                  <EditorSidebar tab={editor.sidebar.name} close={closeSidebar} />
-                </div>
-              )}
-              {editor.current && (
-                <div className="bg-white z-50 w-10   flex flex-col items-center justify-start text-center">
-                  <EditorSidebarTabs tab={editor.sidebar.name} setCurrentTab={setCurrentTab} />
-                </div>
-              )}
-            </div>
+            {editor.current ? (
+              <>
+                <EditorSidebarTabs tab={editor.sidebar.name} setCurrentTab={setCurrentTab} />
+                <EditorSidebar tab={editor.sidebar.name} />
+              </>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-xl">
+                Select a block
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -5,7 +5,8 @@ import Template from '../../utils/tail/templates';
 import ComponentsGallery from './gallery/ComponentsGallery';
 import { useHistory } from 'react-router-dom';
 import { MdOutlineExpandLess, MdOutlineExpandMore } from 'react-icons/md';
-import {addKitBlockInPage, editKitBlockInPage} from "../../store/modules/editor/action";
+import { addKitBlockInPage, editKitBlockInPage } from "../../store/modules/editor/action";
+import Modal from '../blocks/Modal';
 
 const UserLibrary = () => {
     const desktop = useGetter('desktop', 'data', []);
@@ -13,11 +14,12 @@ const UserLibrary = () => {
     const createEmptyBlock = useDispatch('editor', 'createEmptyBlock');
     const addKitBlockInPage = useDispatch('editor', 'addKitBlockInPage');
     const editKitBlockInPage = useDispatch('editor', 'editKitBlockInPage');
-    const [gr,setGr] =useState('');
+    const [gr, setGr] = useState('');
+    const [show, setShow] = useState(false);
     const history = useHistory();
     const [state, setState] = useState({
         library: {
-            name: 'New UI Kit',
+            name: 'New component',
             author: 'Armel Wanes',
             description: '',
             templates: []
@@ -49,38 +51,74 @@ const UserLibrary = () => {
             }, {}),
         }));
     }, [state]);
-    const createUserLibrary = useCallback((payload: any) => {
+
+    const createUserLibrary = useCallback(() => {
         let founded = false
         desktop.uikits.forEach((uikit: any, i: number) => {
-            if (uikit.name === payload.name) {
+            if (uikit.name === state.library.name) {
                 founded = true
                 return
             }
         })
         if (!founded) {
-            desktop.uikits.push(payload)
+            desktop.uikits.push(state.library)
         }
         setInfos({
             'uikits': desktop.uikits,
             'library': {
-                name: 'New UI Kit',
+                name: state.library.name,
+                author: 'Armel Wanes',
+                description: state.library.description,
+                templates: []
+            }
+        })
+        setInfos({
+            'library': {
+                name: '',
                 author: 'Armel Wanes',
                 description: '',
                 templates: []
             }
         })
-    }, [])
-
+    }, [state, desktop])
+    console.log('state', state);
     return (
         <>
-            <button className="btn rounded border-0 btn-sm" onClick={() => createUserLibrary(state.library)}>Create New</button>
+            <Modal
+                title="Ajouter une nouvelle element"
+                show={show}
+                canSubmit={!!state.library.name}
+                setShow={setShow}
+                onSubmit={createUserLibrary}
+            >
+                <label>Nom du composant</label>
+                <input className='input-control' onChange={(e: any) => {
+                    updateStateAttributes({
+                        library: {
+                            name: e.target.value
+                        }
+                    })
+                }} placeholder='Nom du composant' value={state.library.name} />
+                <label>Description</label>
+                <textarea className='input bg-slate-100' onChange={(e: any) => {
+                    updateStateAttributes({
+                        library: {
+                            description: e.target.value
+                        }
+                    })
+                }} >{state.library.description}</textarea>
+            </Modal>
+            <div className="m-2">
+                <button className="btn rounded-sm border bg-white  btn-sm w-full" onClick={() => setShow(!show)}>Click to add custom template</button>
+            </div>
+
             <div className=" bg-white overflow-hidden mt-0 inset-0">
                 <div className="py-1">
                     <div className="flex flex-row items-center gap-2">
                     </div>
                     {desktop.uikits.map((kit: any) => (
                         <>
-                            <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-500 hover:text-white p-2 text-gray-700 text-base ${gr === kit.name ? 'bg-bluegray-300 text-gray-200' : ''}`} onClick={() => {
+                            <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-950 hover:text-white p-2  text-base ${gr === kit.name ? 'bg-slate-950 text-white' : 'text-gray-950'}`} onClick={() => {
                                 //loadUIKit(kit);
                                 setGr(gr === kit.name ? null : kit.name)
                             }}>
@@ -89,7 +127,7 @@ const UserLibrary = () => {
                                     {gr === kit.name ? <MdOutlineExpandLess /> : <MdOutlineExpandMore />}
                                 </div>
                             </div>
-                            <div key={kit.name} className="flex  h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-red-400 flex-row flex-wrap justify-center cursor-pointer p-2" style={{
+                            <div key={kit.name} className="flex  h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-slate-200 flex-row flex-wrap justify-center cursor-pointer p-2" style={{
                                 display: gr === kit.name ? 'flex' : 'none'
                             }}>
                                 {!_.isNull(kit.json) && (
@@ -108,7 +146,7 @@ const UserLibrary = () => {
                         <>
                             {kits.whoobeKits.map((kit: any) => (
                                 <>
-                                    <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-500 hover:text-white p-2 text-gray-700 text-base ${gr === kit.name ? 'bg-bluegray-300 text-gray-200' : ''}`} onClick={() => {
+                                    <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-950 hover:text-white p-2  text-base ${gr === kit.name ? 'bg-slate-950 text-white' : 'text-gray-950'}`} onClick={() => {
                                         //loadUIKit(kit);
                                         setGr(gr === kit.name ? null : kit.name)
                                     }}>
@@ -117,12 +155,12 @@ const UserLibrary = () => {
                                             {gr === kit.name ? <MdOutlineExpandLess /> : <MdOutlineExpandMore />}
                                         </div>
                                     </div>
-                                    <div key={kit.name} className="flex  h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-red-400 flex-row flex-wrap justify-center cursor-pointer p-2" style={{
+                                    <div key={kit.name} className="flex  h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-slate-200 flex-row flex-wrap justify-center cursor-pointer p-2" style={{
                                         display: gr === kit.name ? 'flex' : 'none'
                                     }}>
                                         {!_.isNull(kit.json) && (
                                             <ComponentsGallery
-                                                pages={[]}
+                                                pages={kit.json.templates}
                                                 skip={kits.skip}
                                                 limit={kits.limit}
                                                 addKitBlockInPage={addKitBlockInPage}
