@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch, useGetter } from '../../../store';
 function getCoords(id: any) {
-    let el = document.querySelector('#' + id) as any;
+     let el = document.querySelector("#preview-frame").contentWindow.document.querySelector('#' + id)as any;
+     if(!el) return null;
     try {
       return el.getBoundingClientRect()
     } catch (err) {
@@ -12,7 +13,7 @@ const BlockTree = (props: any) => {
     const setInfo = useDispatch("editor", 'setInfo');
     const editor = useGetter('editor', 'data', []);
     const current = props.current ? props.current : props.editor ? props.editor : null
-    return current ? (
+    return (editor.current!= null && current.id != null) ? (
 
         <li className={`flex flex-col bg-white cursor-pointer w-full px-3`} onClick={(e) =>{
             e.stopPropagation();

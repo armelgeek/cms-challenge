@@ -8,6 +8,7 @@ import BlockTree from './components/blocks/components/BlockTree';
 import EditorSidebar from './components/editor/EditorSidebar';
 import EditorSidebarTabs from './components/editor/EditorSidebarTabs';
 import UserLibrary from './components/editor/UserLibrary';
+import Frame from 'react-frame-component';
 
 const zooming = (value: any, zoomLevel: any) => {
   const zoomFactor = parseFloat(zoomLevel.replace('%', '')) / 100;
@@ -35,6 +36,7 @@ const Test = ({ children, setCurrent }: any) => {
   const setCurrentTab = useDispatch('editor', 'showSidebar');
   const closeSidebar = useDispatch('editor', 'closeSidebar');
   const setInfo = useDispatch('desktop', 'setInfo');
+  const setInfoEditor = useDispatch('editor', 'setInfo');
   const [isRotated, setIsRotated] = useState(false);
   const [w, setW] = useState(zooming(1280, "75%"));
   const [h, setH] = useState(zooming(800, "75%"));
@@ -42,7 +44,6 @@ const Test = ({ children, setCurrent }: any) => {
   const [originalHeight, setOriginalHeight] = useState(zooming(800, "75%"));
   const [pxd, setPxd] = useState(1);
   const [choice, setChoice] = useState(0);
-
   const toggleRotate = useCallback(() => {
     setIsRotated(!isRotated);
     if (!isRotated) {
@@ -64,6 +65,10 @@ const Test = ({ children, setCurrent }: any) => {
     setOriginalWidth(width);
     setOriginalHeight(height);
     setPxd(pixelDestiny);
+    setInfoEditor({
+      prop: 'current',
+      value: null
+    })
   };
 
   const handleZoomChange = (zoomLevel: any) => {
@@ -77,6 +82,19 @@ const Test = ({ children, setCurrent }: any) => {
       prop: 'mode',
       value: mode
     })
+   
+  }
+  const initialContent = () => {
+    return `<!DOCTYPE html>
+      <html>
+        <head>
+          <script src="https://cdn.tailwindcss.com"></script>
+          <link rel="stylesheet" href='http://localhost:5173/app.css'/>
+        </head>
+        <body>
+          <div id="root"></div>
+        </body>
+      </html>`
   }
   return (
     <div className='relative'>
@@ -183,14 +201,19 @@ const Test = ({ children, setCurrent }: any) => {
         </div>
 
         <div className="flex-1 overflow-y-auto flex justify-center border">
-          <div className='border bg-white' style={{
+        
+        <Frame initialContent={initialContent()} id="preview-frame" style={{
             width: w,
             height: h,
             maxHeight: h,
-            overflow: 'auto'
+            overflow: 'auto',
+            backgroundColor: 'white'
           }}>
-            {children}
-          </div>
+          
+              {children}
+           
+          
+          </Frame>
         </div>
         <div className="w-1/6  ">
           <div className="flex flex-col">

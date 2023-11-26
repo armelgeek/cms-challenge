@@ -589,18 +589,18 @@ function duplicateBlockAction(blocks: any, currentId: any) {
       duplicateBlockAction(block.blocks, currentId);
     }
   });
-  return duplicatedBlock;
+  return {duplicatedBlock,blocks};
 }
 
 export const duplicateBlock = () => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
   let current = getState().editor.current;
-  const duplicateBlk = duplicateBlockAction(editor.document.blocks, current.id);
+  const {duplicatedBlock,blocks} = duplicateBlockAction(editor.document.blocks, current.id);
   dispatch({
     type: 'editor__item__infos',
     payload: {
-      'current': duplicateBlk,
-      'document.blocks': editor.document.blocks
+      'current': duplicatedBlock,
+      'document.blocks': blocks
     }
   })
 

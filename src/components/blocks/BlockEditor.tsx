@@ -74,7 +74,8 @@ const BlockEditor = () => {
     }));
   }, [state]);
   function getCoords(id: any) {
-    let el = document.querySelector('#' + id) as any;
+    let el = document.querySelector("#preview-frame")?.contentWindow.document.querySelector('#' + id) as any
+    if(!el) return null;
     try {
       return el.getBoundingClientRect()
     } catch (err) {
@@ -94,7 +95,7 @@ const BlockEditor = () => {
     console.log('flottating',floatRef.current?.offsetWidth);
     if (coords) {
       let containerCoords = {
-        top: coords.top  + window.scrollY - floatRef.current.offsetHeight,
+        top: (coords.top  + window.scrollY) + coords.height,
         left: coords.left + window.scrollX +  coords.width / 2 - elementWidth / 2,
 
       }
@@ -112,7 +113,7 @@ const BlockEditor = () => {
     if(floatRef == null) return;
     if (coords) {
       let containerCoords = {
-        top: coords.top  + window.scrollY - floatRef.current?.offsetHeight,
+        top: (coords.top  + window.scrollY) + coords.height,
         left: coords.left + window.scrollX +  coords.width / 2 - elementWidth / 2,
 
       }
