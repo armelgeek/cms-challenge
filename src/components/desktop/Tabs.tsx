@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useGetter } from '../../store';
 import { FiMenu } from 'react-icons/fi';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { FaPlusCircle } from 'react-icons/fa';
 
 const Tabs = () => {
   const tabs = useGetter('desktop', 'tabs', []);
@@ -67,13 +68,15 @@ const Tabs = () => {
     }
   }, [currentTab])
   return (
-    <div className="fixed top-0 left-0 h-8 items-center bg-primary-900 w-screen z-modal flex flex-wrap">
-      <FiMenu className="h-5 w-5 items-center justify-center flex text-white" />
+    <div className="h-8 items-center border-b bg-white  border-gray-300 w-screen flex flex-wrap">
       {tabs.map((tab: any, index: number) => (
-        <div key={tab.label} title={tab.label} className={`${index === currentTab ? 'bg-white text-gray-400' : 'bg-purple-900'}  relative border-l border-r border-purple-600 rounded-t hover:bg-black px-2 flex items-center cursor-pointer h-8 w-32`}>
-          <span onClick={()=> openTab(index)} className={`w-24 truncate ml-1`}>{tab.label}</span><AiFillCloseCircle className="absolute right-0 mr-2" onClick={() => removeTab(index)} />
+        <div key={tab.label} title={tab.label} className={`${index === currentTab ? 'bg-white text-gray-400' : 'bg-purple-900'}  relative border-l border-t border-r border-purple-600 rounded-t hover:bg-black px-2 flex items-center cursor-pointer h-8`}>
+          <span onClick={()=> openTab(index)} className={`truncate ml-1 text-sm`}>{tab.label}</span><AiFillCloseCircle className="text-gray-400 absolute right-0 mr-2" onClick={() => removeTab(index)} />
         </div>
       ))}
+      <div className={`relative  px-2  cursor-pointer`} >
+          <FaPlusCircle className="text-white"/>
+        </div>
     </div>);
   
 }

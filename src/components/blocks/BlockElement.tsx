@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useGetter } from '../../store';
-import {element} from "prop-types";
+import _ from 'lodash';
+import BlockImage from './components/BlockImage';
 
 const BlockElement = (props: any) => {
   const editor = useGetter('editor', 'data', []);
   const setInfo = useDispatch('editor', 'setInfo');
-
-  const classe = () => {
+  const [isEnter, setIsEnter] = useState(false);
+  const refElement = useRef(null);
+  const classes = () => {
     if (!editor.current && !props.element) {
       return
     }
+
     let cls = ''
     cls += props.element.css.css + ' ' + props.element.css.container
     cls += ' z-' + (parseInt(props.level) + 1)
@@ -18,91 +21,134 @@ const BlockElement = (props: any) => {
     editor.current && editor.current.id === props.element.id ?
       cls += ' shadow' :
       cls += ' '
+
     return cls
   }
-  const stile = () => {
-    let st = ''
-    if (props.element.image && props.element.image.url) {
-      st += "background-image:url(" + props.element.image.url + ");"
-    }
-    // props?.element.font ? st += `font-family:"${this.element.font.replace('+',' ')}";` : null
-
-    return st.replace('absolute', '') + props.element.style
+  const getStyle = (css: any) => {
+    return css.split(';').reduce((acc: any, rule: any) => {
+      const [property, value] = rule.split(':');
+      if (property && value) {
+        acc[property.trim()] = value.trim();
+      }
+      return acc;
+    }, {});
   }
-  const setEditable = () => {
-    return editor.current && editor.current.id === props.element.id && props.element.editable ? true : false
-  }
-  const component = () => {
-    if (!props.element) return null
-
-    return props.element.hasOwnProperty('level') ? 'h' + props.element.level :
-      props.element.element === 'grid' ? 'div' : props.element.element
-  }
-  const selector = () => {
-    let cls = 'z-' + props.level
-    if (editor.current && editor.current.id === props.element.id) {
-      cls += ' shadow'
+  const toggleBorder = () => {
+    if (isEnter && (editor.current && editor.current.id == props.element.id)) {
+      return 'border-primary-500';
     } else {
-      cls += ' '
+      if (editor.current && editor.current.id == props.element.id) {
+        return 'border-primary-500';
+      } else {
+        return 'border-transparent';
+      }
     }
-    return cls
   }
-  console.log('typetype',props.element.element)
-  const renderElement=()=>{
+  useEffect(() => {
+    props.ajustCoords(props.element, refElement?.current?.offsetWidth);
+  }, [props.element])
+  const renderElement = () => {
     const commonProps = {
-      'data-id': props.element.id,
+      ref: refElement,
       'data-type': props.element.type,
-      className: `relative ${classe()}`,
-      onClick: () => setCurrent(props.element),
-      contentEditable: props.element.editable,
-      'data-element-tag': `${props.element.type}`,
-      'data-icon': props.element.data && props.element.data.tag === 'iconify' ? props.element.data.icon : null,
+      'style': getStyle(props.element.style),
+      'id': props.element.id,
+      className: `relative border ${classes()} ${toggleBorder()}`,
+      onMouseEnter: (e: any) => {
+        e.stopPropagation();
+        setIsEnter(true);
+      },
+      onMouseLeave: (e: any) => {
+        e.stopPropagation();
+        setIsEnter(false);
+      },
+      onClick: (e: any) => {
+        e.stopPropagation();
+        props.setCurrent(props.element, refElement.current?.offsetWidth)
+      }
     };
 
     switch (props.element.element) {
       case 'div':
         return <div {...commonProps}>{props.element.content}</div>;
       case 'img':
-        return <img {...commonProps} src={props.element.content.src} alt={props.element.content.alt} />;
+        return <BlockImage commonProps={commonProps} element={props.element} />;
       case 'p':
-        return <p {...commonProps}>{props.element.content}</p>;
-      case 'h1':
-        return <h1 {...commonProps}>{props.element.content}</h1>;
+        return <p {...commonProps} >{props.element.content}</p>;
+      case 'h': {
+        if (props.element.level == 1) return <h1 {...commonProps}>{props.element.content}</h1>;
+        if (props.element.level == 2) return <h2 {...commonProps}>{props.element.content}</h2>;
+        if (props.element.level == 3) return <h3 {...commonProps}>{props.element.content}</h3>;
+        if (props.element.level == 4) return <h4 {...commonProps}>{props.element.content}</h4>;
+        if (props.element.level == 5) return <h5 {...commonProps}>{props.element.content}</h5>;
+        if (props.element.level == 6) return <h6 {...commonProps}>{props.element.content}</h6>;
+      }
+        break;
       case 'span':
         return <span {...commonProps}>{props.element.content}</span>;
+      case 'blockquote':
+        return <blockquote {...commonProps}>{props.element.content}</blockquote>;
+      case 'pre':
+        return <pre {...commonProps}>{props.element.content}</pre>;
+      case 'input': {
+        let placeholder = !_.isUndefined(props.element.data) && !_.isUndefined(props.element.data.attributes) ? props.element.data.attributes.placeholder : 'Input';
+        let name = !_.isUndefined(props.element.data) && !_.isUndefined(props.element.data.attributes) ? props.element.data.attributes.name : null;
+        let id = !_.isUndefined(props.element.data) && !_.isUndefined(props.element.data.attributes) ? props.element.data.attributes.id : null;
+        let required = !_.isUndefined(props.element.data) && !_.isUndefined(props.element.data.attributes) ? props.element.data.attributes.required : null;
+        return <input type={props.element.type} placeholder={placeholder} name={name} required={required} {...commonProps} />;
+      }
+
+      case 'textarea':
+        return <textarea {...commonProps}>{props.element.placeholder}</textarea>;
+      case 'button':
+        return <button type={props.element.tag} {...commonProps} className={'btn'}>{props.element.content}</button>;
+      case 'video':
+        return <video   {...commonProps} src={props.element.link}  {...props.element.options}>{props.element.content}</video>;
+      case 'iframe':
+        return (
+          <iframe
+            key={props.element.id}
+            src={props.element.src + props.element.content}
+            className={classes()}
+            onClick={(e) => {
+              e.stopPropagation();
+              props.setCurrent(props.element, refElement.current)
+            }}
+            data-element-tag={props.element.tag}>
+          </iframe>
+        );
+      case "article":
+        return <article  {...commonProps}>{props.element.content}</article>;
+      case "aside":
+        return <aside  {...commonProps}>{props.element.content}</aside>;
+      case "header":
+        return <header  {...commonProps}>{props.element.content}</header>;
+      case "figcaption":
+        return <figcaption  {...commonProps}>{props.element.content}</figcaption>;
+      case "figure":
+        return <figure  {...commonProps}>{props.element.content}</figure>;
+
+      case "label":
+        return <label  {...commonProps}>{props.element.content}</label>;
+      case "mark":
+        return <mark  {...commonProps}>{props.element.content}</mark>;
+      case "section":
+        return <section  {...commonProps}>{props.element.content}</section>;
+      case "summary":
+        return <summary  {...commonProps}>{props.element.content}</summary>;
+      case "time":
+        return <time  {...commonProps}>{props.element.content}</time>;
+      case "details":
+        return <details  {...commonProps}>{props.element.content}</details>;
+      case "main":
+        return <main  {...commonProps}>{props.element.content}</main>;
+      case "footer":
+        return <footer  {...commonProps}>{props.element.content}</footer>;
       default:
         return <div {...commonProps}>{props.element.content}</div>;
     }
   }
-  const setCurrent = (block: any) => {
-    editor.current && editor.current.id === block.id ?
-        setInfo({
-          prop: 'current',
-          value: null
-        }) : setInfo({
-          prop: 'current',
-          value: block
-        })
 
-
-    /**
-     * if ( this.editor.current && this.editor.current.id === block.id ){
-     *                 this.$store.dispatch ( 'setCurrent' , null )
-     *
-     *                 this.$refs[block.id].blur()
-     *                 return
-     *             }
-     *
-     *             this.$refs[block.id].setAttribute ( 'contenteditable' , block.editable )
-     *             this.$store.dispatch ( 'setCurrent' , block )
-     *             this.$editorBus('floatingElement',block.id)
-     *             let coords = this.$refs[this.element.id].getBoundingClientRect()
-     *             this.element.coords = coords
-     *
-     * editor.current && !editor.current.image ?
-     this.editor.current.image = { url: this.editor.current.image } : null
-     **/
-  }
   return props.element ? renderElement() : null;
 };
 

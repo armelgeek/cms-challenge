@@ -1,5 +1,5 @@
 import { removeItem } from "../../magick/reducer";
-
+import html2canvas from "html2canvas";
 export const TYPES = {} as any;
 for (const key of Object.keys(TYPES)) {
   TYPES[key] = `desktop__${key}`;
@@ -82,4 +82,68 @@ export const addTab = (payload: any) => async (dispatch: any, getState: any) => 
       },
     })
   }
+}
+
+export const loadUIKit = (kit: any) => async (dispatch: any, getState: any) => {
+  try {
+    let uk = getState().desktop.uikits;
+      let founded = false
+      uk.forEach((uikit: any, i: number) => {
+          if (uikit.name === kit.name) {
+              founded = true
+              return
+          }
+      })
+      if (!founded) {
+        uk.push(kit.json)
+      }
+      dispatch({
+        type: 'desktop__item__info',
+        payload: {
+          prop: 'uikits',
+          value: uk
+        },
+      })
+    dispatch({
+      type: 'desktop__item__infos',
+      payload: {
+        'library': kit.json
+      },
+    })   
+  } catch ( err ){
+      console.log ( err )
+  } 
+}
+
+export const addToUKit = (blockEditor:any) => async (dispatch: any, getState: any) => {
+
+  let library = getState().desktop.library;
+  console.log('library', library);
+  let page = getState().editor.page;
+  /**let screenshoot = '';
+  (async (done) => {
+    screenshoot =  await html2canvas(blockEditor,{ type: "dataURL" , useCORS: true , scale: 0.50 });
+  })();**/
+ // page.image = screenshoot;
+  library.templates.forEach((template:any,index:number) => {
+    if ( template.blocks_id === page.blocks_id ){
+      library.templates.splice(index,1)
+    }
+  })
+  library.templates.push(page)
+  window.localStorage.setItem ( 'whoobe-ui-kit' , JSON.stringify( library) );
+  dispatch({
+    type: 'editor__item__info',
+    payload: {
+      prop: 'current',
+      value: null
+    }
+  })
+  dispatch({
+    type: 'desktop__item__info',
+    payload: {
+      prop: 'library',
+      value: library
+    }
+  })
 }

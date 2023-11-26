@@ -7,18 +7,18 @@ import BlockTree from '../blocks/components/BlockTree';
 import BlockCss from '../blocks/components/BlockCss';
 import BlockLibrary from '../blocks/components/BlockLibrary';
 import BlockAttributes from '../blocks/components/BlockAttributes';
+import UserLibrary from "../../components/editor/UserLibrary";
 
 const EditorSidebar = ({tab,close}:any) => {
     const editor = useGetter('editor','data',[]);
-    console.log('tabus',tab);
     return (
-        <div className="relative w-full bg-white z-highest h-screen overflow-hidden border-r border-white">
+        <div className="relative w-full bg-white z-highest h-full overflow-hidden  border-white">
             <div className="p-1 shadow-lg bg-gray-600 text-white capitalize flex flex-row items-center text-base cursor-pointer" onClick={close}>
                 <span>{ tab }</span>
                 <FaArrowDown  className="absolute right-0 text-white text-xl"/>
             </div>
             {editor.current  ? (
-                <div className="w-full h-full overflow-y-auto">
+                <div className="w-full overflow-y-auto">
                     {tab == 'elements' && <BlockElements/>}
                     {tab == 'customize' && (
                     <BlockTailwind 
@@ -27,10 +27,10 @@ const EditorSidebar = ({tab,close}:any) => {
                         key={editor.current.id}
                     />
                     )}
-                    {tab == 'tree' && <BlockTree editor={editor.current}/>}
-                    {tab == 'css' && <BlockCss  editor={editor.current}/>}
+                    {tab == 'css' && <BlockCss />}
                     {tab == 'attributes' && <BlockAttributes/>}
                     {tab == 'snippets' && <BlockLibrary/>}
+                    {tab == 'library' && <UserLibrary/>}
                 </div>
             ) : (
                 <div className="flex h-full w-full items-center justify-center text-xl">

@@ -1,28 +1,21 @@
 import { Database, forwardOrder } from './database';
-import Dexie from 'dexie'
-//import {importDB, exportDB, importInto, peakImportFile} from "dexie-export-import";
+import Dexie from 'dexie';
 import FileSaver from 'file-saver'
 import * as DexieBackup from "dexie-export-import";
 var db = new Database()
-
-//import { eventBus, dialogBus , editorBus } from '../main'
-
-// Create a random ID
-function randomID(suff = 'whoobe') {
+export function randomID(suff = 'tail') {
     return suff + '-' + Math.random().toString(36).substr(2, 5)
 }
 
 
 function progressCallback({ totalRows, completedRows }) {
-    // store.dispatch('socket' , `Progress: ${completedRows} of ${totalRows} rows completed` )
-    //console.log(`Progress: ${completedRows} of ${totalRows} rows completed`);
+   
 }
 
 async function exportDatabase() {
     try {
         const blob = await DexieBackup.exportDB(db, { prettyJson: true, progressCallback })
-        //const blob = await db.exportDB({prettyJson: true, progressCallback})
-        FileSaver.saveAs(blob, 'whoobe-export.json', "application/json");
+        FileSaver.saveAs(blob, 'tail-export.json', "application/json");
     } catch (error) {
         console.error('' + error);
     }

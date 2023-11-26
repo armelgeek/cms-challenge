@@ -10,6 +10,8 @@ export default class Element {
         }
         this.cssObject={
             base: null,
+            xxl:null,
+            xl: null,
             lg: null,
             md: null,
             sm: null,
@@ -32,7 +34,9 @@ export default class Element {
             blur: null,
             keydown: null
         }
-        this.data = {}
+        this.data = {
+          
+        }
         this.gsap = {
             animation: null,
             ease: null,
@@ -273,9 +277,20 @@ export default class Element {
         this.blocks = []
         this.type = 'container'
         this.tag = 'flex'
-        this.css.container = 'flex'
-        this.css.container += options.direction ? ' flex-' + options.direction : ''
-        this.css.container += options.colspan ? ' col-span-' + options.colspan : ''
+        this.css.css = 'flex'
+        this.cssObject = {
+            base:{
+                flex: 'flex',
+                flexdirection: options.direction ? ' flex-' + options.direction : 'flex-row',
+                colspan: options.colspan ? ' col-span-' + options.colspan : ''
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        },
+        this.css.css += options.direction ? ' flex-' + options.direction : ''
+        this.css.css += options.colspan ? ' col-span-' + options.colspan : ''
         this.element = 'div'
         return this
     }

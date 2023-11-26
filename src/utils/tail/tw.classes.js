@@ -3,6 +3,7 @@
  *  
  * 
 */
+
 const fonts = "Alfa+Slab+One|Asap+Condensed|Abel|Alice|Alegreya|Amethysta|Archivo+Black|Barlow|Barlow+Condensed|Bungee+Inline|Expletus+Sans|Lora|Montserrat|Nunito+Sans|Oi|Open+Sans|PT+Sans|Roboto|Roboto+Condensed|Quattrocento|Raleway|Ultra|Yatra+One".replaceAll('+', ' ').split('|')
 const values = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96]
 const pixels = [1, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128, 160, 192, 224, 256]
@@ -31,7 +32,13 @@ const percs = ['full', '1/2',
     '11/12'
 ]
 
-const colors = ['gray', 'bluegray', 'brown', 'red', 'yellow', 'orange', 'green', 'lime', 'teal', 'blue', 'indigo', 'purple', 'pink']
+const colors = ['slate', 'gray', 'zinc', 'neutral', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
+
+
+const getColor = (n, color, type) => {
+    return n === 1 ? `${type}-` + color + '-50' : `${type}-` + color + '-' + (n - 1) * 100
+}
+
 
 function setPercs(prefix) {
     let arr = []
@@ -72,9 +79,32 @@ function setColors(prefix) {
     })
     return arr
 }
+function getColorsClass(type) {
+    let arr = [];
+    colors.forEach(color => {
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((n, index) => {
+            arr.push(getColor(n, color, type));
+        });
+    });
+    return arr
+}
+function getColorsHoverClass(type) {
+    let arr = [];
+    colors.forEach(color => {
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach((n, index) => {
+            arr.push('hover:' + getColor(n, color, type));
+        });
+    });
+    return arr
+}
+
 
 
 var classes = {
+    colorClass: getColorsClass('bg'),
+    textClass: getColorsClass('text'),
+    colorHoverClass: getColorsHoverClass('bg'),
+    textHoverClass: getColorsHoverClass('text'),
     width: [
         { label: 'auto', value: 'w-auto' },
         { label: '0', value: 'w-0' },
@@ -600,5 +630,45 @@ var classes = {
     ],
 
 }
+
+export const flattenClasses = () => {
+    const flatClasses = [];
+
+    for (const category in classes) {
+        if (classes.hasOwnProperty(category)) {
+            const categoryClasses = classes[category];
+
+            categoryClasses.forEach((classItem) => {
+                let ctx = category;
+                if(ctx == 'textClass'){
+                    ctx = 'textcolor';
+                }
+                if(ctx == 'colorClass'){
+                    ctx = 'bgcolor';
+                }
+                if(ctx == 'textHoverClass'){
+                    ctx = 'textcolorover';
+                }
+                if(ctx == 'colorHoverClass'){
+                    ctx = 'bgcolorover';
+                }
+                if (typeof classItem === 'string' && ctx != 'colors') {
+                   
+                    flatClasses.push({ attr: ctx, value: classItem });
+                } else {
+                    flatClasses.push({ attr: ctx, value: classItem.value });
+                }
+            });
+        }
+    }
+
+    return flatClasses;
+};
+export function searchClass(classes, value) {
+    const regex = new RegExp(`\\b${value}\\b`);
+    const matchingClasses = classes.filter((cls) => regex.test(cls.value));
+    return matchingClasses;
+}
+
 
 export default classes

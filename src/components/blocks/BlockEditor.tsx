@@ -4,11 +4,14 @@ import { useDispatch, useGetter } from "../../store";
 import { FiSettings, FiSmartphone } from "react-icons/fi";
 import _ from 'lodash'
 import { FaCamera, FaJsfiddle, FaJsSquare } from "react-icons/fa";
-import { MdFlipCameraAndroid, MdOutlinePreview } from "react-icons/md";
+import { MdDelete, MdFlipCameraAndroid, MdOutlinePreview } from "react-icons/md";
 import DOMPurify from 'dompurify';
 import BlockFloatingAction from "../../components/blocks/components/BlockFloatingAction";
 import BlockFloating from "../../components/blocks/components/BlockFloating";
 import { BsLaptop, BsTablet, BsTabletFill, BsTabletLandscape } from "react-icons/bs";
+import EditorFooter from "../../Footer";
+import Test from "../../Test";
+import Tabs from "../desktop/Tabs";
 const BlockEditor = () => {
   const [state, setState] = useState({
     currentSize: null,
@@ -34,7 +37,8 @@ const BlockEditor = () => {
     containerCoords: {
       top: 0,
       left: 0,
-      height: 0
+      height: 0,
+      width: 0
     },
     component: null,
     actionComponent: null,
@@ -44,11 +48,15 @@ const BlockEditor = () => {
     action: null,
     timer: null
   } as any);
+
   const editor = useGetter('editor', 'data', []);
-  
+  const desktop = useGetter('desktop', 'data', []);
   const mainEditor = useRef();
+  const blockEditor = useRef();
   const setInfo = useDispatch('editor', 'setInfo');
+  const deleteBlock = useDispatch('editor', 'deleteBlock');
   const setDesktopInfo = useDispatch('desktop', 'setInfo');
+  const floatRef = useRef(null);
   const updateStateAttributes = useCallback((updates: any) => {
     setState((prevState: any) => ({
       ...prevState,
@@ -65,7 +73,15 @@ const BlockEditor = () => {
       }, {}),
     }));
   }, [state]);
-  const setCurrent = useCallback((element: any) => {
+  function getCoords(id: any) {
+    let el = document.querySelector('#' + id) as any;
+    try {
+      return el.getBoundingClientRect()
+    } catch (err) {
+      return null
+    }
+  }
+  const setCurrent = useCallback((element: any,elementWidth:any) => {
     element.css.css = DOMPurify.sanitize(element.css.css);
     setInfo({
       prop: 'current',
@@ -74,47 +90,38 @@ const BlockEditor = () => {
     updateStateAttributes({
       'action': null
     })
-  }, []);
-  const setMode = useCallback((mode: any) => {
-    updateStateAttributes({
-      mode: mode
-    })
-    setDesktopInfo({
-      prop: 'mode',
-      value: mode
-    })
-  }, []);
-  const toggleOrientation = useCallback(() => {
-    updateStateAttributes({
-      orientation: !state.orientation
-    })
-  }, []);
-  const previewStyle = () => {
-    if (state.mode === 'xs') {
-      if (state.orientation) {
-        updateStateAttributes({
-          'currentSize': '800x375'
-        })
-      } else {
-        updateStateAttributes({
-          'currentSize': '375x800'
-        })
+    let coords = getCoords(element.id)
+    console.log('flottating',floatRef.current?.offsetWidth);
+    if (coords) {
+      let containerCoords = {
+        top: coords.top  + window.scrollY - floatRef.current.offsetHeight,
+        left: coords.left + window.scrollX +  coords.width / 2 - elementWidth / 2,
+
       }
-      return state.orientation ? "width:800px;height:375px;" : "width:375px;height:80vh;"
+
+      console.log('coordscoords',containerCoords);
+      console.log('container', containerCoords);
+      updateStateAttributes({
+        'containerCoords': containerCoords
+      })
     }
-    if (state.mode === 'md') {
-      if (state.orientation) {
-        updateStateAttributes({
-          'currentSize': 1024 * state.customZoom + 'x' + 1366 * state.customZoom
-        })
-      } else {
-        updateStateAttributes({
-          'currentSize': 1366 * state.customZoom + 'x' + 1024 * state.customZoom
-        })
+
+  }, []);
+  const ajustCoords = useCallback((element:any,elementWidth:any) => {
+    let coords = getCoords(element.id)
+    if(floatRef == null) return;
+    if (coords) {
+      let containerCoords = {
+        top: coords.top  + window.scrollY - floatRef.current.offsetHeight,
+        left: coords.left + window.scrollX +  coords.width / 2 - elementWidth / 2,
+
       }
-      return state.orientation ? "width:" + 1024 * state.customZoom + "px;height:" + 1366 * state.customZoom + "px;" : "width:" + 1366 * state.customZoom + "px;height:" + 1024 * state.customZoom + "px;"
+      updateStateAttributes({
+        'containerCoords': containerCoords
+      })
     }
-  }
+  },[]);
+
   useEffect(() => {
     const handleScroll = (e: any) => {
       updateStateAttributes({
@@ -146,6 +153,7 @@ const BlockEditor = () => {
       'actionComponent': null
     })
   }, [])
+  console.log('desktop in state', desktop);
   const closeBFloating = useCallback(() => {
     updateStateAttributes({
       'component': null,
@@ -155,59 +163,40 @@ const BlockEditor = () => {
   if (!_.isEmpty(editor.page) && !_.isEmpty(editor.document)) {
     return (
       <div id="mainEditor" ref={mainEditor} className="bg-gray-100 min-h-screen text-black overflow-y-auto">
-        <div className="h-8 mt-8 p-1 bg-white text-gray-800 w-full fixed flex flex-row items-center left-0 top-0 z-2xtop shadow cursor-pointer">
+        {/**<div className="h-8 mt-8 p-1 bg-white text-gray-800 w-full fixed flex flex-row items-center left-0 top-0 z-2xtop shadow cursor-pointer">
           <span className="ml-2 chip text-gray-100 bg-purple-800">{editor.page.name}</span><span className="chip bg-gray-100 text-black ml-1">{editor.page.category}</span>
           <FiSettings className="text-gray-400 ml-4 text-2xl hover:text-purple-600" title="Template settings" />
-          <FaJsSquare className="text-gray-400 ml-4 text-2xl hover:text-purple-600"  title="Add Javascript" />
-          <MdOutlinePreview className="text-gray-400 ml-4 text-2xl hover:text-purple-600"  title="Preview" /> 
-          <span className="absolute right-0 mr-12">X:{parseInt(state.containerCoords.left) - state.editorOffsetX} Y:{parseInt(String(state.containerCoords.top + scroll - state.editorOffsetY))} </span>
-        </div>
-        <div className="h-10 w-full gap-3 flex items-center justify-center pr-8 ">
-          <BsLaptop size={32} className={`${state.mode == 'base' ? 'text-primary-500' : ''} cursor-pointer`} onClick={() => setMode('base')} />
-          <BsTabletLandscape size={26} className={`${state.mode == 'md' ? 'text-primary-500' : ''} cursor-pointer`} onClick={() => setMode('md')} />
-          <FiSmartphone size={24} className={`${state.mode == 'xs' ? 'text-primary-500' : ''} cursor-pointer`} onClick={() => setMode('xs')} />
-          {state.mode != 'base' && (
-            <MdFlipCameraAndroid className="cursor-pointer text-2xl mr-4" title="Change orientation" onClick={toggleOrientation} />
-          )}
-          {state.mode != 'md' && (
-            <div className="flex mx-2">
-              <button className="w-4 h-4 flex items-center text-xl justify-center rounded-l-lg bg-blue-400">-</button>
-              <div className="h-4 w-10 bg-white text-black flex items-center justify-center">zoom</div>
-              <button className="w-4 h-4 flex items-center text-xl justify-center rounded-r-lg bg-blue-400">+</button>
-            </div>
-          )}
-          {state.mode != 'base' && (
-            <div>{state.currentSize}</div>)
-          }
-        </div>
-        <div className="flex flex-col overflow-y-auto overflow-x-hidden absolute inset-0 mt-10 laptop-view">
-            <div className="p-4 pb-20" id="BlockEditor">
-              {editor.document && (<BlockContainer
-                doc={editor.document}
-                current={setCurrent}
-                level="10"
-              />)}
-            </div>
-        </div>
-      
+          <FaJsSquare className="text-gray-400 ml-4 text-2xl hover:text-purple-600" title="Add Javascript" />
+          <MdOutlinePreview className="text-gray-400 ml-4 text-2xl hover:text-purple-600" title="Preview" />
+          <MdDelete onClick={deleteBlock} className="text-gray-400 ml-4 text-2xl hover:text-purple-600 cursor-pointer" title="Delete Block" />
+        </div>**/}
 
-        {editor.current && (
-            <BlockFloatingAction
-              className="z-50 bg-white modal"
-              title={state.actionTitle}
-              component={state.actionComponent}
-              options={state.options}
-              close={close}
-            />
-          )}
-        <BlockFloating close={closeBFloating} component={state.component ? 'opacity-100' : 'opacity-0'} />
-        {editor.current && state.viewBlocks && (
+        <Test setCurrent={setCurrent}>
+          <div id="BlockEditor">
+            {editor.document && (<BlockContainer
+              doc={editor.document}
+              setCurrent={setCurrent}
+              level="10"
+              ajustCoords={ajustCoords}
+            />)}
+          </div>
+         
+          <BlockFloating
+            close={closeBFloating}
+            floatRef={floatRef}
+            coords={state.containerCoords}
+            component={state.component ? 'opacity-100' : 'opacity-0'} />
+
+          {/**{editor.current && state.viewBlocks && (
             <pre>
               {editor.current.tag}
               {editor.current}
             </pre>
-        )}
-      </div >
+          )}**/}
+        </Test>
+
+       <EditorFooter blockEditor={blockEditor.current} />
+      </div>
     );
   } else {
     return null;

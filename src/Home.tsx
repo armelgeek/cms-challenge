@@ -3,6 +3,8 @@ import Block from "./utils/tail/blocks";
 import Element from "./utils/tail/element";
 import { useDispatch, useGetter } from "./store";
 import BlockEditor from "./components/blocks/BlockEditor";
+import EditorFooter from "./components/editor/EditorFooter";
+import {Helmet} from "react-helmet";
 
 export default function Home() {
   const editor = useGetter("editor", "data", []);
@@ -34,12 +36,14 @@ export default function Home() {
   }, []);
   return (
     <div className="min-h-screen w-screen bg-gray-800">
+      <Helmet defer={false}>
+      </Helmet>
       <div className="mt-10 overflow-hidden">
         <div className="editor-container bottom-0 left-0 right-0 top-0 flex min-h-screen flex-row">
           <div className="w-full overflow-x-hidden overflow-y-hidden">
             <div className="relative grid w-full grid-cols-12">
               <div className="relative col-span-12 mr-10 min-h-screen pb-20 md:col-span-12 lg:col-span-12">
-                <div className="absolute inset-0 mb-10 flex flex-col overflow-y-auto">
+                <div className="mb-10 flex flex-col overflow-y-auto">
                   <BlockEditor page={page} document={block} />
                 </div>
               </div>
@@ -53,7 +57,7 @@ export default function Home() {
                 </div>
                 {/** <EditorSidebarTabs/>*/}
               </div>
-              {/** <EditorFooter/>*/}
+             
             </div>
           </div>
         </div>

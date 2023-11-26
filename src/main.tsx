@@ -1,7 +1,6 @@
 
-import 'pace-js'
-import 'pace-js/themes/purple/pace-theme-flash.css'
 import "./styles/app.scss";
+import 'react-fontpicker-ts/dist/index.css';
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Routes from './routes';

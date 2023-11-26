@@ -15,7 +15,7 @@ const EditorSidebarTabs = ({tab,setCurrentTab}:any) => {
     return (
         <>
             {editor.current && (
-                <div className="pl-1 flex flex-col gap-6 cursor-pointer text-gray-400">
+                <div className="pl-1 pt-2 flex flex-col gap-6 cursor-pointer text-gray-400">
                     <FaElementor
                         className={`icon-button ml-0 mb-1 ${editor.iconTab==='elements'?'bg-purple-600 text-white': ''}`}
                         title="Add element"

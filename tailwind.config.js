@@ -8,7 +8,7 @@ const aspect = require('@tailwindcss/aspect-ratio');
 const radix =  require("tailwindcss-radix");
 
 // Add your custom theme colors here
-const themeColors = {
+const allColors = {
   primary: colors.violet,
   secondary: colors.gray,
   success: colors.emerald,
@@ -16,6 +16,30 @@ const themeColors = {
   danger: colors.rose,
   info: colors.indigo,
   dark: colors.slate,
+   transparent: 'transparent',
+            current: 'currentColor',
+            black: colors.black,
+            blue: colors.blue,
+            cyan: colors.cyan,
+            emerald: colors.emerald,
+            fuchsia: colors.fuchsia,
+            slate: colors.slate,
+            gray: colors.gray,
+            neutral: colors.neutral,
+            stone: colors.stone,
+            green: colors.green,
+            indigo: colors.indigo,
+            lime: colors.lime,
+            orange: colors.orange,
+            pink: colors.pink,
+            purple: colors.purple,
+            red: colors.red,
+            rose: colors.rose,
+            sky: colors.sky,
+            teal: colors.teal,
+            violet: colors.violet,
+            yellow: colors.amber,
+            white: colors.white,
 };
 
 module.exports = {
@@ -86,10 +110,11 @@ module.exports = {
         'fade-in': 'fade-in 250ms ease-in-out',
         'fade-out': 'fade-out 250ms ease-in-out',
       },
-      colors: themeColors,
+
+      colors: allColors,
       variables: {
         DEFAULT: {
-          ...themeColors,
+          ...allColors,
         },
       },
       borderRadius: {

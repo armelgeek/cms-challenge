@@ -5,7 +5,12 @@ const initialState = {
     tabs: [],
     galleryFilter: null,
     dbmode: true,
-    library: null,
+    library: {
+        name: '',
+        author: '',
+        description: '',
+        templates: []
+    },
     uikits: [],
     component: null,
     cloudinary_image: null,

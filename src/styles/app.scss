@@ -1,35 +1,5 @@
-@font-face {
-  font-family: 'Mali';
-  src: url("./fonts/Mali-Regular.ttf");
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-}
-@font-face {
-  font-family: 'Mali';
-  src: url("./fonts/Mali-SemiBold.ttf");
-  font-style: normal;
-  font-weight: bold;
-}
-@font-face {
-  font-family: 'Mali';
-  src: url("./fonts/Mali-Light.ttf");
-  font-style: normal;
-  font-weight: 100;
-}
-@font-face {
-  font-family: 'Mali';
-  src: url("./fonts/Mali-BoldItalic.ttf");
-  font-style: italic;
-  font-weight: bold;
-}
-@font-face {
-  font-family: 'Mali';
-  src: url("./fonts/Mali-ExtraLightItalic.ttf");
-  font-style: italic;
-  font-weight: 100;
-}
 
+@import './fonts';
 @import './tailwind';
 @import './base';
 @import './typography';
@@ -74,3 +44,5 @@
 @import './components/editor';
 @import './components/karaokeEffect';
 @import './components/home';
+@import './components/devices';
+@import './viewport_simulator';

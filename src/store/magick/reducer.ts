@@ -91,13 +91,18 @@ export const mergeReducers = (moduleName: any, initialState: any, mutations: any
             value
           );
         }
+      
         return updatedState;
       };
+      console.log('state.current',state.current);
       const value = Object.keys(updates).reduce((acc, key) => {
         const keys = key.split('.');
-        return updateNested(acc, keys, updates[key]);
+        console.log('keys:', keys);
+        const val = updateNested(acc, keys, updates[key]);
+        console.log('value',val);
+        return val;
       }, { ...state });
-      return value;
+      return {...state,...value};
     },
     [`${moduleName}__add__item`](state: any, payload: any) {
       return {

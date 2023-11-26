@@ -24,6 +24,7 @@ const BlockTailwind = ({ css, cid }: any) => {
     const desktop = useGetter('desktop', 'data', []);
     const setInfo = useDispatch('editor', 'setInfo');
     const updateBlockStyle = useDispatch('editor', 'updateBlockStyle');
+    console.log('editor',editor);
     const setControl = useCallback((group: any) => {
         setGr(group.label);
         setInfo({
@@ -33,9 +34,9 @@ const BlockTailwind = ({ css, cid }: any) => {
         setControls(group.components);
         css = editor.current.css.css
     }, [])
-    console.log('desktoptop',desktop)
     const updateCss = useCallback((classe: any, attr: any) => {
-        console.log('update css leka', editor.current.cssObject[`${desktop.mode}`],classe,attr,cid === editor.current.id);
+        console.log('editor update',editor.current);
+        //console.log('update css leka', editor.current.cssObject[`${desktop.mode}`],classe,attr,cid === editor.current.id);
         editor.current.cssObject[`${desktop.mode}`] = {
             ...editor.current.cssObject[`${desktop.mode}`],
             [attr]: classe
@@ -50,7 +51,6 @@ const BlockTailwind = ({ css, cid }: any) => {
         }
         return true
     }
-    //console.log('blockblocks',editor.document.blocks);
     useEffect(() => {
         setControls(null);
     }, [cid]);
@@ -225,17 +225,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                 )}
 
                             </div>
-                            {/**component
-                         :key="$randomID() + '_' + editor.current.id"
-                         :is="control.name"
-                         :attr="control.attr"
-                         :title="control.title"
-                         :css="$clean(css)"
-                         :stile="editor.current.style"
-                         :icon="control.icon||null"
-                         v-model="cssTw[control.attr]"
-                         @stile="stile"
-                         @css="updateCss"**/}
+                    
                         </div>)}
                     </div>
 

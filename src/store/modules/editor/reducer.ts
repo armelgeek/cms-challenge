@@ -24,8 +24,8 @@ const initialState = {
   customizeTab: null,
   iconTab: 'elements',
   sidebar:{
-    show: false,
-    name: ''
+    show: true,
+    name: 'elements'
   }
 };
 const mutations = {};

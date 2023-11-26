@@ -1,18 +1,38 @@
 import React from 'react'
-import { useDispatch } from '../../../store';
+import { useDispatch, useGetter } from '../../../store';
+function getCoords(id: any) {
+    let el = document.querySelector('#' + id) as any;
+    try {
+      return el.getBoundingClientRect()
+    } catch (err) {
+      return null
+    }
+  }
 const BlockTree = (props: any) => {
-    const setCurrent = useDispatch("editor", 'setCurrent');
+    const setInfo = useDispatch("editor", 'setInfo');
+    const editor = useGetter('editor', 'data', []);
     const current = props.current ? props.current : props.editor ? props.editor : null
     return current ? (
 
-        <div className="flex flex-col cursor-pointer w-full" onClick={() => setCurrent(current)}>
-            <div className="flex flex-row w-full pb-1 items-center capitalize">
-                {current.semantic || current.element}
+        <li className={`flex flex-col bg-white cursor-pointer w-full px-3`} onClick={(e) =>{
+            e.stopPropagation();
+            let coords = getCoords(current.id)
+            props.setCurrent(current,coords.width);
+        }}>
+            <div className={`${editor.current.id === current.id ? 'bg-gray-500 text-white':'bg-white'} flex flex-row w-full px-2 py-1 items-center capitalize`}>
+                {current.semantic || current.element} <small className='text-xs badge badge-default mx-2 bg-white text-black px-2'>#{current.id}</small>
             </div>
+            <ul>
             {current.blocks.map((block: any) => (
-                <div
-                    className="pl-2 flex w-full flex-row items-center pb-1 capitalize"
-                    onClick={() => setCurrent(current)}
+                <li
+                    className={`pl-2 flex w-full flex-row items-center capitalize `}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setInfo({
+                            prop: 'current',
+                            value: current
+                        })
+                    }}
                     key={'tree_' + block.id}
                 >
                     {!block.blocks && (
@@ -22,12 +42,13 @@ const BlockTree = (props: any) => {
                         
                     )}
                     {block.blocks && (
-                        <BlockTree current={block}/>
+                        <BlockTree current={block} setCurrent={props.setCurrent}/>
                     )}
 
-                </div>
+                </li>
             ))}
-        </div>
+            </ul>
+        </li>
     ) : null
 }
 

@@ -99,3 +99,29 @@ export function toCamelCase(str:string) {
       return p1.toUpperCase();
   });
 }
+export function getAllFontsFromBlocks(blocks: any) {
+  const fontsSet = new Set<string>();
+  function traverseBlocks(blocks: any) {
+    if (Array.isArray(blocks)) {
+      blocks.forEach((block) => {
+        if (block.font && block.font !== "") {
+          fontsSet.add(block.font);
+        }
+        if (block.blocks && block.blocks.length > 0) {
+          traverseBlocks(block.blocks);
+        }
+      });
+    } else {
+      fontsSet.add(blocks.font);
+      if (blocks.blocks && blocks.blocks.length > 0) {
+        traverseBlocks(blocks.blocks);
+      }
+    }
+  }
+  traverseBlocks(blocks.document);
+  return Array.from(fontsSet);
+}
+
+export function hasPermission(permission: string) {
+  return ['create:Posts','index:Posts','update:Posts','delete:Posts'].includes(permission)
+}

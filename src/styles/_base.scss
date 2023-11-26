@@ -175,3 +175,9 @@ body {
   visibility: hidden;
   border-radius: 50%;
 }
+
+@for $i from 1 through 100 {
+  .z-#{$i} {
+    z-index: $i;
+  }
+}
