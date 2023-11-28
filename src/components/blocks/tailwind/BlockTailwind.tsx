@@ -104,7 +104,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                     />
                                 )}
                                 {c.name == 'Range' && (
-                                    <Range
+                                    <Options
                                         attr={c.attr}
                                         title={c.title}
                                         data={editor.current.cssObject[`${desktop.mode}`]}
@@ -113,7 +113,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         updateCss={updateCss}
                                     />
                                 )}
-                                {c.name == 'Options' && (
+                                {c.name == 'Options'  && (
                                     <Options
                                         attr={c.attr}
                                         title={c.title}

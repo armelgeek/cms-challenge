@@ -12,6 +12,7 @@ import { BsLaptop, BsTablet, BsTabletFill, BsTabletLandscape } from "react-icons
 import EditorFooter from "../../Footer";
 import Test from "../../Test";
 import Tabs from "../desktop/Tabs";
+
 const BlockEditor = () => {
   const [state, setState] = useState({
     currentSize: null,
@@ -74,13 +75,17 @@ const BlockEditor = () => {
     }));
   }, [state]);
   function getCoords(id: any) {
-    let el = document.querySelector("#preview-frame")?.contentWindow.document.querySelector('#' + id) as any
-    if(!el) return null;
-    try {
-      return el.getBoundingClientRect()
-    } catch (err) {
-      return null
+    let previewFrame = document.querySelector("#preview-frame");
+    if(previewFrame){
+      let el = previewFrame?.contentWindow.document.querySelector('#' + id) as any;
+      if(!el) return null;
+      try {
+        return el.getBoundingClientRect()
+      } catch (err) {
+        return null
+      }
     }
+
   }
   const setCurrent = useCallback((element: any,elementWidth:any) => {
     element.css.css = DOMPurify.sanitize(element.css.css);
@@ -154,7 +159,6 @@ const BlockEditor = () => {
       'actionComponent': null
     })
   }, [])
-  console.log('desktop in state', desktop);
   const closeBFloating = useCallback(() => {
     updateStateAttributes({
       'component': null,
@@ -181,7 +185,7 @@ const BlockEditor = () => {
               ajustCoords={ajustCoords}
             />)}
           </div>
-         
+
           <BlockFloating
             close={closeBFloating}
             floatRef={floatRef}

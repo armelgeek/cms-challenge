@@ -18,7 +18,7 @@ const Options = ({ title, data, attr,updateCss }: any) => {
             return opt.label
         }
     }
-
+    console.log('title',title || attr)
     return (
         <div className="flex flex-col clear-both">
             <span className="capitalize">{title || attr}</span>
@@ -28,11 +28,17 @@ const Options = ({ title, data, attr,updateCss }: any) => {
                 }}>
                 <option value=""></option>
                 {options.map((opt: any) => (
-                    <option 
-                        selected={opt.hasOwnProperty('label') ? opt.value == selected : opt == selected} 
-                        value={`${opt.hasOwnProperty('label') ? opt.value : opt}`}>
-                        {option(opt)}
-                    </option>
+                    <>
+                        {
+                            option(opt) != "" && (
+                                <option
+                                    selected={opt.hasOwnProperty('label') ? opt.value == selected : opt == selected}
+                                    value={`${opt.hasOwnProperty('label') ? opt.value : opt}`}>
+                                    {option(opt)}
+                                </option>
+                            )
+                        }
+                    </>
                 ))}
 
             </select>

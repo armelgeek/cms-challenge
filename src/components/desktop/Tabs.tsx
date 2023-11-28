@@ -7,7 +7,6 @@ import { FaPlusCircle } from 'react-icons/fa';
 const Tabs = () => {
   const tabs = useGetter('desktop', 'tabs', []);
   const currentTab = useGetter('desktop', 'currentTab', []);
-  console.log('currentTab: ', currentTab);
   const handleChangeDesktopInfo = useDispatch('desktop', 'setInfo');
   const handleChangeEditorInfo = useDispatch('editor', 'setInfo');
   const removeTab = useDispatch('desktop', 'removeTab');

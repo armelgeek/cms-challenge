@@ -15,7 +15,7 @@ const BlockTree = (props: any) => {
     const current = props.current ? props.current : props.editor ? props.editor : null
     return (editor.current!= null && current.id != null) ? (
 
-        <li className={`flex flex-col bg-white cursor-pointer w-full px-3`} onClick={(e) =>{
+        <div className={`flex flex-col bg-white cursor-pointer w-full px-3`} onClick={(e) =>{
             e.stopPropagation();
             let coords = getCoords(current.id)
             props.setCurrent(current,coords.width);
@@ -23,9 +23,8 @@ const BlockTree = (props: any) => {
             <div className={`${editor.current.id === current.id ? 'bg-gray-500 text-white':'bg-white'} flex flex-row w-full px-2 py-1 items-center capitalize`}>
                 {current.semantic || current.element} <small className='text-xs badge badge-default mx-2 bg-white text-black px-2'>#{current.id}</small>
             </div>
-            <ul>
             {current.blocks.map((block: any) => (
-                <li
+                <div
                     className={`pl-2 flex w-full flex-row items-center capitalize `}
                     onClick={(e) => {
                         e.stopPropagation();
@@ -46,10 +45,9 @@ const BlockTree = (props: any) => {
                         <BlockTree current={block} setCurrent={props.setCurrent}/>
                     )}
 
-                </li>
+                </div>
             ))}
-            </ul>
-        </li>
+        </div>
     ) : null
 }
 

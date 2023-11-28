@@ -27,8 +27,8 @@ const BlockElements = () => {
     {editor.elements && (
       <div className="relative">
         {editor.elements.map((group:any) => (
-          <>
-          <div key={group.label} className={`capitalize flex items-center cursor-pointer p-2  text-base ${gr === group.label ? 'bg-primary-500 text-white' : ''}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
+          <React.Fragment key={Math.random().toString(36).substring(7)}>
+          <div  className={`capitalize flex items-center cursor-pointer p-2  text-base ${gr === group.label ? 'bg-primary-500 text-white' : ''}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
             {group.label}
             <div className="absolute right-0 m-1">
             {gr === group.label ?  <MdOutlineExpandLess/> : <MdOutlineExpandMore/>}
@@ -44,7 +44,7 @@ const BlockElements = () => {
               </div>
             ))}
           </div>
-          </>
+          </React.Fragment>
         ))}
         <div key="snippets" className={`capitalize cursor-pointer items-center flex p-2 text-gray-700 text-base ${gr === 'snippets' ? 'bg-bluegray-300 text-gray-200' : ''}`} onClick={() => gr === 'snippets' ? setGr('') : setGr('snippets')}>
           Snippets

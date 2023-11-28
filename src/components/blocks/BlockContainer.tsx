@@ -49,7 +49,7 @@ const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
       }}
       onClick={(e) => {
         e.stopPropagation();
-        setCurrent(doc,refContainer.current.offsetWidth)
+        setCurrent(doc,refContainer.current?.offsetWidth)
       }}
       id={doc.id}
       className={

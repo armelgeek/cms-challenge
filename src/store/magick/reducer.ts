@@ -1,5 +1,3 @@
-import { useCallback } from "react";
-
 const defaultState = {
   meta: {
     isLoading: false,
@@ -94,13 +92,9 @@ export const mergeReducers = (moduleName: any, initialState: any, mutations: any
       
         return updatedState;
       };
-      console.log('state.current',state.current);
       const value = Object.keys(updates).reduce((acc, key) => {
         const keys = key.split('.');
-        console.log('keys:', keys);
-        const val = updateNested(acc, keys, updates[key]);
-        console.log('value',val);
-        return val;
+        return updateNested(acc, keys, updates[key]);
       }, { ...state });
       return {...state,...value};
     },

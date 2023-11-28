@@ -88,7 +88,7 @@ const Test = ({ children, setCurrent }: any) => {
     return `<!DOCTYPE html>
       <html>
         <head>
-          <script src="https://cdn.tailwindcss.com"></script>
+          <script src="http://localhost:5173/tailwind.css"></script>
           <link rel="stylesheet" href='http://localhost:5173/app.css'/>
         </head>
         <body>
@@ -153,31 +153,6 @@ const Test = ({ children, setCurrent }: any) => {
 
         {tabs.length > 0 && <Tabs />}
       </div>
-      {/**<div className="mt-2 relative flex flex-row gap-5">
-        <div className="w-48 sticky top-0 h-96 ml-2">
-          <BlockTree editor={editor.current} />
-        </div>
-        <div className='border border-gray-300' style={{
-          width: w,
-          height: h,
-          maxHeight: h,
-          overflow: 'auto'
-        }}>
-          {children}
-        </div>
-        <div className="absolute flex flex-row right-5 top-0 pr-2">
-          {editor.sidebar.show && (
-            <div className=" z-50  bg-white w-52 border-l">
-              <EditorSidebar tab={editor.sidebar.name} close={closeSidebar} />
-            </div>
-          )}
-          {editor.current && (
-            <div className="bg-white z-50 w-10   flex flex-col items-center justify-start text-center">
-              <EditorSidebarTabs tab={editor.sidebar.name} setCurrentTab={setCurrentTab} />
-            </div>
-          )}
-        </div>
-          </div>**/}
       <div className="flex h-screen pt-3 px-2">
 
         <div className="w-1/6">
@@ -188,9 +163,9 @@ const Test = ({ children, setCurrent }: any) => {
 
           {choice == 0 && (
             <>
-              <ul className="tree relative">
+              <div className="tree relative">
                 <BlockTree editor={editor.document} setCurrent={setCurrent} />
-              </ul>
+              </div>
             </>
           )}
           {choice == 1 && (

@@ -551,12 +551,10 @@ function moveBlockAction(blocks: any, currentId: any, direction: any) {
 
   if (targetIndex !== -1) {
     if (direction === "up" && targetIndex > 0) {
-      // Déplacer vers le parent en échangeant avec le bloc précédent
       const temp = blocks[targetIndex];
       blocks[targetIndex] = blocks[targetIndex - 1];
       blocks[targetIndex - 1] = temp;
     } else if (direction === "down" && targetIndex < blocks.length - 1) {
-      // Déplacer vers l'enfant en échangeant avec le premier enfant
       const temp = blocks[targetIndex];
       blocks[targetIndex] = blocks[targetIndex + 1];
       blocks[targetIndex + 1] = temp;
@@ -582,7 +580,7 @@ function duplicateBlockAction(blocks: any, currentId: any) {
   let duplicatedBlock: any;
   blocks.forEach((block: any, index: number) => {
     if (block.id === currentId) {
-      duplicatedBlock = { ...block, id: Math.random().toString(36).substring(7) };
+      duplicatedBlock = { ...block, id: 'tail-editor-'+Math.random().toString(36).substring(7) };
       blocks.splice(index + 1, 0, duplicatedBlock);
     }
     if (block.blocks && block.blocks.length > 0) {
@@ -595,12 +593,15 @@ function duplicateBlockAction(blocks: any, currentId: any) {
 export const duplicateBlock = () => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
   let current = getState().editor.current;
+  console.log('editor',editor);
+  console.log('current',current);
   const {duplicatedBlock,blocks} = duplicateBlockAction(editor.document.blocks, current.id);
+
   dispatch({
     type: 'editor__item__infos',
     payload: {
-      'current': duplicatedBlock,
-      'document.blocks': blocks
+      'document.blocks': blocks,
+      'current': duplicatedBlock
     }
   })
 
