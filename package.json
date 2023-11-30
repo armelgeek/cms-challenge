@@ -75,6 +75,7 @@
     "process": "^0.11.10",
     "prop-types": "^15.7.2",
     "ramda": "0.27.1",
+    "rc-upload": "^4.4.0",
     "react": "^18.2.0",
     "react-aspect-ratio": "1.0.46",
     "react-color": "^2.19.3",

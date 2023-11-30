@@ -97,16 +97,11 @@ const BlockEditor = () => {
       'action': null
     })
     let coords = getCoords(element.id)
-    console.log('flottating',floatRef.current?.offsetWidth);
     if (coords) {
       let containerCoords = {
         top: (coords.top  + window.scrollY) + coords.height,
         left: coords.left + window.scrollX +  coords.width / 2 - elementWidth / 2,
-
       }
-
-      console.log('coordscoords',containerCoords);
-      console.log('container', containerCoords);
       updateStateAttributes({
         'containerCoords': containerCoords
       })
@@ -168,14 +163,6 @@ const BlockEditor = () => {
   if (!_.isEmpty(editor.page) && !_.isEmpty(editor.document)) {
     return (
       <div id="mainEditor" ref={mainEditor} className="bg-gray-100 min-h-screen text-black overflow-y-auto">
-        {/**<div className="h-8 mt-8 p-1 bg-white text-gray-800 w-full fixed flex flex-row items-center left-0 top-0 z-2xtop shadow cursor-pointer">
-          <span className="ml-2 chip text-gray-100 bg-purple-800">{editor.page.name}</span><span className="chip bg-gray-100 text-black ml-1">{editor.page.category}</span>
-          <FiSettings className="text-gray-400 ml-4 text-2xl hover:text-purple-600" title="Template settings" />
-          <FaJsSquare className="text-gray-400 ml-4 text-2xl hover:text-purple-600" title="Add Javascript" />
-          <MdOutlinePreview className="text-gray-400 ml-4 text-2xl hover:text-purple-600" title="Preview" />
-          <MdDelete onClick={deleteBlock} className="text-gray-400 ml-4 text-2xl hover:text-purple-600 cursor-pointer" title="Delete Block" />
-        </div>**/}
-
         <Test setCurrent={setCurrent}>
           <div id="BlockEditor">
             {editor.document && (<BlockContainer

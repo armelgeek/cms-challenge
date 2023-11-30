@@ -9,13 +9,13 @@ const BlockImageUrl = () => {
   const updateValue = useCallback((e:any)=>{
       setValue(e.target.value);
       editBlockImageUrl(e.target.value);
-  
+
   },[value]);
   useEffect(()=>{
     setValue(editor?.current?.image?.url);
 },[editor?.current])
   return editor.current && (
-    <div  className="flex flex-col items-start"  v-if="$store.state.editor.current">
+    <div  className="flex flex-col items-start"  >
         <div className="flex items-center p-1 justify-around w-full">
             <FaImage/>
             <input  className="ml-2 p-1 w-3/4 rounded text-lg" value={value} onChange={updateValue}/>

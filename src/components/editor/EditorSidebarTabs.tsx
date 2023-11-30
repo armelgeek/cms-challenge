@@ -16,14 +16,8 @@ const EditorSidebarTabs = ({ tab, setCurrentTab }: any) => {
         <>
             {editor.current && (
                 <div className="flex flex-row w-full py-1 items-center border  gap-5 px-2  border-gray-300">
-                    <div className="p-1 border cursor-pointer">
-                        <FaElementor
-                            className={` ${editor.iconTab === 'elements' ? 'bg-primary-500 text-white' : ''}`}
-                            title="Add element"
-                            size={18}
-                            onClick={() => setCurrent('elements')}
-                        /></div>
-                    <div className="p-1 border  cursor-pointer">
+                    <button className="uppercase cursor-pointer badge badge-primary px-3 py-1 border rounded-xl">Page Settings</button>
+                    {/**<div className="p-1 border  cursor-pointer">
                         <SiTailwindcss
                             className={`${editor.iconTab === 'customize' ? 'bg-primary-500 text-white' : ''}`}
                             title="Tailwind Controls"
@@ -53,7 +47,7 @@ const EditorSidebarTabs = ({ tab, setCurrentTab }: any) => {
                             size={18}
                             onClick={() => setCurrent('snippets')}
                         />
-                    </div>
+            </div>**/}
                 </div>
             )}
         </>

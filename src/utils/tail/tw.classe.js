@@ -211,9 +211,11 @@ var classes = {
         'text-6xl',
         'text-7xl',
         'text-8xl',
-        'text-9xl',
-        'text-10xl',
-        'text-20xl'
+        'text-9xl'
+    ],
+    fontsmoothing: [
+        'antialiased',
+        'subpixel-antialiased',
     ],
     textAlign: [
         'text-left',

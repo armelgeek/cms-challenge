@@ -4,7 +4,6 @@ const initialState = {
     filter: '',
     tabs: [],
     galleryFilter: null,
-    dbmode: true,
     library: {
         name: '',
         author: '',
@@ -12,16 +11,13 @@ const initialState = {
         templates: []
     },
     uikits: [],
-    component: null,
-    cloudinary_image: null,
-    error: null,
     currentTab: 0,
     loading: false,
-    project: null,
-    confirm: false,
-    confirmAction: null,
-    toolbar: null,
-    menu_responsive: false
+    modal: {
+        show: false,
+        type: '',
+        title: ''
+    }
 };
 
 const mutations = {};

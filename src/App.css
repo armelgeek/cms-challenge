@@ -555,7 +555,7 @@ button[disabled] {
 
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 1px;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -77,7 +77,9 @@ const Color = ({ title, data, attr, updateCss }: any) => {
   return (
     <div className="flex flex-row">
       <div className="mr-2">
-        Color
+      <span className="uppercase font-bold" style={{
+                fontSize: "10px"
+            }}>Color</span>
         <div 
         onClick={()=> toogleOver(false)}
         className={` cursor-pointer ${state.color.front.replace('text', 'bg')} mb-1 w-8 h-8 border-2 rounded-full`}
@@ -86,7 +88,9 @@ const Color = ({ title, data, attr, updateCss }: any) => {
         </div>
       </div>
       <div>
-        Over
+      <span className="uppercase font-bold" style={{
+                fontSize: "10px"
+            }}>Hover</span>
         <div
         onClick={()=> toogleOver(true)}
          className={`  cursor-pointer ${state.color.over.replace('hover:text', 'bg').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}></div>

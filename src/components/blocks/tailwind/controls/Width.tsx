@@ -7,8 +7,10 @@ const Width = ({title, attr,data, updateCss}:any) => {
     console.log('width',model); 
     return (
         <div className="flex flex-col">
-            { title }
-            <select value={model}  className="w-full nodark"  onChange={(e)=> {
+            <p className='uppercase font-bold' style={{
+                fontSize: '10px',
+            }}>{ title }</p>
+            <select value={model}  className="select"  onChange={(e)=> {
                 setModel(e.target.value);
                 updateCss(e.target.value,attr);
             }}>

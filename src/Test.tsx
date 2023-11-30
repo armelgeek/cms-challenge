@@ -101,7 +101,7 @@ const Test = ({ children, setCurrent }: any) => {
       <div className="sticky top-0">
         <div className="z-50 bg-white py-1 flex border flex-row justify-between item-center px-3">
           <div className="brand">
-            <h3 className='text-primary-500'>Logo</h3>
+            <h3 className='text-primary-500'>WindFlow Studio</h3>
           </div>
           <div className="flex flex-row gap-3 items-center z-30">
             <ResponsiveTest brands={devices} resizeTo={resizeTo} />

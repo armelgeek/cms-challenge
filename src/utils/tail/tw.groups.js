@@ -13,6 +13,7 @@
  *  @negative Boolean => true = slider has negative values
  */
 const twgroups = [
+    
     {
         label: 'grid', filter: ['grid'], components: [
             { name: 'Options', attr: 'gridgap', title: 'grid gap' }
@@ -69,7 +70,10 @@ const twgroups = [
             { name: 'Options', attr: 'textSize', title: 'size' },
             { name: 'Options', attr: 'textAlign', title: 'Align' },
             { name: 'Options', attr: 'fontWeight', title: 'weight' },
+            { name: 'Options', attr: 'fontsmoothing', title: 'Font Smoothing' },
             { name: 'Range', attr: 'textOpacity', title: 'opacity' },
+            
+
             { name: 'Options', attr: 'textSpacing', title: 'letter spacing' },
             { name: 'Options', attr: 'textlineheight', title: 'line height' },
             { name: 'TextFont', attr: 'textfont' },

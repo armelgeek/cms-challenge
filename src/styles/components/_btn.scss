@@ -32,11 +32,11 @@
       }
 
       .btn:first-child {
-        @apply rounded-l-primary;
+        @apply rounded-full;
       }
 
       .btn:last-child {
-        @apply rounded-r-primary border-l-0;
+        @apply rounded-full border-l-0;
       }
 
       .btn:not(:first-child):not(:last-child) {
@@ -45,11 +45,11 @@
 
       &.rounded {
         .btn:first-child {
-          @apply rounded-l-full;
+          @apply rounded-full;
         }
 
         .btn:last-child {
-          @apply rounded-r-full;
+          @apply rounded-full;
         }
       }
     }

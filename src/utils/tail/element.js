@@ -63,161 +63,206 @@ export default class Element {
     Groups() {
         return [
             {
-                label: 'containers',
-                elements: [
+                label: 'main',
+                elements:[
                     {
-                        name: 'Grid',
-                        icon: 'grid_on'
-                    },
-                    {
-                        name: 'Flexbox',
-                        icon: 'highlight_alt'
-                    }
-                ],
-            },
-            {
-                label: 'text',
-                elements: [
-                    {
+                        id: 'heading',
                         name: 'Heading',
                         icon: 'title',
                     },
                     {
+                        id: 'paragraph',
                         name: 'Paragraph',
                         icon: 'subject'
                     },
                     {
+                        id: 'inlinetext',
                         name: 'Inline Text',
                         icon: 'text_format'
                     },
                     {
+                        id: 'span',
                         name: 'Span',
                         icon: 'text_format'
                     },
                     {
+                        id: 'blockquote',
                         name: 'Blockquote',
                         icon: 'text_format'
                     },
                     {
+                        id: 'code',
                         name: 'Code',
                         icon: 'code'
-                    }
-
-                ]
-            },
-            {
-                label: 'media',
-                elements: [
+                    },
                     {
+                        id: 'link',
+                        name: 'Link',
+                        icon: 'link'
+                    },
+                    {
+                        id: 'image',
                         name: 'Image',
                         icon: 'insert_photo'
                     },
                     {
-                        name: 'Slider',
-                        icon: 'video_library'
-                    },
-                    {
+                        id: 'video',
                         name: 'Video',
                         icon: 'movie'
                     },
                     {
+                        id: 'youtube',
                         name: 'Youtube',
                         icon: 'movie'
                     },
+
                     {
-                        name: 'Vimeo',
-                        icon: 'movie'
-                    },
-                    {
-                        name: 'MIcon',
-                        icon: 'crop_original'
-                    },
-                    {
-                        name: 'Iconify',
-                        icon: 'crop_original'
-                    },
-                    {
+                        id: 'download',
                         name: 'Download',
                         icon: 'download'
                     }
                 ]
             },
             {
+
+                label: 'containers',
+                elements: [
+                    {
+                        id: 'grid',
+                        name: 'Grid',
+                        icon: 'grid_on'
+                    },
+                    {
+                        id: 'flexbox',
+                        name: 'Flexbox',
+                        icon: 'highlight_alt'
+                    },
+                    {
+                        id: 'emptycontainer',
+                        name: 'Empty Container',
+                        icon: 'highlight_alt'
+                    },
+                    {
+                        id: 'containerwith2div',
+                        name: 'Container With 2 Div',
+                        icon: 'highlight_alt'
+                    },
+                    {
+                        id: 'containerwith2divunequalsdivs',
+                        name: 'Container With 2 Div unequals divs',
+                        icon: 'highlight_alt'
+                    },
+                    {
+                        id: 'ul',
+                        name: 'List',
+                        icon: 'ul'
+                    },
+                    {
+                        id: 'li',
+                        name: 'UnOrdered List item',
+                        icon: 'li'
+                    },
+                    {
+                        id: 'ol',
+                        name: 'Ordered List item',
+                        icon: 'ol'
+                    },
+
+                ],
+            },
+            {
                 label: 'form',
                 elements: [
                     {
+                        id: 'form',
                         name: 'Form',
                         icon: 'call_to_action'
                     },
                     {
+                        id: 'inputtext',
                         name: 'Input Text',
                         icon: 'input'
                     },
                     {
+                        id: 'email',
                         name: 'Email',
                         icon: 'email'
                     },
                     {
+                        id: 'hidden',
                         name: 'Hidden',
                         icon: 'input'
                     },
                     {
+                        id: 'number',
                         name: 'Number',
                         icon: 'input'
                     },
                     {
+                        id: 'checkbox',
                         name: 'Checkbox',
                         icon: 'check_box'
                     },
                     {
+                        id: 'textarea',
                         name: 'Textarea',
                         icon: 'text_format'
                     },
                     {
+                        id: 'submit',
                         name: 'Submit',
                         icon: 'smart_button'
                     },
                     {
+                        id: 'reset',
                         name: 'Reset',
                         icon: 'smart_button'
                     },
                     {
+                        id: 'button',
                         name: 'Button',
                         icon: 'smart_button'
                     }
                 ]
+            },
+            {
+                label: 'Tables',
+                elements: []
             }
         ]
     }
 
 
     createElement(element, options) {
-        return element === 'Grid' ? this.Grid(options) :
-            element === 'Flexbox' ? this.Flexbox(options) :
-                element === 'Heading' ? this.Heading(options) :
-                    element === 'Paragraph' ? this.Paragraph() :
-                        element === 'Inline Text' ? this.InlineText() :
-                            element === 'Span' ? this.Span() :
-                                element === 'Blockquote' ? this.Blockquote() :
-                                    element === 'Code' ? this.Code() :
-                                        element === 'Image' ? this.Image() :
-                                            element === 'Slider' ? this.Slider() :
-                                                element === 'Video' ? this.Video() :
-                                                    element === 'Youtube' ? this.YTVideo() :
-                                                        element === 'Vimeo' ? this.VimeoVideo() :
-                                                            element === 'MIcon' ? this.Icon() :
-                                                                element === 'Iconify' ? this.Iconify() :
-                                                                    element === 'Download' ? this.Download() :
-                                                                        element === 'Form' ? this.Form() :
-                                                                            element === 'Input Text' ? this.InputText() :
-                                                                                element === 'Email' ? this.InputEmail() :
-                                                                                    element === 'Textarea' ? this.InputTextarea() :
-                                                                                        element === 'Checkbox' ? this.InputCheckbox() :
-                                                                                            element === 'Number' ? this.InputNumber() :
-                                                                                                element === 'Hidden' ? this.InputHidden() :
-                                                                                                    element === 'Submit' ? this.InputSubmit() :
-                                                                                                        element === 'Reset' ? this.InputReset() :
-                                                                                                            element === 'Button' ? this.Button() : null
+        return element === 'grid' ? this.Grid(options) :
+            element === 'flexbox' ? this.Flexbox(options) :
+                element === 'heading' ? this.Heading(options) :
+                    element === 'paragraph' ? this.Paragraph() :
+                        element === 'inlinetext' ? this.InlineText() :
+                            element === 'Sspan' ? this.Span() :
+                                element === 'blockquote' ? this.Blockquote() :
+                                    element === 'code' ? this.Code() :
+                                        element === 'image' ? this.Image() :
+                                            element === 'video' ? this.Video() :
+                                                    element === 'youtube' ? this.YTVideo() :
+                                                                    element === 'download' ? this.Download() :
+                                                                        element === 'form' ? this.Form() :
+                                                                            element === 'inputtext' ? this.InputText() :
+                                                                                element === 'email' ? this.InputEmail() :
+                                                                                    element === 'textarea' ? this.InputTextarea() :
+                                                                                        element === 'checkbox' ? this.InputCheckbox() :
+                                                                                            element === 'number' ? this.InputNumber() :
+                                                                                                element === 'hidden' ? this.InputHidden() :
+                                                                                                    element === 'submit' ? this.InputSubmit() :
+                                                                                                        element === 'reset' ? this.InputReset() :
+                                                                                                            element === 'button' ? this.Button() :
+                                                                                                                element === 'emptycontainer' ? this.EmptyContainer(options) :
+                                                                                                                    element === 'containerwith2div' ? this.ContainerWith2Div(options) :
+                                                                                                                        element === 'containerwith2divunequalsdivs' ? this.ContainerWith2DivUnequalsDivs(options) :
+                                                                                                                            element === 'ul' ? this.Ul(options) :
+                                                                                                                                element === 'li' ? this.Li(options) :
+                                                                                                                                    element === 'ol' ? this.Ol(options) :
+                                                                                                                                    element === 'link' ? this.Link(options) : null
     }
 
     setIcon(icon) {
@@ -256,10 +301,17 @@ export default class Element {
         this.blocks = []
         this.type = 'container'
         this.tag = 'grid'
-        this.css.container = 'md:grid flex flex-col'
+        this.css.css = 'grid'
         this.element = 'div'
-        //this.helper = 'blocks/helpers/Grid.vue'
-        this.dialog = 'md:w-1/3'
+        this.cssObject = {
+            base:{
+                display: 'grid'
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
         return this
     }
 
@@ -294,7 +346,185 @@ export default class Element {
         this.element = 'div'
         return this
     }
+    EmptyContainer(options = { direction: null, colspan: null }) {
+        this.id= this.randomID()
+        this.blocks = []
+        this.type = 'container'
+        this.css.css = 'flex w-full h-80 justify-center items-center'
+        this.tag = 'flex'
+        this.cssObject = {
+            base:{
+                flex: 'flex',
+                w: 'w-full',
+                h: 'h-80',
+                justifycenter: 'justify-center',
+                itemscenter: 'items-center'
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'div'
+        this.content = 'Container with preset height of 20rem (h-80) and item centered. Drag elements from the left sidebar into this container'
+        return this
+    }
 
+
+    ContainerWith2Div(options = { direction: null, colspan: null }) {
+        this.id= this.randomID()
+        this.blocks = [{
+            id:this.randomID(),
+            type:'container',
+            css:{
+                css:'flex w-full h-full justify-center items-center md:w-1/2'
+            },
+            tag:'flex',
+            cssObject:{
+                base:{
+                    flex: 'flex',
+                    w: 'w-full',
+                    h: 'h-full',
+                    justifycenter: 'justify-center',
+                    itemscenter: 'items-center'
+                },
+                lg: null,
+                md: {
+                    w: 'md:w-1/2'
+                },
+                sm: null,
+                xs: null
+            },
+            element: 'div',
+            content: 'Content 1'
+        },{
+            id:this.randomID(),
+            type:'container',
+            css:{
+                css:'flex w-full h-full justify-center items-center md:w-1/2'
+            },
+            tag:'flex',
+            cssObject:{
+                base:{
+                    flex: 'flex',
+                    w: 'w-full',
+                    h: 'h-full',
+                    justifycenter: 'justify-center',
+                    itemscenter: 'items-center'
+                },
+                lg: null,
+                md: {
+                    w: 'md:w-1/2'
+                },
+                sm: null,
+                xs: null
+            },
+            element: 'div',
+            content: 'Content 2'
+        }]
+        this.type = 'container'
+        this.css.css = 'flex w-full h-80 justify-center items-center mt-0 mr-auto mb-0 ml-auto flex-wrap'
+        this.tag = 'flex'
+        this.cssObject = {
+            base:{
+                flex: 'flex',
+                w: 'w-full',
+                h: 'h-80',
+                mt: 'mt-0',
+                mr: 'mr-auto',
+                mb: 'mb-0',
+                ml: 'ml-auto',
+                flexWrap: 'flex-wrap',
+                justifycenter: 'justify-center',
+                itemscenter: 'items-center'
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'div'
+        //this.content = 'Container with preset height of 20rem (h-80) and item centered. Drag elements from the left sidebar into this container'
+        return this
+    }
+
+
+    ContainerWith2DivUnequalsDivs(options = { direction: null, colspan: null }) {
+        this.id = this.randomID()
+        this.blocks = [{
+            id:this.randomID(),
+            type:'container',
+            css:{
+                css:'flex w-full h-full justify-center items-center md:w-1/3'
+            },
+            tag:'flex',
+            cssObject:{
+                base:{
+                    flex: 'flex',
+                    w: 'w-full',
+                    h: 'h-full',
+                    justifycenter: 'justify-center',
+                    itemscenter: 'items-center'
+                },
+                lg: null,
+                md: {
+                    w: 'md:w-1/3'
+                },
+                sm: null,
+                xs: null
+            },
+            element: 'div',
+            content: 'Content 1'
+        },{
+            id:this.randomID(),
+            type:'container',
+            css:{
+                css:'flex w-full h-full justify-center items-center md:w-2/3'
+            },
+            tag:'flex',
+            cssObject:{
+                base:{
+                    flex: 'flex',
+                    w: 'w-full',
+                    h: 'h-full',
+                    justifycenter: 'justify-center',
+                    itemscenter: 'items-center'
+                },
+                lg: null,
+                md: {
+                    w: 'md:w-2/3'
+                },
+                sm: null,
+                xs: null
+            },
+            element: 'div',
+            content: 'Content 2'
+        }]
+        this.type = 'container'
+        this.css.css = 'flex w-full h-80 justify-center items-center mt-0 mr-auto mb-0 ml-auto flex-wrap'
+        this.tag = 'flex'
+        this.cssObject = {
+            base:{
+                flex: 'flex',
+                w: 'w-full',
+                h: 'h-80',
+                mt: 'mt-0',
+                mr: 'mr-auto',
+                mb: 'mb-0',
+                ml: 'ml-auto',
+                flexWrap: 'flex-wrap',
+                justifycenter: 'justify-center',
+                itemscenter: 'items-center'
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'div'
+        //this.content = 'Container with preset height of 20rem (h-80) and item centered. Drag elements from the left sidebar into this container'
+        return this
+    }
     Slider() {
         this.blocks = []
         this.type = 'slider'
@@ -313,7 +543,6 @@ export default class Element {
         this.content = 'Heading ' + level
         this.icon = 'title'
         this.editable = true
-        this.helper = 'blocks/helpers/Heading.vue'
         this.dialog = 'md:w-40'
         return this
     }
@@ -446,7 +675,18 @@ export default class Element {
 
     inputElement() {
         this.element = 'input'
-
+        this.css.css = 'input',
+            this.cssObject={
+                base: {
+                    input: 'input',
+                },
+                xxl:null,
+                xl: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
         this.placeholder = ''
         this.content = ''
         this.value = ''
@@ -494,6 +734,10 @@ export default class Element {
     InputTextarea() {
         this.element = 'textarea'
         this.tag = 'textarea'
+        this.css.css  = 'textarea'
+        this.cssObject = {
+            textarea: 'textarea'
+        }
         this.type = 'textarea'
         this.placeholder = 'type here'
         return this
@@ -520,9 +764,163 @@ export default class Element {
         this.type = 'button'
         this.element = 'button'
         this.tag = 'button'
+        this.css.css = 'btn btn-primary'
+        this.cssObject={
+            base: {
+                btn: 'btn',
+                btnPrimary: 'btn-primary',
+            },
+            xxl:null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
         this.content = 'button'
         this.value = 'button'
         return this
+    }
+    Ul() {
+        this.type = 'container'
+        this.style = ''
+        this.blocks = [{
+            id: this.randomID(),
+            type:'container',
+            blocks:[],
+            tag:'element',
+            css: {
+                css: ''
+            },
+            style: '',
+            cssObject:{
+                base:null,
+                xxl:null,
+                xl: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            element:'li',
+            content:'List item 1'
+        },{
+            id: this.randomID(),
+            type:'container',
+            blocks:[],
+            tag:'element',
+            css: {
+                css: ''
+            },
+            style: '',
+            cssObject:{
+                base:null,
+                xxl:null,
+                xl: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            element:'li',
+            content:'List item 2'
+        },{
+            id: this.randomID(),
+            type:'container',
+            blocks:[],
+            tag:'element',
+            css: {
+                css: ''
+            },
+            style: '',
+            cssObject:{
+                base:null,
+                xxl:null,
+                xl: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            element:'li',
+            content:'List item 3'
+        }]
+        this.id= this.randomID()
+        this.tag = 'container'
+        this.css.css = ''
+        this.cssObject={
+            base: null,
+            xxl:null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'ul'
+        this.content = ''
+        return this
+    }
+    Li(){
+        this.id=this.randomID()
+        this.type='container'
+        this.style= ''
+        this.blocks=[]
+        this.tag='element'
+        this.css.css= ''
+        this.cssObject={
+                base:null,
+                xxl:null,
+                xl: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+        }
+        this.element='li'
+        this.content='Unordered list item'
+        return this;
+    }
+    Ol(){
+        this.id = this.randomID()
+        this.type='container'
+        this.style= ''
+        this.blocks=[]
+        this.tag='element'
+        this.css.css= ''
+        this.cssObject={
+            base:null,
+            xxl:null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element='ol'
+        this.content='Ordered list item'
+        return this;
+    }
+    Link(){
+        console.log('it lets you');
+        this.id = this.randomID()
+        this.type='element'
+        this.style= ''
+        this.blocks=[]
+        this.tag='element'
+        this.css.css= ''
+        this.cssObject={
+            base:null,
+            xxl:null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element='a'
+        this.content='Link'
+        return this;
     }
 
 }

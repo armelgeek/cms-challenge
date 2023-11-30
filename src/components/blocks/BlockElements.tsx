@@ -4,21 +4,19 @@ import { useDispatch, useGetter } from '../../store';
 import {MdOutlineExpandLess, MdOutlineExpandMore} from "react-icons/md";
 import BlockLibrary from './components/BlockLibrary';
 const BlockElements = () => {
-  const [gr,setGr] =useState('');
+  const [gr,setGr] =useState('main');
   const editor = useGetter("editor","data",[]);
   const setCurrent = useDispatch("editor",'setCurrent');
   const setInfo = useDispatch('editor', 'setInfo');
   const createElement = useCallback((el:any) => {
+    console.log('elttt',el.id);
     if (!editor.current) return;
-    const element = new Element().createElement(el.name)?.setIcon(el.icon);
+    const element = new Element().createElement(el.id)?.setIcon(el.icon);
     editor.current.blocks.push(element)
     setInfo({
       prop: 'current',
       value: element
     })
-   /** if ( element.helper ){
-      this.$dialogBus ( 'editorHelper' , { content: element.helper , title: element.element.toUpperCase() , width: element.dialog } )
-    } **/
 
   },[editor]);
 

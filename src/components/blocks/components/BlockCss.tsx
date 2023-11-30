@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef, memo } from 'react'
 import _ from 'lodash';
 import classes from '../../../utils/scripts/tw.classes';
 import { useDispatch, useGetter } from '../../../store';
-import { flattenClasses, searchClass } from '../../../utils/tail/tw.classes';
+import { flattenClasses, searchClass } from '../../../utils/tail/tw.classe';
 import { FaMinusCircle } from 'react-icons/fa';
 const classList = flattenClasses();
 const ScrollItem = memo(({ selectTag, item, index }: any) => {

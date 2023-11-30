@@ -1,14 +1,16 @@
 import React, { useCallback, useState } from 'react'
 import Pallete from '../../components/Pallete';
 import _ from 'lodash';
-const BorderColor = ({ title, data, attr, updateCss }: any) => {
+import classes from '../../../../utils/scripts/tw.classes';
+const DecorationColor = ({ title, data, attr, updateCss }: any) => {
+  const colors = classes[attr];
   const [state, setState] = useState({
     allCss: null,
     palette: false,
     is_over: false,
     color: {
-      color: !_.isNull(data) && !_.isUndefined(data[attr]) ? data[attr] : '',
-      hover: !_.isNull(data) && !_.isUndefined(data[attr+'hover']) ? data[attr+'hover'] : '',
+      front: !_.isNull(data) && !_.isUndefined(data[attr])  ? data[attr] : '',
+      over: !_.isNull(data) && !_.isUndefined(data[attr+'over']) ? data[attr+'over'] : '',
     },
     color_over: '',
     colors: null
@@ -30,19 +32,19 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
     }));
   }, [state]);
   const setColor = useCallback((color: string, tone: any) => {
-    let c = attr + '-' //bg-'
+    let c = 'decoration-';
     if (color) {
       tone ? c += color + '-' + tone : c += color
       if (!state.is_over) {
         updateStateAttributes({
-          'color.color': c.replace('bordercolor','border'),
+          'color.color': c,
         })
-        updateCss(c.replace('bordercolor','border'), attr);
+        updateCss(c, attr);
       } else {
         updateStateAttributes({
-          'color.hover': 'hover:' +  c.replace('bordercolor','border'),
+          'color.over': 'hover:' +  c,
         })
-        updateCss('hover:' + c.replace('bordercolor','border'), attr+'hover');
+        updateCss('hover:' + c, attr+'over');
       }
     } else {
       if (!state.is_over) {
@@ -52,9 +54,9 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
         updateCss('', attr);
       } else {
         updateStateAttributes({
-          'color.hover': '',
+          'color.over': '',
         })
-        updateCss('', attr+'hover');
+        updateCss('', attr+'over');
       }
     }
     updateStateAttributes({
@@ -77,10 +79,10 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
       <div className="mr-2">
       <span className="uppercase font-bold" style={{
                 fontSize: "10px"
-            }}>Color</span>
+            }}>Déco</span>
         <div 
         onClick={()=> toogleOver(false)}
-        className={` cursor-pointer ${state.color.color.replace('text', 'bg').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}
+        className={` cursor-pointer ${state.color.front} mb-1 w-8 h-8 border-2 rounded-full`}
         >
 
         </div>
@@ -88,10 +90,10 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
       <div>
       <span className="uppercase font-bold" style={{
                 fontSize: "10px"
-            }}>Over</span>
+            }}>Hover</span>
         <div
         onClick={()=> toogleOver(true)}
-         className={`  cursor-pointer ${state.color.hover.replace('hover:text', 'bg').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}></div>
+         className={`  cursor-pointer ${state.color.over.replace('hover:decoration', 'decoration').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}></div>
       </div>
       {state.palette && (
         <Pallete close={togglePalette}  setColor={setColor}/>
@@ -100,4 +102,4 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
     </div>
   )
 }
-export default BorderColor;
+export default DecorationColor;

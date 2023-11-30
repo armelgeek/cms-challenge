@@ -6,8 +6,10 @@ const Height = ({title, attr,data, updateCss}:any) => {
     const [model, setModel] = useState(!_.isNull(data) && !_.isUndefined(data[attr]) ? data[attr] : {});
     return (
         <div className="flex flex-col">
-            { title }
-            <select value={model} className="w-full nodark"  onChange={(e)=> {
+            <p className='uppercase font-bold' style={{
+                fontSize: '10px',
+            }}>{ title }</p>
+            <select value={model} className="w-full select"  onChange={(e)=> {
                 setModel(e.target.value);
                 updateCss(e.target.value,attr);
             }}>
