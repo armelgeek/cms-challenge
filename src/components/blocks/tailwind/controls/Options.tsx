@@ -19,7 +19,6 @@ const Options = ({ title, data, attr, updateCss }: any) => {
             return opt.label
         }
     }
-    console.log('title',options)
     return (
         <div className="flex flex-col clear-both">
             <span className="uppercase font-bold" style={{

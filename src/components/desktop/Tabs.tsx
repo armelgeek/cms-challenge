@@ -8,7 +8,9 @@ const Tabs = () => {
   const tabs = useGetter('desktop', 'tabs', []);
   const currentTab = useGetter('desktop', 'currentTab', []);
   const handleChangeDesktopInfo = useDispatch('desktop', 'setInfo');
+  const createEmptyBlock = useDispatch('editor', 'createEmptyBlock');
   const handleChangeEditorInfo = useDispatch('editor', 'setInfo');
+  
   const removeTab = useDispatch('desktop', 'removeTab');
   const openTab = useCallback((index: number) => {
     handleChangeDesktopInfo({
@@ -69,12 +71,12 @@ const Tabs = () => {
   return (
     <div className="h-8 items-center border-b bg-white  border-gray-300 w-screen flex flex-wrap">
       {tabs.map((tab: any, index: number) => (
-        <div key={tab.label} title={tab.label} className={`${index === currentTab ? 'bg-white text-gray-400' : 'bg-purple-900'}  relative border-l border-t border-r border-purple-600 rounded-t hover:bg-black px-2 flex items-center cursor-pointer h-8`}>
-          <span onClick={()=> openTab(index)} className={`truncate ml-1 text-sm`}>{tab.label}</span><AiFillCloseCircle className="text-gray-400 absolute right-0 mr-2" onClick={() => removeTab(index)} />
+        <div key={tab.label} title={tab.label} className={`${index === currentTab ? 'bg-white text-gray-400' : 'bg-primary-200'}  relative border-l border-t border-r border-primary-600 rounded-t hover:bg-primary-200 px-2 flex items-center cursor-pointer h-8`}>
+          <span onClick={()=> openTab(index)} className={`truncate ml-1 text-sm`}>{tab.label}</span><AiFillCloseCircle className="text-gray-700 absolute right-0 mr-2" onClick={() => removeTab(index)} />
         </div>
       ))}
-      <div className={`relative  px-2  cursor-pointer`} >
-          <FaPlusCircle className="text-white"/>
+      <div className={`relative  px-2  cursor-pointer`} onClick={createEmptyBlock}>
+          <FaPlusCircle className="text-primary-500"/>
         </div>
     </div>);
   

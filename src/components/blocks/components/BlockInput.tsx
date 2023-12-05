@@ -11,7 +11,7 @@ const BlockInput = () => {
         required: editor?.current?.data?.attributes?.required
     })
     console.log('editor',editor);
-    const updateBlockProperty = useDispatch('editor', 'updateBlockProperty');
+    const updateBlockProperty = useDispatch('editor', '');
     const updateValue = useCallback((value: any, type: any) => {
         console.log('e.target.value',value)
         let key = '';
@@ -21,7 +21,7 @@ const BlockInput = () => {
             key = type;
         }
         
-        updateBlockProperty(value,key);
+        (value,key);
     }, [])
     useEffect(() => {
         setState({

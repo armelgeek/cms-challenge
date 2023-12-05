@@ -23,25 +23,8 @@ export default class Element {
         this.content = ""
         this.description = ""
         this.categories = []
-        this.alpine = {}
-        this.events = {
-            display: null,
-            hide: null,
-            mouseenter: null,
-            mouseleave: null,
-            click: null,
-            focus: null,
-            blur: null,
-            keydown: null
-        }
         this.data = {
           
-        }
-        this.gsap = {
-            animation: null,
-            ease: null,
-            duration: 0,
-            delay: 0
         }
         this.link = ''
         this.anchor = ''
@@ -53,7 +36,6 @@ export default class Element {
         this.editable = false
         this.icon = 'highlight_alt'
         this.helper = null
-        this.dialog = null
     }
 
     randomID() {

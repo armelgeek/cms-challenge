@@ -57,7 +57,7 @@ const BlockElement = (props: any) => {
       ref: refElement,
       'style': getStyle(props.element.style),
       'id': props.element.id,
-      className: `relative border ${classes()} ${toggleBorder()}`,
+      className: `relative border  ${isEnter ? 'bg-primary-100': 'bg-white'} ${classes()} ${toggleBorder()}`,
       onMouseEnter: (e: any) => {
         e.stopPropagation();
         setIsEnter(true);
@@ -110,7 +110,7 @@ const BlockElement = (props: any) => {
       case 'textarea':
         return <textarea {...commonProps} {...editableProps}>{props.element.placeholder}</textarea>;
       case 'button':
-        return <button type={props.element.tag} {...commonProps} {...editableProps} className={'btn'}>{props.element.content}</button>;
+        return <button type={props.element.tag} {...commonProps} className={'btn'}>{props.element.content}</button>;
       case 'video':
         return <video   {...commonProps} src={props.element.link}  {...props.element.options}>{props.element.content}</video>;
       case 'iframe':
@@ -142,7 +142,7 @@ const BlockElement = (props: any) => {
       case "mark":
         return <mark  {...commonProps}>{props.element.content}</mark>;
       case "section":
-        return <section  {...commonProps} {...editableProps}>{props.element.content}</section>;
+        return <section  {...commonProps}>{props.element.content}</section>;
       case "summary":
         return <summary  {...commonProps}>{props.element.content}</summary>;
       case "time":

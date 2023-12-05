@@ -94,9 +94,9 @@ export const clean = function (str = '') {
   str = str.replace(/\s\s+/g, ' ')
   return [...new Set(str.split(' '))].join(' ')
 }
-export function toCamelCase(str:string) {
-  return str.replace(/-([a-z])/g, function(match, p1) {
-      return p1.toUpperCase();
+export function toCamelCase(str: string) {
+  return str.replace(/-([a-z])/g, function (match, p1) {
+    return p1.toUpperCase();
   });
 }
 export function getAllFontsFromBlocks(blocks: any) {
@@ -122,6 +122,17 @@ export function getAllFontsFromBlocks(blocks: any) {
   return Array.from(fontsSet);
 }
 
-export function hasPermission(permission: string) {
-  return ['create:Posts','index:Posts','update:Posts','delete:Posts'].includes(permission)
+export function mergeCSSObjects(obj1: any, obj2: any) {
+  const mergedObject = { ...obj1 };
+  for (const key in obj2) {
+    if (obj2.hasOwnProperty(key)) {
+      if (mergedObject[key]) {
+        mergedObject[key] = { ...mergedObject[key], ...obj2[key] };
+      } else {
+        mergedObject[key] = obj2[key];
+      }
+    }
+  }
+
+  return mergedObject;
 }

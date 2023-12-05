@@ -13,7 +13,7 @@ import EditorFooter from "../../Footer";
 import Test from "../../Test";
 import Tabs from "../desktop/Tabs";
 
-const BlockEditor = () => {
+const BlockEditor = ({ref}:any) => {
   const [state, setState] = useState({
     currentSize: null,
     mode: 'base',
@@ -164,7 +164,7 @@ const BlockEditor = () => {
     return (
       <div id="mainEditor" ref={mainEditor} className="bg-gray-100 min-h-screen text-black overflow-y-auto">
         <Test setCurrent={setCurrent}>
-          <div id="BlockEditor">
+          <div id="BlockEditor" ref={ref}>
             {editor.document && (<BlockContainer
               doc={editor.document}
               setCurrent={setCurrent}

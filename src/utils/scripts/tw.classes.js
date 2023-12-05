@@ -293,15 +293,25 @@ var classes = {
         }
     ],
     fontvariantnumeric: [
-        "normal-nums",
-        "ordinal",
-        "slashed-zero",
-        "lining-nums",
-        "oldstyle-nums",
-        "proportional-nums",
-        "tabular-nums",
-        "diagonal-fractions",
-        "stacked-fractions"
+        {
+            label: "normal nums", value: 'normal-nums',
+        }, {
+            label: 'ordinal', value: 'ordinal'
+        }, {
+            label: 'slashed zero', value: 'slashed-zero'
+        }, {
+            label: 'lining nums', value: 'lining-nums'
+        }, {
+            label: 'lodstyle nums', value: 'lodstyle-nums'
+        }, {
+            label: 'proportional nums', value: 'proportional-nums'
+        }, {
+            label: 'tabular nums', value: 'tabular-nums'
+        }, {
+            label: 'diagonal fractions', value: 'diagonal-fractions'
+        }
+        // "stacked-fractions"
+
     ],
     lineclamp: [
         'line-clamp-none',
@@ -378,16 +388,16 @@ var classes = {
     ],
     textoverflow: [
         {
-          label: 'truncate', value: 'trucate',
+            label: 'truncate', value: 'trucate',
         }, {
-          label: 'text-ellipsis', value: 'text-ellipsis'
+            label: 'text-ellipsis', value: 'text-ellipsis'
         }, {
-          label: 'text-clip', value: 'text-clip'
+            label: 'text-clip', value: 'text-clip'
         }
     ],
-    textindent:[...setValue('indent',false),'indent-px'],
-    verticalalign:['align-baseline','align-top','align-middle','align-bottom','align-text-top','align-text-bottom','align-sub','align-super'],
-    whitespace: ['whitespace-normal','whitespace-nowrap','whitespace-pre','whitespace-per-line','whitespace-pre-wrap','whitespace-per-line-wrap','whitespace-break-spaces'],
+    textindent: [...setValue('indent', false), 'indent-px'],
+    verticalalign: ['align-baseline', 'align-top', 'align-middle', 'align-bottom', 'align-text-top', 'align-text-bottom', 'align-sub', 'align-super'],
+    whitespace: ['whitespace-normal', 'whitespace-nowrap', 'whitespace-pre', 'whitespace-per-line', 'whitespace-pre-wrap', 'whitespace-per-line-wrap', 'whitespace-break-spaces'],
     bgOpacity: setOpacity('bg-opacity'),
     opacity: setOpacity('opacity'),
     colors: colors,
@@ -404,6 +414,46 @@ var classes = {
         { label: 'Bottom Left', value: 'bg-gradient-to-bl' },
         { label: 'Left', value: 'bg-gradient-to-l' },
         { label: 'Top Left', value: 'bg-gradient-to-tl' }
+    ],
+    bgsizes: [
+        'bg-auto',
+        'bg-cover',
+        'bg-contain'
+    ],
+    bgpositions: [
+        'bg-center',
+        'bg-top',
+        'bg-bottom',
+        'bg-left',
+        'bg-left-top',
+        'bg-left-bottom',
+        'bg-right',
+        'bg-right-top',
+        'bg-right-bottom'
+    ],
+    bgrepeats: [
+        'bg-no-repeat',
+        'bg-repeat',
+        'bg-repeat-x',
+        'bg-repeat-y',
+        'bg-repeat-round',
+        'bg-repeat-space'
+    ],
+    bgattachments: [
+        'bg-fixed',
+        'bg-local',
+        'bg-scroll'
+    ],
+    bgclips: [
+        'bg-clip-border',
+        'bg-clip-padding',
+        'bg-clip-content',
+        'bg-clip-text'
+    ],
+    bgorigin: [
+        'bg-origin-border',
+        'bg-origin-padding',
+        'bg-origin-content'
     ],
     blur: ['blur-1', 'blur-2', 'blur-3', 'blur-4', 'blur-5', 'blur-sm', 'blur-md', 'blur-lg', 'blur-xl', 'blur-2xl', 'blur-3xl'],
     flexval: [
@@ -453,6 +503,91 @@ var classes = {
         'z-top',
         'z-2xtop'
     ],
+    dividewidth: [
+        'divide-x-0',
+        'divide-x',
+        'divide-x-2',
+        'divide-x-4',
+        'divide-x-8',
+        'divide-x-reverse',
+        'divide-y-0',
+        'divide-y',
+        'divide-y-2',
+        'divide-y-4',
+        'divide-y-8',
+        'divide-y-reverse'
+    ],
+    dividecolor: setColors('divide'),
+    dividerStyle: [
+        'divider-solid',
+        'divider-dashed',
+        'divider-dotted',
+        'divider-double',
+        'divider-none'
+    ],
+    outline: [
+        'outline-0',
+        'outline-1',
+        'outline-2',
+        'outline-4',
+        'outline-8'
+    ],
+    outlinestyle: [
+        {
+            label: 'none', value: 'outline-none',
+        },
+        {
+            label: 'outline', value: 'outline'
+        },
+        {
+            label: 'dashed', value: 'outline-dashed'
+        },
+        {
+            label: 'dotted', value: 'outline-dotted'
+        },
+        {
+            label: 'double', value: 'outline-double',
+        }
+    ],
+    outlineoffset: [
+        'outline-offset-0',
+        'outline-offset-1',
+        'outline-offset-2',
+        'outline-offset-4',
+        'outline-offset-8'
+    ],
+    ringwidth: [
+        {
+            label: 'ring 0', value: 'ring-0',
+        },
+        {
+            label: 'ring 1', value: 'ring-1'
+        },
+        {
+            label: 'ring 2', value: 'ring-2'
+        },
+        {
+            label: 'ring', value: 'ring'
+        },
+        {
+            label: 'ring 4', value: 'ring-4',
+        },
+        {
+            label: 'ring 8', value: 'ring-8',
+        },
+        {
+            label: 'ring inset', value: 'ring-inset',
+        }
+    ],
+    ringcolor: setColors('ring'),
+    ringoffset: [
+        'ring-offset-0',
+        'ring-offset-1',
+        'ring-offset-2',
+        'ring-offset-4',
+        'ring-offset-8'
+    ],
+    ringoffsetcolor: setColors('ring-offset'),
     gridcols: [
         'md:grid-cols-1',
         'md:grid-cols-2',
@@ -484,7 +619,7 @@ var classes = {
         'md:col-span-12',
         'md:col-span-full',
     ],
-    gap: [...setValue('gap',false), 'gap-px', ...setValue('gap-x'), 'gap-x-px', ...setValue('gap-y'), 'gap-y-px'],
+    gap: [...setValue('gap', false), 'gap-px', ...setValue('gap-x'), 'gap-x-px', ...setValue('gap-y'), 'gap-y-px'],
     alignitems: [
         'items-start',
         'items-center',
@@ -559,6 +694,12 @@ var classes = {
         'justify-self-end',
         'justify-self-stretch',
     ],
+    breakword: [
+        'break-normal',
+        'break-words',
+        'break-all',
+        'break-keep'
+    ],
     bordercolor: setColors('border'),
     border: [
         'border',
@@ -591,31 +732,26 @@ var classes = {
         'border-b-8'
     ],
     borderOpacity: setOpacity('border-opacity'),
-    padding: [...setValue('p', false), 'px'],
-    paddingTop: [...setValue('pt', false), 'px'],
-    paddingBottom: [...setValue('pb', false), 'px'],
-    paddingLeft: [...setValue('pl', false), 'px'],
-    paddingRight: [...setValue('pr', false), 'px'],
-    paddingInlineStart: [...setValue('ps', false), 'px'],
-    paddingInlineEnd: [...setValue('pe', false), 'px'],
-    spacing: setPercs('p'),
-    spacingTop: setPercs('pt'),
-    spacingBottom: setPercs('pb'),
-    spacingLeft: setPercs('pl'),
-    spacingRight: setPercs('pr'),
-    margin: [...setValue('m', true), 'auto'],
-    marginTop: [...setValue('mt', true), 'auto'],
-    marginBottom: [...setValue('mb', true), 'auto'],
-    marginLeft: [...setValue('ml', true), 'auto'],
-    marginRight: [...setValue('mr', true), 'auto'],
-    marginInlineStart: [...setValue('ms', true), 'auto'],
-    marginInlineEnd: [...setValue('me', true), 'auto'],
+    paddingTop: [...setValue('pt', false), 'pt-px'],
+    paddingBottom: [...setValue('pb', false), 'pb-px'],
+    paddingLeft: [...setValue('pl', false), 'pl-px'],
+    paddingRight: [...setValue('pr', false), 'pr-px'],
+    paddingInlineStart: [...setValue('ps', false), 'ps-px'],
+    paddingInlineEnd: [...setValue('pe', false), 'pe-px'],
+    spacing: [...setValue('space-x', false), 'space-x-px', 'space-x-reverse', ...setValue('space-y', false), 'space-y-px', 'space-y-reverse'],
+    marginTop: [...setValue('mt', true), 'mt-auto'],
+    marginBottom: [...setValue('mb', true), 'mb-auto'],
+    marginLeft: [...setValue('ml', true), 'ml-auto'],
+    marginRight: [...setValue('mr', true), 'mr-auto'],
+    marginInlineStart: [...setValue('ms', true), 'ms-auto'],
+    marginInlineEnd: [...setValue('me', true), 'me-auto'],
     mauto: ['m-auto'],
     borderType: [
         'border-solid',
         'border-dashed',
         'border-dotted',
         'border-double',
+        'border-hidden',
         'border-none'
     ],
     positionelement: [
@@ -768,16 +904,65 @@ var classes = {
         'rounded-xl',
         'rounded-2xl',
         'rounded-3xl',
-        'rounded-full'
+        'rounded-full',
+        'rounded-s-none',
+        'rounded-s-sm',
+        'rounded-s',
+        'rounded-s-md',
+        'rounded-s-lg',
+        'rounded-s-xl',
+        'rounded-s-2xl',
+        'rounded-s-3xl',
+        'rounded-s-full',
     ],
     shadow: [
+        'shado-none',
         'shadow',
         'shadow-xs',
         'shadow-sm',
         'shadow-md',
         'shadow-lg',
         'shadow-xl',
-        'shadow-2xl'
+        'shadow-2xl',
+        'shadow-inner'
+    ],
+    shadowcolor: setColors('shadow'),
+    mixblendmode: [
+        'mix-blend-normal',
+        'mix-blend-multiply',
+        'mix-blend-screen',
+        'mix-blend-overlay',
+        'mix-blend-darken',
+        'mix-blend-lighten',
+        'mix-blend-color-dodge',
+        'mix-blend-color-burn',
+        'mix-blend-hard-light',
+        'mix-blend-soft-light',
+        'mix-blend-difference',
+        'mix-blend-exclusion',
+        'mix-blend-hue',
+        'mix-blend-saturation',
+        'mix-blend-color',
+        'mix-blend-luminosity',
+        'mix-blend-plus-lighter'
+    ],
+    bgblendmode: [
+        "bg-blend-normal",
+        "bg-blend-multiply",
+        "bg-blend-screen",
+        "bg-blend-overlay",
+        "bg-blend-darken",
+        "bg-blend-lighten",
+        "bg-blend-color-dodge",
+        "bg-blend-color-burn",
+        "bg-blend-hard-light",
+        "bg-blend-soft-light",
+        "bg-blend-difference",
+        "bg-blend-exclusion",
+        "bg-blend-hue",
+        "bg-blend-saturation",
+        "bg-blend-color",
+        "bg-blend-luminosity"
     ],
     grayscale: ['grayscale'],
     animation: [
@@ -844,7 +1029,411 @@ var classes = {
         'delay-700',
         'delay-1000'
     ],
+    blur: [
+        {
+            label: 'blur none', value: 'blur-none',
+        },
+        {
+            label: 'blur sm', value: 'blur-sm',
+        },
+        {
+            label: 'blur', value: 'blur'
+        },
+        {
+            label: 'blur md', value: 'blur-md'
+        },
+        {
+            label: 'blur lg', value: 'blur-lg'
+        },
+        {
+            label: 'blur xl', value: 'blur-xl',
+        },
+        {
+            label: 'blur 2xl', value: 'blur-2xl',
+        },
+        {
+            label: 'blur 3xl', value: 'blur-3xl',
+        }
+    ],
+    brightness:[
+        'brightness-0',
+        'brightness-50',
+        'brightness-75',
+        'brightness-90',
+        'brightness-95',
+        'brightness-100',
+        'brightness-105',
+        'brightness-110',
+        'brightness-125',
+        'brightness-150',
+        'brightness-200'
+    ],
+    contrast:[
+        'contrast-0',
+        'contrast-50',
+        'contrast-75',
+        'contrast-100',
+        'contrast-125',
+        'contrast-150',
+        'contrast-200'
+    ],
+    dropshadow: [
+        {
+            label: 'drop shadow', value: 'drop-shadow-none',
+        },
+        {
+            label: 'drop shadow sm', value: 'drop-shadow-sm',
+        },
+        {
+            label: 'drop shadow', value: 'drop-shadow'
+        },
+        {
+            label: 'drop shadow md', value: 'drop-shadow-md'
+        },
+        {
+            label: 'drop shadow lg', value: 'drop-shadow-lg'
+        },
+        {
+            label: 'drop shadow xl', value: 'drop-shadow-xl',
+        },
+        {
+            label: 'drop shadow 2xl', value: 'drop-shadow-2xl',
+        }
+    ],
+    huerotate:[
+        'hue-rotate-0',
+        'hue-rotate-15',
+        'hue-rotate-30',
+        'hue-rotate-60',
+        'hue-rotate-90',
+        'hue-rotate-180'
+    ],
+    invert:[
 
+        'invert',
+        'invert-0',
+    ],
+    saturation:[
+        'saturation-0',
+        'saturation-50',
+        'saturation-100',
+        'saturation-150',
+        'saturation-200'
+    ],
+    sepia:[
+      
+        'sepia',
+        'sepia-0',
+    ],
+
+    backdropblur: [
+        {
+            label: 'backdrop blur none', value: 'backdrop-blur-none',
+        },
+        {
+            label: 'backdrop blur sm', value: 'backdrop-blur-sm',
+        },
+        {
+            label: 'backdrop blur', value: 'backdrop-blur'
+        },
+        {
+            label: 'backdrop blur md', value: 'backdrop-blur-md'
+        },
+        {
+            label: 'backdrop blur lg', value: 'backdrop-blur-lg'
+        },
+        {
+            label: 'backdrop blur xl', value: 'backdrop-blur-xl',
+        },
+        {
+            label: 'backdrop blur 2xl', value: 'backdrop-blur-2xl',
+        }
+    ],
+    backdropbrightness:[
+        'backdrop-brightness-0',
+        'backdrop-brightness-50',
+        'backdrop-brightness-75',
+        'backdrop-brightness-90',
+        'backdrop-brightness-95',
+        'backdrop-brightness-100',
+        'backdrop-brightness-105',
+        'backdrop-brightness-110',
+        'backdrop-brightness-125',
+        'backdrop-brightness-150',
+        'backdrop-brightness-200'
+    ],
+    backdropcontrast:[
+        'backdrop-contrast-0',
+        'backdrop-contrast-50',
+        'backdrop-contrast-75',
+        'backdrop-contrast-100',
+        'backdrop-contrast-125',
+        'backdrop-contrast-150',
+        'backdrop-contrast-200'
+    ],
+    backdropgrayscale:[
+        'backdrop-grayscale',
+        'backdrop-grayscale-0',
+    ],
+    backdrophuerotate:[
+        'backdrop-hue-rotate-0',
+        'backdrop-hue-rotate-15',
+        'backdrop-hue-rotate-30',
+        'backdrop-hue-rotate-60',
+        'backdrop-hue-rotate-90',
+        'backdrop-hue-rotate-180'
+    ],
+    backdropinvert:[
+        'backdrop-invert',
+        'backdrop-invert-0'
+    ],
+    backdropopacity:[
+        'backdrop-opacity-0',
+        'backdrop-opacity-5',
+        'backdrop-opacity-10',
+        'backdrop-opacity-15',
+        'backdrop-opacity-20',
+        'backdrop-opacity-25',
+        'backdrop-opacity-30',
+        'backdrop-opacity-40',
+        'backdrop-opacity-50',
+        'backdrop-opacity-60',
+        'backdrop-opacity-70',
+        'backdrop-opacity-75',
+        'backdrop-opacity-80',
+        'backdrop-opacity-90',
+        'backdrop-opacity-95',
+        'backdrop-opacity-100',
+        'backdrop-opacity-105',
+        'backdrop-opacity-110',
+        'backdrop-opacity-125',
+        'backdrop-opacity-150',
+        'backdrop-opacity-200'
+    ],
+    backdropsaturate:[
+        'backdrop-saturate-0',
+        'backdrop-saturate-50',
+        'backdrop-saturate-100',
+        'backdrop-saturate-125',
+        'backdrop-saturate-150',
+        'backdrop-saturate-200'
+    ],
+    backdropsepia:[
+        'backdrop-sepia',
+        'backdrop-sepia-0'
+    ],
+    bordercollapse:[
+        'border-collapse',
+        'border-separate'
+    ],
+    borderspacing: [...setValue('border-spacing', false), 'border-spacing-px',...setValue('border-spacing-x', false), 'border-spacing-x-px', ...setValue('border-spacing-y', false), 'border-spacing-y-px'],
+    tablelayout:[
+        'table-auto',
+        'table-fixed'
+    ],
+    captionside:[
+        'caption-top',
+        'caption-bottom'
+    ],
+    scale:[
+        'slace-0',
+        'scale-50',
+        'scale-75',
+        'scale-90',
+        'scale-95',
+        'scale-100',
+        'scale-105',
+        'scale-110',
+        'scale-125',
+        'scale-150',
+    ],
+    scalex:[
+        'scale-x-0', 'scale-x-50', 'scale-x-75', 'scale-x-90', 'scale-x-95', 'scale-x-100','scale-x-105', 'scale-x-110','scale-x-125',        'scale-x-150',
+    ],
+    scaley:[
+        'scale-y-0', 'scale-y-50', 'scale-y-75', 'scale-y-90', 'scale-y-95', 'scale-y-100','scale-y-105', 'scale-y-110','scale-y-125',        'scale-x-150',
+    ],
+    translatex:[...setValue('translate-x'),'translate-x-full', 'translate-x-1/2',
+    'translate-x-1/3',
+    'translate-x-2/3',
+    'translate-x-1/4',
+    'translate-x-2/4',
+    'translate-x-3/4'
+    ],
+    translatey:[...setValue('translate-y'),'translate-y-full', 'translate-y-1/2',
+    'translate-y-1/3',
+    'translate-y-2/3',
+    'translate-y-1/4',
+    'translate-y-2/4',
+    'translate-y-3/4'
+    ],
+    transformorigin:[
+        'origin-center',
+        'origin-top',
+        'origin-top-right',
+        'origin-right',
+        'origin-bottom-right',
+        'origin-bottom',
+        'origin-bottom-left',
+        'origin-left',
+        'origin-top-left'
+    ],
+    willchange:[
+        'will-change-auto',
+        'will-change-scroll',
+        'will-change-contents',
+        'will-change-transform'
+    ],
+    userselect:[
+        'select-none',
+        'select-text',
+        'select-all',
+        'select-auto'
+    ],
+    touchaction:[
+        'touch-auto',
+        'touch-none',
+        'touch-pan-x',
+        'touch-pan-left',
+        'touch-pan-right',
+        'touch-pan-y',
+        'touch-pan-up',
+        'touch-pan-down',
+        'touch-pinch-zoom',
+        'touch-manipulation'
+    ],
+    scrollsnaptype:[
+        'snap-none',
+        'snap-x',
+        'snap-y',
+        'snap-both',
+        'snap-mandatory',
+        'snap-proximity'
+    ],
+    scrollsnapstop:[
+        'snap-normal',
+        'snap-always'
+    ],
+    scrollsnapalign:[
+        'snap-start',
+        'snap-end',
+        'snap-center',
+        'snap-align-none'
+    ],
+    scrollsnappaddingTop: [...setValue('scroll-pt', false), 'scroll-pt-px'],
+    scrollsnappaddingBottom: [...setValue('scroll-pb', false), 'scroll-pb-px'],
+    scrollsnappaddingLeft: [...setValue('scroll-pl', false), 'scroll-pl-px'],
+    scrollsnappaddingRight: [...setValue('scroll-pr', false), 'scroll-pr-px'],
+    scrollsnapmarginTop: [...setValue('scroll-mt', true), 'scroll-auto'],
+    scrollsnapmarginBottom: [...setValue('scroll-mb', true), 'scroll-auto'],
+    scrollsnapmarginLeft: [...setValue('scroll-ml', true), 'scroll-auto'],
+    scrollsnapmarginRight: [...setValue('scroll-mr', true), 'scroll-auto'],
+    scrollbehavior:[
+        'scroll-auto',
+        'scroll-smooth'
+    ],
+    resize: [
+        {
+            label: 'resize none', value: 'resize-none',
+        },
+        {
+            label: 'resize x', value: 'resize-x',
+        },
+        {
+            label: 'resize y', value: 'resize-y',
+        },
+        {
+            label: 'resize', value: 'resize',
+        },
+    ],
+    pointerevent:[
+        'pointer-events-none',
+        'pointer-events-auto'
+    ],
+    caretcolor: setColors('caret'),
+    cursor:[
+        'cursor-auto',
+        'cursor-default',
+        'cursor-pointer',
+        'cursor-wait',
+        'cursor-text',
+        'cursor-move',
+        'cursor-help',
+        'cursor-not-allowed',
+        'cursor-none',
+        'cursor-context-menu',
+        'cursor-progress',
+        'cursor-cell',
+        'cursor-crosshair',
+        'cursor-vertical-text',
+        'cursor-alias',
+        'cursor-copy',
+        'cursor-no-drop',
+        'cursor-grab',
+        'cursor-grabbing',
+        'cursor-all-scroll',
+        'cursor-col-resize',
+        'cursor-row-resize',
+        'cursor-n-resize',
+        'cursor-e-resize',
+        'cursor-s-resize',
+        'cursor-w-resize',
+        'cursor-ne-resize',
+        'cursor-nw-resize',
+        'cursor-se-resize',
+        'cursor-sw-resize',
+        'cursor-ew-resize',
+        'cursor-ns-resize',
+        'cursor-nesw-resize',
+        'cursor-nwse-resize',
+        'cursor-zoom-in',
+        'cursor-zoom-out'
+    ],
+    apparence:[
+        'apparence',
+        'appearance-none'
+    ],
+    accent: setColors('accent'),
+}
+
+export const flattenClasses = () => {
+    const flatClasses = [];
+
+    for (const category in classes) {
+        if (classes.hasOwnProperty(category)) {
+            const categoryClasses = classes[category];
+
+            categoryClasses.forEach((classItem) => {
+                let ctx = category;
+                if(ctx == 'textClass'){
+                    ctx = 'textcolor';
+                }
+                if(ctx == 'colorClass'){
+                    ctx = 'bgcolor';
+                }
+                if(ctx == 'textHoverClass'){
+                    ctx = 'textcolorover';
+                }
+                if(ctx == 'colorHoverClass'){
+                    ctx = 'bgcolorover';
+                }
+                if (typeof classItem === 'string' && ctx != 'colors') {
+                   
+                    flatClasses.push({ attr: ctx, value: classItem });
+                } else {
+                    flatClasses.push({ attr: ctx, value: classItem.value });
+                }
+            });
+        }
+    }
+
+    return flatClasses;
+};
+export function searchClass(classes, value) {
+    const regex = new RegExp(`\\b${value}\\b`);
+    const matchingClasses = classes.filter((cls) => regex.test(cls.value));
+    return matchingClasses;
 }
 
 export default classes
+

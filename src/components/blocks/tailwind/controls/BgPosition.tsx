@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react'
 import _ from 'lodash';
 import classes from '../../../../utils/scripts/tw.classes';
 const BgPosition = ({ title, data, attr, updateCss }: any) => {
-    console.log('data lek',data);
     const [state, setState] = useState({
         bgposition: {
             size: !_.isNull(data) && !_.isUndefined(data['bgsize']) ? data['bgsize'] : '',
@@ -12,46 +11,12 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
             clip: !_.isNull(data) && !_.isUndefined(data['bgpositionclip']) ? data['bgpositionclip'] : '',
             origin: !_.isNull(data) && !_.isUndefined(data['bgorigin']) ? data['bgorigin'] : ''
         },
-        bgsizes: [
-            'bg-auto',
-            'bg-cover',
-            'bg-contain'
-        ],
-        bgpositions: [
-            'bg-center',
-            'bg-top',
-            'bg-bottom',
-            'bg-left',
-            'bg-left-top',
-            'bg-left-bottom',
-            'bg-right',
-            'bg-right-top',
-            'bg-right-bottom'
-        ],
-        bgrepeats: [
-            'bg-no-repeat',
-            'bg-repeat',
-            'bg-repeat-x',
-            'bg-repeat-y',
-            'bg-repeat-round',
-            'bg-repeat-space'
-        ],
-        bgattachments: [
-            'bg-fixed',
-            'bg-local',
-            'bg-scroll'
-        ],
-        bgclips: [
-            'bg-clip-border',
-            'bg-clip-padding',
-            'bg-clip-content',
-            'bg-clip-text'
-        ],
-        bgorigin: [
-            'bg-origin-border',
-            'bg-origin-padding',
-            'bg-origin-content'
-        ]
+        bgsizes: classes.bgsizes,
+        bgpositions: classes.bgpositions,
+        bgrepeats: classes.bgrepeats,
+        bgattachments: classes.bgattachments,
+        bgclips:  classes.bgclips,
+        bgorigin:  classes.bgorigin
     });
     const updateStateAttributes = useCallback((updates: any) => {
         setState((prevState: any) => ({
@@ -76,14 +41,13 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
         updateCss(value, cssKey);
     }, [])
     return (
+        <div className="grid grid-cols-2 gap-y-1 content-center mx-2 mb-1">
         <div className="flex flex-row flex-wrap">
-            <div className="w-full flex flex-col">
-                Media
-            </div>
-            <div className="w-full grid grid-cols-2 gap-3" v-if="$store.state.editor.current.image">
+          
+            <div >
                 <div className="w-1/2">
-                    <div>Size</div>
-                    <select value={state.bgposition.size} onChange={(e) => {
+                <span className="uppercase font-bold" style={{fontSize: '10px'}}>Size</span>
+                    <select className='select select-sm bg-white' value={state.bgposition.size} onChange={(e) => {
                         update(e.target.value,'bgposition.size','bgsize');
                     }}>
                         <option value=""></option>
@@ -94,8 +58,8 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     </select>
                 </div>
                 <div className="w-1/2 ml-1">
-                    <div>Position</div>
-                    <select value={state.bgposition.position} onChange={(e) => {
+                <span className="uppercase font-bold" style={{fontSize: '10px'}}>Position</span>
+                    <select  className='select select-sm bg-white' value={state.bgposition.position} onChange={(e) => {
                         update(e.target.value,'bgposition.position','bgposition');
                     }}>
                         <option value=""></option>
@@ -106,8 +70,8 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     </select>
                 </div>
                 <div className="col-span-2">
-                    <div>Repeat</div>
-                    <select value={state.bgposition.repeat} onChange={(e) => {
+                <span className="uppercase font-bold" style={{fontSize: '10px'}}>Repeat</span>
+                    <select  className='select select-sm bg-white' value={state.bgposition.repeat} onChange={(e) => {
                         update(e.target.value,'bgposition.repeat','bgrepeat');
                     }}>
                         <option value=""></option>
@@ -119,8 +83,8 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                 </div>
 
                 <div className="col-span-2">
-                    <div>Attachment</div>
-                    <select value={state.bgposition.attachment} onChange={(e) => {
+                <span className="uppercase font-bold" style={{fontSize: '10px'}}>Attachment</span>
+                    <select  className='select select-sm bg-white' value={state.bgposition.attachment} onChange={(e) => {
                         update(e.target.value,'bgposition.attachment','bgattachment');
                     }}>
                         <option value=""></option>
@@ -132,8 +96,8 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                 </div>
 
                 <div className="col-span-2">
-                    <div>Clip</div>
-                    <select value={state.bgposition.clip} onChange={(e) => {
+                <span className="uppercase font-bold" style={{fontSize: '10px'}}>Clip</span>
+                    <select  className='select select-sm bg-white' value={state.bgposition.clip} onChange={(e) => {
                         update(e.target.value,'bgposition.clip','bgpositionclip');
                     }}>
                         <option value=""></option>
@@ -144,8 +108,8 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     </select>
                 </div>
                 <div className="">
-                    <div>Origin</div>
-                    <select value={state.bgposition.origin} onChange={(e) => {
+                    <span className="uppercase font-bold" style={{fontSize: '10px'}}>Origin</span>
+                    <select  className='select select-sm bg-white' value={state.bgposition.origin} onChange={(e) => {
                         update(e.target.value,'bgposition.origin','bgorigin');
                     }}>
                         <option value=""></option>
@@ -156,6 +120,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     </select>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

@@ -20,7 +20,7 @@ const twgroups = [
     },
     {
         label: 'Advanced', components: [
-            { name: 'Options', attr: 'gap', title: 'gap' }
+            { name: 'Css', attr: 'css', title: 'CSS' }
         ]
     },
     {
@@ -85,6 +85,13 @@ const twgroups = [
             { name: 'Options', attr: 'justifyitems', title: 'Justify items' },
             { name: 'Options', attr: 'justifyself', title: 'justify self' },
         ]
+    }, {
+        label: 'Tables', components: [
+            {name:'Options', attr: 'bordercollapse', title: 'border collapse'},
+            {name:'Options', attr: 'borderspacing', title: 'border spacing'},
+            {name:'Options', attr: 'tablelayout', title: 'table layout'},
+            {name: 'Options', attr: 'captionside', title: 'caption side'}
+        ]
     },
     {
         label: 'position', components: [
@@ -99,7 +106,6 @@ const twgroups = [
             { name: 'Options', attr: 'positionInsetEnd', title: 'Inset End' },
             { name: 'Options', attr: 'positionInsetPx', title: 'Inset X' },
             { name: 'Options', attr: 'positionInsetPy', title: 'Inset Y' },
-            { name: 'Position', attr: 'position' },
             { name: 'Options', attr: 'zindex', title: 'z index' },
         ]
     },
@@ -137,21 +143,55 @@ const twgroups = [
             { name: 'Range', attr: 'textOpacity', title: 'opacity' },
             { name: 'Options', attr: 'fontsmoothing', title: 'Font Smoothing' },
             { name: 'Options', attr: 'textSpacing', title: 'letter spacing' },
-            { name: 'Options', attr: 'textlineheight', title: 'line height' },
-            { name: 'Options', attr: 'fontvariantnumeric', title: 'Font Variant Numeric' },
-            { name: 'TextFont', attr: 'textfont', title:'Font' },
-            { name: 'Options', attr: 'lineclamp', title:'line clamp' },
+            { name: 'FontText', attr: 'textsize', title: 'Font' },
+            { name: 'Options', attr: 'textlineheight', title: 'line height' }
         ]
     },
-    {label: 'List', components: [
-        { name: 'Options', attr: 'liststyleposition', title:'list style position' },
-        { name: 'Options', attr: 'liststyletype', title:'list style position' },
-    ]},
+    {
+        label: 'Others', components: [
+            { name: 'Options', attr: 'liststyleposition', title: 'list style position' },
+            { name: 'Options', attr: 'liststyletype', title: 'list style position' },
+            { name: 'Options', attr: 'lineclamp', title: 'line clamp' },
+            { name: 'Options', attr: 'breakword', title: 'Break Word' },
+            { name: 'Options', attr: 'fontvariantnumeric', title: 'Font Variant Numeric' },
+            { name: 'Options', attr: 'ringwidth', title: 'ring width' },
+            { name: 'RingColor', attr: 'ringcolor', title: 'ring color' },
+            { name: 'Options', attr: 'ringoffset', title: 'ring offset' },
+            { name: 'RingOffsetColor', attr: 'ringoffsetcolor' }
+        ]
+    },
+    {
+        label: 'Filters', components: [
+            { name: 'Options', attr: 'blur', title: 'blur' },
+            { name: 'Options', attr: 'brightness', title: 'brightness' },
+            {name: 'Options', attr: 'contrast', title: 'contrast' },
+            {name: 'Options', attr: 'dropshadow', title: 'drop shadow' },
+            { name: 'Checkbox', attr: 'grayscale', title: 'grayscale' },
+            { name: 'Checkbox', attr: 'invert', title: 'invert' },
+            {name: 'Options', attr: 'huerotate', title: 'hue rotate' },
+            {name: 'Options', attr: 'saturation', title: 'saturation' },
+            { name: 'Checkbox', attr: 'sepia', title: 'sepia' },
+            {name:'Checkbox', attr:'backdropgrayscale',title:'backdrop grayscale'},
+            {name: 'Options', attr: 'backdropblur', title: 'backdrop blur' },
+            {name:'Options',attr:'backdropbrightness',title: 'backdrop brightness'},
+            {name:'Options', attr:'backdropcontrast',title: 'backdrop contrast'},
+            {name:'Options', attr:'backdrophuerotate',title: 'backdrop hue rotate'},
+            {name: 'Checkbox',attr:'backdropinvert',title: 'backdrop invert'},
+            {name:'Options',attr:'backdropopacity',title: 'backdrop opacity'},
+            {name: 'Options',attr:'backdropsaturate',title: 'backdrop saturate'},
+           
+        ]
+    },
     {
         label: 'background', components: [
             { name: 'Color', attr: 'bgcolor' },
             { name: 'Range', attr: 'bgOpacity', title: 'opacity' },
-            { name: 'BgPosition', attr: 'bgposition' },
+            { name: 'Options', attr: 'bgattachments', title: 'Bg Attachement' },
+            { name: 'Options', attr: 'bgclips', title: 'Bg Clips' },
+            { name: 'Options', attr: 'bgorigin', title: 'Bg Origin' },
+            { name: 'Options', attr: 'bgpositions', title: 'Bg Position' },
+            { name: 'Options', attr: 'bgrepeats', title: 'Bg Repeat' },
+            { name: 'Options', attr: 'bgsizes', title: 'Bg Size' },
             { name: 'Options', attr: 'blur', title: 'filter blur' }
         ]
     },
@@ -165,30 +205,6 @@ const twgroups = [
         ]
     },
     {
-        label: 'padding', components: [
-            { name: 'Range', attr: 'padding', title: 'all' },
-            { name: 'Range', attr: 'paddingTop', title: 'top' },
-            { name: 'Range', attr: 'paddingBottom', title: 'bottom' },
-            { name: 'Range', attr: 'paddingLeft', title: 'left' },
-            { name: 'Range', attr: 'paddingRight', title: 'right' },
-            { name: 'Range', attr: 'paddingInlineStart', title: 'inline start' },
-            { name: 'Range', attr: 'paddingInlineEnd', title: 'inline end' },
-            
-        ]
-    },
-
-    {
-        label: 'margin', components: [
-            { name: 'Range', attr: 'margin', title: 'all', negative: true },
-            { name: 'Range', attr: 'marginTop', title: 'top', negative: true },
-            { name: 'Range', attr: 'marginBottom', title: 'bottom', negative: true },
-            { name: 'Range', attr: 'marginLeft', title: 'left', negative: true },
-            { name: 'Range', attr: 'marginRight', title: 'right', negative: true },
-            { name: 'Range', attr: 'marginInlineStart', title: 'inline start', negative: true  },
-            { name: 'Range', attr: 'marginInlineEnd', title: 'inline end', negative: true  },
-        ]
-    },
-    {
         label: 'border', components: [
             { name: 'Range', attr: 'border', title: 'all' },
             { name: 'Range', attr: 'borderTop', title: 'top' },
@@ -197,46 +213,90 @@ const twgroups = [
             { name: 'Range', attr: 'borderLeft', title: 'left' },
             { name: 'BorderColor', attr: 'bordercolor' },
             { name: 'Options', attr: 'borderType' },
-            { name: 'Range', attr: 'borderOpacity', title: 'opacity' }
+            { name: 'Range', attr: 'borderOpacity', title: 'opacity' },
+            { name: 'DivideColor', attr: 'dividecolor' },
+            { name: 'Range', attr: 'dividewidth', title: 'divide width' },
+            { name: 'Range', attr: 'dividerStyle', title: 'divider style' },
+            { name: 'Range', attr: 'outline', title: 'Outline' },
+            { name: 'OutlineColor', attr: 'outlinecolor' },
+            { name: 'Options', attr: 'outlinestyle', title: 'outline style' },
+            { name: 'Options', attr: 'outlineoffset', title: 'outline offset' }
+
+
         ]
     },
     {
         label: 'rounded / shadow / +', components: [
             { name: 'Options', attr: 'rounded' },
             { name: 'Options', attr: 'shadow' },
-            { name: 'Checkbox', attr: 'grayscale', title: 'grayscale' },
-            { name: 'Range', attr: 'opacity', title: 'opacity' }
+            { name: 'Range', attr: 'opacity', title: 'opacity' },
+            { name: 'ShadowColor', attr: 'shadowcolor' },
+            { name: 'Options', attr: 'mixblendmode',title:'Mix Blend M.' },
+            { name: 'Options', attr: 'bgblendmode',title:'Bg Blend M.' }
         ]
     },
     {
-        label: 'CSS Animation', components: [
-            { name: 'Options', attr: 'animation', title: 'animation' }
+        label: 'Interact && Animation', components: [
+
+            {name: 'Checkbox',attr: 'apparence', title: 'apparence'},
+            { name: 'Options', attr: 'animation', title: 'animation' },
+            {name: 'Options', attr: 'willchange', title: 'will change' },
+            {name: 'Options', attr: 'userselect',title: 'user select' },
+            {name: 'Options',attr: 'touchaction', title: 'touch action'},
+            {name: 'Options',attr: 'scrollsnaptype', title: 'scroll snap type'},
+            {name: 'Options',attr: 'scrollsnapstop', title: 'scroll snap stop'},
+            {name: 'Options',attr: 'scrollsnapalign', title: 'scroll snap align'},
+            {name: 'Options',attr: 'scrollsnappaddingTop', title: 'scroll snap pt'},
+            {name: 'Options',attr: 'scrollsnappaddingBottom', title: 'scroll snap pb'},
+            {name: 'Options',attr: 'scrollsnappaddingLeft', title: 'scroll snap pl'},
+            {name: 'Options',attr: 'scrollsnappaddingRight', title: 'scroll snap pr'},
+            {name: 'Options',attr: 'scrollsnapmarginTop', title: 'scroll snap mt'},
+            {name: 'Options',attr: 'scrollsnapmarginBottom', title: 'scroll snap mb'},
+            {name: 'Options',attr: 'scrollsnapmarginLeft', title: 'scroll snap ml'},
+            {name: 'Options',attr: 'scrollsnapmarginRight', title: 'scroll snap mr'},
+            {name: 'Options',attr: 'scrollbehavior', title: 'scroll behavior'},
+            {name: 'Options',attr: 'resize', title: 'resize'},
+            {name: 'Options',attr: 'pointerevent', title: 'pointer event'},
+            {name: 'CaretColor',attr: 'caretcolor'},
+            {name: 'AccentColor',attr: 'accent'},
+            {name: 'Options',attr: 'cursor', title: 'cursor'},
+            
         ]
     },
     {
-        label: 'Transition', components: [
+        label: 'transform && Transit.', components: [
             { name: 'Options', attr: 'transition', title: 'transition type' },
-            { name: 'Options', attr: 'transitionDuration', title: 'transition duration' },
+            { name: 'Options', attr: 'transitionDuration', title: 'transition dur.' },
             { name: 'Options', attr: 'transitionTiming', title: 'timing function' },
-            { name: 'Options', attr: 'transitionDelay', title: 'transition delay' }
-        ]
-    },
-    {
-        label: 'transform', components: [
+            { name: 'Options', attr: 'transitionDelay', title: 'transition del.' },
             { name: 'Options', attr: 'skewX', required: 'transform', title: 'Skew X' },
             { name: 'Options', attr: 'skewY', required: 'transform', title: 'Skew Y' },
             { name: 'Options', attr: 'rotate', required: 'transform' },
             { name: 'Options', attr: 'clipPath', required: 'transform', title: 'clip path' },
-            { name: 'Options', attr: 'rotate3D', title: 'Perspective' }
+            { name: 'Options', attr: 'rotate3D', title: 'Perspective' },
+            {name: 'Options', attr: 'scalex', title: 'scale x'},
+            {name: 'Options', attr: 'scaley', title: 'scale y'},
+            {name: 'Options', attr: 'translatex', title: 'translate x'},
+            {name: 'Options', attr: 'translatey', title: 'translate y'},
+            {name: 'Options', attr: 'transformorigin', title: 'transform origin'}
         ]
     },
+   
     {
         label: 'spacing', components: [
-            { name: 'Options', attr: 'spacing', title: 'all' },
-            { name: 'Options', attr: 'spacingTop', title: 'top' },
-            { name: 'Options', attr: 'spacingBottom', title: 'bottom' },
-            { name: 'Options', attr: 'spacingLeft', title: 'left' },
-            { name: 'Options', attr: 'spacingRight', title: 'right' },
+            { name: 'Options', attr: 'spacing', title: 'space' },
+            { name: 'Range', attr: 'paddingTop', title: 'P top' },
+            { name: 'Range', attr: 'paddingBottom', title: 'bottom' },
+            { name: 'Range', attr: 'paddingLeft', title: 'P left' },
+            { name: 'Range', attr: 'paddingRight', title: 'P right' },
+            { name: 'Range', attr: 'paddingInlineStart', title: 'P inline start' },
+            { name: 'Range', attr: 'paddingInlineEnd', title: 'P inline end' },
+            { name: 'Range', attr: 'marginTop', title: 'M top', negative: true },
+            { name: 'Range', attr: 'marginBottom', title: 'M bottom', negative: true },
+            { name: 'Range', attr: 'marginLeft', title: 'M left', negative: true },
+            { name: 'Range', attr: 'marginRight', title: 'M right', negative: true },
+            { name: 'Range', attr: 'marginInlineStart', title: 'M inline start', negative: true },
+            { name: 'Range', attr: 'marginInlineEnd', title: 'M inline end', negative: true },
         ]
     },
 

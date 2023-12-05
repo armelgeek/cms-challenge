@@ -26,7 +26,8 @@ const initialState = {
   sidebar:{
     show: true,
     name: 'elements'
-  }
+  },
+  copiedCssObject:null
 };
 const mutations = {};
 export default { initialState, mutations };

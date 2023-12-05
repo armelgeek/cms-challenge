@@ -37,6 +37,7 @@ const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
     ref:refContainer,
     onMouseEnter:(e:any) =>{
       e.stopPropagation();
+      console.log('on hover');
       setIsEnter(true)
     },
     onMouseLeave:(e:any) =>{
@@ -48,7 +49,7 @@ const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
     setCurrent(doc,refContainer.current?.offsetWidth)
   },
   id: doc.id,
-    className: `${classes()} relative cursor-pointer border ${toggleBorder()}`
+  className: `${classes()} ${isEnter ? 'bg-primary-100': 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
   }
   const render = () => (
       <>
@@ -111,7 +112,7 @@ const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
     case 'ol':
     return <ol {...props} {...editableProps}>{render()}</ol>;
     default:
-      return <div {...props} {...editableProps}>{render()}</div>;
+      return <div {...props}>{render()}</div>;
   }
 };
 export default BlockContainer;

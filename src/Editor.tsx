@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import BlockEditor from './components/blocks/BlockEditor';
 import {useDispatch, useGetter} from "./store";
 import Modal from "./components/blocks/Modal";
@@ -9,9 +9,10 @@ import BlockChooseImage from "./components/blocks/components/BlockChooseImage";
 import BlockEditContent from "./components/blocks/components/BlockEditContent";
 import BlockInput from "./components/blocks/components/BlockInput";
 import Element from './utils/tail/element';
+import BlockSourceCode from './components/blocks/components/BlockSourceCode';
 
 const Editor = () => {
-
+    const ref = useRef(null);
     const setInfo = useDispatch('desktop', 'setInfo');
     const setInfos = useDispatch('desktop', 'setInfos');
     const addToUKit = useDispatch('desktop', 'addToUKit');
@@ -41,7 +42,7 @@ const Editor = () => {
     const onAction = useCallback(() =>{
        if(desktop.modal.type == 'add-to-kit'){
            if(desktop.library.name != ''){
-               addToUKit(null);
+               addToUKit(ref);
            }
        }
         /**else if(desktop.modal.type == 'heading'){
@@ -49,7 +50,7 @@ const Editor = () => {
        }else{
 
        }**/
-    },[desktop.modal.type])
+    },[desktop.modal.type,ref])
     useEffect(()=>{
         createEmptyBlock();
         dispatch({
@@ -64,7 +65,7 @@ const Editor = () => {
                     <div className="w-full grid grid-cols-12 relative">
                         <div className="col-span-12 md:col-span-12 lg:col-span-12 min-h-screen">
                                 <div className="flex flex-col inset-0 mb-10">
-                                    <BlockEditor/>
+                                    <BlockEditor ref={ref}/>
                                 </div>
                         </div>
                         
@@ -110,6 +111,9 @@ const Editor = () => {
                 )}
                 {(desktop.modal.type == 'input') && (
                     <BlockInput/>
+                )}
+                {desktop.modal.type == 'sourcecode' && (
+                    <BlockSourceCode/>
                 )}
             </Modal>
 

@@ -16,13 +16,13 @@ const zooming = (value: any, zoomLevel: any) => {
 };
 const ResponsiveTest = ({ brands, resizeTo }: any) => {
   return (
-    <select className='select w-28 select-sm' onChange={(e: any) => {
+    <select className='select w-52' onChange={(e: any) => {
       const device = JSON.parse(e.target.value);
       resizeTo(device.width, device.height, device.pixelRatio)
     }}>
       {brands.map((device: any, j: number) => (
         <option key={j} value={JSON.stringify(device)}>
-          {device.width} X {device.height}
+          {device.name} - ({device.width} x {device.height})
         </option>
       ))}
     </select>
@@ -34,7 +34,8 @@ const Test = ({ children, setCurrent }: any) => {
   const editor = useGetter('editor', 'data', []);
   const desktop = useGetter('desktop', 'data', []);
   const setCurrentTab = useDispatch('editor', 'showSidebar');
-  const closeSidebar = useDispatch('editor', 'closeSidebar');
+  const exportBuild = useDispatch('desktop', 'exportBuild');
+
   const setInfo = useDispatch('desktop', 'setInfo');
   const setInfoEditor = useDispatch('editor', 'setInfo');
   const [isRotated, setIsRotated] = useState(false);
@@ -82,7 +83,7 @@ const Test = ({ children, setCurrent }: any) => {
       prop: 'mode',
       value: mode
     })
-   
+
   }
   const initialContent = () => {
     return `<!DOCTYPE html>
@@ -140,7 +141,7 @@ const Test = ({ children, setCurrent }: any) => {
               </button>
             </div>
             <div className="flex flex-row gap-1 justify-center">
-              <button className='btn bg-primary-500 btn-sm text-white'><FaFileExport /> Export</button>
+              <button className='btn bg-primary-500 btn-sm text-white' onClick={exportBuild}><FaFileExport /> Export</button>
             </div>
             <div className="flex flex-row gap-1 justify-center">
               <button className='btn bg-primary-500 text-white'><FaSave /></button>
@@ -153,44 +154,37 @@ const Test = ({ children, setCurrent }: any) => {
 
         {tabs.length > 0 && <Tabs />}
       </div>
-      <div className="flex h-screen pt-3 px-2">
+      <div className="flex h-screen pt-3 px-2 space-x-8">
 
-        <div className="w-1/6">
-          <div className="flex flex-row  border  gap-2 p-1 border-gray-300">
-            <div onClick={() => setChoice(0)} className={`uppercase cursor-pointer badge badge-${choice == 0 ? 'primary' : 'default  bg-white'} px-3 py-1 border rounded-xl`}>Block Tree</div>
-            <div onClick={() => setChoice(1)} className={`uppercase cursor-pointer badge badge-${choice == 1 ? 'primary' : 'default  bg-white'} px-3 py-1 border rounded-xl`}>Templates</div>
+        <div className="w-1/6 bg-white">
+          <div className="flex flex-row  border  gap-2 p-1 border-gray-300 bg-gray-100">
+            <div className={`uppercase cursor-pointer badge badge-${choice == 1 ? 'primary' : 'default  bg-white'} px-3 py-1 border rounded-xl`}>Templates</div>
           </div>
-
-          {choice == 0 && (
-            <>
-              <div className="tree relative">
-                <BlockTree editor={editor.document} setCurrent={setCurrent} />
-              </div>
-            </>
-          )}
-          {choice == 1 && (
-            <div className="relative">
-              <UserLibrary />
-            </div>
-          )}
+          <div className="relative">
+            <UserLibrary />
+          </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto flex justify-center border">
-        
-        <Frame initialContent={initialContent()} id="preview-frame" style={{
-            width: w,
-            height: h,
-            maxHeight: h,
-            overflow: 'auto',
-            backgroundColor: 'white'
-          }}>
-          
+        <div className="preview-container">
+          <div className='pb-2'>
+            <BlockTree editor={editor.document} setCurrent={setCurrent} />
+          </div>
+          <div className="flex-1 overflow-y-auto flex flex-col justify-center">
+            <Frame initialContent={initialContent()} id="preview-frame" style={{
+              width: w,
+              height: h,
+              maxHeight: h,
+              overflow: 'auto',
+              backgroundColor: 'white'
+            }}>
+
               {children}
-           
-          
-          </Frame>
+
+
+            </Frame>
+          </div>
         </div>
-        <div className="w-1/6  ">
+        <div className="w-1/5  ">
           <div className="flex flex-col">
             {editor.current ? (
               <>

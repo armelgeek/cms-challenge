@@ -6,7 +6,7 @@ const getColor = (n: number, color: string) => {
 
 const Pallete = (props: any) => {
     const [options, setOptions] = useState(classes['colors']);
-    console.log('colorss',options);
+  
     return (
         <div className="fixed top-0 z-50 bg-gray-700 text-white p-2 w-full z-modal cursor-pointer right-0">
             <div className="flex flex-row justify-start">

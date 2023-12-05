@@ -1,5 +1,9 @@
 const initialState = {
     mode: 'base',
+    frame: {
+        w: 'w-screen',
+        h: 'h-screen'
+    },
     message: '',
     filter: '',
     tabs: [],
@@ -17,7 +21,9 @@ const initialState = {
         show: false,
         type: '',
         title: ''
-    }
+    },
+    html: '',
+    preview:false
 };
 
 const mutations = {};

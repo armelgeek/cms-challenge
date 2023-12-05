@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useGetter } from '../../../store';
 import _ from 'lodash';
-import { FaArrowDown } from 'react-icons/fa';
+import { FaAngleRight, FaArrowDown } from 'react-icons/fa';
 import { FaAngleDown } from 'react-icons/fa6';
 function getCoords(id: any) {
      let el = document.querySelector("#preview-frame").contentWindow.document.querySelector('#' + id)as any;
@@ -16,22 +16,21 @@ const BlockTree = (props: any) => {
     const setInfo = useDispatch("editor", 'setInfo');
     const editor = useGetter('editor', 'data', []);
     const current = props.current ? props.current : props.editor ? props.editor : null
-    console.log('blockTree',current.blocks);
     return (editor.current!= null && current.id != null) ? (
 
-        <div className={`flex flex-col bg-white cursor-pointer w-full`} onClick={(e) =>{
+        <div className={`flex flex-row justify-start items-center cursor-pointer`} onClick={(e) =>{
             e.stopPropagation();
             let coords = getCoords(current.id)
             props.setCurrent(current,coords.width);
         }}>
-            <div className={`${editor.current.id === current.id ? 'bg-primary-600 text-white':'bg-slate-300'} border flex flex-row w-full px-2 py-1 justify-between items-center capitalize`}>
-                <div className="tag-element"> {current.semantic || current.element}</div>
-                {(current.type =='container' && current.blocks.length > 0) && (<div className="icon-element"><FaAngleDown/></div>)}
+            <div className={`${editor.current.id === current.id ? 'bg-primary-600 text-white':'bg-slate-300'} rounded-full border flex flex-row px-2 justify-between items-center capitalize`}>
+                <div className="tag-element text-sm"> {current.semantic || current.element}</div>
             </div>
+            <div className="icon-element mx-1"><FaAngleRight className='text-slate-400'/></div>
+
 
             {current.blocks.map((block: any) => (
                 <div
-                    className={`pl-2 flex w-full flex-row items-center`}
                     onClick={(e) => {
                         e.stopPropagation();
                         setInfo({

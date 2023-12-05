@@ -1,3 +1,4 @@
+import { jsonToHTML } from "../../../utils/tail/jsontohtml";
 import { removeItem } from "../../magick/reducer";
 import html2canvas from "html2canvas";
 export const TYPES = {} as any;
@@ -48,9 +49,9 @@ export const addTab = (payload: any) => async (dispatch: any, getState: any) => 
   let founded = false
   const { desktop } = getState()
   console.log('desktop:', desktop.tabs);
-   if(desktop.tabs.length > 0){
-    desktop.tabs.forEach ( (tab:any,i:number) => {
-      if ( tab.label === payload.label ){
+  if (desktop.tabs.length > 0) {
+    desktop.tabs.forEach((tab: any, i: number) => {
+      if (tab.label === payload.label) {
         dispatch({
           type: 'desktop__item__info',
           payload: {
@@ -58,16 +59,16 @@ export const addTab = (payload: any) => async (dispatch: any, getState: any) => 
             value: i
           },
         })
-          founded = true
-          return
+        founded = true
+        return
       }
-  })
-   }
-  if ( !founded ){ 
-  
-     let tabs = [...desktop.tabs,payload];
-     console.log('tabs',tabs);
-     dispatch({
+    })
+  }
+  if (!founded) {
+
+    let tabs = [...desktop.tabs, payload];
+    console.log('tabs', tabs);
+    dispatch({
       type: 'desktop__item__info',
       payload: {
         prop: 'tabs',
@@ -78,7 +79,7 @@ export const addTab = (payload: any) => async (dispatch: any, getState: any) => 
       type: 'desktop__item__info',
       payload: {
         prop: 'currentTab',
-        value: tabs.length-1
+        value: tabs.length - 1
       },
     })
   }
@@ -87,62 +88,117 @@ export const addTab = (payload: any) => async (dispatch: any, getState: any) => 
 export const loadUIKit = (kit: any) => async (dispatch: any, getState: any) => {
   try {
     let uk = getState().desktop.uikits;
-      let founded = false
-      uk.forEach((uikit: any, i: number) => {
-          if (uikit.name === kit.name) {
-              founded = true
-              return
-          }
-      })
-      if (!founded) {
-        uk.push(kit.json)
+    let founded = false
+    uk.forEach((uikit: any, i: number) => {
+      if (uikit.name === kit.name) {
+        founded = true
+        return
       }
-      dispatch({
-        type: 'desktop__item__info',
-        payload: {
-          prop: 'uikits',
-          value: uk
-        },
-      })
+    })
+    if (!founded) {
+      uk.push(kit.json)
+    }
+    dispatch({
+      type: 'desktop__item__info',
+      payload: {
+        prop: 'uikits',
+        value: uk
+      },
+    })
     dispatch({
       type: 'desktop__item__infos',
       payload: {
         'library': kit.json
       },
-    })   
-  } catch ( err ){
-      console.log ( err )
-  } 
+    })
+  } catch (err) {
+    console.log(err)
+  }
 }
 
-export const addToUKit = (blockEditor:any) => async (dispatch: any, getState: any) => {
+const takeScreenShot = async (node: any) => {
+  if (!node) {
+    throw new Error('You should provide correct html node.')
+  }
+  return html2canvas(node)
+    .then((canvas) => {
+      const croppedCanvas: any = document.createElement('canvas')
+      const croppedCanvasContext: any = croppedCanvas.getContext('2d')
+      // init data
+      const cropPositionTop = 0
+      const cropPositionLeft = 0
+      const cropWidth = canvas.width
+      const cropHeight = canvas.height
+
+      croppedCanvas.width = cropWidth
+      croppedCanvas.height = cropHeight
+
+      croppedCanvasContext.drawImage(
+        canvas,
+        cropPositionLeft,
+        cropPositionTop,
+      )
+
+      const base64Image = croppedCanvas.toDataURL()
+      return base64Image
+    })
+    .catch((e) => console.log('Error', e))
+}
+
+export const addToUKit = (blockEditor: any) => async (dispatch: any, getState: any) => {
 
   let library = getState().desktop.library;
-  console.log('page: ',library);
   let page = getState().editor.page;
-  /**let screenshoot = '';
-  (async (done) => {
-    screenshoot =  await html2canvas(blockEditor,{ type: "dataURL" , useCORS: true , scale: 0.50 });
-  })();**/
- // page.image = screenshoot;
-  library.templates.forEach((template:any,index:number) => {
-    if ( template.blocks_id === page.blocks_id ){
-      library.templates.splice(index,1)
+  let current = getState().editor.current;
+  let previewFrame = document.querySelector("#preview-frame");
+  if (previewFrame) {
+    let el = previewFrame?.contentWindow.document.querySelector('#' + current.id) as any;
+    console.log('current: ', current.id,!!el);
+    if (!el) return null;
+    try {
+      console.log('adding preview');
+      page.image = await takeScreenShot(el);
+      library.templates.forEach((template: any, index: number) => {
+        if (template.blocks_id === page.blocks_id) {
+          library.templates.splice(index, 1)
+        }
+      })
+      library.templates.push(page)
+      dispatch({
+        type: 'editor__item__info',
+        payload: {
+          prop: 'current',
+          value: null
+        }
+      })
+      dispatch({
+        type: 'desktop__item__info',
+        payload: {
+          prop: 'library',
+          value: library
+        }
+      })
+    } catch (e) {
+      console.log('Error [add to kit]:', e);
     }
-  })
-  library.templates.push(page)
-  dispatch({
-    type: 'editor__item__info',
-    payload: {
-      prop: 'current',
-      value: null
+
+  }
+
+}
+
+
+export const exportBuild = () => async (dispatch: any, getState: any) => {
+  let editor = getState().desktop;
+  let tabs = editor.tabs
+  let shw = '';
+  for (let i = 0; i < tabs.length; i++) {
+    if (tabs[i].type == 'editor') {
+      shw += `---------------start ${tabs[i].label}.html---------------\n`;
+      shw += jsonToHTML(tabs[i].object.json.blocks);
+      shw += `\n`;
+      shw += `---------------end ${tabs[i].label}.html---------------\n`;
     }
-  })
-  dispatch({
-    type: 'desktop__item__info',
-    payload: {
-      prop: 'library',
-      value: library
-    }
-  })
+  }
+  console.log('export build', shw);
+
 }

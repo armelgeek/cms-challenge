@@ -9,11 +9,13 @@ import {
   FaCopy,
   FaEdit,
   FaLayerGroup,
+  FaPaintBrush,
   FaPlus,
   FaTextHeight,
   FaTrash,
   FaUpload
 } from 'react-icons/fa';
+import { RiPaintFill } from "react-icons/ri";
 import { CgExtensionAdd } from "react-icons/cg";
 import Modal from '../Modal';
 import { MdDynamicForm } from "react-icons/md";
@@ -56,7 +58,9 @@ const BlockFloating = ({ floatRef, coords }: any) => {
   const deleteBlock = useDispatch('editor', 'deleteBlock');
   const setInfo = useDispatch('desktop', 'setInfo');
   const setInfos = useDispatch('desktop', 'setInfos');
-  const editBlockImageUrl = useDispatch('editor', 'editBlockImageUrl');
+  const copyStyleBlock = useDispatch('editor', 'copyStyleBlock');
+  const pasteStyleBlock = useDispatch('editor', 'pasteStyleBlock');
+  const getCurrentHTML = useDispatch('editor', 'getCurrentHTML');
   const setShow = useCallback((value: any, title: string, type: string) => {
     if (type == null) {
       setInfos({
@@ -75,7 +79,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
     }
 
   }, [])
-  const createElement = useCallback((el:any) => {
+  const createElement = useCallback((el: any) => {
     if (!editor.current) return;
     const element = new Element().createElement(el.id)?.setIcon(el.icon);
     editor.current.blocks.push(element)
@@ -84,9 +88,12 @@ const BlockFloating = ({ floatRef, coords }: any) => {
       value: element
     })
     setPopUpOpen(false);
-  },[editor]);
+  }, [editor]);
 
-
+  const showSourceCode = useCallback((el: any) => {
+    getCurrentHTML();
+    setShow(true, "Code source", 'sourcecode');
+  },[])
   let bound = HorizontallyBound(floatRef.current);
   console.log('bound', gr);
   console.log('editor.current', editor.current);
@@ -106,7 +113,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
           <CgExtensionAdd size={18} />
         </div>
       )}
-      <div title={'Export code'} className="text-white  hover:text-purple-300 text-sm" onClick={navigateToParent}>
+      <div title={'Export code'} className="text-white  hover:text-purple-300 text-sm"  onClick={showSourceCode}>
         <FaCode size={12} />
       </div>
 
@@ -144,6 +151,22 @@ const BlockFloating = ({ floatRef, coords }: any) => {
               <FaLayerGroup size={12} />
             </div>
           )}
+          {(typeof editor.current.cssObject === 'object' &&
+            !Array.isArray(editor.current.cssObject) &&
+            editor.current.cssObject !== null) && (
+              <>
+                {(typeof editor.copiedCssObject === 'object' &&
+                  !Array.isArray(editor.copiedCssObject) &&
+                  editor.copiedCssObject !== null) ? (
+                  <div title="paste style of block" className="text-white  hover:text-purple-300 text-sm" onClick={pasteStyleBlock}>
+                    <RiPaintFill size={12} />
+                  </div>
+                ) : (
+                  <div title="copy style of block" className="text-white  hover:text-purple-300 text-sm" onClick={copyStyleBlock}>
+                    <FaPaintBrush size={12} />
+                  </div>
+                )}
+              </>)}
 
           <div className="text-white  hover:text-purple-300 text-sm" onClick={deleteBlock}>
             <FaTrash size={12} />
@@ -169,7 +192,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
           {icon.title}
         </div>
       ))}**/}
-      {floatRef.current != null && floatRef.current.offsetHeight && isPopUpOpen &&   (
+      {floatRef.current != null && floatRef.current.offsetHeight && isPopUpOpen && (
         <div className="absolute w-60 h-72 border border-dark-800 rounded-tl-none rounded-lg  bg-gray-950" style={{
           top: floatRef.current.offsetHeight - 1,
           left: 0,
@@ -177,25 +200,25 @@ const BlockFloating = ({ floatRef, coords }: any) => {
 
           <div className="flex max-w-full overflow-x-auto overflow-y-hidden flex-col w-full">
             <div className="btn-group flex flex-row my-1 rounded-sm justify-center">
-            {editor.elements.map((group: any) => (
-              <React.Fragment key={Math.random().toString(36).substring(7)}>
-                <button className={`btn font-medium rounded-full btn-xs px-2 py-2 bg-${gr === group.label ? 'primary-500 text-white' : 'slate-300 text-gray-950'}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
-                  {group.label}
-                </button>
+              {editor.elements.map((group: any) => (
+                <React.Fragment key={Math.random().toString(36).substring(7)}>
+                  <button className={`btn font-medium rounded-full btn-xs px-2 py-2 bg-${gr === group.label ? 'primary-500 text-white' : 'slate-300 text-gray-950'}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
+                    {group.label}
+                  </button>
 
-              </React.Fragment>
-            ))}
+                </React.Fragment>
+              ))}
             </div>
             <div className="w-full h-72 max-h-72 overflow-x-hidden overflow-y-auto">
-            {editor.elements.map((group: any) => (
-              <div key={group.label} className="flex  bg-gray-950 flex-row flex-wrap justify-center cursor-pointer" style={{ display: gr === group.label ? 'flex' : 'none' }}>
-                {group.elements.map((element: any) => (
-                  <div key={element.name} className="bg-slate-800 border border-dark-800  m-1 hover:bg-slate-700 flex w-16 flex-col items-center h-16 text-xs justify-center text-center text-slate-200 rounded hover:text-primary-600 shadow" onClick={() => createElement(element)}>
-                    {element.name}
-                  </div>
-                ))}
-              </div>
-            ))}
+              {editor.elements.map((group: any) => (
+                <div key={group.label} className="flex  bg-gray-950 flex-row flex-wrap justify-center cursor-pointer" style={{ display: gr === group.label ? 'flex' : 'none' }}>
+                  {group.elements.map((element: any) => (
+                    <div key={element.name} className="bg-slate-800 border border-dark-800  m-1 hover:bg-slate-700 flex w-16 flex-col items-center h-16 text-xs justify-center text-center text-slate-200 rounded hover:text-primary-600 shadow" onClick={() => createElement(element)}>
+                      {element.name}
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </div>
         </div>

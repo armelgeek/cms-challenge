@@ -2,12 +2,13 @@ import React, { useState, useCallback, useEffect, useRef, memo } from 'react'
 import _ from 'lodash';
 import classes from '../../../utils/scripts/tw.classes';
 import { useDispatch, useGetter } from '../../../store';
-import { flattenClasses, searchClass } from '../../../utils/tail/tw.classe';
+import { flattenClasses, searchClass } from  '../../../utils/scripts/tw.classes';
 import { FaMinusCircle } from 'react-icons/fa';
 const classList = flattenClasses();
+console.log('classList', classList);
 const ScrollItem = memo(({ selectTag, item, index }: any) => {
   return (
-    <div className="suggestion-item" key={item.attr + '--' + index} onClick={() => {
+    <div className="text-sm  lowercase suggestion-item" key={item.attr + '--' + index} onClick={() => {
       selectTag(item.value, item.attr)
     }}> {item.value}</div>
   )
@@ -100,10 +101,10 @@ const BlockCss = () => {
     setText('');
   }, [])
   return (
-    <div className="flex flex-col w-full h-full items-start p-2 bg-bluegray-200">
-      <label className="font-bold">CSS</label>
-      <div className="tag-input-sg-container mt-2  w-full">
-        <input type="text" value={text} className="w-full  rounded-md  border-gray-200 focus:outline-0 focus:shadow-none focus:focus-within:ring-0 text-sm" placeholder='Search class' onChange={(e) => handleSearh(e.target.value)} />
+    <div className="flex flex-col w-full h-full items-start bg-bluegray-200">
+      <span className="uppercase font-bold  my-2" style={{fontSize: '10px'}}>CSS</span>
+      <div className="tag-input-sg-container  w-full">
+        <input type="text" value={text} className="w-full input-sm  rounded-md  border-gray-200 focus:outline-0 focus:shadow-none focus:focus-within:ring-0 text-sm" placeholder='Search class' onChange={(e) => handleSearh(e.target.value)} />
         <div className="suggestions-container" ref={containerRef} style={{
           display: cls.length > 0 ? 'block' : 'none'
         }}>
@@ -112,20 +113,18 @@ const BlockCss = () => {
         <div className="flex flex-row flex-wrap gap-2 py-2">
           {!_.isUndefined(state.css[`${desktop.mode}`]) && !_.isNull(state.css[`${desktop.mode}`]) && Object.keys(state.css[`${desktop.mode}`]).map((item) => {
             return state.css[`${desktop.mode}`][item] != '' ? (
-              <div className="badge badge-primary cursor-pointer" key={`css-badge-` + item}>
-                { }
+              <div className="badge badge-primary tex-sm rounded-full text-xs lowercase font-bold cursor-pointer" key={`css-badge-` + item}>
                 <span>{state.css[`${desktop.mode}`][item]}</span>
                 <span className='ml-1' onClick={() => updateCss('', item)}><FaMinusCircle /></span>
-
               </div>
             ) : null;
           })}
         </div>
       </div>
-      <label className="font-bold my-1">Style</label>
-      <textarea value={state.style} onChange={(e: any) => updateValue(e.target.value, 'style')} className="text-sm font-mono w-full h-1/6 bg-white shadow p-1" />
-      <label className="font-bold my-1">Semantic</label>
-      <select value={state.semantic} className="w-full mr-4" onChange={(e: any) => updateValue(e.target.value, 'semantic')}>
+      <span className="uppercase font-bold   my-2" style={{fontSize: '10px'}}>Style</span>
+      <textarea value={state.style} rows={10} onChange={(e: any) => updateValue(e.target.value, 'style')} className="text-sm textarea border font-mono w-full h-1/6 bg-white shadow p-1" />
+      <span className="uppercase font-bold   mt-2" style={{fontSize: '10px'}}>Semantic</span>
+      <select value={state.semantic} className="w-full mr-4 select select-sm" onChange={(e: any) => updateValue(e.target.value, 'semantic')}>
         <option value=""></option>
         {semantics.map(semantic => (
           <option key={semantic} selected={state.semantic == semantic} value={semantic}>{semantic}</option>
