@@ -24,6 +24,7 @@ import ShadowColor from './controls/ShadowColor';
 import CaretColor from './controls/CaretColor';
 import AccentColor from './controls/AccentColor';
 import BlockCss from '../components/BlockCss';
+import BlockIconify from '../components/BlockIconify';
 const BlockTailwind = ({ css, cid }: any) => {
     const [gr, setGr] = useState('');
     const [controls, setControls] = useState(null) as any;
@@ -89,12 +90,15 @@ const BlockTailwind = ({ css, cid }: any) => {
                                 value: null
                             })
                         }}><FaAngleLeft className={'mr-1'} /> {gr}</div>
-                        <div className={`grid grid-cols-${gr=='Advanced' ? 1: 2} gap-y-1 content-center mx-2 mb-1`}>
+                        <div className={`grid grid-cols-${gr == 'Advanced' ? 1 : 2} gap-y-1 content-center mx-2 mb-1`}>
                             {controls.map((c: any) => <div className={`capitalize ${c.hasOwnProperty('group') ? 'float-left my-4 mx-1' : 'py-1 px-2 flex flex-col clear-both'}`}>
                                 <div key={Math.random() + '_' + editor.current.id}>
-                                        {c.name == 'Css' && (
-                                         <BlockCss/>
-                                        )}
+                                    {c.name == 'icon' && (
+                                        <BlockIconify />
+                                    )}
+                                    {c.name == 'Css' && (
+                                        <BlockCss />
+                                    )}
                                     {c.name == 'Width' && (
                                         <Width
                                             attr={c.attr}

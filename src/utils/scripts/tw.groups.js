@@ -20,6 +20,7 @@ const twgroups = [
     },
     {
         label: 'Advanced', components: [
+            {name: 'icon', attr: 'icon', title: 'icon'},
             { name: 'Css', attr: 'css', title: 'CSS' }
         ]
     },

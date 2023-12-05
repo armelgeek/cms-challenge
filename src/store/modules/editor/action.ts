@@ -471,6 +471,42 @@ export const updateBlockProperty = (value: any, key: string) => async (dispatch:
     })
   }
 }
+
+
+
+export const updateBlockDataContent = (value: any, key: string) => async (dispatch: any, getState: any) => {
+  let editor = getState().editor;
+  let current = getState().editor.current;
+  let attr = 'current.data.' + key;
+  let dttr = 'current.content';
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      [attr]: value,
+      [dttr]: value
+    }
+  })
+  if (current.tag == 'document') {
+    editor.document[key] = value;
+    editor.document.content = value;
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document': editor.document
+      }
+    })
+  } else {
+    modifyBlockProperty(editor.document.blocks, current.id, value, key);
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document.blocks': editor.document.blocks
+      }
+    })
+  }
+}
+
+
 export const addPage = () => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
   if (!editor.page) return
@@ -737,27 +773,27 @@ export const exportBlock = () => async (dispatch: any, getState: any) => {
   FileSaver.saveAs(blob, 'windflow-block');
 }
 export const exportBuild = (html: any) => async (dispatch: any, getState: any) => {
- /** let editor = getState().editor;
-  if (!html) return
-  let page = editor.page
-  let fonts = jp.query(page.json.blocks, '$..blocks..font')
-  let fnts = [...new Set(fonts.filter(a => { return a }))]
-  let anims = jp.query(page.json.blocks, '$..blocks[?(@.gsap.animation)]')
-  let animations = anims.map(a => { return { id: a.id, gsap: a.gsap } })
-  const whoobeone = {
-    html: html,
-    fonts: fnts,
-    title: page.name,
-    description: page.description,
-    animations: animations,
-    tags: page.tags.join(','),
-    js: page.json.blocks.data.js,
-    analytics: page.analytics || null
-  }
-  console.log(whoobeone)
-  let data = "const whoobe = " + JSON.stringify(whoobeone) + ';export default whoobe'
-  const blob = new Blob([data], { type: 'application/js' })
-  FileSaver.saveAs(blob, 'whoobe.js')**/
+  /** let editor = getState().editor;
+   if (!html) return
+   let page = editor.page
+   let fonts = jp.query(page.json.blocks, '$..blocks..font')
+   let fnts = [...new Set(fonts.filter(a => { return a }))]
+   let anims = jp.query(page.json.blocks, '$..blocks[?(@.gsap.animation)]')
+   let animations = anims.map(a => { return { id: a.id, gsap: a.gsap } })
+   const whoobeone = {
+     html: html,
+     fonts: fnts,
+     title: page.name,
+     description: page.description,
+     animations: animations,
+     tags: page.tags.join(','),
+     js: page.json.blocks.data.js,
+     analytics: page.analytics || null
+   }
+   console.log(whoobeone)
+   let data = "const whoobe = " + JSON.stringify(whoobeone) + ';export default whoobe'
+   const blob = new Blob([data], { type: 'application/js' })
+   FileSaver.saveAs(blob, 'whoobe.js')**/
 }
 
 

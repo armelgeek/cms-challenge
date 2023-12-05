@@ -9,6 +9,7 @@ import EditorSidebar from './components/editor/EditorSidebar';
 import EditorSidebarTabs from './components/editor/EditorSidebarTabs';
 import UserLibrary from './components/editor/UserLibrary';
 import Frame from 'react-frame-component';
+import jp from 'jsonpath';
 
 const zooming = (value: any, zoomLevel: any) => {
   const zoomFactor = parseFloat(zoomLevel.replace('%', '')) / 100;
@@ -86,14 +87,21 @@ const Test = ({ children, setCurrent }: any) => {
 
   }
   const initialContent = () => {
+    let fonts = jp.query(editor.page.json.blocks, '$..blocks..font')
+    let fnts = [...new Set(fonts.filter(a => { return a }))]
+    let fontsLink = ''
+    fnts.length ? fontsLink = '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=' + fnts.join('|') + '">\n' : fontsLink = ''
+    let icons = ''
     return `<!DOCTYPE html>
       <html>
         <head>
           <script src="http://localhost:5173/tailwind.css"></script>
           <link rel="stylesheet" href='http://localhost:5173/app.css'/>
+          ${fontsLink}
         </head>
         <body>
           <div id="root"></div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/iconify/2.0.0/iconify.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         </body>
       </html>`
   }
