@@ -1,26 +1,23 @@
 import React, { useState } from 'react'
 import _ from 'lodash';
+import FontPicker from 'react-fontpicker-ts'
 import classes from '../../../../utils/scripts/tw.classes';
-const TextFont = ({ title, data, attr, updateCss }: any) => {
+import { useDispatch } from '../../../../store';
+const TextFont = ({ title, data, attr }: any) => {
   const fonts = classes.fontfamily;
-  const [fontFamily, setFontFamily] = useState(!_.isNull(data) && !_.isUndefined(data[attr]) ? data[attr] : '');
-  const handleChange = (e: any) => {
-    let v = e.target.value;
+  const editBlockFontContent = useDispatch('editor', 'editBlockFontContent');
+  const [fontFamily, setFontFamily] = useState(!_.isNull(data) && !_.isUndefined(data) ? data : '');
+  const handleChange = (v: any) => {
     setFontFamily(v);
-    updateCss(v, attr);
+    //editBlockFontContent(v);
   };
   return (
     <div className="flex flex-col family">
-      <label className="font-bold">Font</label>
-      <select className="p-2" value={fontFamily} onChange={handleChange}>
-        <option value=""></option>
-        <option value="Arial">sans-serif</option>
-        <option value="serif">serif</option>
-        <option value="monospace">monospace</option>
-        {fonts.map(font => (
-          <option value={font}>{font}</option>
-        ))}
-      </select>
+      <p className='uppercase font-bold' style={{
+        fontSize: '10px',
+      }}>Font Family</p>
+      <FontPicker defaultValue={fontFamily}/>
+
     </div>
   )
 }

@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { MdOutlineExpandLess, MdOutlineExpandMore } from 'react-icons/md';
 import { addKitBlockInPage, editKitBlockInPage } from "../../store/modules/editor/action";
 import Modal from '../blocks/Modal';
-
+import sdk from "../../utils/api-sdk";
 const UserLibrary = () => {
     const desktop = useGetter('desktop', 'data', []);
     const setInfos = useDispatch('desktop', 'setInfos');
@@ -32,8 +32,7 @@ const UserLibrary = () => {
         pages: null,
         total: 0,
         galleryID: null,
-        freeKits: true,
-        whoobeKits: new Template().kits()
+        freeKits: true
     });
     const updateStateAttributes = useCallback((updates: any) => {
         setState((prevState: any) => ({
@@ -63,25 +62,22 @@ const UserLibrary = () => {
         if (!founded) {
             desktop.uikits.push(state.library)
         }
-        setInfos({
-            'uikits': desktop.uikits,
-            'library': {
-                name: state.library.name,
-                author: 'Armel Wanes',
-                description: state.library.description,
-                templates: []
-            }
-        })
-        setInfos({
-            'library': {
-                name: '',
-                author: 'Armel Wanes',
-                description: '',
-                templates: []
-            }
-        })
+        let requestObj = sdk.createUserLibrary(state.library).promise;
+        requestObj
+            .then((response: any) => {
+                setInfos({
+                    'uikits': desktop.uikits,
+                    'library': {
+                        name: state.library.name,
+                        author: 'Armel Wanes',
+                        description: state.library.description,
+                        templates: []
+                    }
+                })
+            })
+
+
     }, [state, desktop])
-    console.log('state', state);
     return (
         <>
             <Modal
@@ -116,7 +112,7 @@ const UserLibrary = () => {
                 <div className="py-1">
                     <div className="flex flex-row items-center gap-2">
                     </div>
-                    {desktop.uikits.map((kit: any) => (
+                    {!_.isUndefined(desktop.uikits) && desktop.uikits.map((kit: any) => (
                         <>
                             <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-950 hover:text-white p-2  text-base ${gr === kit.name ? 'bg-slate-950 text-white' : 'text-gray-950'}`} onClick={() => {
                                 //loadUIKit(kit);
@@ -127,12 +123,14 @@ const UserLibrary = () => {
                                     {gr === kit.name ? <MdOutlineExpandLess /> : <MdOutlineExpandMore />}
                                 </div>
                             </div>
-                            <div key={kit.name} className="flex  h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-slate-200 flex-row flex-wrap justify-center cursor-pointer p-2" style={{
+                            <div key={kit.name} className="flex w-full h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-slate-200 flex-row flex-wrap justify-center cursor-pointer" style={{
                                 display: gr === kit.name ? 'flex' : 'none'
                             }}>
-                                {!_.isNull(kit.json) && (
+
+                                {!_.isNull(kit.json) && !_.isUndefined(kit.json) && !_.isUndefined(kit.json.templates) &&(
                                     <ComponentsGallery
-                                        pages={kit.templates}
+                                        kit={kit}
+                                        page
                                         skip={kits.skip}
                                         limit={kits.limit}
                                         addKitBlockInPage={addKitBlockInPage}
@@ -142,37 +140,6 @@ const UserLibrary = () => {
                             </div>
                         </>
                     ))}
-                    {kits.freeKits && kits.whoobeKits && (
-                        <>
-                            {kits.whoobeKits.map((kit: any) => (
-                                <>
-                                    <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-950 hover:text-white p-2  text-base ${gr === kit.name ? 'bg-slate-950 text-white' : 'text-gray-950'}`} onClick={() => {
-                                        //loadUIKit(kit);
-                                        setGr(gr === kit.name ? null : kit.name)
-                                    }}>
-                                        {kit.name}
-                                        <div className="absolute right-0 m-1">
-                                            {gr === kit.name ? <MdOutlineExpandLess /> : <MdOutlineExpandMore />}
-                                        </div>
-                                    </div>
-                                    <div key={kit.name} className="flex  h-96 max-h-96 overflow-y-auto overflow-x-hidden bg-slate-200 flex-row flex-wrap justify-center cursor-pointer p-2" style={{
-                                        display: gr === kit.name ? 'flex' : 'none'
-                                    }}>
-                                        {!_.isNull(kit.json) && (
-                                            <ComponentsGallery
-                                                pages={kit.json.templates}
-                                                skip={kits.skip}
-                                                limit={kits.limit}
-                                                addKitBlockInPage={addKitBlockInPage}
-                                                editKitBlockInPage={editKitBlockInPage}
-                                            />
-                                        )}
-                                    </div>
-                                </>
-                            ))}
-
-                        </>
-                    )}
                 </div>
             </div>
 

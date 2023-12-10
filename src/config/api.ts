@@ -1,7 +1,8 @@
 import axios, {AxiosResponse} from "axios";
 import _ from "lodash";
+import { apiPrefix } from "./constant";
 export const apiConfig = {
-  baseURL: process.env.API_URL || "http://localhost:8100/api/",
+  baseURL: apiPrefix.baseUrl,
   headers: () => {
     return {
       Accept: "application/json",

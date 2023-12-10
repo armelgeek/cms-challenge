@@ -123,14 +123,17 @@ const twgroups = [
     },
     {
         label: 'typography', components: [
+
             { name: 'Button', group: 'text-decoration', attr: 'italic', title: 'italic', icon: 'format_italic', css: 'float-left' },
             { name: 'Button', group: 'text-decoration', attr: 'underline', title: 'underline', icon: 'format_underline', css: 'float-left' },
             { name: 'Button', group: 'text-decoration', attr: 'uppercase', title: 'uppercase', icon: 'arrow_upward', css: 'float-left' },
             { name: 'Button', group: 'text-decoration', attr: 'lowercase', title: 'lowercase', icon: 'arrow_downward', css: 'float-left' },
             { name: 'Button', group: 'text-decoration', attr: 'capitalize', title: 'capitalize', icon: 'text_fields', css: 'float-none' },
             { name: 'Button', group: 'text-decoration', attr: 'line-through', title: 'strikethrough', icon: 'format_strikethrough', css: 'float-left' },
+
             { name: 'Color', attr: 'textcolor' },
             { name: 'DecorationColor', attr: 'textdecorationcolor', title: 'Text decoration color' },
+            { name: 'TextFont' , attr: 'textfont' },
             { name: 'Options', attr: 'textdecorationstyle', title: 'Deco. style' },
             { name: 'Options', attr: 'textdecorationythickness', title: 'Deco. Thickness' },
             { name: 'Options', attr: 'textunderlineoffset', title: 'Under.. Offset' },

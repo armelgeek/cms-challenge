@@ -35,3 +35,27 @@ export const objectDeepMerge = (target:any, source:any, mergedObj:any) => {
   });
   Object.assign(target, base);
 };
+export function formatRelativeDate(dateString:string) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+
+  if (diff < 60000) { // moins d'une minute
+    return "< 1 minute";
+  } else if (diff < 3600000) { // moins d'une heure
+    const minutes = Math.floor(diff / 60000);
+    return `Il y a ${minutes} ${minutes > 1 ? "minutes" : "minute"}`;
+  } else if (diff < 86400000) { // moins d'un jour
+    const hours = Math.floor(diff / 3600000);
+    return `Il y a ${hours} ${hours > 1 ? "heures" : "heure"}`;
+  } else if (diff < 2592000000) { // moins d'un mois
+    const days = Math.floor(diff / 86400000);
+    return `Il y a ${days} ${days > 1 ? "jours" : "jour"}`;
+  } else if (diff < 31536000000) { // moins d'une année
+    const months = Math.floor(diff / 2592000000);
+    return `Il y a ${months} ${months > 1 ? "mois" : "mois"}`;
+  } else { // plus d'un an
+    const years = Math.floor(diff / 31536000000);
+    return `Il y a ${years} ${years > 1 ? "années" : "année"}`;
+  }
+}

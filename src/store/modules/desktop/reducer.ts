@@ -9,9 +9,10 @@ const initialState = {
     tabs: [],
     galleryFilter: null,
     library: {
-        name: '',
+        id: 'null',
+        name: 'Nouvelle library',
         author: '',
-        description: '',
+        description: 'ceci est une description',
         templates: []
     },
     uikits: [],

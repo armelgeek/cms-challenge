@@ -131,7 +131,13 @@ var classes = {
         { label: 'video', value: 'aspect-video' }
     ],
     container: [
-        'container-none',
+        { label: 'none', value: 'container-none' },
+        { label: 'normal', value: 'container' },
+        { label: 'sm', value: 'container-sm' },
+        { label: 'md', value: 'container-md' },
+        { label: 'lg', value: 'container-lg' },
+        { label: 'xl', value: 'container-xl' },
+        { label: '2xl', value: 'container-2xl' },
         'container-sm',
         'container-md',
         'container-lg',

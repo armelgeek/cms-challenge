@@ -16,6 +16,7 @@ const BlockTree = (props: any) => {
     const setInfo = useDispatch("editor", 'setInfo');
     const editor = useGetter('editor', 'data', []);
     const current = props.current ? props.current : props.editor ? props.editor : null
+    console.log('current',current);
     return (editor.current!= null && current.id != null) ? (
 
         <div className={`flex flex-row justify-start items-center cursor-pointer`} onClick={(e) =>{
@@ -24,7 +25,7 @@ const BlockTree = (props: any) => {
             props.setCurrent(current,coords.width);
         }}>
             <div className={`${editor.current.id === current.id ? 'bg-primary-600 text-white':'bg-slate-300'} rounded-full border flex flex-row px-2 justify-between items-center capitalize`}>
-                <div className="tag-element text-sm"> {current.semantic || current.element}</div>
+                <div className="tag-element text-sm"> {current.tag=="document" ? "Body": current.title}</div>
             </div>
             <div className="icon-element mx-1"><FaAngleRight className='text-slate-400'/></div>
 
@@ -41,7 +42,7 @@ const BlockTree = (props: any) => {
                     key={'tree_' + block.id}
                 >
                     
-                    {block.blocks && (
+                    {!_.isUndefined(block.blocks) && (
                         <BlockTree current={block} setCurrent={props.setCurrent}/>
                     )}
 

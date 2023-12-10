@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'codemirror/lib/codemirror.css';
-@import 'codemirror/theme/material.css';
 @keyframes FadeAnim {
   0% {
     opacity: 0;
@@ -1034,3 +1032,7 @@ label.tree_label:after { border-bottom: 0; }
   }
 
 .tree > li:last-child:before { display: none; }
+
+.fill-current {
+  fill: white;
+}

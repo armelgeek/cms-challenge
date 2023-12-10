@@ -5,7 +5,7 @@ import BlockImage from './components/BlockImage';
 
 const BlockElement = (props: any) => {
   const editor = useGetter('editor', 'data', []);
-  const editBlockContent = useDispatch('editor','editBlockContent');
+  const editBlockContent = useDispatch('editor', 'editBlockContent');
   const [isEnter, setIsEnter] = useState(false);
   const refElement = useRef(null);
   const classes = () => {
@@ -25,10 +25,10 @@ const BlockElement = (props: any) => {
     return cls
   }
   const getStyle = (css: any) => {
-    let stl ;
-      if(css!= ''){
+    let stl;
+    if (css != '') {
 
-         stl = css.split(';').reduce((acc: any, rule: any) => {
+      stl = css.split(';').reduce((acc: any, rule: any) => {
         const [property, value] = rule.split(':');
         if (property && value) {
           acc[property.trim()] = value.trim();
@@ -57,7 +57,7 @@ const BlockElement = (props: any) => {
       ref: refElement,
       'style': getStyle(props.element.style),
       'id': props.element.id,
-      className: `relative border  ${isEnter ? 'bg-primary-100': 'bg-white'} ${classes()} ${toggleBorder()}`,
+      className: `relative border  ${isEnter ? 'bg-primary-100' : 'bg-white'} ${classes()} ${toggleBorder()}`,
       onMouseEnter: (e: any) => {
         e.stopPropagation();
         setIsEnter(true);
@@ -108,7 +108,7 @@ const BlockElement = (props: any) => {
       }
 
       case 'textarea':
-        return <textarea {...commonProps} {...editableProps}>{props.element.placeholder}</textarea>;
+        return <textarea {...commonProps}>{props.element.placeholder}</textarea>;
       case 'button':
         return <button type={props.element.tag} {...commonProps} className={'btn'}>{props.element.content}</button>;
       case 'video':
@@ -155,7 +155,9 @@ const BlockElement = (props: any) => {
         return <footer  {...commonProps}>{props.element.content}</footer>;
       case "a":
         return <a  {...commonProps}>{props.element.content}</a>;
-        
+      case "hr":
+        return <hr  {...commonProps} />;
+
       default:
         return <div {...commonProps}>{props.element.content}</div>;
     }

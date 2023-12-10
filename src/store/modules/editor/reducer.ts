@@ -1,5 +1,7 @@
+import Element from "../../../utils/tail/element";
+
 const initialState = {
-  elements: null,
+  elements: new Element().Groups(),
   pages: [],
   document: null,
   project: null,

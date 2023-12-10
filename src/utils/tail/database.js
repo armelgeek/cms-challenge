@@ -1,14 +1,6 @@
-import Dexie from 'dexie';
-export class Database extends Dexie {
-  constructor() {
-    super('database');
-    this.version(1).stores({
-      pages: '++id,name,category,description,*tags',
-      settings: 'id'
-    });
-    this.pages = this.table('pages');
-    this.settings = this.table('settings')
-  }
+
+export class Database {
+  
   async getPages(category='',limit=10,offset=0,order='name') {
     let pages = [];
     switch ( category ){

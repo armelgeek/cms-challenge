@@ -37,20 +37,9 @@ function HorizontallyBound(childDiv: any) {
 }
 
 const BlockFloating = ({ floatRef, coords }: any) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [state, setState] = useState({
-    currentIcon: '',
-    icons: [
-      { icon: 'akar-icons:edit', title: 'Edit content', action: 'BlockEditContent', filter: null },
-      { icon: 'bx:bx-heading', title: 'Heading', action: 'BlockHeading', filter: 'h' },
-      { icon: 'akar-icons:image', title: 'Image', action: 'BlockImageUrl', filter: 'image' },
-      { icon: 'akar-icons:link-chain', title: 'Link', action: 'BlockLink', filter: null }
-    ]
-  });
   const [isPopUpOpen, setPopUpOpen] = useState(false);
-
   const editor = useGetter('editor', 'data', []);
-  const [gr, setGr] = useState('Main');;
+  const [gr, setGr] = useState('structure');;
   const moveBlock = useDispatch('editor', 'moveBlock');
   const duplicateBlock = useDispatch('editor', 'duplicateBlock');
   const navigateToParent = useDispatch('editor', 'navigateToParent');
@@ -93,7 +82,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
   const showSourceCode = useCallback((el: any) => {
     getCurrentHTML();
     setShow(true, "Code source", 'sourcecode');
-  },[])
+  }, [])
   let bound = HorizontallyBound(floatRef.current);
   console.log('bound', gr);
   console.log('editor.current', editor.current);
@@ -106,14 +95,14 @@ const BlockFloating = ({ floatRef, coords }: any) => {
         left: coords.left
       }}
     >
-      <small className=" text-white  capitalize">{editor.current.element}</small>
+      <small className=" text-white  capitalize">{editor.current.tag == "document" ? "Body" : editor.current.title}</small>
       {editor.current.type === 'container' && (
 
         <div title={'Add in current UI Kit'} className="text-white  hover:text-purple-300 text-sm" onClick={() => setShow(true, "Ajouter dans le UI Kit", 'add-to-kit')}>
           <CgExtensionAdd size={18} />
         </div>
       )}
-      <div title={'Export code'} className="text-white  hover:text-purple-300 text-sm"  onClick={showSourceCode}>
+      <div title={'Export code'} className="text-white  hover:text-purple-300 text-sm" onClick={showSourceCode}>
         <FaCode size={12} />
       </div>
 
@@ -193,7 +182,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
         </div>
       ))}**/}
       {floatRef.current != null && floatRef.current.offsetHeight && isPopUpOpen && (
-        <div className="absolute w-60 h-72 border border-dark-800 rounded-tl-none rounded-lg  bg-gray-950" style={{
+        <div className="absolute w-96 h-72 border border-dark-800 rounded-tl-none rounded-lg  bg-gray-950" style={{
           top: floatRef.current.offsetHeight - 1,
           left: 0,
         }}>
@@ -202,7 +191,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
             <div className="btn-group flex flex-row my-1 rounded-sm justify-center">
               {editor.elements.map((group: any) => (
                 <React.Fragment key={Math.random().toString(36).substring(7)}>
-                  <button className={`btn font-medium rounded-full btn-xs px-2 py-2 bg-${gr === group.label ? 'primary-500 text-white' : 'slate-300 text-gray-950'}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
+                  <button title={group.label} className={`btn font-medium rounded-full btn-xs px-2 py-2 bg-${gr === group.label ? 'primary-500 text-white' : 'slate-300 text-gray-950'}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
                     {group.label}
                   </button>
 
@@ -213,7 +202,8 @@ const BlockFloating = ({ floatRef, coords }: any) => {
               {editor.elements.map((group: any) => (
                 <div key={group.label} className="flex  bg-gray-950 flex-row flex-wrap justify-center cursor-pointer" style={{ display: gr === group.label ? 'flex' : 'none' }}>
                   {group.elements.map((element: any) => (
-                    <div key={element.name} className="bg-slate-800 border border-dark-800  m-1 hover:bg-slate-700 flex w-16 flex-col items-center h-16 text-xs justify-center text-center text-slate-200 rounded hover:text-primary-600 shadow" onClick={() => createElement(element)}>
+                    <div key={element.name} className="bg-slate-800 border border-dark-800  m-1 hover:bg-slate-700 flex w-20 flex-row gap-2 items-center h-8 text-xs justify-center text-center text-slate-200 rounded hover:text-primary-600 shadow" onClick={() => createElement(element)}>
+                      {/** {element.icon} */}
                       {element.name}
                     </div>
                   ))}

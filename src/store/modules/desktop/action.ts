@@ -1,6 +1,8 @@
+import _ from 'lodash';
 import { jsonToHTML } from "../../../utils/tail/jsontohtml";
 import { removeItem } from "../../magick/reducer";
 import html2canvas from "html2canvas";
+import sdk from "../../../utils/api-sdk";
 export const TYPES = {} as any;
 for (const key of Object.keys(TYPES)) {
   TYPES[key] = `desktop__${key}`;
@@ -46,9 +48,10 @@ export const openDialog = (dialog: any) => async (dispatch: any, getState: any) 
   }
 }
 export const addTab = (payload: any) => async (dispatch: any, getState: any) => {
+
   let founded = false
   const { desktop } = getState()
-  console.log('desktop:', desktop.tabs);
+
   if (desktop.tabs.length > 0) {
     desktop.tabs.forEach((tab: any, i: number) => {
       if (tab.label === payload.label) {
@@ -116,7 +119,7 @@ export const loadUIKit = (kit: any) => async (dispatch: any, getState: any) => {
   }
 }
 
-const takeScreenShot = async (node: any) => {
+export const takeScreenShot = async (node: any) => {
   if (!node) {
     throw new Error('You should provide correct html node.')
   }
@@ -145,7 +148,7 @@ const takeScreenShot = async (node: any) => {
     .catch((e) => console.log('Error', e))
 }
 
-export const addToUKit = (blockEditor: any) => async (dispatch: any, getState: any) => {
+export const addToUKit = () => async (dispatch: any, getState: any) => {
 
   let library = getState().desktop.library;
   let page = getState().editor.page;
@@ -153,31 +156,40 @@ export const addToUKit = (blockEditor: any) => async (dispatch: any, getState: a
   let previewFrame = document.querySelector("#preview-frame");
   if (previewFrame) {
     let el = previewFrame?.contentWindow.document.querySelector('#' + current.id) as any;
-    console.log('current: ', current.id,!!el);
+
     if (!el) return null;
     try {
-      console.log('adding preview');
-      page.image = await takeScreenShot(el);
-      library.templates.forEach((template: any, index: number) => {
-        if (template.blocks_id === page.blocks_id) {
-          library.templates.splice(index, 1)
-        }
-      })
-      library.templates.push(page)
-      dispatch({
-        type: 'editor__item__info',
-        payload: {
-          prop: 'current',
-          value: null
-        }
-      })
-      dispatch({
-        type: 'desktop__item__info',
-        payload: {
-          prop: 'library',
-          value: library
-        }
-      })
+        let img = await takeScreenShot(el);
+        page.name = library.name;
+        page.description = library.description;
+        page.category = 'uikit';
+        let kit = {
+          name: page.name,
+          image: img || null,
+          description: page.description,
+          categoryId: library.id,
+          templates: JSON.stringify(page)
+        };
+      let requestObj = sdk.addToUiKit(kit).promise;
+      requestObj
+        .then((response: any) => {
+          dispatch({
+            type: 'editor__item__info',
+            payload: {
+              prop: 'current',
+              value: null
+            }
+          })
+          dispatch({
+            type: 'desktop__item__info',
+            payload: {
+              prop: 'library',
+              value: library
+            }
+          })
+        })
+
+
     } catch (e) {
       console.log('Error [add to kit]:', e);
     }
@@ -185,7 +197,6 @@ export const addToUKit = (blockEditor: any) => async (dispatch: any, getState: a
   }
 
 }
-
 
 export const exportBuild = () => async (dispatch: any, getState: any) => {
   let editor = getState().desktop;
@@ -200,5 +211,21 @@ export const exportBuild = () => async (dispatch: any, getState: any) => {
     }
   }
   console.log('export build', shw);
+
+}
+export const fetchUIKit = () => async (dispatch: any, getState: any) => {
+
+  let requestObj = sdk.fetchUIKit().promise;
+  requestObj
+    .then((response: any) => {
+      console.log('response', response);
+      dispatch({
+        type: 'desktop__item__info',
+        payload: {
+          prop: 'uikits',
+          value: response
+        }
+      })
+    })
 
 }

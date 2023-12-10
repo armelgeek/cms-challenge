@@ -195,7 +195,7 @@ export const mergeActions = (modules:any, moduleName:string) => {
       dispatch(setSuccess(""));
       dispatch(setLoading(true));
       return api
-        .get(`${apiConfig.baseURL}${path}`, params)
+        .get(`${apiConfig.baseURL}${path}`, {...params})
         .then((json:any) => {
           dispatch({
             type: `${moduleName}__fetch_items`,
@@ -239,7 +239,7 @@ export const mergeActions = (modules:any, moduleName:string) => {
       dispatch(setSuccess(""));
       dispatch(setLoading(true));
       return api
-        .get(`${apiConfig.baseURL}${path}`, params)
+        .get(`${apiConfig.baseURL}${path}`, {...params})
         .then((json) => {
           dispatch(setSelected(json));
           dispatch(setError(""));

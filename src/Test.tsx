@@ -106,14 +106,14 @@ const Test = ({ children, setCurrent }: any) => {
       </html>`
   }
   return (
-    <div className='relative'>
+    <div className='relative mt-3'>
       <div className="sticky top-0">
-        <div className="z-50 bg-white py-1 flex border flex-row justify-between item-center px-3">
+         {/**<div className="z-50 py-1 flex border flex-row justify-between item-center px-3">
           <div className="brand">
             <h3 className='text-primary-500'>WindFlow Studio</h3>
           </div>
           <div className="flex flex-row gap-3 items-center z-30">
-            <ResponsiveTest brands={devices} resizeTo={resizeTo} />
+           <ResponsiveTest brands={devices} resizeTo={resizeTo} />
             <button type="button" className="btn btn-sm bg-primary-500 text-white" onClick={toggleRotate}><FaRetweet /></button>
 
             <div className="flex flex-row gap-2">
@@ -128,43 +128,22 @@ const Test = ({ children, setCurrent }: any) => {
                 ))}
               </select>
             </div>
+              
           </div>
-          <div className="flex flex-row items-center gap-3">
-            <div className='flex flex-row  border rounded-full gap-2 p-1 border-gray-300'>
-              <div onClick={() => setMode('base')} className={`cursor-pointer badge badge-${desktop.mode == 'base' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>ALL</div>
-              <div onClick={() => setMode('sm')} className={`cursor-pointer badge badge-${desktop.mode == 'sm' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>SM</div>
-              <div onClick={() => setMode('md')} className={`cursor-pointer badge badge-${desktop.mode == 'md' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>MD</div>
-              <div onClick={() => setMode('lg')} className={`cursor-pointer badge badge-${desktop.mode == 'lg' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>LG</div>
-              <div onClick={() => setMode('xl')} className={`cursor-pointer badge badge-${desktop.mode == 'xl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>XL</div>
-              <div onClick={() => setMode('xxl')} className={`badge badge-${desktop.mode == 'xxl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>2XL</div>
-            </div>
-            <div className="undo" title='undo'>
-              <button className='btn btn-sm bg-white border'>
-                <FaUndo />
-              </button>
-            </div>
-            <div className="redo" title='redo'>
-              <button className='btn  btn-sm bg-white border'>
-                <FaRedo />
-              </button>
-            </div>
-            <div className="flex flex-row gap-1 justify-center">
-              <button className='btn bg-primary-500 btn-sm text-white' onClick={exportBuild}><FaFileExport /> Export</button>
-            </div>
-            <div className="flex flex-row gap-1 justify-center">
-              <button className='btn bg-primary-500 text-white'><FaSave /></button>
-            </div>
-            <div className="flex flex-row gap-1 justify-center">
-              <button className='btn bg-primary-500 text-white'><FaEye /></button>
-            </div>
-          </div>
-        </div>
+
+        </div>  **/}
 
         {tabs.length > 0 && <Tabs />}
+
+        {/**<div className="flex flex-row gap-1 justify-center">
+              <button className='btn bg-primary-500 btn-sm text-white' onClick={exportBuild}><FaFileExport /> Export</button>
+            </div>
+          **/}
       </div>
-      <div className="flex h-screen pt-3 px-2 space-x-8">
+      <div className="flex h-screen pt-3 px-2">
 
         <div className="w-1/6 bg-white">
+         
           <div className="flex flex-row  border  gap-2 p-1 border-gray-300 bg-gray-100">
             <div className={`uppercase cursor-pointer badge badge-${choice == 1 ? 'primary' : 'default  bg-white'} px-3 py-1 border rounded-xl`}>Templates</div>
           </div>
@@ -192,8 +171,18 @@ const Test = ({ children, setCurrent }: any) => {
             </Frame>
           </div>
         </div>
-        <div className="w-1/5  ">
-          <div className="flex flex-col">
+        <div className="w-72 ">
+        {/**<div className="flex flex-row items-center gap-3 mr-3">
+            <div className='flex flex-row  border rounded-full gap-2 p-1 border-gray-300'>
+              <div onClick={() => setMode('base')} className={`cursor-pointer badge badge-${desktop.mode == 'base' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>ALL</div>
+              <div onClick={() => setMode('sm')} className={`cursor-pointer badge badge-${desktop.mode == 'sm' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>SM</div>
+              <div onClick={() => setMode('md')} className={`cursor-pointer badge badge-${desktop.mode == 'md' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>MD</div>
+              <div onClick={() => setMode('lg')} className={`cursor-pointer badge badge-${desktop.mode == 'lg' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>LG</div>
+              <div onClick={() => setMode('xl')} className={`cursor-pointer badge badge-${desktop.mode == 'xl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>XL</div>
+              <div onClick={() => setMode('xxl')} className={`badge badge-${desktop.mode == 'xxl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>2XL</div>
+            </div>
+          </div>**/}
+          <div className="flex flex-col w-full">
             {editor.current ? (
               <>
                 <EditorSidebarTabs tab={editor.sidebar.name} setCurrentTab={setCurrentTab} />

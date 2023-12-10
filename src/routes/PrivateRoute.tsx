@@ -3,13 +3,15 @@ import { Route, Redirect, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import AppContainer from "../components/admin/AppContainer";
 import BodyWrapper from "../components/admin/BodyWrapper";
+import Navbar from "../components/header/Navbar";
+import { FaArrowLeft } from 'react-icons/fa';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
-    <AppContainer>
-      <BodyWrapper>
+    <div>
+      <Navbar />
         <Route
           {...rest}
           render={(props: any) =>
@@ -20,8 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             )
           }
         />
-      </BodyWrapper>
-    </AppContainer>
+    </div>
   );
 };
 

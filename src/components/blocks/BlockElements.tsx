@@ -35,9 +35,9 @@ const BlockElements = () => {
           <div key={group.label} className="flex  bg-slate-100 flex-row flex-wrap justify-center cursor-pointer p-2" style={{ display: gr === group.label ? 'flex' : 'none' }}>
             {group.elements.map((element:any) => (
               <div key={element.name} className="bg-white m-1 hover:bg-gray-100 flex flex-col items-center h-16 w-16 text-xs justify-center text-center text-gray-500 rounded hover:text-primary-600 shadow" onClick={() => createElement(element)}>
-                {/**<div className="material-icons text-3xl">
+                <div className="material-icons text-3xl">
                   {element.icon}
-                </div>**/}
+                </div>
                 {element.name}
               </div>
             ))}

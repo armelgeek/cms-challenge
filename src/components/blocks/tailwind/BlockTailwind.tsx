@@ -43,6 +43,7 @@ const BlockTailwind = ({ css, cid }: any) => {
         css = editor.current.css.css
     }, [])
     const updateCss = useCallback((classe: any, attr: any) => {
+        console.log('attr',attr);
         editor.current.cssObject[`${desktop.mode}`] = {
             ...editor.current.cssObject[`${desktop.mode}`],
             [attr]: classe
@@ -273,7 +274,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <TextFont
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.font}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}

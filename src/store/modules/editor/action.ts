@@ -1,7 +1,6 @@
 import Block from "../../../utils/tail/blocks";
 import Element from "../../../utils/tail/element";
-import { addTab } from "../desktop/action";
-import page from '../../../assets/pages/default.json'
+import { addTab, takeScreenShot } from "../desktop/action";
 import DOMPurify from "dompurify";
 import FileSaver from 'file-saver';
 import jp from 'jsonpath'
@@ -9,6 +8,7 @@ import { randomID } from "../../../utils/tail/db";
 import { Database } from "../../../utils/tail/database";
 import { mergeCSSObjects } from "../../../utils/functions";
 import { jsonToHTML } from "../../../utils/tail/jsontohtml";
+import sdk from "../../../utils/api-sdk";
 let db = new Database();
 export const TYPES = {} as any;
 for (const key of Object.keys(TYPES)) {
@@ -55,25 +55,7 @@ export const createEmptyBlock = () => async (dispatch: any, getState: any) => {
 }
 
 export const openDefaultBlock = () => async (dispatch: any, getState: any) => {
-  dispatch({
-    type: 'editor__item__info',
-    payload: {
-      prop: 'page',
-      value: page
-    },
-  })
-  dispatch({
-    type: 'editor__item__info',
-    payload: {
-      prop: 'document',
-      value: page.json.blocks
-    },
-  })
-  dispatch(addTab({
-    label: page.name,
-    object: page,
-    type: 'editor'
-  }))
+
 }
 
 export const setCurrentIconTab = (icon: string) => async (dispatch: any, getState: any) => {
@@ -215,10 +197,11 @@ export const updateBlockStyle = (obj: any) => async (dispatch: any, getState: an
   let css = '';
   let keys = Object.keys(obj);
   for (let index = 0; index < keys.length; index++) {
-    const key = keys[index];
+    let key = keys[index];
 
     if (key !== 'base' && obj[key] != null) {
       const values = Object.values(obj[key]);
+      if (key == 'xxl') { key = '2xl'; }
       const prefixedValues = values.map(value => `${key}:${value}`);
       css += ` ${prefixedValues.join(' ')}`;
     } else if (key === 'base' && obj[key] != null) {
@@ -285,6 +268,8 @@ export const editBlockContent = (value: any) => async (dispatch: any, getState: 
     })
   }
 }
+
+
 function updateBlockContent(blocks: any, currentId: any, modified: any) {
   blocks.forEach((block: any) => {
     if (block.id === currentId) {
@@ -295,6 +280,46 @@ function updateBlockContent(blocks: any, currentId: any, modified: any) {
     }
   });
 }
+
+export const editBlockFontContent = (value: any) => async (dispatch: any, getState: any) => {
+  let editor = getState().editor;
+  let current = getState().editor.current;
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'current.font': value
+    }
+  })
+  if (current.tag == 'document') {
+    editor.document.font = value;
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document': editor.document
+      }
+    })
+  } else {
+    updateBlockFontContent(editor.document.blocks, current.id, value);
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document.blocks': editor.document.blocks
+      }
+    })
+  }
+}
+
+function updateBlockFontContent(blocks: any, currentId: any, modified: any) {
+  blocks.forEach((block: any) => {
+    if (block.id === currentId) {
+      block.font = modified
+    }
+    if (block.blocks && block.blocks.length > 0) {
+      updateBlockFontContent(block.blocks, currentId, modified);
+    }
+  });
+}
+
 
 
 
@@ -508,42 +533,86 @@ export const updateBlockDataContent = (value: any, key: string) => async (dispat
 
 
 export const addPage = () => async (dispatch: any, getState: any) => {
-  let editor = getState().editor;
-  if (!editor.page) return
-  editor.page.id = editor.page.blocks_id
-  db.addPage(editor.page)
-  db.getPages().then(res => console.log(res))
+  /**  let editor = getState().editor;
+   if (!editor.page) return
+   editor.page.id = editor.page.blocks_id
+   let requestObj = sdk.createPage(editor.page).promise;
+   requestObj
+     .then((response: any) => {
+       createEmptyBlock()
+     })
+   db.getPages().then(res => console.log(res))**/
+
 }
-export const savePage = (payload: any) => async (dispatch: any, getState: any) => {
+export const savePage = (projectId: any) => async (dispatch: any, getState: any) => {
   if (!getState().editor.page) return
   let page = getState().editor.page;
-  try {
-    if (!page.id || !page.hasOwnProperty('id')) {
-      page.id = randomID('page')
-      const savedPage = new Promise((resolve, reject) => {
-        db.addPage(page).then(res => {
-          dispatch({
-            type: 'editor__item__info',
-            payload: {
-              prop: 'page',
-              value: page
-            },
-          });
+  if (page.category == 'uikit') {
+    console.log('page category', page);
+    //let previewFrame = document.querySelector("#preview-frame");
+    //if (previewFrame) {
+    //  console.log('page','tail-editor-hym2q',page.id);
+      //let el = previewFrame?.contentWindow.document.querySelector('#' + page.id) as any;
+      //if (!el) return null;
+      try {
+       // let img = await takeScreenShot(el);
+        let requestObj = sdk.updateUIkit({
+          id: page.id,
+          name: page.name,
+        //  image: img || null,
+          description: page.description,
+          templates: JSON.stringify(page),
+        }).promise;
+        requestObj
+          .then((response: any) => {
+            dispatch({
+              type: 'editor__item__info',
+              payload: {
+                prop: 'page',
+                value: page
+              },
+            });
+          })
+      } catch (e) {
+        console.log('Error [edit to kit]:', e);
+      }
+    //}
+  } else {
+    try {
+      if (!page.id || !page.hasOwnProperty('id')) {
+        page.id = randomID('page')
+        const savedPage = new Promise((resolve, reject) => {
+          let pag = { ...page, blocks: JSON.stringify(page.json.blocks), tags: JSON.stringify(page.tags), projectId: projectId };
+          delete pag.json;
+          let requestObj = sdk.createPage(pag).promise;
+          requestObj
+            .then((response: any) => {
+              dispatch({
+                type: 'editor__item__info',
+                payload: {
+                  prop: 'page',
+                  value: page
+                },
+              });
+            })
         })
-      })
-      return savedPage
-    } else {
-      const savedPage = new Promise((resolve, reject) => {
-        db.updatePage(page.id, page).then(res => {
-          resolve(res)
+        return savedPage
+      } else {
+        const savedPage = new Promise((resolve, reject) => {
+          let requestObj = sdk.updatePage({ ...page, blocks: JSON.stringify(page.json.blocks), tags: JSON.stringify(page.tags) }, page.id).promise;
+          requestObj
+            .then((response: any) => {
+              resolve(response)
+            })
         })
-      })
-      return savedPage
+        return savedPage
+      }
+    } catch (err) {
+      console.log('It was not possible to save the page');
+      console.log(err)
     }
-  } catch (err) {
-    console.log('It was not possible to save the page');
-    console.log(err)
   }
+
 }
 
 export const getPages = (category: any, limit = 4, offset = 0) => {
@@ -566,7 +635,9 @@ export const deletePage = () => async (dispatch: any, getState: any) => {
 }
 
 export const addKitBlockInPage = (kit: any) => async (dispatch: any, getState: any) => {
-  let importedBlock = kit.json.blocks;
+  let kitt = JSON.parse(kit.content);
+  let importedBlock = kitt.json.blocks;
+
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -579,23 +650,27 @@ export const addKitBlockInPage = (kit: any) => async (dispatch: any, getState: a
 
 
 export const editKitBlockInPage = (kit: any) => async (dispatch: any, getState: any) => {
+  let kitt = JSON.parse(kit.content)
+  kitt.name = kit.name,
+    kitt.description = kit.description;
+  kitt.id = kit.id
   dispatch({
     type: 'editor__item__info',
     payload: {
       prop: 'page',
-      value: kit
+      value: kitt
     },
   })
   dispatch({
     type: 'editor__item__info',
     payload: {
       prop: 'document',
-      value: kit.json.blocks
+      value: kitt.json.blocks
     },
   })
   dispatch(addTab({
     label: kit.name,
-    object: kit,
+    object: kitt,
     type: 'editor'
   }))
 }
@@ -736,6 +811,17 @@ export const pasteStyleBlock = () => async (dispatch: any, getState: any) => {
     }
   })
 }
+export const updateProject = (value: any, key: any) => async (dispatch: any, getState: any) => {
+  let editor = getState().editor;
+  let page = editor.page;
+  console.log('page', page);
+  let requestObj = sdk.updatePage({ ...page, [key]: value, blocks: JSON.stringify(page.json.blocks), tags: page.tags ? JSON.stringify(page.tags) : "[]" }, page.id).promise;
+  requestObj
+    .then((response: any) => {
+      console.log('project successfully updated');
+    })
+}
+
 export const importBlock = () => async (dispatch: any, getState: any) => {
 
 }
@@ -810,3 +896,4 @@ export const getCurrentHTML = () => async (dispatch: any, getState: any) => {
     }
   })
 }
+

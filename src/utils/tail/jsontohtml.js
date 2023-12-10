@@ -1,9 +1,12 @@
 export function jsonToHTML(jsonData) {
     let html = '';
     if (jsonData.type != 'document') {
-        html += `<${jsonData.element} id="${jsonData.id}"`;
+        html += `<${jsonData.element}`;
         if (jsonData.css.css != "") {
             html += ` class="${jsonData.css.css}"`;
+        }
+        if (jsonData.style != "") {
+            html += `style:"${jsonData.style}"`;
         }
         html += '>';
         if (jsonData.content) {

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { Provider } from "react-redux";
 import createStore from "../store";
+import { AuthProvider } from "./AuthProvider";
 class AppStoreProvider extends PureComponent {
   render() {
     // @ts-ignore
@@ -8,7 +9,9 @@ class AppStoreProvider extends PureComponent {
     let { store } = createStore();
     return (
       <Provider store={store}>
+        <AuthProvider>
           {children}
+        </AuthProvider>
       </Provider>
     );
   }

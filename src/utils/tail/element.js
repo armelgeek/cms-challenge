@@ -3,28 +3,29 @@
 export default class Element {
     constructor() {
         this.id = this.randomID()
+        this.title = ''
         this.blocks = []
         this.css = {
             css: "",
             container: "",
         }
-        this.cssObject={
+        this.cssObject = {
             base: null,
-            xxl:null,
+            xxl: null,
             xl: null,
             lg: null,
             md: null,
             sm: null,
             xs: null
         },
-        this.tailwind = {}
+            this.tailwind = {}
         this.font = ""
         this.style = ""
         this.content = ""
         this.description = ""
         this.categories = []
         this.data = {
-          
+
         }
         this.link = ''
         this.anchor = ''
@@ -39,29 +40,70 @@ export default class Element {
     }
 
     randomID() {
-        return 'tail-editor-' + Math.random().toString(36).substr(2, 5)
+        return 'windflow-' + Math.random().toString(36).substr(2, 5)
     }
 
     Groups() {
         return [
             {
-                label: 'main',
-                elements:[
+                label: 'structure',
+                elements: [
+                    {
+                        id: 'section',
+                        name: 'Section',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill-opacity="0.15" points="1 3 1 9 11 9 11 3"></polygon><path d="M12,4 L12,8 C12,9.1045695 11.1045695,10 10,10 L2,10 C0.8954305,10 -1.09144673e-11,9.1045695 -1.09139364e-11,8 L-1.09139364e-11,4 C-1.09140717e-11,2.8954305 0.8954305,2 2,2 L10,2 C11.1045695,2 12,2.8954305 12,4 Z M10,3 L2,3 C1.44771525,3 1,3.44771525 1,4 L1,8 C1,8.55228475 1.44771525,9 2,9 L10,9 C10.5522847,9 11,8.55228475 11,8 L11,4 C11,3.44771525 10.5522847,3 10,3 Z" fill-rule="nonzero"></path><path d="M0,11 L12,11 L12,12 L0,12 Z M0,0 L12,0 L12,1 L0,1 Z" fill-opacity="0.5"></path></svg>',
+                    },
+                    {
+                        id: 'container',
+                        name: 'Container',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon fill-opacity="0.15" points="3 1 3 11 9 11 9 1"></polygon><path d="M10,2 L10,10 C10,11.1045695 9.1045695,12 8,12 L4,12 C2.8954305,12 2,11.1045695 2,10 L2,2 C2,0.8954305 2.8954305,-4.63227689e-16 4,0 L8,0 C9.1045695,-2.02906125e-16 10,0.8954305 10,2 Z M8,1 L4,1 C3.44771525,1 3,1.44771525 3,2 L3,10 C3,10.5522847 3.44771525,11 4,11 L8,11 C8.55228475,11 9,10.5522847 9,10 L9,2 C9,1.44771525 8.55228475,1 8,1 Z" fill-rule="nonzero"></path><path d="M11,0 L12,0 L12,12 L11,12 Z M0,0 L1,0 L1,12 L0,12 Z" fill-opacity="0.5"></path></svg>',
+                    },
+                    {
+                        id: 'block',
+                        name: 'Block',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M2.5,1 L9.5,1 C10.3284271,1 11,1.67157288 11,2.5 L11,9.5 C11,10.3284271 10.3284271,11 9.5,11 L2.5,11 C1.67157288,11 1,10.3284271 1,9.5 L1,2.5 C1,1.67157288 1.67157288,1 2.5,1 Z" fill-opacity="0.15"></path><path d="M9.5,0 L2.5,0 C1.11928813,0 0,1.11928813 0,2.5 L0,9.5 C0,10.8807119 1.11928813,12 2.5,12 L9.5,12 C10.8807119,12 12,10.8807119 12,9.5 L12,2.5 C12,1.11928813 10.8807119,0 9.5,0 Z M2.5,1 L9.5,1 C10.3284271,1 11,1.67157288 11,2.5 L11,9.5 C11,10.3284271 10.3284271,11 9.5,11 L2.5,11 C1.67157288,11 1,10.3284271 1,9.5 L1,2.5 C1,1.67157288 1.67157288,1 2.5,1 Z"></path></svg>',
+                    },
+                    {
+                        id: 'separator',
+                        name: 'Separator',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect x="0" y="5.5" width="12" height="1"></rect><path d="M11,8 L11,12 L1,12 L1,8 L11,8 Z M11,0 L11,4 L1,4 L1,0 L11,0 Z" opacity="0.15"></path></svg>'
+                    },
+                    {
+                        id: 'columns',
+                        name: 'Columns',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M10,6.5 C11.1045695,6.5 12,7.3954305 12,8.5 L12,10 C12,11.1045695 11.1045695,12 10,12 L2,12 C0.8954305,12 0,11.1045695 0,10 L0,8.5 C0,7.3954305 0.8954305,6.5 2,6.5 L10,6.5 Z M10,7.5 L2,7.5 C1.44771525,7.5 1,7.94771525 1,8.5 L1,10 C1,10.5522847 1.44771525,11 2,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,8.5 C11,7.94771525 10.5522847,7.5 10,7.5 Z M10,0 C11.1045695,0 12,0.8954305 12,2 L12,3.5 C12,4.6045695 11.1045695,5.5 10,5.5 L2,5.5 C0.8954305,5.5 0,4.6045695 0,3.5 L0,2 C0,0.8954305 0.8954305,0 2,0 L10,0 Z M10,1 L2,1 C1.44771525,1 1,1.44771525 1,2 L1,3.5 C1,4.05228475 1.44771525,4.5 2,4.5 L10,4.5 C10.5522847,4.5 11,4.05228475 11,3.5 L11,2 C11,1.44771525 10.5522847,1 10,1 Z" transform="translate(6, 6) rotate(90) translate(-6, -6)"></path><path d="M10,7.5 L2,7.5 C1.44771525,7.5 1,7.94771525 1,8.5 L1,10 C1,10.5522847 1.44771525,11 2,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,8.5 C11,7.94771525 10.5522847,7.5 10,7.5 Z M10,1 L2,1 C1.44771525,1 1,1.44771525 1,2 L1,3.5 C1,4.05228475 1.44771525,4.5 2,4.5 L10,4.5 C10.5522847,4.5 11,4.05228475 11,3.5 L11,2 C11,1.44771525 10.5522847,1 10,1 Z" fill-opacity="0.15" transform="translate(6, 6) rotate(90) translate(-6, -6)"></path></svg>'
+                    },
+                    {
+                        id: 'rows',
+                        name: 'Rows',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M10,6.5 C11.1045695,6.5 12,7.3954305 12,8.5 L12,10 C12,11.1045695 11.1045695,12 10,12 L2,12 C0.8954305,12 0,11.1045695 0,10 L0,8.5 C0,7.3954305 0.8954305,6.5 2,6.5 L10,6.5 Z M10,7.5 L2,7.5 C1.44771525,7.5 1,7.94771525 1,8.5 L1,10 C1,10.5522847 1.44771525,11 2,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,8.5 C11,7.94771525 10.5522847,7.5 10,7.5 Z M10,0 C11.1045695,0 12,0.8954305 12,2 L12,3.5 C12,4.6045695 11.1045695,5.5 10,5.5 L2,5.5 C0.8954305,5.5 0,4.6045695 0,3.5 L0,2 C0,0.8954305 0.8954305,0 2,0 L10,0 Z M10,1 L2,1 C1.44771525,1 1,1.44771525 1,2 L1,3.5 C1,4.05228475 1.44771525,4.5 2,4.5 L10,4.5 C10.5522847,4.5 11,4.05228475 11,3.5 L11,2 C11,1.44771525 10.5522847,1 10,1 Z"></path><path d="M10,7.5 L2,7.5 C1.44771525,7.5 1,7.94771525 1,8.5 L1,10 C1,10.5522847 1.44771525,11 2,11 L10,11 C10.5522847,11 11,10.5522847 11,10 L11,8.5 C11,7.94771525 10.5522847,7.5 10,7.5 Z M10,1 L2,1 C1.44771525,1 1,1.44771525 1,2 L1,3.5 C1,4.05228475 1.44771525,4.5 2,4.5 L10,4.5 C10.5522847,4.5 11,4.05228475 11,3.5 L11,2 C11,1.44771525 10.5522847,1 10,1 Z" fill-opacity="0.15"></path></svg>'
+                    }, {
+                        id: 'grid',
+                        name: 'Grid',
+                        icon: '<svg width="12" height="12" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="currentColor" fill-opacity=".15" d="M11 8v3H8V8h3zM5 8v3H2V8h3zm0-6v3H2V2h3zm6 0v3H8V2h3z"></path><path fill="currentColor" d="M12 7v4.5a.5.5 0 01-.5.5H7V7h5zM6 7v5H1.5a.5.5 0 01-.5-.5V7h5zm5 1H8v3h3V8zM5 8H2v3h3V8zm1-7v5H1V1.5a.5.5 0 01.5-.5H6zm5.5 0a.5.5 0 01.5.5V6H7V1h4.5zM5 2H2v3h3V2zm6 0H8v3h3V2z"></path></svg>'
+                    }
+                ]
+            },
+            {
+
+                label: 'content',
+                elements: [
                     {
                         id: 'heading',
                         name: 'Heading',
-                        icon: 'title',
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M2,0 L2,6 L10,6 L10,0 L11,0 L11,12 L10,12 L10,7 L2,7 L2,12 L1,12 L1,0 L2,0 Z"></path></svg>',
                     },
                     {
                         id: 'paragraph',
                         name: 'Paragraph',
-                        icon: 'subject'
+                        icon: '<svg width="12" height="12" class="fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M0,10 L6,10 L6,11 L0,11 L0,10 Z M0,1 L12,1 L12,2 L0,2 L0,1 Z M0,4 L12,4 L12,5 L0,5 L0,4 Z M0,7 L12,7 L12,8 L0,8 L0,7 Z"></path></svg>'
                     },
                     {
-                        id: 'inlinetext',
-                        name: 'Inline Text',
-                        icon: 'text_format'
+                        id: 'richtext',
+                        name: 'RichText',
+                        icon: '<svg width="12" height="12" viewBox="0 0 12 12" class="fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect opacity="0.3" x="1" y="1" width="5" height="5"></rect><path d="M5.5,11 C5.77614237,11 6,11.2238576 6,11.5 C6,11.7761424 5.77614237,12 5.5,12 L0.5,12 C0.223857625,12 3.38176876e-17,11.7761424 0,11.5 C-3.38176876e-17,11.2238576 0.223857625,11 0.5,11 L5.5,11 Z M11.5,8 C11.7761424,8 12,8.22385763 12,8.5 C12,8.77614237 11.7761424,9 11.5,9 L0.5,9 C0.223857625,9 3.38176876e-17,8.77614237 0,8.5 C-3.38176876e-17,8.22385763 0.223857625,8 0.5,8 L11.5,8 Z M6,0 C6.55228475,2.78052031e-16 7,0.44771525 7,1 L7,6 C7,6.55228475 6.55228475,7 6,7 L1,7 C0.44771525,7 4.47140469e-16,6.55228475 0,6 L0,1 C-1.78657678e-16,0.44771525 0.44771525,-9.5692398e-18 1,0 L6,0 Z M11.5,5 C11.7761424,5 12,5.22385763 12,5.5 C12,5.77614237 11.7761424,6 11.5,6 L8.5,6 C8.22385763,6 8,5.77614237 8,5.5 C8,5.22385763 8.22385763,5 8.5,5 L11.5,5 Z M4.492,3.915 L1.813,6 L6,6 L6,5.248 L4.492,3.915 Z M6,1 L1,1 L1,5.365 L4.53374238,2.61663017 L6,3.914 L6,1 Z M11.5,2 C11.7761424,2 12,2.22385763 12,2.5 C12,2.77614237 11.7761424,3 11.5,3 L8.5,3 C8.22385763,3 8,2.77614237 8,2.5 C8,2.22385763 8.22385763,2 8.5,2 L11.5,2 Z"></path></svg>'
                     },
+                
                     {
                         id: 'span',
                         name: 'Span',
@@ -82,6 +124,13 @@ export default class Element {
                         name: 'Link',
                         icon: 'link'
                     },
+                ]
+            },
+            {
+
+                label: 'main',
+                elements: [
+                    
                     {
                         id: 'image',
                         name: 'Image',
@@ -109,11 +158,7 @@ export default class Element {
 
                 label: 'containers',
                 elements: [
-                    {
-                        id: 'grid',
-                        name: 'Grid',
-                        icon: 'grid_on'
-                    },
+
                     {
                         id: 'flexbox',
                         name: 'Flexbox',
@@ -124,16 +169,7 @@ export default class Element {
                         name: 'Empty Container',
                         icon: 'highlight_alt'
                     },
-                    {
-                        id: 'containerwith2div',
-                        name: 'Container With 2 Div',
-                        icon: 'highlight_alt'
-                    },
-                    {
-                        id: 'containerwith2divunequalsdivs',
-                        name: 'Container With 2 Div unequals divs',
-                        icon: 'highlight_alt'
-                    },
+                   
                     {
                         id: 'ul',
                         name: 'List',
@@ -216,36 +252,44 @@ export default class Element {
 
 
     createElement(element, options) {
-        return element === 'grid' ? this.Grid(options) :
-            element === 'flexbox' ? this.Flexbox(options) :
-                element === 'heading' ? this.Heading(options) :
-                    element === 'paragraph' ? this.Paragraph() :
-                        element === 'inlinetext' ? this.InlineText() :
-                            element === 'Sspan' ? this.Span() :
-                                element === 'blockquote' ? this.Blockquote() :
-                                    element === 'code' ? this.Code() :
-                                        element === 'image' ? this.Image() :
-                                            element === 'video' ? this.Video() :
-                                                    element === 'youtube' ? this.YTVideo() :
-                                                                    element === 'download' ? this.Download() :
-                                                                        element === 'form' ? this.Form() :
-                                                                            element === 'inputtext' ? this.InputText() :
-                                                                                element === 'email' ? this.InputEmail() :
-                                                                                    element === 'textarea' ? this.InputTextarea() :
-                                                                                        element === 'checkbox' ? this.InputCheckbox() :
-                                                                                            element === 'number' ? this.InputNumber() :
-                                                                                                element === 'hidden' ? this.InputHidden() :
-                                                                                                    element === 'submit' ? this.InputSubmit() :
-                                                                                                        element === 'reset' ? this.InputReset() :
-                                                                                                            element === 'button' ? this.Button() :
-                                                                                                                element === 'emptycontainer' ? this.EmptyContainer(options) :
-                                                                                                                    element === 'containerwith2div' ? this.ContainerWith2Div(options) :
-                                                                                                                        element === 'containerwith2divunequalsdivs' ? this.ContainerWith2DivUnequalsDivs(options) :
-                                                                                                                            element === 'ul' ? this.Ul(options) :
-                                                                                                                                element === 'li' ? this.Li(options) :
-                                                                                                                                    element === 'ol' ? this.Ol(options) :
-                                                                                                                                    element === 'link' ? this.Link(options) : null
+        switch (element) {
+            case 'section': return this.Section(options);
+            case 'container': return this.Container(options);
+            case 'block': return this.Block(options);
+            case 'separator': return this.Separator(options);
+            case 'columns': return this.Columns(options);
+            case 'rows': return this.Rows(options);
+            case 'grid': return this.Grid(options);
+            case 'flexbox': return this.Flexbox(options);
+            case 'heading': return this.Heading(options);
+            case 'paragraph': return this.Paragraph();
+            case 'richtext': return this.RichText();
+            case 'Sspan': return this.Span();
+            case 'blockquote': return this.Blockquote();
+            case 'code': return this.Code();
+            case 'image': return this.Image();
+            case 'video': return this.Video();
+            case 'youtube': return this.YTVideo();
+            case 'download': return this.Download();
+            case 'form': return this.Form();
+            case 'inputtext': return this.InputText();
+            case 'email': return this.InputEmail();
+            case 'textarea': return this.InputTextarea();
+            case 'checkbox': return this.InputCheckbox();
+            case 'number': return this.InputNumber();
+            case 'hidden': return this.InputHidden();
+            case 'submit': return this.InputSubmit();
+            case 'reset': return this.InputReset();
+            case 'button': return this.Button();
+            case 'emptycontainer': return this.EmptyContainer(options);
+            case 'ul': return this.Ul(options);
+            case 'li': return this.Li(options);
+            case 'ol': return this.Ol(options);
+            case 'link': return this.Link(options);
+            default: return null;
+        }
     }
+
 
     setIcon(icon) {
         this.icon = icon
@@ -277,21 +321,171 @@ export default class Element {
         return this
     }
 
-
-
-    Grid() {
+    Container() {
         this.blocks = []
         this.type = 'container'
-        this.tag = 'grid'
-        this.css.css = 'grid'
+        this.tag = 'container'
+        this.title = 'Container'
+        this.css.css = 'container'
         this.element = 'div'
         this.cssObject = {
-            base:{
-                display: 'grid'
+            base: {
+                container: 'container'
             },
             lg: null,
             md: null,
             sm: null,
+            xs: null
+        }
+        return this
+    }
+    Section() {
+        this.blocks = []
+        this.type = 'container'
+        this.title = 'Section'
+        this.tag = 'section'
+        this.css.css = 'pt-5 pb-5 w-full'
+        this.element = 'section'
+        this.cssObject = {
+            base: {
+                paddingTop: 'pt-5',
+                paddingBottom: 'pb-5',
+                width: 'w-full'
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.content = 'Empty section'
+        return this
+    }
+    Block(content = 'Empty Block') {
+        this.blocks = []
+        this.title = 'Block',
+            this.type = 'container'
+        this.title = 'Block'
+        this.tag = 'block'
+        this.css.css = 'w-full'
+        this.element = 'div'
+        this.cssObject = {
+            base: {
+                width: 'w-full',
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.content = content
+        return this
+    }
+
+
+    Grid() {
+        this.blocks = [
+            {
+                id: this.randomID(),
+                blocks: [],
+                title: 'Block',
+                type: 'container',
+                tag: 'block',
+                css: {
+                    css: 'w-full'
+                },
+                element: 'div',
+                cssObject: {
+                    base: {
+                        width: 'w-full',
+                    },
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: 'Empty Block 1'
+            },
+            {
+                id: this.randomID(),
+                blocks: [],
+                title: 'Block',
+                type: 'container',
+                tag: 'block',
+                css: {
+                    css: 'w-full'
+                },
+                element: 'div',
+                cssObject: {
+                    base: {
+                        width: 'w-full',
+                    },
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: 'Empty Block 2'
+            },
+            {
+                id: this.randomID(),
+                blocks: [],
+                title: 'Block',
+                type: 'container',
+                tag: 'block',
+                css: {
+                    css: 'w-full'
+                },
+                element: 'div',
+                cssObject: {
+                    base: {
+                        width: 'w-full',
+                    },
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: 'Empty Block 3'
+            },
+            {
+                id: this.randomID(),
+                blocks: [],
+                title: 'Block',
+                type: 'container',
+                tag: 'block',
+                css: {
+                    css: 'w-full'
+                },
+                element: 'div',
+                cssObject: {
+                    base: {
+                        width: 'w-full',
+                    },
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: 'Empty Block 4'
+            }
+        ]
+        this.type = 'container'
+        this.title = 'Grid'
+        this.tag = 'grid'
+        this.css.css = 'grid gap-3 grid-cols-1 sm:grid-cols-2 w-full'
+        this.element = 'div'
+        this.cssObject = {
+            base: {
+                display: 'grid',
+                gap: 'gap-3',
+                width: 'w-full',
+                gridtemplatecolumn: 'grid-cols-1'
+            },
+            lg: null,
+            md: null,
+            sm: {
+                gridtemplatecolumn: 'grid-cols-2'
+            },
             xs: null
         }
         return this
@@ -310,10 +504,11 @@ export default class Element {
     Flexbox(options = { direction: null, colspan: null }) {
         this.blocks = []
         this.type = 'container'
+        this.title = 'Flex'
         this.tag = 'flex'
         this.css.css = 'flex'
         this.cssObject = {
-            base:{
+            base: {
                 flex: 'flex',
                 flexdirection: options.direction ? ' flex-' + options.direction : 'flex-row',
                 colspan: options.colspan ? ' col-span-' + options.colspan : ''
@@ -323,19 +518,21 @@ export default class Element {
             sm: null,
             xs: null
         },
-        this.css.css += options.direction ? ' flex-' + options.direction : ''
+            this.css.css += options.direction ? ' flex-' + options.direction : ''
         this.css.css += options.colspan ? ' col-span-' + options.colspan : ''
         this.element = 'div'
         return this
     }
     EmptyContainer(options = { direction: null, colspan: null }) {
-        this.id= this.randomID()
+        this.id = this.randomID()
         this.blocks = []
+
         this.type = 'container'
+        this.title = 'Empty Container'
         this.css.css = 'flex w-full h-80 justify-center items-center'
         this.tag = 'flex'
         this.cssObject = {
-            base:{
+            base: {
                 flex: 'flex',
                 w: 'w-full',
                 h: 'h-80',
@@ -353,171 +550,6 @@ export default class Element {
     }
 
 
-    ContainerWith2Div(options = { direction: null, colspan: null }) {
-        this.id= this.randomID()
-        this.blocks = [{
-            id:this.randomID(),
-            type:'container',
-            css:{
-                css:'flex w-full h-full justify-center items-center md:w-1/2'
-            },
-            tag:'flex',
-            cssObject:{
-                base:{
-                    flex: 'flex',
-                    w: 'w-full',
-                    h: 'h-full',
-                    justifycenter: 'justify-center',
-                    itemscenter: 'items-center'
-                },
-                lg: null,
-                md: {
-                    w: 'md:w-1/2'
-                },
-                sm: null,
-                xs: null
-            },
-            element: 'div',
-            content: 'Content 1'
-        },{
-            id:this.randomID(),
-            type:'container',
-            css:{
-                css:'flex w-full h-full justify-center items-center md:w-1/2'
-            },
-            tag:'flex',
-            cssObject:{
-                base:{
-                    flex: 'flex',
-                    w: 'w-full',
-                    h: 'h-full',
-                    justifycenter: 'justify-center',
-                    itemscenter: 'items-center'
-                },
-                lg: null,
-                md: {
-                    w: 'md:w-1/2'
-                },
-                sm: null,
-                xs: null
-            },
-            element: 'div',
-            content: 'Content 2'
-        }]
-        this.type = 'container'
-        this.css.css = 'flex w-full h-80 justify-center items-center mt-0 mr-auto mb-0 ml-auto flex-wrap'
-        this.tag = 'flex'
-        this.cssObject = {
-            base:{
-                flex: 'flex',
-                w: 'w-full',
-                h: 'h-80',
-                mt: 'mt-0',
-                mr: 'mr-auto',
-                mb: 'mb-0',
-                ml: 'ml-auto',
-                flexWrap: 'flex-wrap',
-                justifycenter: 'justify-center',
-                itemscenter: 'items-center'
-            },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
-        }
-        this.element = 'div'
-        //this.content = 'Container with preset height of 20rem (h-80) and item centered. Drag elements from the left sidebar into this container'
-        return this
-    }
-
-
-    ContainerWith2DivUnequalsDivs(options = { direction: null, colspan: null }) {
-        this.id = this.randomID()
-        this.blocks = [{
-            id:this.randomID(),
-            type:'container',
-            css:{
-                css:'flex w-full h-full justify-center items-center md:w-1/3'
-            },
-            tag:'flex',
-            cssObject:{
-                base:{
-                    flex: 'flex',
-                    w: 'w-full',
-                    h: 'h-full',
-                    justifycenter: 'justify-center',
-                    itemscenter: 'items-center'
-                },
-                lg: null,
-                md: {
-                    w: 'md:w-1/3'
-                },
-                sm: null,
-                xs: null
-            },
-            element: 'div',
-            content: 'Content 1'
-        },{
-            id:this.randomID(),
-            type:'container',
-            css:{
-                css:'flex w-full h-full justify-center items-center md:w-2/3'
-            },
-            tag:'flex',
-            cssObject:{
-                base:{
-                    flex: 'flex',
-                    w: 'w-full',
-                    h: 'h-full',
-                    justifycenter: 'justify-center',
-                    itemscenter: 'items-center'
-                },
-                lg: null,
-                md: {
-                    w: 'md:w-2/3'
-                },
-                sm: null,
-                xs: null
-            },
-            element: 'div',
-            content: 'Content 2'
-        }]
-        this.type = 'container'
-        this.css.css = 'flex w-full h-80 justify-center items-center mt-0 mr-auto mb-0 ml-auto flex-wrap'
-        this.tag = 'flex'
-        this.cssObject = {
-            base:{
-                flex: 'flex',
-                w: 'w-full',
-                h: 'h-80',
-                mt: 'mt-0',
-                mr: 'mr-auto',
-                mb: 'mb-0',
-                ml: 'ml-auto',
-                flexWrap: 'flex-wrap',
-                justifycenter: 'justify-center',
-                itemscenter: 'items-center'
-            },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
-        }
-        this.element = 'div'
-        //this.content = 'Container with preset height of 20rem (h-80) and item centered. Drag elements from the left sidebar into this container'
-        return this
-    }
-    Slider() {
-        this.blocks = []
-        this.type = 'slider'
-        this.tag = 'flex'
-        this.element = 'slider'
-        this.label = 'Slider'
-        this.icon = 'video_library'
-        this.css.css = 'w-full h-1/3'
-        this.css.container = 'flex flex-col'
-        return this
-    }
 
     Heading(level = 1) {
         this.level = level
@@ -525,25 +557,18 @@ export default class Element {
         this.content = 'Heading ' + level
         this.icon = 'title'
         this.editable = true
+
         this.dialog = 'md:w-40'
+        this.title = 'Heading ' + level
         return this
     }
-
     Paragraph() {
         this.element = 'p'
-        this.label = 'Rich Text'
+        this.label = 'Paragraph'
         this.icon = 'subject'
         this.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac tortor dignissim convallis aenean. Imperdiet massa tincidunt nunc pulvinar.'
         this.editable = true
-        return this
-    }
-
-    InlineText() {
-        this.element = 'div'
-        this.label = 'Inline text'
-        this.icon = 'text_snippet'
-        this.content = 'Inline text'
-        this.editable = true
+        this.title = 'Paragraph'
         return this
     }
 
@@ -553,13 +578,16 @@ export default class Element {
         this.icon = 'text_format'
         this.content = 'Simple text'
         this.editable = true
+        this.title = 'Simple text'
         return this
     }
 
     Blockquote() {
+
         this.element = 'blockquote'
         this.content = 'This is a quote'
         this.editable = true
+        this.title = 'Blockquote'
         return this
     }
 
@@ -567,6 +595,7 @@ export default class Element {
         this.element = 'pre'
         this.content = 'Code goes here'
         this.editable = true
+        this.title = 'Code'
         return this
     }
 
@@ -576,6 +605,7 @@ export default class Element {
         this.icon = 'insert_photo'
         this.content = ''
         this.css.css = 'w-40 h-auto'
+        this.title = 'Image'
         return this
     }
 
@@ -587,6 +617,7 @@ export default class Element {
         this.icon = 'movie'
         this.content = ''
         this.type = 'video'
+        this.title = 'Video'
         this.src = ''
         this.options = {
             controls: true,
@@ -599,6 +630,7 @@ export default class Element {
     YTVideo() {
         this.src = "https://youtube.com/embed/"
         this.label = 'Youtube Video'
+        this.title = 'Youtube Video'
         this.type = 'video'
         this.element = 'iframe'
         return this
@@ -606,6 +638,7 @@ export default class Element {
 
     VimeoVideo() {
         this.src = "https://player.vimeo.com/video/"
+        this.title = 'Vimeo Video'
         this.label = 'Vimeo Video'
         this.type = 'video'
         this.element = 'iframe'
@@ -614,6 +647,7 @@ export default class Element {
 
     Icon() {
         this.label = 'Material Icon'
+        this.title = 'Material Icon'
         this.data = { icon: 'home' }
         this.tag = "micon"
         this.css.css = 'text-xl'
@@ -625,6 +659,7 @@ export default class Element {
 
     Iconify() {
         this.label = 'Iconify'
+        this.title = 'Icon'
         this.data = { icon: 'fa:home' }
         this.tag = "iconify"
         this.css.css = 'text-2xl'
@@ -636,6 +671,7 @@ export default class Element {
 
     Download() {
         this.label = 'File'
+        this.title = 'Download File'
         this.icon = 'download'
         this.content = 'Download'
         this.type = 'file'
@@ -646,6 +682,7 @@ export default class Element {
 
     Form() {
         this.type = 'container'
+        this.title = 'form'
         this.blocks = []
         this.tag = 'form'
         this.element = 'form'
@@ -657,19 +694,20 @@ export default class Element {
 
     inputElement() {
         this.element = 'input'
+        this.title = 'input'
         this.css.css = 'input',
-            this.cssObject={
+            this.cssObject = {
                 base: {
                     input: 'input',
                 },
-                xxl:null,
+                xxl: null,
                 xl: null,
                 lg: null,
                 md: null,
                 sm: null,
                 xs: null
             },
-        this.placeholder = ''
+            this.placeholder = ''
         this.content = ''
         this.value = ''
         this.icon = 'input'
@@ -679,6 +717,7 @@ export default class Element {
     InputText() {
         this.inputElement()
         this.type = 'text'
+        this.title = 'input text'
         this.tag = 'input'
         this.placeholder = 'Input'
         return this
@@ -686,6 +725,7 @@ export default class Element {
 
     InputEmail() {
         this.inputElement()
+        this.title = 'input email'
         this.type = 'email'
         this.tag = 'email'
         this.placeholder = 'Email'
@@ -694,6 +734,7 @@ export default class Element {
 
     InputNumber() {
         this.inputElement()
+        this.title = 'input number'
         this.tag = 'number'
         this.type = 'number'
         return this
@@ -701,6 +742,7 @@ export default class Element {
 
     InputHidden() {
         this.inputElement()
+        this.title = 'input hidden'
         this.tag = 'hidden'
         this.type = 'hidden'
         return this
@@ -708,6 +750,7 @@ export default class Element {
 
     InputCheckbox() {
         this.inputElement()
+        this.title = 'checkbox'
         this.tag = 'checkbox'
         this.type = 'checkbox'
         return this
@@ -715,8 +758,9 @@ export default class Element {
 
     InputTextarea() {
         this.element = 'textarea'
+        this.title = 'textarea'
         this.tag = 'textarea'
-        this.css.css  = 'textarea'
+        this.css.css = 'textarea'
         this.cssObject = {
             textarea: 'textarea'
         }
@@ -727,6 +771,7 @@ export default class Element {
 
     InputSubmit() {
         this.element = 'button'
+        this.title = 'input submit'
         this.tag = 'submit'
         this.type = 'button'
         this.value = 'Submit'
@@ -736,6 +781,7 @@ export default class Element {
 
     InputReset() {
         this.InputSubmit()
+        this.title = 'input reset'
         this.tag = 'reset'
         this.value = 'Reset'
         this.content = 'Reset'
@@ -745,14 +791,15 @@ export default class Element {
     Button() {
         this.type = 'button'
         this.element = 'button'
+        this.title = 'button'
         this.tag = 'button'
         this.css.css = 'btn btn-primary'
-        this.cssObject={
+        this.cssObject = {
             base: {
                 btn: 'btn',
                 btnPrimary: 'btn-primary',
             },
-            xxl:null,
+            xxl: null,
             xl: null,
             lg: null,
             md: null,
@@ -766,73 +813,13 @@ export default class Element {
     Ul() {
         this.type = 'container'
         this.style = ''
-        this.blocks = [{
-            id: this.randomID(),
-            type:'container',
-            blocks:[],
-            tag:'element',
-            css: {
-                css: ''
-            },
-            style: '',
-            cssObject:{
-                base:null,
-                xxl:null,
-                xl: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
-            },
-            element:'li',
-            content:'List item 1'
-        },{
-            id: this.randomID(),
-            type:'container',
-            blocks:[],
-            tag:'element',
-            css: {
-                css: ''
-            },
-            style: '',
-            cssObject:{
-                base:null,
-                xxl:null,
-                xl: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
-            },
-            element:'li',
-            content:'List item 2'
-        },{
-            id: this.randomID(),
-            type:'container',
-            blocks:[],
-            tag:'element',
-            css: {
-                css: ''
-            },
-            style: '',
-            cssObject:{
-                base:null,
-                xxl:null,
-                xl: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
-            },
-            element:'li',
-            content:'List item 3'
-        }]
-        this.id= this.randomID()
+        this.title = 'List'
+        this.blocks = [this.Li(), this.Li(), this.Li()]
         this.tag = 'container'
         this.css.css = ''
-        this.cssObject={
+        this.cssObject = {
             base: null,
-            xxl:null,
+            xxl: null,
             xl: null,
             lg: null,
             md: null,
@@ -843,66 +830,289 @@ export default class Element {
         this.content = ''
         return this
     }
-    Li(){
-        this.id=this.randomID()
-        this.type='container'
-        this.style= ''
-        this.blocks=[]
-        this.tag='element'
-        this.css.css= ''
-        this.cssObject={
-                base:null,
-                xxl:null,
-                xl: null,
+    Li() {
+        this.type = 'container'
+        this.title = 'Unordered List Item'
+        this.style = ''
+        this.blocks = []
+        this.tag = 'element'
+        this.css.css = ''
+        this.cssObject = {
+            base: null,
+            xxl: null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'li'
+        this.content = 'Unordered list item'
+        return this;
+    }
+    Ol() {
+        this.type = 'container'
+        this.title = 'Ordered List Item'
+        this.style = ''
+        this.blocks = []
+        this.tag = 'element'
+        this.css.css = ''
+        this.cssObject = {
+            base: null,
+            xxl: null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'ol'
+        this.content = 'Ordered list item'
+        return this;
+    }
+    Link() {
+        this.type = 'element'
+        this.title = 'Link'
+        this.style = ''
+        this.blocks = []
+        this.tag = 'element'
+        this.css.css = ''
+        this.cssObject = {
+            base: null,
+            xxl: null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'a'
+        this.content = 'Link'
+        return this;
+    }
+    Separator() {
+        this.title = 'Horizontal line',
+            this.type = 'element'
+        this.style = ''
+        this.blocks = []
+        this.tag = 'element'
+        this.css.css = 'mt-5 mb-5 border-black border-opacity-3 border-t-1 w-full'
+        this.cssObject = {
+            base: {
+                marginTop: 'mt-5',
+                borderColor: 'border-black',
+                borderOpacity: 'border-opacity-3',
+                marginBottom: 'mb-5',
+                borderTop: 'border-t-1',
+                width: 'w-full'
+            },
+            xxl: null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'hr'
+        this.content = ''
+        return this;
+    }
+    Columns() {
+        this.type = 'container'
+        this.title = 'Columns'
+        this.style = ''
+        this.blocks = [{
+            id: this.randomID(),
+            blocks: [],
+            title: 'Block',
+            type: 'container',
+            tag: 'block',
+            css: {
+                css: 'w-full'
+            },
+            element: 'div',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
                 lg: null,
                 md: null,
                 sm: null,
                 xs: null
-        }
-        this.element='li'
-        this.content='Unordered list item'
-        return this;
-    }
-    Ol(){
-        this.id = this.randomID()
-        this.type='container'
-        this.style= ''
-        this.blocks=[]
-        this.tag='element'
-        this.css.css= ''
-        this.cssObject={
-            base:null,
-            xxl:null,
+            },
+            content: 'Empty container 1'
+        }, {
+            id: this.randomID(),
+            blocks: [],
+            title: 'Block',
+            type: 'container',
+            tag: 'block',
+            css: {
+                css: 'w-full'
+            },
+            element: 'div',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Empty container 2'
+        }]
+        this.tag = 'container'
+        this.css.css = 'flex flex-col gap-5 w-full'
+        this.cssObject = {
+            base: {
+                display: 'flex',
+                gap: 'gap-5',
+                flexdirection: 'flex-col',
+                width: 'w-full'
+            },
+            xxl: null,
             xl: null,
             lg: null,
             md: null,
             sm: null,
             xs: null
         }
-        this.element='ol'
-        this.content='Ordered list item'
-        return this;
+        this.element = 'div'
+        this.content = ''
+        return this
     }
-    Link(){
-        console.log('it lets you');
-        this.id = this.randomID()
-        this.type='element'
-        this.style= ''
-        this.blocks=[]
-        this.tag='element'
-        this.css.css= ''
-        this.cssObject={
-            base:null,
-            xxl:null,
+    Rows() {
+        this.type = 'container'
+        this.title = 'Rows'
+        this.style = ''
+        this.blocks = [{
+            id: this.randomID(),
+            blocks: [],
+            title: 'Block',
+            type: 'container',
+            tag: 'block',
+            css: {
+                css: 'w-full'
+            },
+            element: 'div',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Empty container 1'
+        }, {
+            id: this.randomID(),
+            blocks: [],
+            title: 'Block',
+            type: 'container',
+            tag: 'block',
+            css: {
+                css: 'w-full'
+            },
+            element: 'div',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Empty container 2'
+        }]
+        this.tag = 'container'
+        this.css.css = 'flex flex-row gap-5 w-full'
+        this.cssObject = {
+            base: {
+                display: 'flex',
+                gap: 'gap-5',
+                flexdirection: 'flex-row',
+                width: 'w-full'
+            },
+            xxl: null,
             xl: null,
             lg: null,
             md: null,
             sm: null,
             xs: null
         }
-        this.element='a'
-        this.content='Link'
-        return this;
+        this.element = 'div'
+        this.content = ''
+        return this
     }
 
+    RichText() {
+        this.type = 'container'
+        this.title = 'Rich Text'
+        this.style = ''
+        this.blocks = [
+            {
+                id: this.randomID(),
+                blocks: [],
+                level: 2,
+                title: 'Heading',
+                type: 'element',
+                tag: 'element',
+                style: '',
+                css: {
+                    css: 'font-bold text-lg'
+                },
+                element: 'h',
+                cssObject: {
+                    base: {
+                        fontWeight:'font-bold',
+                        textSize: 'text-lg'
+                    },
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: 'Heading title'
+             },
+            {
+                id: this.randomID(),
+                blocks: [],
+                title: 'Paragraph',
+                type: 'element',
+                tag: 'element',
+                style: '',
+                css: {
+                    css: 'w-full'
+                },
+                element: 'p',
+                cssObject: {
+                    base: {
+                        width: 'w-full',
+                    },
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac tortor dignissim convallis aenean. Imperdiet massa tincidunt nunc pulvinar.'
+            }
+        ]
+        this.tag = 'container'
+        this.css.css = ''
+        this.cssObject = {
+            base: null,
+            xxl: null,
+            xl: null,
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        }
+        this.element = 'div'
+        this.content = ''
+        return this
+    }
 }
