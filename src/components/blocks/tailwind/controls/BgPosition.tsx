@@ -50,7 +50,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     <select className='select select-sm bg-white' value={state.bgposition.size} onChange={(e) => {
                         update(e.target.value,'bgposition.size','bgsize');
                     }}>
-                        <option value=""></option>
+                        <option value="">-</option>
                         {state.bgsizes.map((size, index) => (
                             <option key={index} value={size}>{size.replace('bg-', '')}</option>
                         ))}
@@ -62,7 +62,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     <select  className='select select-sm bg-white' value={state.bgposition.position} onChange={(e) => {
                         update(e.target.value,'bgposition.position','bgposition');
                     }}>
-                        <option value=""></option>
+                        <option value="">-</option>
                         {state.bgpositions.map((position, index) => (
                             <option key={index} value={position}>{position.replace('bg-', '')}</option>
                         ))}
@@ -74,7 +74,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     <select  className='select select-sm bg-white' value={state.bgposition.repeat} onChange={(e) => {
                         update(e.target.value,'bgposition.repeat','bgrepeat');
                     }}>
-                        <option value=""></option>
+                        <option value="">-</option>
                         {state.bgrepeats.map((repeat, index) => (
                             <option key={index} value={repeat}>{repeat.replace('bg-', '')}</option>
                         ))}
@@ -87,7 +87,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     <select  className='select select-sm bg-white' value={state.bgposition.attachment} onChange={(e) => {
                         update(e.target.value,'bgposition.attachment','bgattachment');
                     }}>
-                        <option value=""></option>
+                        <option value="">-</option>
                         {state.bgattachments.map((attachment, index) => (
                             <option key={index} value={attachment}>{attachment.replace('bg-', '')}</option>
                         ))}
@@ -100,7 +100,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     <select  className='select select-sm bg-white' value={state.bgposition.clip} onChange={(e) => {
                         update(e.target.value,'bgposition.clip','bgpositionclip');
                     }}>
-                        <option value=""></option>
+                        <option value="">-</option>
                         {state.bgclips.map((clip, index) => (
                             <option key={index} value={clip}>{clip.replace('bg-', '')}</option>
                         ))}
@@ -112,7 +112,7 @@ const BgPosition = ({ title, data, attr, updateCss }: any) => {
                     <select  className='select select-sm bg-white' value={state.bgposition.origin} onChange={(e) => {
                         update(e.target.value,'bgposition.origin','bgorigin');
                     }}>
-                        <option value=""></option>
+                        <option value="">-</option>
                         {state.bgorigin.map((origin, index) => (
                             <option key={index} value={origin}>{origin.replace('bg-', '')}</option>
                         ))}

@@ -24,11 +24,11 @@ const BlockElement = (props: any) => {
 
     return cls
   }
-  const getStyle = (css: any) => {
-    let stl;
-    if (css != '') {
+  const getStyle = (block: any) => {
+    let stl = {} as any;
 
-      stl = css.split(';').reduce((acc: any, rule: any) => {
+    if (block.style !== '') {
+      stl = block.style.split(';').reduce((acc: any, rule: any) => {
         const [property, value] = rule.split(':');
         if (property && value) {
           acc[property.trim()] = value.trim();
@@ -36,8 +36,13 @@ const BlockElement = (props: any) => {
         return acc;
       }, {});
     }
+    if (block.font !== '') {
+      stl['fontFamily'] = block.font;
+    }
+
     return stl;
-  }
+  };
+
   const toggleBorder = () => {
     if (isEnter && (editor.current && editor.current.id == props.element.id)) {
       return 'border-primary-500';
@@ -55,7 +60,7 @@ const BlockElement = (props: any) => {
   const renderElement = () => {
     const commonProps = {
       ref: refElement,
-      'style': getStyle(props.element.style),
+      'style': getStyle(props.element),
       'id': props.element.id,
       className: `relative border  ${isEnter ? 'bg-primary-100' : 'bg-white'} ${classes()} ${toggleBorder()}`,
       onMouseEnter: (e: any) => {
@@ -113,6 +118,9 @@ const BlockElement = (props: any) => {
         return <button type={props.element.tag} {...commonProps} className={'btn'}>{props.element.content}</button>;
       case 'video':
         return <video   {...commonProps} src={props.element.link}  {...props.element.options}>{props.element.content}</video>;
+      
+      case 'audio':
+        return <audio   {...commonProps} src={props.element.link}  {...props.element.options}>{props.element.content}</audio>;
       case 'iframe':
         return (
           <iframe
@@ -157,7 +165,9 @@ const BlockElement = (props: any) => {
         return <a  {...commonProps}>{props.element.content}</a>;
       case "hr":
         return <hr  {...commonProps} />;
-
+     
+      case "option":
+        return <option  {...commonProps} {...editableProps}>{props.element.content}</option>;
       default:
         return <div {...commonProps}>{props.element.content}</div>;
     }

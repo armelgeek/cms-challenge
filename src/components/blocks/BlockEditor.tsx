@@ -162,7 +162,7 @@ const BlockEditor = ({ref}:any) => {
   }, [state]);
   if (!_.isEmpty(editor.page) && !_.isEmpty(editor.document)) {
     return (
-      <div id="mainEditor"  className="bg-gray-100 min-h-screen text-black overflow-y-auto">
+      <div id="mainEditor">
         <Test setCurrent={setCurrent}>
           <div id="BlockEditor" ref={ref}>
             {editor.document && (<BlockContainer

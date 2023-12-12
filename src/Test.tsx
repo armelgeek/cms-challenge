@@ -10,6 +10,7 @@ import EditorSidebarTabs from './components/editor/EditorSidebarTabs';
 import UserLibrary from './components/editor/UserLibrary';
 import Frame from 'react-frame-component';
 import jp from 'jsonpath';
+import Element from './utils/tail/element';
 
 const zooming = (value: any, zoomLevel: any) => {
   const zoomFactor = parseFloat(zoomLevel.replace('%', '')) / 100;
@@ -86,18 +87,32 @@ const Test = ({ children, setCurrent }: any) => {
     })
 
   }
+  const head = () => {
+    let fonts = jp.query(editor.page.json.blocks, '$..blocks..font');
+    let uniqueFonts = [...new Set(fonts.filter(a => a))];
+    console.log('fonts', uniqueFonts);
+    return (
+      <style>
+        {`${uniqueFonts.length && `@import url('https://fonts.googleapis.com/css?family=${uniqueFonts.join('|')}');`}`}
+      </style>
+    );
+  };
+  const createElement = useCallback((el: any) => {
+    if (!editor.current) return;
+    const element = new Element().createElement(el.id)?.setIcon(el.icon);
+    editor.current.blocks.push(element)
+    setInfo({
+      prop: 'current',
+      value: element
+    })
+  }, [editor]);
   const initialContent = () => {
-    let fonts = jp.query(editor.page.json.blocks, '$..blocks..font')
-    let fnts = [...new Set(fonts.filter(a => { return a }))]
-    let fontsLink = ''
-    fnts.length ? fontsLink = '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=' + fnts.join('|') + '">\n' : fontsLink = ''
     let icons = ''
     return `<!DOCTYPE html>
       <html>
         <head>
           <script src="http://localhost:5173/tailwind.css"></script>
           <link rel="stylesheet" href='http://localhost:5173/app.css'/>
-          ${fontsLink}
         </head>
         <body>
           <div id="root"></div>
@@ -106,9 +121,9 @@ const Test = ({ children, setCurrent }: any) => {
       </html>`
   }
   return (
-    <div className='relative mt-3'>
+    <div className='relative'>
       <div className="sticky top-0">
-         {/**<div className="z-50 py-1 flex border flex-row justify-between item-center px-3">
+        {/**<div className="z-50 py-1 flex border flex-row justify-between item-center px-3">
           <div className="brand">
             <h3 className='text-primary-500'>WindFlow Studio</h3>
           </div>
@@ -142,37 +157,69 @@ const Test = ({ children, setCurrent }: any) => {
       </div>
       <div className="flex h-screen pt-3 px-2">
 
-        <div className="w-1/6 bg-white">
-         
-          <div className="flex flex-row  border  gap-2 p-1 border-gray-300 bg-gray-100">
-            <div className={`uppercase cursor-pointer badge badge-${choice == 1 ? 'primary' : 'default  bg-white'} px-3 py-1 border rounded-xl`}>Templates</div>
-          </div>
-          <div className="relative">
-            <UserLibrary />
+        <div className='border-gray-200 dark:border-gray-600 w-1/6 border-r bg-white dark:bg-gray-800  z-30 h-screen'>
+          <div className="flex flex-col h-full relative justify-around">
+            <div className="overflow-y-auto overflow-x-hidden noscrollbar select-none flex-1 flex flex-col">
+              <div className="flex flex-col flex-1">
+                <div className="p-1 sticky top-0 z-20 border-b border-gray-200 dark:border-white dark:border-opacity-5 bg-white dark:bg-gray-800">
+                  <div className="w-full flex rounded-md p-2 backdrop-filter backdrop-blur-lg bg-gray-200 bg-opacity-50 dark:bg-white dark:bg-opacity-5">
+                    <button type="button" onClick={() => setChoice(0)} className={`${choice == 0 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Layers</span></button>
+                    <button type="button" onClick={() => setChoice(1)} className={`${choice == 1 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Elements</span></button>
+                    <button type="button" onClick={() => setChoice(2)} className={`${choice == 2 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Layouts</span></button>
+                  </div>
+                </div>
+                <div className="divide-y divide-gray-200 dark:divide-white dark:divide-opacity-5 flex-1 mb-32">
+                  {choice == 0 && (
+                    <div className="pt-2 px-3">
+                      <BlockTree editor={editor.document} setCurrent={setCurrent} />
+                    </div>
+                  )}
+                  {choice == 1 && (
+                    <>
+                      {editor.elements.map((group: any) => (
+                        <div className="px-3 py-3.5">
+                          <div className="text-xs text-gray-700 text-opacity-60 capitalize mb-1.5">{group.label}</div>
+                          <div className="grid grid-cols-2 gap-1">
+                            {group.elements.map((element: any) => (
+                              <div onClick={() => createElement(element)} className="p-3 bg-primary-500 hover:bg-primary-300 rounded-md text-white text-xs flex items-center transition ease-in duration-75 group cursor-pointer">
+                                <span className='icons group-hover:opacity-75 opacity-50 mr-1.5'>
+
+                                </span>
+                                <span className='group-hover:opacity-100 opacity-75 leading-4 capitalize -my-0.5 truncate'> {element.name}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>))}</>
+                  )}
+                  {choice == 2 && (
+                    <div className="px-3">
+                      <UserLibrary />
+                    </div>
+                  )}
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <div className="relative z-20 flex-1 flex flex-col items-center bg-gray-200 dark:bg-gray-700 overflow-hidden">
+          <div className="w-full h-full relative z-10 scrollbar overflow-scroll">
 
-        <div className="preview-container">
-          <div className='pb-2'>
-            <BlockTree editor={editor.document} setCurrent={setCurrent} />
-          </div>
-          <div className="flex-1 overflow-y-auto flex flex-col justify-center">
-            <Frame initialContent={initialContent()} id="preview-frame" style={{
-              width: w,
-              height: h,
-              maxHeight: h,
-              overflow: 'auto',
-              backgroundColor: 'white'
-            }}>
-
-              {children}
-
-
-            </Frame>
+            <div className="absolute top-2 left-2 z-20 grid items-center justify-center">
+              <IFrame head={head()} initialContent={initialContent()} id="preview-frame" style={{
+                width: w,
+                height: h,
+                maxHeight: h,
+                overflow: 'auto',
+                backgroundColor: 'white'
+              }}>
+                {children}
+              </IFrame>
+            </div>
           </div>
         </div>
-        <div className="w-72 ">
-        {/**<div className="flex flex-row items-center gap-3 mr-3">
+        <div className="w-1/6">
+          {/**<div className="flex flex-row items-center gap-3 mr-3">
             <div className='flex flex-row  border rounded-full gap-2 p-1 border-gray-300'>
               <div onClick={() => setMode('base')} className={`cursor-pointer badge badge-${desktop.mode == 'base' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>ALL</div>
               <div onClick={() => setMode('sm')} className={`cursor-pointer badge badge-${desktop.mode == 'sm' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>SM</div>
@@ -182,11 +229,12 @@ const Test = ({ children, setCurrent }: any) => {
               <div onClick={() => setMode('xxl')} className={`badge badge-${desktop.mode == 'xxl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>2XL</div>
             </div>
           </div>**/}
-          <div className="flex flex-col w-full">
+          <div className="border-gray-200 dark:border-gray-600 w-64 border-l order-last bg-white dark:bg-gray-800  z-30 h-full relative">
             {editor.current ? (
               <>
-                <EditorSidebarTabs tab={editor.sidebar.name} setCurrentTab={setCurrentTab} />
-                <EditorSidebar tab={editor.sidebar.name} />
+                <EditorSidebarTabs setCurrentTab={setCurrentTab}>
+                  <EditorSidebar tab={editor.sidebar.name} />
+                </EditorSidebarTabs>
               </>
             ) : (
               <div className="flex h-full w-full items-center justify-center text-xl">

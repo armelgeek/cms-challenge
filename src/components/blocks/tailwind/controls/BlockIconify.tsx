@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import icon from '../../../utils/api/icon';
-import { useDispatch } from '../../../store';
+import icon from '../../../../utils/api/icon';
+import { useDispatch } from '../../../../store';
 const ScrollItem = memo(({ setInfos, item, index }: any) => {
     return (
         <div className="text-sm  lowercase suggestion-item" key={item + '--' + index} onClick={() => {
@@ -63,9 +63,9 @@ const BlockIconify = () => {
     }
     return (
         <div className="flex flex-col w-full h-full items-start bg-bluegray-200">
-            <span className="uppercase font-bold  my-2" style={{ fontSize: '10px' }}>CSS</span>
+            <span className="uppercase font-bold  my-2" style={{ fontSize: '10px' }}>Icon</span>
             <div className="tag-input-sg-container  w-full">
-                <input type="text" className="w-full input-sm  rounded-md  border-gray-200 focus:outline-0 focus:shadow-none focus:focus-within:ring-0 text-sm" placeholder='Search class' onKeyDown={(e) => searchIcon(e)} />
+                <input type="text" className="w-full input-sm  rounded-md  border-gray-200 focus:outline-0 focus:shadow-none focus:focus-within:ring-0 text-sm" placeholder='Search Icon ...' onKeyDown={(e) => searchIcon(e)} />
                 <div className="suggestions-container" ref={containerRef} style={{
                     display: items.length > 0 ? 'block' : 'none'
                 }}>

@@ -1,5 +1,6 @@
 const initialState = {
     mode: 'base',
+    state: 'neutral',
     frame: {
         w: 'w-screen',
         h: 'h-screen'

@@ -114,7 +114,7 @@ const UserLibrary = () => {
                     </div>
                     {!_.isUndefined(desktop.uikits) && desktop.uikits.map((kit: any) => (
                         <>
-                            <div className={`capitalize flex items-center cursor-pointer hover:bg-gray-950 hover:text-white p-2  text-base ${gr === kit.name ? 'bg-slate-950 text-white' : 'text-gray-950'}`} onClick={() => {
+                            <div className={`py-3.5 capitalize flex items-center cursor-pointer hover:bg-gray-950 hover:text-white p-2  text-base ${gr === kit.name ? 'bg-slate-950 text-white' : 'text-gray-950'}`} onClick={() => {
                                 //loadUIKit(kit);
                                 setGr(gr === kit.name ? null : kit.name)
                             }}>

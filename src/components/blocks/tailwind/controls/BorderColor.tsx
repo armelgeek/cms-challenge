@@ -8,7 +8,7 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
     is_over: false,
     color: {
       color: !_.isNull(data) && !_.isUndefined(data[attr]) ? data[attr] : '',
-      hover: !_.isNull(data) && !_.isUndefined(data[attr+'hover']) ? data[attr+'hover'] : '',
+      hover: !_.isNull(data) && !_.isUndefined(data[attr + 'hover']) ? data[attr + 'hover'] : '',
     },
     color_over: '',
     colors: null
@@ -35,14 +35,14 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
       tone ? c += color + '-' + tone : c += color
       if (!state.is_over) {
         updateStateAttributes({
-          'color.color': c.replace('bordercolor','border'),
+          'color.color': c.replace('bordercolor', 'border'),
         })
-        updateCss(c.replace('bordercolor','border'), attr);
+        updateCss(c.replace('bordercolor', 'border'), attr);
       } else {
         updateStateAttributes({
-          'color.hover': 'hover:' +  c.replace('bordercolor','border'),
+          'color.hover': 'hover:' + c.replace('bordercolor', 'border'),
         })
-        updateCss('hover:' + c.replace('bordercolor','border'), attr+'hover');
+        updateCss('hover:' + c.replace('bordercolor', 'border'), attr + 'hover');
       }
     } else {
       if (!state.is_over) {
@@ -54,7 +54,7 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
         updateStateAttributes({
           'color.hover': '',
         })
-        updateCss('', attr+'hover');
+        updateCss('', attr + 'hover');
       }
     }
     updateStateAttributes({
@@ -73,31 +73,38 @@ const BorderColor = ({ title, data, attr, updateCss }: any) => {
     })
   }, [])
   return (
-    <div className="flex flex-row">
-      <div className="mr-2">
-      <span className="uppercase font-bold" style={{
-                fontSize: "10px"
-            }}>Color</span>
-        <div 
-        onClick={()=> toogleOver(false)}
-        className={` cursor-pointer ${state.color.color.replace('text', 'bg').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}
-        >
+    <div className="flex relative disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none min-w-0">
+      <div className="flex flex-row-reverse items-center justify-between w-full text-gray-900 dark:text-white text-xs text-opacity-80 dark:text-opacity-80">
+        <div className="w-2/3 items-center">
+          <div className="w-full space-y-1">
+            <div className="relative flex  gap-2 flex-col w-full max-w-full tracking-wide  min-w-0 highlight leading-5.5 text-xs rounded-md  bg-opacity-10">
+              <div className="w-full flex gap-1"></div>
+              <div
+                onClick={() => toogleOver(false)}
+                className={` cursor-pointer ${state.color.color.replace('text', 'bg').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}
+              >
 
-        </div>
-      </div>
-      <div>
+              </div>
+            </div>
+            {/**<div>
       <span className="uppercase font-bold" style={{
                 fontSize: "10px"
             }}>Over</span>
         <div
         onClick={()=> toogleOver(true)}
          className={`  cursor-pointer ${state.color.hover.replace('hover:text', 'bg').replace('hover:', '')} mb-1 w-8 h-8 border-2 rounded-full`}></div>
+      </div> */}
+            {state.palette && (
+              <Pallete close={togglePalette} setColor={setColor} />
+            )}
+
+          </div>
+        </div>
+        <label className='w-1/4 py-0.5 text-xs leading-5.5 truncate pr-1 font-medium'>
+           Color
+        </label>
       </div>
-      {state.palette && (
-        <Pallete close={togglePalette}  setColor={setColor}/>
-      )}
-      
-    </div>
+      </div>
   )
 }
 export default BorderColor;

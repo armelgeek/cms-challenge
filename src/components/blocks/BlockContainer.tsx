@@ -3,12 +3,12 @@ import BlockElement from "./BlockElement";
 import { useDispatch, useGetter } from "../../store";
 import BlockIFrame from "./components/BlockIFrame";
 
-const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
+const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
 
   const refContainer = useRef(null);
   const [isEnter, setIsEnter] = useState(false);
   const editor = useGetter('editor', 'data', []);
-  const editBlockContent = useDispatch('editor','editBlockContent');
+  const editBlockContent = useDispatch('editor', 'editBlockContent');
   const editableProps = {
     contentEditable: true,
     onBlur: (e: any) => {
@@ -32,76 +32,76 @@ const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
       }
     }
   }
-  const props =  {
-    key:doc.id,
-    ref:refContainer,
-    onMouseEnter:(e:any) =>{
+  const props = {
+    key: doc.id,
+    ref: refContainer,
+    onMouseEnter: (e: any) => {
       e.stopPropagation();
       console.log('on hover');
       setIsEnter(true)
     },
-    onMouseLeave:(e:any) =>{
-        e.stopPropagation();
-        setIsEnter(false)
+    onMouseLeave: (e: any) => {
+      e.stopPropagation();
+      setIsEnter(false)
     },
-    onClick:(e:any) => {
-    e.stopPropagation();
-    setCurrent(doc,refContainer.current?.offsetWidth)
-  },
-  id: doc.id,
-  className: `${classes()} ${isEnter ? 'bg-primary-100': 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
+    onClick: (e: any) => {
+      e.stopPropagation();
+      setCurrent(doc, refContainer.current?.offsetWidth)
+    },
+    id: doc.id,
+    className: `${classes()} ${isEnter ? 'bg-primary-100' : 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
   }
   const render = () => (
-      <>
-        {typeof doc.blocks!= "undefined" && doc.blocks.length > 0 ? null : (doc.content ? doc.content:  doc.element)}
-        {typeof doc.blocks!= "undefined" &&  doc.blocks.map((block: any) => {
-          if (
-              block.type === "container" ||
-              block.tag === "container" ||
-              block.tag === "blocks"
-          ) {
+    <>
+      {typeof doc.blocks != "undefined" && doc.blocks.length > 0 ? null : (doc.content ? doc.content : doc.element)}
+      {typeof doc.blocks != "undefined" && doc.blocks.map((block: any) => {
+        if (
+          block.type === "container" ||
+          block.tag === "container" ||
+          block.tag === "blocks"
+        ) {
+          return (
+            <React.Fragment key={block.id}>
+              <BlockContainer
+                doc={block}
+                key={block.id}
+                setCurrent={setCurrent}
+                level={parseInt(level) + 1}
+                ajustCoords={ajustCoords}
+              />
+            </React.Fragment>
+          )
+        }
+        {
+          if (block && block.type != 'container' && block.tag != 'container') {
             return (
-                <React.Fragment key={block.id}>
-                  <BlockContainer
-                      doc={block}
-                      key={block.id}
-                      setCurrent={setCurrent}
-                      level={parseInt(level) + 1}
-                      ajustCoords={ajustCoords}
-                  />
-                </React.Fragment>
+              <BlockElement
+                element={block}
+                key={'block_element_' + block.id}
+                level={parseInt(level) + 1}
+                setCurrent={setCurrent}
+                ajustCoords={ajustCoords}
+              />
             )
           }
-          {
-            if (block && block.type != 'container' && block.tag != 'container') {
-              return (
-                  <BlockElement
-                      element={block}
-                      key={'block_element_' + block.id}
-                      level={parseInt(level) + 1}
-                      setCurrent={setCurrent}
-                      ajustCoords={ajustCoords}
-                  />
-              )
-            }
-          }
-          if (block.tag === 'iframe' || block.tag === 'youtube' || block.tag === 'vimeo') {
-            return (
-                <BlockIFrame
-                    element={block}
-                    key={'block_element_' + block.id}
-                    setCurrent={setCurrent}
-                    level={parseInt(level) + 1}
-                />)
-          }
-        })}
-      </>
+        }
+        if (block.tag === 'iframe' || block.tag === 'youtube' || block.tag === 'vimeo') {
+          return (
+            <BlockIFrame
+              element={block}
+              key={'block_element_' + block.id}
+              setCurrent={setCurrent}
+              level={parseInt(level) + 1}
+            />)
+        }
+      })}
+    </>
   )
-  useEffect(()=>{
-    if(refContainer.current!=null){
-      ajustCoords(doc,refContainer.current.offsetWidth);
+  useEffect(() => {
+    if (refContainer.current != null) {
+      ajustCoords(doc, refContainer.current.offsetWidth);
     }
-  },[doc, refContainer.current])
+  }, [doc, refContainer.current])
   switch (doc.element) {
     case 'div':
       return <div {...props}>{render()}</div>;
@@ -110,7 +110,21 @@ const BlockContainer = ({ doc, level,setCurrent,ajustCoords }: any) => {
     case 'li':
       return <li {...props} {...editableProps}>{render()}</li>;
     case 'ol':
-    return <ol {...props} {...editableProps}>{render()}</ol>;
+      return <ol {...props} {...editableProps}>{render()}</ol>;
+    case "select":
+      return <select {...props} {...editableProps}>{render()}</select>;
+    case 'table':
+      return <table {...props}>{render()}</table>;
+    case 'thead':
+      return <thead {...props}>{render()}</thead>;
+    case 'tbody':
+      return <tbody {...props}>{render()}</tbody>;
+    case 'th':
+      return <th {...props}>{render()}</th>;
+    case 'tr':
+      return <tr {...props}>{render()}</tr>;
+    case 'td':
+      return <td {...props}>{render()}</td>;
     default:
       return <div {...props}>{render()}</div>;
   }

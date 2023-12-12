@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import _ from 'lodash';
 import classes from '../../../../utils/scripts/tw.classes';
 
-const Options = ({ title, data, attr, updateCss }: any) => {
+const Group = ({ title, data, attr, updateCss }: any) => {
     const [selected, setSelected] = useState(!_.isNull(data) && !_.isUndefined(data[attr]) ? data[attr] : {});
     const options = classes[attr];
     const option = (opt: any) => {
@@ -24,11 +24,10 @@ const Options = ({ title, data, attr, updateCss }: any) => {
                 fontSize: "10px"
             }}>{title || attr}</span> */}
             <select className="select select-sm bg-white" onChange={(e) => {
-                e.stopPropagation();
                 setSelected(e.target.value);
                 updateCss(e.target.value, attr);
             }}>
-                <option value="">-</option>
+                <option value="">{title || attr}</option>
                 {options.map((opt: any) => (
                     <>
                         {
@@ -47,4 +46,4 @@ const Options = ({ title, data, attr, updateCss }: any) => {
         </div>
     )
 }
-export default Options;
+export default Group;

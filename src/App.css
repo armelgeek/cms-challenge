@@ -1036,3 +1036,10 @@ label.tree_label:after { border-bottom: 0; }
 .fill-current {
   fill: white;
 }
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none; 
+  padding-right: 0; 
+}

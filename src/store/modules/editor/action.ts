@@ -310,6 +310,7 @@ export const editBlockFontContent = (value: any) => async (dispatch: any, getSta
 }
 
 function updateBlockFontContent(blocks: any, currentId: any, modified: any) {
+  console.log('updateBlockFontContent', blocks,modified,currentId);
   blocks.forEach((block: any) => {
     if (block.id === currentId) {
       block.font = modified
@@ -718,7 +719,7 @@ function duplicateBlockAction(blocks: any, currentId: any) {
   let duplicatedBlock: any;
   blocks.forEach((block: any, index: number) => {
     if (block.id === currentId) {
-      duplicatedBlock = { ...block, id: 'tail-editor-' + Math.random().toString(36).substring(7) };
+      duplicatedBlock = { ...block, id: 'windflow-' + Math.random().toString(36).substring(7) };
       blocks.splice(index + 1, 0, duplicatedBlock);
     }
     if (block.blocks && block.blocks.length > 0) {

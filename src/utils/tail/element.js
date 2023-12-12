@@ -103,34 +103,48 @@ export default class Element {
                         name: 'RichText',
                         icon: '<svg width="12" height="12" viewBox="0 0 12 12" class="fill-current" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect opacity="0.3" x="1" y="1" width="5" height="5"></rect><path d="M5.5,11 C5.77614237,11 6,11.2238576 6,11.5 C6,11.7761424 5.77614237,12 5.5,12 L0.5,12 C0.223857625,12 3.38176876e-17,11.7761424 0,11.5 C-3.38176876e-17,11.2238576 0.223857625,11 0.5,11 L5.5,11 Z M11.5,8 C11.7761424,8 12,8.22385763 12,8.5 C12,8.77614237 11.7761424,9 11.5,9 L0.5,9 C0.223857625,9 3.38176876e-17,8.77614237 0,8.5 C-3.38176876e-17,8.22385763 0.223857625,8 0.5,8 L11.5,8 Z M6,0 C6.55228475,2.78052031e-16 7,0.44771525 7,1 L7,6 C7,6.55228475 6.55228475,7 6,7 L1,7 C0.44771525,7 4.47140469e-16,6.55228475 0,6 L0,1 C-1.78657678e-16,0.44771525 0.44771525,-9.5692398e-18 1,0 L6,0 Z M11.5,5 C11.7761424,5 12,5.22385763 12,5.5 C12,5.77614237 11.7761424,6 11.5,6 L8.5,6 C8.22385763,6 8,5.77614237 8,5.5 C8,5.22385763 8.22385763,5 8.5,5 L11.5,5 Z M4.492,3.915 L1.813,6 L6,6 L6,5.248 L4.492,3.915 Z M6,1 L1,1 L1,5.365 L4.53374238,2.61663017 L6,3.914 L6,1 Z M11.5,2 C11.7761424,2 12,2.22385763 12,2.5 C12,2.77614237 11.7761424,3 11.5,3 L8.5,3 C8.22385763,3 8,2.77614237 8,2.5 C8,2.22385763 8.22385763,2 8.5,2 L11.5,2 Z"></path></svg>'
                     },
-                
                     {
                         id: 'span',
-                        name: 'Span',
+                        name: 'Text',
                         icon: 'text_format'
-                    },
+                    }
+
+                ]
+            },
+            {
+                label: 'Actions',
+                elements: [
                     {
-                        id: 'blockquote',
-                        name: 'Blockquote',
-                        icon: 'text_format'
-                    },
-                    {
-                        id: 'code',
-                        name: 'Code',
-                        icon: 'code'
+                        id: 'button',
+                        name: 'Button',
+                        icon: 'smart_button'
                     },
                     {
                         id: 'link',
                         name: 'Link',
-                        icon: 'link'
+                        icon: 'smart_link'
+                    }, {
+                        id: 'submit',
+                        name: 'Submit',
+                        icon: 'smart_button'
                     },
+                    {
+                        id: 'reset',
+                        name: 'Reset',
+                        icon: 'smart_button'
+                    },
+                    {
+                        id: 'download',
+                        name: 'Download',
+                        icon: 'download'
+                    }
                 ]
             },
             {
 
-                label: 'main',
+                label: 'Media',
                 elements: [
-                    
+
                     {
                         id: 'image',
                         name: 'Image',
@@ -142,19 +156,18 @@ export default class Element {
                         icon: 'movie'
                     },
                     {
+                        id: 'audio',
+                        name: 'Audio',
+                        icon: 'audio'
+                    },
+                    {
                         id: 'youtube',
                         name: 'Youtube',
                         icon: 'movie'
                     },
-
-                    {
-                        id: 'download',
-                        name: 'Download',
-                        icon: 'download'
-                    }
                 ]
             },
-            {
+            /**{
 
                 label: 'containers',
                 elements: [
@@ -187,9 +200,9 @@ export default class Element {
                     },
 
                 ],
-            },
+            },**/
             {
-                label: 'form',
+                label: 'forms',
                 elements: [
                     {
                         id: 'form',
@@ -197,29 +210,14 @@ export default class Element {
                         icon: 'call_to_action'
                     },
                     {
+                        id: 'label',
+                        name: 'Label',
+                        icon: 'label_alt'
+                    },
+                    {
                         id: 'inputtext',
                         name: 'Input Text',
                         icon: 'input'
-                    },
-                    {
-                        id: 'email',
-                        name: 'Email',
-                        icon: 'email'
-                    },
-                    {
-                        id: 'hidden',
-                        name: 'Hidden',
-                        icon: 'input'
-                    },
-                    {
-                        id: 'number',
-                        name: 'Number',
-                        icon: 'input'
-                    },
-                    {
-                        id: 'checkbox',
-                        name: 'Checkbox',
-                        icon: 'check_box'
                     },
                     {
                         id: 'textarea',
@@ -227,25 +225,105 @@ export default class Element {
                         icon: 'text_format'
                     },
                     {
-                        id: 'submit',
-                        name: 'Submit',
-                        icon: 'smart_button'
+                        id: 'select',
+                        name: 'Select',
+                        icon: 'select'
+                    },
+
+                    {
+                        id: 'option',
+                        name: 'Option',
+                        icon: 'option'
                     },
                     {
-                        id: 'reset',
-                        name: 'Reset',
-                        icon: 'smart_button'
+                        id: 'file',
+                        name: 'File Upload',
+                        icon: 'file'
                     },
                     {
-                        id: 'button',
-                        name: 'Button',
-                        icon: 'smart_button'
-                    }
+                        id: 'checkbox',
+                        name: 'Checkbox',
+                        icon: 'check_box'
+                    },
+                    {
+                        id: 'radio',
+                        name: 'Radio',
+                        icon: 'radio'
+                    },
+
+
+
                 ]
             },
             {
                 label: 'Tables',
-                elements: []
+                elements: [
+                    {
+                        id: 'table',
+                        name: 'Table',
+                        icon: 'table'
+                    },
+                    {
+                        id: 'header',
+                        name: 'Header',
+                        icon: 'header'
+                    },
+                    {
+                        id: 'body',
+                        name: 'Body',
+                        icon: 'body'
+                    },
+                    {
+                        id: 'footer',
+                        name: 'Footer',
+                        icon: 'footer'
+                    },
+                    {
+                        id: 'th',
+                        name: 'Th',
+                        icon: 'th'
+                    },
+                    {
+                        id: 'row',
+                        name: 'Row',
+                        icon: 'row'
+                    },
+                    {
+                        id: 'cell',
+                        name: 'Cell',
+                        icon: 'cell'
+                    },
+                ]
+            },
+            {
+                label: 'List',
+                elements: [
+                    {
+                        id: 'ul',
+                        name: 'List',
+                        icon: 'ul'
+                    },
+                    {
+                        id: 'li',
+                        name: 'UnOrdered List item',
+                        icon: 'li'
+                    },
+                    {
+                        id: 'ol',
+                        name: 'Ordered List item',
+                        icon: 'ol'
+                    },
+                ]
+            },
+            {
+                label: 'HTML',
+                elements: [
+                    {
+                        id: 'embed',
+                        name: 'Embed',
+                        icon: 'embed'
+                    }
+                ]
             }
         ]
     }
@@ -264,16 +342,19 @@ export default class Element {
             case 'heading': return this.Heading(options);
             case 'paragraph': return this.Paragraph();
             case 'richtext': return this.RichText();
-            case 'Sspan': return this.Span();
+            case 'span': return this.Span();
+            case 'label': return this.Label();
             case 'blockquote': return this.Blockquote();
             case 'code': return this.Code();
             case 'image': return this.Image();
             case 'video': return this.Video();
+            case 'audio': return this.Audio();
             case 'youtube': return this.YTVideo();
             case 'download': return this.Download();
             case 'form': return this.Form();
             case 'inputtext': return this.InputText();
-            case 'email': return this.InputEmail();
+            case 'file': return this.InputFile();
+            case 'radio': return this.InputRadio();
             case 'textarea': return this.InputTextarea();
             case 'checkbox': return this.InputCheckbox();
             case 'number': return this.InputNumber();
@@ -281,11 +362,20 @@ export default class Element {
             case 'submit': return this.InputSubmit();
             case 'reset': return this.InputReset();
             case 'button': return this.Button();
+            case 'select': return this.Select();
             case 'emptycontainer': return this.EmptyContainer(options);
+            case 'option': return this.Option();
             case 'ul': return this.Ul(options);
             case 'li': return this.Li(options);
             case 'ol': return this.Ol(options);
             case 'link': return this.Link(options);
+            case 'table': return this.Table(options);
+            case 'row': return this.Row(options);
+            case 'cell': return this.Cell(options);
+            case 'th': return this.TCell(options);
+            case 'header': return this.Thead(options);
+            case 'body': return this.TBody(options);
+            case 'footer': return this.TFooter(options);
             default: return null;
         }
     }
@@ -626,6 +716,22 @@ export default class Element {
         }
         return this
     }
+    Audio() {
+        this.element = 'audio'
+        this.label = 'Audio'
+        this.icon = 'audio'
+        this.content = ''
+        this.type = 'audio'
+        this.title = 'Audio'
+        this.src = ''
+        this.options = {
+            controls: true,
+            autoplay: true,
+            loop: true
+        }
+        return this
+    }
+
 
     YTVideo() {
         this.src = "https://youtube.com/embed/"
@@ -636,14 +742,6 @@ export default class Element {
         return this
     }
 
-    VimeoVideo() {
-        this.src = "https://player.vimeo.com/video/"
-        this.title = 'Vimeo Video'
-        this.label = 'Vimeo Video'
-        this.type = 'video'
-        this.element = 'iframe'
-        return this
-    }
 
     Icon() {
         this.label = 'Material Icon'
@@ -723,12 +821,106 @@ export default class Element {
         return this
     }
 
-    InputEmail() {
+    InputFile() {
         this.inputElement()
-        this.title = 'input email'
-        this.type = 'email'
-        this.tag = 'email'
-        this.placeholder = 'Email'
+        this.title = 'file upload'
+        this.type = 'file'
+        this.tag = 'file'
+        this.placeholder = 'Select file'
+        return this
+    }
+    InputRadio() {
+        this.inputElement()
+        this.title = 'Input Radio'
+        this.type = 'radio'
+        this.tag = 'radio'
+        this.placeholder = 'Choice Radio'
+        return this
+    }
+    Label() {
+
+        this.element = 'label'
+        this.content = 'This is a label'
+        this.editable = true
+        this.title = 'Label'
+        return this
+    }
+    Option() {
+        this.element = 'option'
+        this.content = 'This is a option'
+        this.title = 'Option'
+        return this
+    }
+
+    Select() {
+        this.element = 'select'
+        this.content = ''
+        this.tag = 'container'
+        this.blocks = [{
+            id: this.randomID(),
+            blocks: [],
+            title: 'Option',
+            type: 'element',
+            style: '',
+            tag: 'option',
+            css: {
+                css: ''
+            },
+            element: 'option',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Option 1'
+        }, {
+            id: this.randomID(),
+            blocks: [],
+            title: 'Option',
+            type: 'element',
+            style: '',
+            tag: 'option',
+            css: {
+                css: ''
+            },
+            element: 'option',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Option 2'
+        }, {
+            id: this.randomID(),
+            blocks: [],
+            title: 'Option',
+            type: 'element',
+            style: '',
+            tag: 'option',
+            css: {
+                css: ''
+            },
+            element: 'option',
+            cssObject: {
+                base: {
+                    width: 'w-full',
+                },
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Option 3'
+        }]
+        this.title = 'Select'
         return this
     }
 
@@ -814,7 +1006,64 @@ export default class Element {
         this.type = 'container'
         this.style = ''
         this.title = 'List'
-        this.blocks = [this.Li(), this.Li(), this.Li()]
+        this.blocks = [{
+            id: this.randomID(),
+            blocks: [],
+            title: 'li',
+            type: 'element',
+            style: '',
+            tag: 'container',
+            css: {
+                css: ''
+            },
+            element: 'li',
+            cssObject: {
+                base: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'List Item 1'
+        },{
+            id: this.randomID(),
+            blocks: [],
+            title: 'li',
+            type: 'element',
+            style: '',
+            tag: 'container',
+            css: {
+                css: ''
+            },
+            element: 'li',
+            cssObject: {
+                base: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'List Item 2'
+        },{
+            id: this.randomID(),
+            blocks: [],
+            title: 'li',
+            type: 'element',
+            style: '',
+            tag: 'container',
+            css: {
+                css: ''
+            },
+            element: 'li',
+            cssObject: {
+                base: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'List Item 3'
+        }]
         this.tag = 'container'
         this.css.css = ''
         this.cssObject = {
@@ -1067,7 +1316,7 @@ export default class Element {
                 element: 'h',
                 cssObject: {
                     base: {
-                        fontWeight:'font-bold',
+                        fontWeight: 'font-bold',
                         textSize: 'text-lg'
                     },
                     lg: null,
@@ -1076,7 +1325,7 @@ export default class Element {
                     xs: null
                 },
                 content: 'Heading title'
-             },
+            },
             {
                 id: this.randomID(),
                 blocks: [],
@@ -1115,4 +1364,644 @@ export default class Element {
         this.content = ''
         return this
     }
+    Row() {
+        this.element = 'tr'
+        this.content = ''
+        this.tag = 'container'
+        this.blocks = [{
+            id: this.randomID(),
+            blocks: [],
+            title: 'td',
+            type: 'element',
+            style: '',
+            tag: 'container',
+            css: {
+                css: ''
+            },
+            element: 'td',
+            cssObject: {
+                base: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Cell 1'
+        }, {
+            id: this.randomID(),
+            blocks: [],
+            title: 'td',
+            type: 'element',
+            style: '',
+            tag: 'container',
+            css: {
+                css: ''
+            },
+            element: 'td',
+            cssObject: {
+                base: null,
+                lg: null,
+                md: null,
+                sm: null,
+                xs: null
+            },
+            content: 'Cell 2'
+        }]
+        this.title = 'tr'
+        return this
+    }
+    Cell() {
+        this.element = 'td'
+        this.content = 'Cell'
+        this.tag = 'container'
+        this.blocks = []
+        this.title = 'td'
+        return this
+    }
+    TCell() {
+        this.element = 'th'
+        this.content = 'T Cell'
+        this.tag = 'container'
+        this.blocks = []
+        this.title = 'th'
+        return this
+    }
+    Thead() {
+        this.element = 'thead'
+        this.content = ''
+        this.tag = 'container'
+        this.blocks = [
+            {
+                id: this.randomID(),
+                blocks: [
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'th',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'th',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 1'
+                    },
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'th',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'th',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 2'
+                    },
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'th',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'th',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 3'
+                    }
+                ],
+                title: 'tr',
+                type: 'element',
+                style: '',
+                tag: 'container',
+                css: {
+                    css: ''
+                },
+                element: 'tr',
+                cssObject: {
+                    base: null,
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: ''
+            }
+        ]
+        this.title = 'Thead'
+        return this
+    }
+
+    TBody() {
+        this.element = 'tbody'
+        this.content = ''
+        this.tag = 'container'
+        this.blocks = [
+            {
+                id: this.randomID(),
+                blocks: [
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'td',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'td',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 1'
+                    },
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'td',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'td',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 2'
+                    },
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'td',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'td',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 3'
+                    }
+                ],
+                title: 'tr',
+                type: 'element',
+                style: '',
+                tag: 'container',
+                css: {
+                    css: ''
+                },
+                element: 'tr',
+                cssObject: {
+                    base: null,
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: ''
+            }
+        ]
+        this.title = 'TBody'
+        return this
+    }
+
+    TFooter() {
+        this.element = 'tfoot'
+        this.content = ''
+        this.tag = 'container'
+        this.blocks = [
+            {
+                id: this.randomID(),
+                blocks: [
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'td',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'td',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 1'
+                    },
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'td',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'td',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 2'
+                    },
+                    {
+                        id: this.randomID(),
+                        blocks: [],
+                        title: 'td',
+                        type: 'element',
+                        style: '',
+                        tag: 'container',
+                        css: {
+                            css: ''
+                        },
+                        element: 'td',
+                        cssObject: {
+                            base: null,
+                            lg: null,
+                            md: null,
+                            sm: null,
+                            xs: null
+                        },
+                        content: 'Cell 3'
+                    }
+                ],
+                title: 'tr',
+                type: 'element',
+                style: '',
+                tag: 'container',
+                css: {
+                    css: ''
+                },
+                element: 'tr',
+                cssObject: {
+                    base: null,
+                    lg: null,
+                    md: null,
+                    sm: null,
+                    xs: null
+                },
+                content: ''
+            }
+        ]
+        this.title = 'TFoot'
+        return this
+    }
+    Table() {
+        this.element = 'table'
+        this.content = ''
+        this.tag = 'container'
+        this.css.css = 'table'
+        this.cssObject = {
+            base: {
+                table: 'table'
+            },
+            lg: null,
+            md: null,
+            sm: null,
+            xs: null
+        },
+            this.blocks = [
+                {
+                    id: this.randomID(),
+                    blocks: [
+                        {
+                            id: this.randomID(),
+                            blocks: [
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'th',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'th',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 1'
+                                },
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'th',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'th',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 2'
+                                },
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'th',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'th',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 3'
+                                }
+                            ],
+                            title: 'tr',
+                            type: 'element',
+                            style: '',
+                            tag: 'container',
+                            css: {
+                                css: ''
+                            },
+                            element: 'tr',
+                            cssObject: {
+                                base: null,
+                                lg: null,
+                                md: null,
+                                sm: null,
+                                xs: null
+                            },
+                            content: ''
+                        }
+                    ],
+                    title: 'thead',
+                    type: 'element',
+                    style: '',
+                    tag: 'container',
+                    css: {
+                        css: ''
+                    },
+                    element: 'thead',
+                    cssObject: {
+                        base: null,
+                        lg: null,
+                        md: null,
+                        sm: null,
+                        xs: null
+                    },
+                    content: ''
+                },
+                {
+                    id: this.randomID(),
+                    blocks: [
+                        {
+                            id: this.randomID(),
+                            blocks: [
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'td',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'td',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 1'
+                                },
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'td',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'td',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 2'
+                                },
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'td',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'td',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 3'
+                                }
+                            ],
+                            title: 'tr',
+                            type: 'element',
+                            style: '',
+                            tag: 'container',
+                            css: {
+                                css: ''
+                            },
+                            element: 'tr',
+                            cssObject: {
+                                base: null,
+                                lg: null,
+                                md: null,
+                                sm: null,
+                                xs: null
+                            },
+                            content: ''
+                        },
+                        {
+                            id: this.randomID(),
+                            blocks: [
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'td',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'td',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 11'
+                                },
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'td',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'td',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 12'
+                                },
+                                {
+                                    id: this.randomID(),
+                                    blocks: [],
+                                    title: 'td',
+                                    type: 'element',
+                                    style: '',
+                                    tag: 'container',
+                                    css: {
+                                        css: ''
+                                    },
+                                    element: 'td',
+                                    cssObject: {
+                                        base: null,
+                                        lg: null,
+                                        md: null,
+                                        sm: null,
+                                        xs: null
+                                    },
+                                    content: 'Cell 13'
+                                }
+                            ],
+                            title: 'tr',
+                            type: 'element',
+                            style: '',
+                            tag: 'container',
+                            css: {
+                                css: ''
+                            },
+                            element: 'tr',
+                            cssObject: {
+                                base: null,
+                                lg: null,
+                                md: null,
+                                sm: null,
+                                xs: null
+                            },
+                            content: ''
+                        }
+                    ],
+                    title: 'tbody',
+                    type: 'element',
+                    style: '',
+                    tag: 'container',
+                    css: {
+                        css: ''
+                    },
+                    element: 'tbody',
+                    cssObject: {
+                        base: null,
+                        lg: null,
+                        md: null,
+                        sm: null,
+                        xs: null
+                    },
+                    content: ''
+                },
+
+            ]
+        this.title = 'Table'
+        return this
+    }
+
 }

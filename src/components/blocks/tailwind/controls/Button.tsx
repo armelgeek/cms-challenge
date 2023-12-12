@@ -16,7 +16,7 @@ const Button = ({ title, data, attr, updateCss }: any) => {
  
   return (<div
     onClick={toggle}
-    className={`rounded-md ${selected ? 'border bg-primary-500 text-white' : 'bg-white text-gray-600'} cursor-pointer px-2 flex  justify-center border  text-sm mr-1`}>
+    className={`rounded-xl text-xs my-1 badge ${selected ? ' bg-primary-500 text-white' : 'bg-white text-gray-600'} cursor-pointer flex  justify-center border  text-sm mr-1`}>
     {attr}
   </div>
   )

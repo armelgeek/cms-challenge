@@ -24,7 +24,22 @@ import ShadowColor from './controls/ShadowColor';
 import CaretColor from './controls/CaretColor';
 import AccentColor from './controls/AccentColor';
 import BlockCss from '../components/BlockCss';
-import BlockIconify from '../components/BlockIconify';
+import BlockIconify from './controls/BlockIconify';
+import Group from './controls/Group';
+import SingleOptions from './controls/SingleOptions';
+import Spacing from './controls/Spacing';
+import TextSpacing from './controls/TextSpacing';
+import TextStyle from './controls/TextStyle';
+import Borders from './controls/Borders';
+import BordersWidth from './controls/BordersWidth';
+import { Partial } from './controls/Partial';
+import DividerWidth from './controls/DividerWidth';
+import Placement from './controls/Placement';
+import Scale from './controls/Scale';
+import Move from './controls/Move';
+import Skew from './controls/Skew';
+import { Origin } from './controls/Origin';
+import Display from './controls/Display';
 const BlockTailwind = ({ css, cid }: any) => {
     const [gr, setGr] = useState('');
     const [controls, setControls] = useState(null) as any;
@@ -43,7 +58,6 @@ const BlockTailwind = ({ css, cid }: any) => {
         css = editor.current.css.css
     }, [])
     const updateCss = useCallback((classe: any, attr: any) => {
-        console.log('attr',attr);
         editor.current.cssObject[`${desktop.mode}`] = {
             ...editor.current.cssObject[`${desktop.mode}`],
             [attr]: classe
@@ -61,38 +75,42 @@ const BlockTailwind = ({ css, cid }: any) => {
     useEffect(() => {
         setControls(null);
     }, [cid]);
-    console.log('controls', controls);
     return (
-        <div className="relative z-highest h-full">
+        <>
             {editor.current && (
-                <div className="mx-1 my-1">
+                <>
                     {twGroups.map((group) => (
                         <>
                             {isEnabled(group) && (
-                                <div key={group.label} className={`${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={() => setControl(group)}>
-                                    <div className="bt-label text-base">{group.label}</div>
-                                    <div className="bt-icon">
-                                        <FaAngleRight />
+                                <div key={group.label} className={` py-1 border-b border-gray-200 dark:border-gray-700 px-3 ${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={() => setControl(group)}>
+                                    <div className="text-gray-900 dark:text-white text-xs font-medium tracking-wide flex justify-between items-center -mb-3 cursor-pointer p-3 -mx-3 -mt-3">
+                                        <div className={`flex items-center leading-7 text-sm  py-px  ${gr === group.label ? 'text-white' : ''}`}>
+                                            <div className="icons  mr-1">
+                                                <FaAngleRight className='text-slate-300' />
+                                            </div>
+                                            <span className={`${gr === group.label ? 'text-white' : 'text-slate-600'}`}>{group.label}</span>
+                                        </div>
                                     </div>
-
                                 </div>
                             )}
                         </>
                     ))}
-                </div>
+                </>
             )}
             {controls != null && (
                 <>
-                    <div className="bg-slate-100 border text-gray-500  top-0 absolute w-full z-10 left-0 right-0 bottom-0">
-                        <div className="bg-primary-500 flex flex-row py-1 mx-1 px-1 items-center capitalize cursor-pointer text-white" onClick={() => {
-                            setControls(null);
-                            setInfo({
-                                prop: 'customizeTab',
-                                value: null
-                            })
-                        }}><FaAngleLeft className={'mr-1'} /> {gr}</div>
-                        <div className={`grid grid-cols-${gr == 'Advanced' ? 1 : 2} gap-y-1 content-center mx-2 mb-1`}>
-                            {controls.map((c: any) => <div className={`capitalize ${c.hasOwnProperty('group') ? 'float-left my-4 mx-1' : 'py-1 px-2 flex flex-col clear-both'}`}>
+                    <div className="bg-white  text-gray-500  top-0 absolute w-full z-10 left-0 right-0 bottom-0">
+                        <div className="text-gray-900 sticky top-0 z-40 bg-primary-500  dark:text-white text-xs font-medium tracking-wide flex justify-between items-center cursor-pointer py-1 px-3">
+                            <div className="flex flex-row  text-sm items-center capitalize leading-7 py-px   text-white dark:text-gray-400 mr-1" onClick={() => {
+                                setControls(null);
+                                setInfo({
+                                    prop: 'customizeTab',
+                                    value: null
+                                })
+                            }}><FaAngleLeft className={'mr-1'} /> {gr}</div>
+                        </div>
+                        <>
+                            {controls.map((c: any) => <div className={`p-3 capitalize ${c.hasOwnProperty('group') ? 'float-left my-4 mx-1' : 'py-1 px-2 flex flex-col clear-both'}`}>
                                 <div key={Math.random() + '_' + editor.current.id}>
                                     {c.name == 'icon' && (
                                         <BlockIconify />
@@ -112,6 +130,38 @@ const BlockTailwind = ({ css, cid }: any) => {
                                     )}
                                     {c.name == 'Height' && (
                                         <Height
+                                            attr={c.attr}
+                                            title={c.title}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            stitle={editor.current.style}
+                                            icon={c.icon || null}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+
+                                    {c.name == 'SingleOptions' && (
+                                        <SingleOptions
+                                            attr={c.attr}
+                                            title={c.title}
+                                            prefix={c.prefix || ''}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            stitle={editor.current.style}
+                                            icon={c.icon || null}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == 'Group' && (
+                                        <Group
+                                            attr={c.attr}
+                                            title={c.title}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            stitle={editor.current.style}
+                                            icon={c.icon || null}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == 'Spacing' && (
+                                        <Spacing
                                             attr={c.attr}
                                             title={c.title}
                                             data={editor.current.cssObject[`${desktop.mode}`]}
@@ -144,6 +194,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Position
                                             attr={c.attr}
                                             title={c.title}
+                                            selector={c.selector}
                                             data={editor.current.cssObject[`${desktop.mode}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
@@ -320,14 +371,98 @@ const BlockTailwind = ({ css, cid }: any) => {
                                             updateCss={updateCss}
                                         />
                                     )}
+                                    {c.name == "TextSpacing" && (
+                                        <TextSpacing
+                                            title={'Spacing'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "TextStyle" && (
+                                        <TextStyle
+                                            title={'Style'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Borders" && (
+                                        <Borders
+                                            title={''}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "BordersWidth" && (
+                                        <BordersWidth
+                                            title={''}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Partial" && (
+                                        <Partial title={c.title} />
+
+                                    )}
+
+                                    {c.name == "DividerWidth" && (
+                                        <DividerWidth
+                                            title={'DividerWidth'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Placement" && (
+                                        <Placement
+                                            title={'Placement'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Scale" && (
+                                        <Scale
+                                            title={'Scale'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Move" && (
+                                        <Move
+                                            title={'Move'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Skew" && (
+                                        <Skew
+                                            title={'Skew'}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Origin" && (
+                                        <Origin
+                                            attr={c.attr}
+                                            title={c.title}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+                                    {c.name == "Display" && (
+                                        <Display
+                                            attr={c.attr}
+                                            title={c.title}
+                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
+
                                 </div>
                             </div>)}
-                        </div>
+                        </>
                     </div>
-
                 </>
             )}
-        </div>
+        </>
     )
 }
 export default BlockTailwind;

@@ -226,6 +226,7 @@ var classes = {
         { label: 'table row', value: 'table-row' },
         { label: 'flow root', value: 'flow-root' }
     ],
+
     float: [
         'float-none',
         'float-right',
@@ -509,19 +510,21 @@ var classes = {
         'z-top',
         'z-2xtop'
     ],
-    dividewidth: [
-        'divide-x-0',
-        'divide-x',
-        'divide-x-2',
-        'divide-x-4',
-        'divide-x-8',
-        'divide-x-reverse',
-        'divide-y-0',
-        'divide-y',
-        'divide-y-2',
-        'divide-y-4',
-        'divide-y-8',
-        'divide-y-reverse'
+    dividex: [
+        { label: 'none', value: 'divide-x-0' },
+        { label: 'normal', value: 'divide-x' },
+        { label: 'sm', value: 'divide-x-2' },
+        { label: 'lg', value: 'divide-x-4' },
+        { label: 'xl', value: 'divide-x-8' },
+        { label: 'reverse', value: 'divide-x-reverse' }
+    ],
+    dividey: [
+        { label: 'none', value: 'divide-y-0' },
+        { label: 'normal', value: 'divide-y' },
+        { label: 'sm', value: 'divide-y-2' },
+        { label: 'lg', value: 'divide-y-4' },
+        { label: 'xl', value: 'divide-y-8' },
+        { label: 'reverse', value: 'divide-y-reverse' }
     ],
     dividecolor: setColors('divide'),
     dividerStyle: [
@@ -625,7 +628,8 @@ var classes = {
         'md:col-span-12',
         'md:col-span-full',
     ],
-    gap: [...setValue('gap', false), 'gap-px', ...setValue('gap-x'), 'gap-x-px', ...setValue('gap-y'), 'gap-y-px'],
+    gapx: [  ...setValue('gap-x',false), 'gap-x-px'],
+    gapy:[ ...setValue('gap-y',false), 'gap-y-px'],
     alignitems: [
         'items-start',
         'items-center',
@@ -707,12 +711,7 @@ var classes = {
         'break-keep'
     ],
     bordercolor: setColors('border'),
-    border: [
-        'border',
-        'border-2',
-        'border-4',
-        'border-8'
-    ],
+
     borderTop: [
         'border-t',
         'border-t-2',
@@ -744,7 +743,8 @@ var classes = {
     paddingRight: [...setValue('pr', false), 'pr-px'],
     paddingInlineStart: [...setValue('ps', false), 'ps-px'],
     paddingInlineEnd: [...setValue('pe', false), 'pe-px'],
-    spacing: [...setValue('space-x', false), 'space-x-px', 'space-x-reverse', ...setValue('space-y', false), 'space-y-px', 'space-y-reverse'],
+    spacingx: [...setValue('space-x', false), 'space-x-px', 'space-x-reverse'],
+    spacingy: [...setValue('space-y', false), 'space-y-py', 'space-y-reverse'],
     marginTop: [...setValue('mt', true), 'mt-auto'],
     marginBottom: [...setValue('mb', true), 'mb-auto'],
     marginLeft: [...setValue('ml', true), 'ml-auto'],
@@ -761,12 +761,12 @@ var classes = {
         'border-none'
     ],
     positionelement: [
-        'static',
-        'fixed',
-        'absolute',
-        'relative',
-        'sticky',
-        'modal'
+        { label: 'static', value: 'static' },
+        { label: 'fixed', value: 'fixed' },
+        { label: 'absolute', value: 'absolute' },
+        { label: 'relative', value: 'relative' },
+        { label: 'sticky', value: 'sticky' },
+        { label: 'modal', value: 'modal' },
     ],
     positionTop: [...setValue('top'), 'top-px'],
     positionLeft: [...setValue('left'), 'left-px'],
@@ -867,7 +867,7 @@ var classes = {
         '-rotate-90',
         '-rotate-180',
     ],
-    skewX: [
+    skewx: [
         'skew-x-0',
         'skew-x-1',
         'skew-x-2',
@@ -881,7 +881,7 @@ var classes = {
         '-skew-x-6',
         '-skew-x-12',
     ],
-    skewY: [
+    skewy: [
         'skew-y-0',
         'skew-y-1',
         'skew-y-2',
@@ -901,28 +901,56 @@ var classes = {
         'perspective-rotate3dY',
         'perspective-rotate3dY-inverse',
     ],
-    rounded: [
-        'rounded-none',
-        'rounded-sm',
-        'rounded',
-        'rounded-md',
-        'rounded-lg',
-        'rounded-xl',
-        'rounded-2xl',
-        'rounded-3xl',
-        'rounded-full',
-        'rounded-s-none',
-        'rounded-s-sm',
-        'rounded-s',
-        'rounded-s-md',
-        'rounded-s-lg',
-        'rounded-s-xl',
-        'rounded-s-2xl',
-        'rounded-s-3xl',
-        'rounded-s-full',
+    roundedtl: [
+        { label: 'none', value: 'rounded-tl-none' },
+        { label: 'sm', value: 'rounded-tl-sm' },
+        { label: 'rounded', value: 'rounded-tl' },
+        { label: 'md', value: 'rounded-tl-md' },
+        { label: 'lg', value: 'rounded-tl-lg' },
+        { label: 'xl', value: 'rounded-tl-xl' },
+        { label: '2xl', value: 'rounded-tl-2xl' },
+        { label: '3xl', value: 'rounded-tl-3xl' },
+        { label: '3xl', value: 'rounded-tl-3xl' },
+        { label: 'full', value: 'rounded-tl-full' }
+    ],
+    roundedtr: [
+        { label: 'none', value: 'rounded-tr-none' },
+        { label: 'sm', value: 'rounded-tr-sm' },
+        { label: 'rounded', value: 'rounded-tr' },
+        { label: 'md', value: 'rounded-tr-md' },
+        { label: 'lg', value: 'rounded-tr-lg' },
+        { label: 'xl', value: 'rounded-tr-xl' },
+        { label: '2xl', value: 'rounded-tr-2xl' },
+        { label: '3xl', value: 'rounded-tr-3xl' },
+        { label: '3xl', value: 'rounded-tr-3xl' },
+        { label: 'full', value: 'rounded-tr-full' },
+    ],
+    roundedbl: [
+        { label: 'none', value: 'rounded-bl-none' },
+        { label: 'sm', value: 'rounded-bl-sm' },
+        { label: 'rounded', value: 'rounded-bl' },
+        { label: 'md', value: 'rounded-bl-md' },
+        { label: 'lg', value: 'rounded-bl-lg' },
+        { label: 'xl', value: 'rounded-bl-xl' },
+        { label: '2xl', value: 'rounded-bl-2xl' },
+        { label: '3xl', value: 'rounded-bl-3xl' },
+        { label: '3xl', value: 'rounded-bl-3xl' },
+        { label: 'full', value: 'rounded-bl-full' },
+    ],
+    roundedbr: [
+        { label: 'none', value: 'rounded-br-none' },
+        { label: 'sm', value: 'rounded-br-sm' },
+        { label: 'rounded', value: 'rounded-br' },
+        { label: 'md', value: 'rounded-br-md' },
+        { label: 'lg', value: 'rounded-br-lg' },
+        { label: 'xl', value: 'rounded-br-xl' },
+        { label: '2xl', value: 'rounded-br-2xl' },
+        { label: '3xl', value: 'rounded-br-3xl' },
+        { label: '3xl', value: 'rounded-br-3xl' },
+        { label: 'full', value: 'rounded-br-full' },
     ],
     shadow: [
-        'shado-none',
+        'shadow-none',
         'shadow',
         'shadow-xs',
         'shadow-sm',
@@ -970,7 +998,11 @@ var classes = {
         "bg-blend-color",
         "bg-blend-luminosity"
     ],
-    grayscale: ['grayscale'],
+    grayscale: [{
+        label: 'none', value: 'grayscale-0'
+    }, {
+        label: 'grayscale', value: 'grayscale'
+    }],
     animation: [
         'animate-none',
         'animate-ping',
@@ -1037,31 +1069,31 @@ var classes = {
     ],
     blur: [
         {
-            label: 'blur none', value: 'blur-none',
+            label: 'none', value: 'blur-none',
         },
         {
-            label: 'blur sm', value: 'blur-sm',
+            label: 'sm', value: 'blur-sm',
         },
         {
-            label: 'blur', value: 'blur'
+            label: 'normal', value: 'blur'
         },
         {
-            label: 'blur md', value: 'blur-md'
+            label: 'md', value: 'blur-md'
         },
         {
-            label: 'blur lg', value: 'blur-lg'
+            label: 'lg', value: 'blur-lg'
         },
         {
-            label: 'blur xl', value: 'blur-xl',
+            label: 'xl', value: 'blur-xl',
         },
         {
-            label: 'blur 2xl', value: 'blur-2xl',
+            label: '2xl', value: 'blur-2xl',
         },
         {
-            label: 'blur 3xl', value: 'blur-3xl',
+            label: '3xl', value: 'blur-3xl',
         }
     ],
-    brightness:[
+    brightness: [
         'brightness-0',
         'brightness-50',
         'brightness-75',
@@ -1074,7 +1106,7 @@ var classes = {
         'brightness-150',
         'brightness-200'
     ],
-    contrast:[
+    contrast: [
         'contrast-0',
         'contrast-50',
         'contrast-75',
@@ -1106,7 +1138,7 @@ var classes = {
             label: 'drop shadow 2xl', value: 'drop-shadow-2xl',
         }
     ],
-    huerotate:[
+    huerotate: [
         'hue-rotate-0',
         'hue-rotate-15',
         'hue-rotate-30',
@@ -1114,22 +1146,26 @@ var classes = {
         'hue-rotate-90',
         'hue-rotate-180'
     ],
-    invert:[
-
-        'invert',
-        'invert-0',
+    invert: [
+        {
+            label: 'none', value: 'invert-0',
+        }, {
+            label: 'invert', value: 'invert'
+        }
     ],
-    saturation:[
+    saturation: [
         'saturation-0',
         'saturation-50',
         'saturation-100',
         'saturation-150',
         'saturation-200'
     ],
-    sepia:[
-      
-        'sepia',
-        'sepia-0',
+    sepia: [
+        {
+            label: 'none', value: 'sepia-0',
+        }, {
+            label: 'sepia', value: 'sepia'
+        }
     ],
 
     backdropblur: [
@@ -1155,7 +1191,7 @@ var classes = {
             label: 'backdrop blur 2xl', value: 'backdrop-blur-2xl',
         }
     ],
-    backdropbrightness:[
+    backdropbrightness: [
         'backdrop-brightness-0',
         'backdrop-brightness-50',
         'backdrop-brightness-75',
@@ -1168,7 +1204,7 @@ var classes = {
         'backdrop-brightness-150',
         'backdrop-brightness-200'
     ],
-    backdropcontrast:[
+    backdropcontrast: [
         'backdrop-contrast-0',
         'backdrop-contrast-50',
         'backdrop-contrast-75',
@@ -1177,11 +1213,11 @@ var classes = {
         'backdrop-contrast-150',
         'backdrop-contrast-200'
     ],
-    backdropgrayscale:[
+    backdropgrayscale: [
         'backdrop-grayscale',
         'backdrop-grayscale-0',
     ],
-    backdrophuerotate:[
+    backdrophuerotate: [
         'backdrop-hue-rotate-0',
         'backdrop-hue-rotate-15',
         'backdrop-hue-rotate-30',
@@ -1189,11 +1225,11 @@ var classes = {
         'backdrop-hue-rotate-90',
         'backdrop-hue-rotate-180'
     ],
-    backdropinvert:[
+    backdropinvert: [
         'backdrop-invert',
         'backdrop-invert-0'
     ],
-    backdropopacity:[
+    backdropopacity: [
         'backdrop-opacity-0',
         'backdrop-opacity-5',
         'backdrop-opacity-10',
@@ -1216,7 +1252,7 @@ var classes = {
         'backdrop-opacity-150',
         'backdrop-opacity-200'
     ],
-    backdropsaturate:[
+    backdropsaturate: [
         'backdrop-saturate-0',
         'backdrop-saturate-50',
         'backdrop-saturate-100',
@@ -1224,24 +1260,24 @@ var classes = {
         'backdrop-saturate-150',
         'backdrop-saturate-200'
     ],
-    backdropsepia:[
+    backdropsepia: [
         'backdrop-sepia',
         'backdrop-sepia-0'
     ],
-    bordercollapse:[
+    bordercollapse: [
         'border-collapse',
         'border-separate'
     ],
-    borderspacing: [...setValue('border-spacing', false), 'border-spacing-px',...setValue('border-spacing-x', false), 'border-spacing-x-px', ...setValue('border-spacing-y', false), 'border-spacing-y-px'],
-    tablelayout:[
+    borderspacing: [...setValue('border-spacing', false), 'border-spacing-px', ...setValue('border-spacing-x', false), 'border-spacing-x-px', ...setValue('border-spacing-y', false), 'border-spacing-y-px'],
+    tablelayout: [
         'table-auto',
         'table-fixed'
     ],
-    captionside:[
+    captionside: [
         'caption-top',
         'caption-bottom'
     ],
-    scale:[
+    scale: [
         'slace-0',
         'scale-50',
         'scale-75',
@@ -1253,27 +1289,27 @@ var classes = {
         'scale-125',
         'scale-150',
     ],
-    scalex:[
-        'scale-x-0', 'scale-x-50', 'scale-x-75', 'scale-x-90', 'scale-x-95', 'scale-x-100','scale-x-105', 'scale-x-110','scale-x-125',        'scale-x-150',
+    scalex: [
+        'scale-x-0', 'scale-x-50', 'scale-x-75', 'scale-x-90', 'scale-x-95', 'scale-x-100', 'scale-x-105', 'scale-x-110', 'scale-x-125', 'scale-x-150',
     ],
-    scaley:[
-        'scale-y-0', 'scale-y-50', 'scale-y-75', 'scale-y-90', 'scale-y-95', 'scale-y-100','scale-y-105', 'scale-y-110','scale-y-125',        'scale-x-150',
+    scaley: [
+        'scale-y-0', 'scale-y-50', 'scale-y-75', 'scale-y-90', 'scale-y-95', 'scale-y-100', 'scale-y-105', 'scale-y-110', 'scale-y-125', 'scale-x-150',
     ],
-    translatex:[...setValue('translate-x'),'translate-x-full', 'translate-x-1/2',
-    'translate-x-1/3',
-    'translate-x-2/3',
-    'translate-x-1/4',
-    'translate-x-2/4',
-    'translate-x-3/4'
+    translatex: [...setValue('translate-x'), 'translate-x-full', 'translate-x-1/2',
+        'translate-x-1/3',
+        'translate-x-2/3',
+        'translate-x-1/4',
+        'translate-x-2/4',
+        'translate-x-3/4'
     ],
-    translatey:[...setValue('translate-y'),'translate-y-full', 'translate-y-1/2',
-    'translate-y-1/3',
-    'translate-y-2/3',
-    'translate-y-1/4',
-    'translate-y-2/4',
-    'translate-y-3/4'
+    translatey: [...setValue('translate-y'), 'translate-y-full', 'translate-y-1/2',
+        'translate-y-1/3',
+        'translate-y-2/3',
+        'translate-y-1/4',
+        'translate-y-2/4',
+        'translate-y-3/4'
     ],
-    transformorigin:[
+    transformorigin: [
         'origin-center',
         'origin-top',
         'origin-top-right',
@@ -1284,19 +1320,19 @@ var classes = {
         'origin-left',
         'origin-top-left'
     ],
-    willchange:[
+    willchange: [
         'will-change-auto',
         'will-change-scroll',
         'will-change-contents',
         'will-change-transform'
     ],
-    userselect:[
+    userselect: [
         'select-none',
         'select-text',
         'select-all',
         'select-auto'
     ],
-    touchaction:[
+    touchaction: [
         'touch-auto',
         'touch-none',
         'touch-pan-x',
@@ -1308,7 +1344,7 @@ var classes = {
         'touch-pinch-zoom',
         'touch-manipulation'
     ],
-    scrollsnaptype:[
+    scrollsnaptype: [
         'snap-none',
         'snap-x',
         'snap-y',
@@ -1316,11 +1352,11 @@ var classes = {
         'snap-mandatory',
         'snap-proximity'
     ],
-    scrollsnapstop:[
+    scrollsnapstop: [
         'snap-normal',
         'snap-always'
     ],
-    scrollsnapalign:[
+    scrollsnapalign: [
         'snap-start',
         'snap-end',
         'snap-center',
@@ -1334,7 +1370,7 @@ var classes = {
     scrollsnapmarginBottom: [...setValue('scroll-mb', true), 'scroll-auto'],
     scrollsnapmarginLeft: [...setValue('scroll-ml', true), 'scroll-auto'],
     scrollsnapmarginRight: [...setValue('scroll-mr', true), 'scroll-auto'],
-    scrollbehavior:[
+    scrollbehavior: [
         'scroll-auto',
         'scroll-smooth'
     ],
@@ -1352,12 +1388,16 @@ var classes = {
             label: 'resize', value: 'resize',
         },
     ],
-    pointerevent:[
-        'pointer-events-none',
-        'pointer-events-auto'
+    pointerevent: [
+        {
+            label: 'none', value: 'pointer-events-none',
+        },
+        {
+            label: 'auto', value: 'pointer-events-auto',
+        }
     ],
     caretcolor: setColors('caret'),
-    cursor:[
+    cursor: [
         'cursor-auto',
         'cursor-default',
         'cursor-pointer',
@@ -1395,11 +1435,18 @@ var classes = {
         'cursor-zoom-in',
         'cursor-zoom-out'
     ],
-    apparence:[
+    apparence: [
         'apparence',
         'appearance-none'
     ],
     accent: setColors('accent'),
+    radius: [
+        'none',
+        'full',
+        'sm',
+        'base',
+
+    ]
 }
 
 export const flattenClasses = () => {
@@ -1411,20 +1458,20 @@ export const flattenClasses = () => {
 
             categoryClasses.forEach((classItem) => {
                 let ctx = category;
-                if(ctx == 'textClass'){
+                if (ctx == 'textClass') {
                     ctx = 'textcolor';
                 }
-                if(ctx == 'colorClass'){
+                if (ctx == 'colorClass') {
                     ctx = 'bgcolor';
                 }
-                if(ctx == 'textHoverClass'){
+                if (ctx == 'textHoverClass') {
                     ctx = 'textcolorover';
                 }
-                if(ctx == 'colorHoverClass'){
+                if (ctx == 'colorHoverClass') {
                     ctx = 'bgcolorover';
                 }
                 if (typeof classItem === 'string' && ctx != 'colors') {
-                   
+
                     flatClasses.push({ attr: ctx, value: classItem });
                 } else {
                     flatClasses.push({ attr: ctx, value: classItem.value });

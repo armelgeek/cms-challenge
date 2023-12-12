@@ -181,3 +181,9 @@ body {
     z-index: $i;
   }
 }
+.spacing-grid-controls {
+  display: grid;
+  grid-template-columns: minmax(0,2fr) minmax(0,2fr) minmax(0,1fr) minmax(0,2fr) minmax(0,2fr);
+  grid-template-rows: minmax(0,2fr) minmax(0,2fr) minmax(0,1fr) minmax(0,2fr) minmax(0,2fr);
+  height: 12rem
+}
