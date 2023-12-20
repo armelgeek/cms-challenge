@@ -58,14 +58,15 @@ const BlockTailwind = ({ css, cid }: any) => {
         css = editor.current.css.css
     }, [])
     const updateCss = useCallback((classe: any, attr: any) => {
-        editor.current.cssObject[`${desktop.mode}`] = {
-            ...editor.current.cssObject[`${desktop.mode}`],
+         console.log('desktop',desktop.mode);
+        editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`] = {
+            ...editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`],
             [attr]: classe
         };
         if (cid === editor.current.id) {
             updateBlockStyle(editor.current.cssObject);
         }
-    }, [editor.current, desktop.mode])
+    }, [editor.current, desktop.mode,desktop.state])
     const isEnabled = (group: any) => {
         if (group.filter) {
             return group.filter.includes(editor.current.tag)
@@ -83,7 +84,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                         <>
                             {isEnabled(group) && (
                                 <div key={group.label} className={` py-1 border-b border-gray-200 dark:border-gray-700 px-3 ${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={() => setControl(group)}>
-                                    <div className="text-gray-900 dark:text-white text-xs font-medium tracking-wide flex justify-between items-center -mb-3 cursor-pointer p-3 -mx-3 -mt-3">
+                                    <div className="text-gray-900 dark:text-white text-xs font-medium tracking-wide flex justify-between items-center -mb-3 cursor-pointer px-3 py-2.5 -mx-3 -mt-3">
                                         <div className={`flex items-center leading-7 text-sm  py-px  ${gr === group.label ? 'text-white' : ''}`}>
                                             <div className="icons  mr-1">
                                                 <FaAngleRight className='text-slate-300' />
@@ -122,7 +123,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Width
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -132,7 +133,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Height
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -144,7 +145,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                             attr={c.attr}
                                             title={c.title}
                                             prefix={c.prefix || ''}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -154,7 +155,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Group
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -164,7 +165,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Spacing
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -174,7 +175,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Options
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -184,7 +185,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Options
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -195,7 +196,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                             attr={c.attr}
                                             title={c.title}
                                             selector={c.selector}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -205,7 +206,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Checkbox
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -215,7 +216,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Button
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -225,7 +226,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Color
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -235,7 +236,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <RingColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -245,7 +246,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <ShadowColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -255,7 +256,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <CaretColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -265,7 +266,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <AccentColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -275,7 +276,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <DecorationColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -285,7 +286,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <RingOffsetColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -295,7 +296,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <OutlineColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -305,7 +306,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <DivideColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -315,7 +316,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <BorderColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -335,7 +336,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <BgPosition
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -345,7 +346,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <BgGradient
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -355,7 +356,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <BgGradientPresets
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -365,7 +366,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <BgColor
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             stitle={editor.current.style}
                                             icon={c.icon || null}
                                             updateCss={updateCss}
@@ -374,28 +375,28 @@ const BlockTailwind = ({ css, cid }: any) => {
                                     {c.name == "TextSpacing" && (
                                         <TextSpacing
                                             title={'Spacing'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "TextStyle" && (
                                         <TextStyle
                                             title={'Style'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "Borders" && (
                                         <Borders
                                             title={''}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "BordersWidth" && (
                                         <BordersWidth
                                             title={''}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
@@ -407,35 +408,35 @@ const BlockTailwind = ({ css, cid }: any) => {
                                     {c.name == "DividerWidth" && (
                                         <DividerWidth
                                             title={'DividerWidth'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "Placement" && (
                                         <Placement
                                             title={'Placement'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "Scale" && (
                                         <Scale
                                             title={'Scale'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "Move" && (
                                         <Move
                                             title={'Move'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
                                     {c.name == "Skew" && (
                                         <Skew
                                             title={'Skew'}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
@@ -443,7 +444,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Origin
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}
@@ -451,7 +452,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                         <Display
                                             attr={c.attr}
                                             title={c.title}
-                                            data={editor.current.cssObject[`${desktop.mode}`]}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
                                             updateCss={updateCss}
                                         />
                                     )}

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 export function jsonToHTML(jsonData) {
     let html = '';
     if (jsonData.type != 'document') {
@@ -6,7 +7,16 @@ export function jsonToHTML(jsonData) {
             html += ` class="${jsonData.css.css}"`;
         }
         if (jsonData.style != "") {
-            html += `style:"${jsonData.style}"`;
+            html += ` style="${jsonData.style}"`;
+        }
+        if (jsonData.type != "") {
+            html += ` type="${jsonData.type}"`;
+        }
+        if (!_.isUndefined(jsonData.data.attributes)) {
+            let keys = Object.keys(jsonData.data.attributes);
+            for (let i = 0; i < keys.length; i++) {
+                html += ` ${keys[i]}="${jsonData.data.attributes[keys[i]]}"`;
+            }
         }
         html += '>';
         if (jsonData.content) {
@@ -18,7 +28,7 @@ export function jsonToHTML(jsonData) {
             });
         }
         html += `</${jsonData.element}>`;
-       
+
     }
     return html;
 }

@@ -45,15 +45,26 @@ const BlockElement = (props: any) => {
 
   const toggleBorder = () => {
     if (isEnter && (editor.current && editor.current.id == props.element.id)) {
-      return 'border-primary-500';
+      if (props.state == 'neutral') {
+        return 'border-primary-500';
+      } else {
+        return 'border-green-500';
+      }
+
     } else {
       if (editor.current && editor.current.id == props.element.id) {
-        return 'border-primary-500';
+        if (props.state == 'neutral') {
+          return 'border-primary-500';
+        } else {
+          return 'border-green-500';
+        }
+
       } else {
         return 'border-transparent';
       }
     }
   }
+
   useEffect(() => {
     props.ajustCoords(props.element, refElement?.current?.offsetWidth);
   }, [props.element])
@@ -62,7 +73,7 @@ const BlockElement = (props: any) => {
       ref: refElement,
       'style': getStyle(props.element),
       'id': props.element.id,
-      className: `relative border  ${isEnter ? 'bg-primary-100' : 'bg-white'} ${classes()} ${toggleBorder()}`,
+      className: `relative border  ${isEnter ? (props.state == 'neutral' ? 'bg-primary-100' : 'bg-green-100') : 'bg-white'} ${classes()} ${toggleBorder()}`,
       onMouseEnter: (e: any) => {
         e.stopPropagation();
         setIsEnter(true);
@@ -118,7 +129,7 @@ const BlockElement = (props: any) => {
         return <button type={props.element.tag} {...commonProps} className={'btn'}>{props.element.content}</button>;
       case 'video':
         return <video   {...commonProps} src={props.element.link}  {...props.element.options}>{props.element.content}</video>;
-      
+
       case 'audio':
         return <audio   {...commonProps} src={props.element.link}  {...props.element.options}>{props.element.content}</audio>;
       case 'iframe':
@@ -165,7 +176,7 @@ const BlockElement = (props: any) => {
         return <a  {...commonProps}>{props.element.content}</a>;
       case "hr":
         return <hr  {...commonProps} />;
-     
+
       case "option":
         return <option  {...commonProps} {...editableProps}>{props.element.content}</option>;
       default:

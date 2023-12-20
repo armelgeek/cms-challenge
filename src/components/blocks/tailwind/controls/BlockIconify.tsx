@@ -4,7 +4,7 @@ import { useDispatch } from '../../../../store';
 const ScrollItem = memo(({ setInfos, item, index }: any) => {
     return (
         <div className="text-sm  lowercase suggestion-item" key={item + '--' + index} onClick={() => {
-            setInfos()
+          setInfos(item);
         }}><span className="iconify-wrapper  text-2xl"><span className={`iconify`} data-icon={`${item}`}></span></span></div>
     )
 }, (prevProps: any, nextProps: any) => prevProps.item === nextProps.item && prevProps.index === nextProps.index)
@@ -51,7 +51,8 @@ const ScrollableList = ({ items, containerRef, setInfos }: any) => {
 }
 const BlockIconify = () => {
     const [items, setItems] = useState([]);
-    const updateBlockDataContent = useDispatch('editor', 'updateBlockDataContent');
+    const editBlockIcon = useDispatch('editor', 'editBlockIcon');
+    //editBlockIcon
     const containerRef = useRef();
     const searchIcon = (e: any) => {
         if (e.key === 'Enter' && e.target.value.length > 2) {
@@ -69,7 +70,7 @@ const BlockIconify = () => {
                 <div className="suggestions-container" ref={containerRef} style={{
                     display: items.length > 0 ? 'block' : 'none'
                 }}>
-                    <ScrollableList items={items} containerRef={containerRef} setInfos={updateBlockDataContent} />
+                    <ScrollableList items={items} containerRef={containerRef} setInfos={editBlockIcon} />
                 </div>
             </div>
         </div>

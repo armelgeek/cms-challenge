@@ -26,7 +26,7 @@ const SingleOptions = ({ title, data, attr, updateCss, prefix = '' }: any) => {
                     <div className="w-full space-y-1">
                         <div className="relative flex  gap-2 flex-col w-full max-w-full tracking-wide  min-w-0 highlight leading-5.5 text-xs rounded-md  bg-opacity-10">
                             <div className="w-full flex gap-1">
-                                <select className="select select-sm  bg-white" onChange={(e) => {
+                                <select value={selected} className="select select-sm  bg-white" onChange={(e) => {
                                     e.stopPropagation();
                                     setSelected(e.target.value);
                                     updateCss(e.target.value, attr);
@@ -37,7 +37,6 @@ const SingleOptions = ({ title, data, attr, updateCss, prefix = '' }: any) => {
                                             {
                                                 option(opt) != "" && (
                                                     <option
-                                                        selected={opt.hasOwnProperty('label') ? opt.value == selected : opt == selected}
                                                         value={`${opt.hasOwnProperty('label') ? opt.value : opt}`}>
                                                         {option(opt) + prefix}
                                                     </option>

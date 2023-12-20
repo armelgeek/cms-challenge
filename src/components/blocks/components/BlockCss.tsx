@@ -67,13 +67,13 @@ const BlockCss = () => {
     semantic: editor?.current?.semantic,
   })
   const updateCss = useCallback((classe: any, attr: any) => {
-    editor.current.cssObject[`${desktop.mode}`] = {
-      ...editor.current.cssObject[`${desktop.mode}`],
+    editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`] = {
+      ...editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`],
       [attr]: classe
     };
     updateBlockStyle(editor.current.cssObject);
 
-  }, [editor.current, desktop.mode])
+  }, [editor.current, desktop.mode,desktop.state])
   const updateBlockProperty = useDispatch('editor', 'updateBlockProperty');
   const updateValue = useCallback((value: any, type: any) => {
     if (type != 'style') {
@@ -111,10 +111,10 @@ const BlockCss = () => {
           <ScrollableList items={cls} containerRef={containerRef} selectTag={selectTag} />
         </div>
         <div className="flex flex-row flex-wrap gap-2 py-2">
-          {!_.isUndefined(state.css[`${desktop.mode}`]) && !_.isNull(state.css[`${desktop.mode}`]) && Object.keys(state.css[`${desktop.mode}`]).map((item) => {
-            return state.css[`${desktop.mode}`][item] != '' ? (
+          {!_.isUndefined(state.css[`${desktop.mode}`][`${desktop.state}`]) && !_.isNull(state.css[`${desktop.mode}`][`${desktop.state}`]) && Object.keys(state.css[`${desktop.mode}`][`${desktop.state}`]).map((item) => {
+            return state.css[`${desktop.mode}`][`${desktop.state}`][item] != '' ? (
               <div className="badge badge-primary tex-sm rounded-full text-xs lowercase font-bold cursor-pointer" key={`css-badge-` + item}>
-                <span>{state.css[`${desktop.mode}`][item]}</span>
+                <span>{state.css[`${desktop.mode}`][`${desktop.state}`][item]}</span>
                 <span className='ml-1' onClick={() => updateCss('', item)}><FaMinusCircle /></span>
               </div>
             ) : null;

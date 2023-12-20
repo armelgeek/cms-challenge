@@ -8,6 +8,7 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
   const refContainer = useRef(null);
   const [isEnter, setIsEnter] = useState(false);
   const editor = useGetter('editor', 'data', []);
+  const desktop = useGetter('desktop', 'data', []);
   const editBlockContent = useDispatch('editor', 'editBlockContent');
   const editableProps = {
     contentEditable: true,
@@ -18,15 +19,25 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
   const classes = () => {
     let css = '';
     css = doc.css && Object.values(doc.css).join(" ");
-    css += " z-" + level;
+    css += " windflow-level-" + level;
     return css;
   };
+  console.log('desktop',desktop);
   const toggleBorder = () => {
     if (isEnter && (editor.current && editor.current.id == doc.id)) {
-      return 'border-primary-500';
+      if(desktop.state=='neutral'){
+        return 'border-primary-500';
+      }else{
+        return 'border-green-500';
+      }
+     
     } else {
       if (editor.current && editor.current.id == doc.id) {
-        return 'border-primary-500';
+        if(desktop.state=='neutral'){
+          return 'border-primary-500';
+        }else{
+          return 'border-green-500';
+        }
       } else {
         return 'border-transparent';
       }
@@ -49,7 +60,7 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
       setCurrent(doc, refContainer.current?.offsetWidth)
     },
     id: doc.id,
-    className: `${classes()} ${isEnter ? 'bg-primary-100' : 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
+    className: `${classes()} ${isEnter ? (desktop.state == 'neutral' ? 'bg-primary-100': 'bg-green-100')  : 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
   }
   const render = () => (
     <>
@@ -77,6 +88,7 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
             return (
               <BlockElement
                 element={block}
+                state={desktop.state}
                 key={'block_element_' + block.id}
                 level={parseInt(level) + 1}
                 setCurrent={setCurrent}

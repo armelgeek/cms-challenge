@@ -10,10 +10,8 @@ const BlockInput = () => {
         placeholder: editor?.current?.data?.attributes?.placeholder,
         required: editor?.current?.data?.attributes?.required
     })
-    console.log('editor',editor);
-    const updateBlockProperty = useDispatch('editor', '');
+    const updateBlockProperty = useDispatch('editor', 'updateBlockProperty');
     const updateValue = useCallback((value: any, type: any) => {
-        console.log('e.target.value',value)
         let key = '';
         if(type != 'type'){
             key = 'data.attributes.' + type;
@@ -21,33 +19,33 @@ const BlockInput = () => {
             key = type;
         }
         
-        (value,key);
+        updateBlockProperty(value,key);
     }, [])
     useEffect(() => {
         setState({
             type: editor?.current?.type,
             name: editor?.current?.attributes?.data?.name,
             id: editor?.current?.attributes?.data?.id,
-            placeholder: editor?.current?.data?.attributes?.placeholder,
+            placeholder: editor?.current?.data?.attributes?.placeholder|| "Placeholder",
             required: editor?.current?.data?.attributes?.required
         });
     }, [editor?.current])
     return (
-        <div className="flex flex-col p-2 pr-20">
-            <label>Type</label>
-            <select value={state.type} onChange={(e) => updateValue(e.target.value, 'type')}>
+        <div className="flex flex-col gap-2  p-2">
+            <label className='text-sm'>Type</label>
+            <select className='select select-md'  value={state.type} onChange={(e) => updateValue(e.target.value, 'type')}>
                 <option value="text">text</option>
                 <option value="email">email</option>
                 <option value="number">number</option>
             </select>
-            <label>Name</label>
-            <input type="text" value={state.name} onChange={(e) => updateValue(e.target.value, 'name')} />
-            <label>ID</label>
-            <input type="text" value={state.id} onChange={(e) => updateValue(e.target.value, 'id')} />
-            <label>Placeholder</label>
-            <input type="text" value={state.placeholder} onChange={(e) => updateValue(e.target.value, 'placeholder')} />
-            <label>Required</label>
-            <input type="checkbox" value={state.required} onChange={(e) => updateValue(e.target.checked, 'required')} />
+            <label className='text-sm'>Name</label>
+            <input  className='text-sm border-gray-500 h-10 w-full  items-center overflow-hidden rounded-primary bg-slate-100 dark:text-white text-slate-600 dark:bg-slate-800 sm:flex border' value={state.name} onChange={(e) => updateValue(e.target.value, 'name')} />
+            <label className='text-sm'>ID</label>
+            <input  className='text-sm border-gray-500 h-10 w-full  items-center overflow-hidden rounded-primary bg-slate-100 dark:text-white text-slate-600 dark:bg-slate-800 sm:flex border'  value={state.id} onChange={(e) => updateValue(e.target.value, 'id')} />
+            <label className='text-sm'>Placeholder</label>
+            <input  className='text-sm border-gray-500  h-10 w-full  items-center overflow-hidden rounded-primary bg-slate-100 dark:text-white text-slate-600 dark:bg-slate-800 sm:flex border'  value={state.placeholder} onChange={(e) => updateValue(e.target.value, 'placeholder')} />
+            <label className='text-sm'>Required</label>
+            <input type="checkbox"  checked={state.required} onChange={(e) => updateValue(e.target.checked, 'required')} />
         </div>
     )
 }

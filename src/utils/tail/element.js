@@ -10,13 +10,48 @@ export default class Element {
             container: "",
         }
         this.cssObject = {
-            base: null,
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            base: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         },
             this.tailwind = {}
         this.font = ""
@@ -418,14 +453,40 @@ export default class Element {
         this.title = 'Container'
         this.css.css = 'container'
         this.element = 'div'
+
         this.cssObject = {
             base: {
-                container: 'container'
+                neutral: {
+                    container: 'container'
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         return this
     }
@@ -438,14 +499,39 @@ export default class Element {
         this.element = 'section'
         this.cssObject = {
             base: {
-                paddingTop: 'pt-5',
-                paddingBottom: 'pb-5',
-                width: 'w-full'
+                neutral: {
+                    paddingTop: 'pt-5',
+                    paddingBottom: 'pb-5',
+                    width: 'w-full'
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.content = 'Empty section'
         return this
@@ -460,12 +546,37 @@ export default class Element {
         this.element = 'div'
         this.cssObject = {
             base: {
-                width: 'w-full',
+                neutral: {
+                    width: 'w-full',
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.content = content
         return this
@@ -486,12 +597,38 @@ export default class Element {
                 element: 'div',
                 cssObject: {
                     base: {
-                        width: 'w-full',
+
+                        neutral: {
+                            width: 'w-full'
+                        },
+                        active: null,
+                        hover: null,
+                        focus: null
                     },
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: 'Empty Block 1'
             },
@@ -507,12 +644,38 @@ export default class Element {
                 element: 'div',
                 cssObject: {
                     base: {
-                        width: 'w-full',
+
+                        neutral: {
+                            width: 'w-full'
+                        },
+                        active: null,
+                        hover: null,
+                        focus: null
                     },
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: 'Empty Block 2'
             },
@@ -528,12 +691,37 @@ export default class Element {
                 element: 'div',
                 cssObject: {
                     base: {
-                        width: 'w-full',
+                        neutral: {
+                            width: 'w-full'
+                        },
+                        active: null,
+                        hover: null,
+                        focus: null
                     },
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: 'Empty Block 3'
             },
@@ -549,12 +737,38 @@ export default class Element {
                 element: 'div',
                 cssObject: {
                     base: {
-                        width: 'w-full',
+                        neutral: {
+                            width: 'w-full'
+                        },
+                        active: null,
+                        hover: null,
+                        focus: null
+
                     },
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: 'Empty Block 4'
             }
@@ -566,17 +780,41 @@ export default class Element {
         this.element = 'div'
         this.cssObject = {
             base: {
-                display: 'grid',
-                gap: 'gap-3',
-                width: 'w-full',
-                gridtemplatecolumn: 'grid-cols-1'
+                neutral: {
+                    display: 'grid',
+                    gap: 'gap-3',
+                    width: 'w-full',
+                    gridtemplatecolumn: 'grid-cols-1'
+                },
+                active: null,
+                hover: null,
+                focus: null
+
             },
-            lg: null,
-            md: null,
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
             sm: {
-                gridtemplatecolumn: 'grid-cols-2'
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
             },
-            xs: null
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         return this
     }
@@ -599,14 +837,39 @@ export default class Element {
         this.css.css = 'flex'
         this.cssObject = {
             base: {
-                flex: 'flex',
-                flexdirection: options.direction ? ' flex-' + options.direction : 'flex-row',
-                colspan: options.colspan ? ' col-span-' + options.colspan : ''
+                neutral: {
+                    flex: 'flex',
+                    flexdirection: options.direction ? ' flex-' + options.direction : 'flex-row',
+                    colspan: options.colspan ? ' col-span-' + options.colspan : ''
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         },
             this.css.css += options.direction ? ' flex-' + options.direction : ''
         this.css.css += options.colspan ? ' col-span-' + options.colspan : ''
@@ -623,16 +886,42 @@ export default class Element {
         this.tag = 'flex'
         this.cssObject = {
             base: {
-                flex: 'flex',
-                w: 'w-full',
-                h: 'h-80',
-                justifycenter: 'justify-center',
-                itemscenter: 'items-center'
+                neutral: {
+                    flex: 'flex',
+                    w: 'w-full',
+                    h: 'h-80',
+                    justifycenter: 'justify-center',
+                    itemscenter: 'items-center'
+                },
+                active: null,
+                hover: null,
+                focus: null
+
             },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'div'
         this.content = 'Container with preset height of 20rem (h-80) and item centered. Drag elements from the left sidebar into this container'
@@ -796,14 +1085,49 @@ export default class Element {
         this.css.css = 'input',
             this.cssObject = {
                 base: {
-                    input: 'input',
+                    neutral: {
+                        input: 'input',
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
                 },
-                xxl: null,
-                xl: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             this.placeholder = ''
         this.content = ''
@@ -869,12 +1193,38 @@ export default class Element {
             element: 'option',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
+
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Option 1'
         }, {
@@ -890,12 +1240,38 @@ export default class Element {
             element: 'option',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
+
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Option 2'
         }, {
@@ -911,12 +1287,38 @@ export default class Element {
             element: 'option',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
+
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Option 3'
         }]
@@ -953,10 +1355,43 @@ export default class Element {
         this.title = 'textarea'
         this.tag = 'textarea'
         this.css.css = 'textarea'
+
         this.cssObject = {
-            textarea: 'textarea'
-        }
-        this.type = 'textarea'
+            base: {
+                neutral: {
+                    textarea: 'textarea'
+                },
+                active: null,
+                hover: null,
+                focus: null
+
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
+        },
+            this.type = 'textarea'
         this.placeholder = 'type here'
         return this
     }
@@ -988,15 +1423,51 @@ export default class Element {
         this.css.css = 'btn btn-primary'
         this.cssObject = {
             base: {
-                btn: 'btn',
-                btnPrimary: 'btn-primary',
+
+                neutral: {
+                    btn: 'btn',
+                    btnPrimary: 'btn-primary',
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.content = 'button'
         this.value = 'button'
@@ -1018,14 +1489,51 @@ export default class Element {
             },
             element: 'li',
             cssObject: {
-                base: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                base: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'List Item 1'
-        },{
+        }, {
             id: this.randomID(),
             blocks: [],
             title: 'li',
@@ -1037,14 +1545,51 @@ export default class Element {
             },
             element: 'li',
             cssObject: {
-                base: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                base: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'List Item 2'
-        },{
+        }, {
             id: this.randomID(),
             blocks: [],
             title: 'li',
@@ -1056,24 +1601,96 @@ export default class Element {
             },
             element: 'li',
             cssObject: {
-                base: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                base: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'List Item 3'
         }]
         this.tag = 'container'
         this.css.css = ''
         this.cssObject = {
-            base: null,
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            base: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'ul'
         this.content = ''
@@ -1087,13 +1704,48 @@ export default class Element {
         this.tag = 'element'
         this.css.css = ''
         this.cssObject = {
-            base: null,
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            base: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'li'
         this.content = 'Unordered list item'
@@ -1107,13 +1759,48 @@ export default class Element {
         this.tag = 'element'
         this.css.css = ''
         this.cssObject = {
-            base: null,
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            base: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'ol'
         this.content = 'Ordered list item'
@@ -1127,13 +1814,48 @@ export default class Element {
         this.tag = 'element'
         this.css.css = ''
         this.cssObject = {
-            base: null,
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            base: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'a'
         this.content = 'Link'
@@ -1148,19 +1870,54 @@ export default class Element {
         this.css.css = 'mt-5 mb-5 border-black border-opacity-3 border-t-1 w-full'
         this.cssObject = {
             base: {
-                marginTop: 'mt-5',
-                borderColor: 'border-black',
-                borderOpacity: 'border-opacity-3',
-                marginBottom: 'mb-5',
-                borderTop: 'border-t-1',
-                width: 'w-full'
+                neutral: {
+                    marginTop: 'mt-5',
+                    borderColor: 'border-black',
+                    borderOpacity: 'border-opacity-3',
+                    marginBottom: 'mb-5',
+                    borderTop: 'border-t-1',
+                    width: 'w-full'
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'hr'
         this.content = ''
@@ -1182,12 +1939,49 @@ export default class Element {
             element: 'div',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Empty container 1'
         }, {
@@ -1202,12 +1996,49 @@ export default class Element {
             element: 'div',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Empty container 2'
         }]
@@ -1215,17 +2046,52 @@ export default class Element {
         this.css.css = 'flex flex-col gap-5 w-full'
         this.cssObject = {
             base: {
-                display: 'flex',
-                gap: 'gap-5',
-                flexdirection: 'flex-col',
-                width: 'w-full'
+                neutral: {
+                    display: 'flex',
+                    gap: 'gap-5',
+                    flexdirection: 'flex-col',
+                    width: 'w-full'
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'div'
         this.content = ''
@@ -1247,12 +2113,49 @@ export default class Element {
             element: 'div',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Empty container 1'
         }, {
@@ -1267,12 +2170,49 @@ export default class Element {
             element: 'div',
             cssObject: {
                 base: {
-                    width: 'w-full',
+                    neutral: {
+                        width: 'w-full'
+                    },
+                    active: null,
+                    hover: null,
+                    focus: null
                 },
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Empty container 2'
         }]
@@ -1280,17 +2220,52 @@ export default class Element {
         this.css.css = 'flex flex-row gap-5 w-full'
         this.cssObject = {
             base: {
-                display: 'flex',
-                gap: 'gap-5',
-                flexdirection: 'flex-row',
-                width: 'w-full'
+                neutral: {
+                    display: 'flex',
+                    gap: 'gap-5',
+                    flexdirection: 'flex-row',
+                    width: 'w-full'
+                },
+                active: null,
+                hover: null,
+                focus: null
             },
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'div'
         this.content = ''
@@ -1316,13 +2291,51 @@ export default class Element {
                 element: 'h',
                 cssObject: {
                     base: {
-                        fontWeight: 'font-bold',
-                        textSize: 'text-lg'
+                        neutral: {
+                            fontWeight: 'font-bold',
+                            textSize: 'text-lg'
+                        },
+                        active: null,
+                        hover: null,
+                        focus: null
+
                     },
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    xxl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: 'Heading title'
             },
@@ -1337,28 +2350,104 @@ export default class Element {
                     css: 'w-full'
                 },
                 element: 'p',
+
                 cssObject: {
                     base: {
-                        width: 'w-full',
+                        neutral: {
+                            width: 'w-full'
+                        },
+                        active: null,
+                        hover: null,
+                        focus: null
+
                     },
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    xxl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
+
                 content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac tortor dignissim convallis aenean. Imperdiet massa tincidunt nunc pulvinar.'
             }
         ]
         this.tag = 'container'
         this.css.css = ''
         this.cssObject = {
-            base: null,
-            xxl: null,
-            xl: null,
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            base: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+
+            },
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         }
         this.element = 'div'
         this.content = ''
@@ -1380,11 +2469,49 @@ export default class Element {
             },
             element: 'td',
             cssObject: {
-                base: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                base: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+
+                },
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Cell 1'
         }, {
@@ -1399,11 +2526,49 @@ export default class Element {
             },
             element: 'td',
             cssObject: {
-                base: null,
-                lg: null,
-                md: null,
-                sm: null,
-                xs: null
+                base: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+
+                },
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
             },
             content: 'Cell 2'
         }]
@@ -1446,11 +2611,49 @@ export default class Element {
                         },
                         element: 'th',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 1'
                     },
@@ -1466,11 +2669,49 @@ export default class Element {
                         },
                         element: 'th',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 2'
                     },
@@ -1486,11 +2727,49 @@ export default class Element {
                         },
                         element: 'th',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 3'
                     }
@@ -1504,11 +2783,49 @@ export default class Element {
                 },
                 element: 'tr',
                 cssObject: {
-                    base: null,
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    base: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+
+                    },
+                    xxl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: ''
             }
@@ -1537,11 +2854,49 @@ export default class Element {
                         },
                         element: 'td',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 1'
                     },
@@ -1557,11 +2912,49 @@ export default class Element {
                         },
                         element: 'td',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 2'
                     },
@@ -1577,11 +2970,49 @@ export default class Element {
                         },
                         element: 'td',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 3'
                     }
@@ -1595,11 +3026,49 @@ export default class Element {
                 },
                 element: 'tr',
                 cssObject: {
-                    base: null,
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    base: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+
+                    },
+                    xxl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: ''
             }
@@ -1628,11 +3097,49 @@ export default class Element {
                         },
                         element: 'td',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 1'
                     },
@@ -1648,11 +3155,49 @@ export default class Element {
                         },
                         element: 'td',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 2'
                     },
@@ -1668,11 +3213,49 @@ export default class Element {
                         },
                         element: 'td',
                         cssObject: {
-                            base: null,
-                            lg: null,
-                            md: null,
-                            sm: null,
-                            xs: null
+                            base: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+
+                            },
+                            xxl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xl: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            lg: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            md: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            sm: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            },
+                            xs: {
+                                neutral: null,
+                                active: null,
+                                hover: null,
+                                focus: null
+                            }
                         },
                         content: 'Cell 3'
                     }
@@ -1686,11 +3269,49 @@ export default class Element {
                 },
                 element: 'tr',
                 cssObject: {
-                    base: null,
-                    lg: null,
-                    md: null,
-                    sm: null,
-                    xs: null
+                    base: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+
+                    },
+                    xxl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xl: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    lg: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    md: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    sm: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    },
+                    xs: {
+                        neutral: null,
+                        active: null,
+                        hover: null,
+                        focus: null
+                    }
                 },
                 content: ''
             }
@@ -1705,12 +3326,50 @@ export default class Element {
         this.css.css = 'table'
         this.cssObject = {
             base: {
-                table: 'table'
+                neutral: {
+                    table: 'table'
+                },
+                active: null,
+                hover: null,
+                focus: null
+
             },
-            lg: null,
-            md: null,
-            sm: null,
-            xs: null
+            xxl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xl: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            lg: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            md: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            sm: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            },
+            xs: {
+                neutral: null,
+                active: null,
+                hover: null,
+                focus: null
+            }
         },
             this.blocks = [
                 {
@@ -1731,11 +3390,49 @@ export default class Element {
                                     },
                                     element: 'th',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 1'
                                 },
@@ -1751,11 +3448,49 @@ export default class Element {
                                     },
                                     element: 'th',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 2'
                                 },
@@ -1771,11 +3506,49 @@ export default class Element {
                                     },
                                     element: 'th',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 3'
                                 }
@@ -1789,11 +3562,49 @@ export default class Element {
                             },
                             element: 'tr',
                             cssObject: {
-                                base: null,
-                                lg: null,
-                                md: null,
-                                sm: null,
-                                xs: null
+                                base: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+
+                                },
+                                xxl: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                xl: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                lg: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                md: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                sm: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                xs: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                }
                             },
                             content: ''
                         }
@@ -1807,11 +3618,49 @@ export default class Element {
                     },
                     element: 'thead',
                     cssObject: {
-                        base: null,
-                        lg: null,
-                        md: null,
-                        sm: null,
-                        xs: null
+                        base: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+
+                        },
+                        xxl: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        xl: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        lg: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        md: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        sm: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        xs: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        }
                     },
                     content: ''
                 },
@@ -1833,11 +3682,49 @@ export default class Element {
                                     },
                                     element: 'td',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 1'
                                 },
@@ -1853,11 +3740,49 @@ export default class Element {
                                     },
                                     element: 'td',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 2'
                                 },
@@ -1873,11 +3798,48 @@ export default class Element {
                                     },
                                     element: 'td',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 3'
                                 }
@@ -1891,11 +3853,49 @@ export default class Element {
                             },
                             element: 'tr',
                             cssObject: {
-                                base: null,
-                                lg: null,
-                                md: null,
-                                sm: null,
-                                xs: null
+                                base: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+
+                                },
+                                xxl: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                xl: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                lg: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                md: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                sm: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                xs: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                }
                             },
                             content: ''
                         },
@@ -1914,11 +3914,49 @@ export default class Element {
                                     },
                                     element: 'td',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 11'
                                 },
@@ -1934,11 +3972,49 @@ export default class Element {
                                     },
                                     element: 'td',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 12'
                                 },
@@ -1954,11 +4030,49 @@ export default class Element {
                                     },
                                     element: 'td',
                                     cssObject: {
-                                        base: null,
-                                        lg: null,
-                                        md: null,
-                                        sm: null,
-                                        xs: null
+                                        base: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+
+                                        },
+                                        xxl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xl: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        lg: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        md: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        sm: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        },
+                                        xs: {
+                                            neutral: null,
+                                            active: null,
+                                            hover: null,
+                                            focus: null
+                                        }
                                     },
                                     content: 'Cell 13'
                                 }
@@ -1972,11 +4086,50 @@ export default class Element {
                             },
                             element: 'tr',
                             cssObject: {
-                                base: null,
-                                lg: null,
-                                md: null,
-                                sm: null,
-                                xs: null
+                                base: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+
+                                },
+                                xxl: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                xl: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                lg: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },                                            active: null,
+
+                                md: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                sm: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                },
+                                xs: {
+                                    neutral: null,
+                                    active: null,
+                                    hover: null,
+                                    focus: null
+                                }
                             },
                             content: ''
                         }
@@ -1990,11 +4143,49 @@ export default class Element {
                     },
                     element: 'tbody',
                     cssObject: {
-                        base: null,
-                        lg: null,
-                        md: null,
-                        sm: null,
-                        xs: null
+                        base: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+
+                        },
+                        xxl: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        xl: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        lg: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        md: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        sm: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        },
+                        xs: {
+                            neutral: null,
+                            active: null,
+                            hover: null,
+                            focus: null
+                        }
                     },
                     content: ''
                 },

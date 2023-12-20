@@ -196,19 +196,70 @@ export const updateBlockStyle = (obj: any) => async (dispatch: any, getState: an
   let current = getState().editor.current;
   let css = '';
   let keys = Object.keys(obj);
+
+  const flattenObject: any = (nestedObj: any, prefix = '') => {
+    return Object.keys(nestedObj).reduce((acc, key) => {
+      const newKey = `${prefix}`;
+      if (typeof nestedObj[key] === 'object' && nestedObj[key] !== null) {
+        return { ...acc, ...flattenObject(nestedObj[key], `${newKey}.`) };
+      } else {
+        return { ...acc, [newKey]: nestedObj[key] };
+      }
+    }, {});
+  };
+
   for (let index = 0; index < keys.length; index++) {
     let key = keys[index];
 
     if (key !== 'base' && obj[key] != null) {
-      const values = Object.values(obj[key]);
-      if (key == 'xxl') { key = '2xl'; }
-      const prefixedValues = values.map(value => `${key}:${value}`);
-      css += ` ${prefixedValues.join(' ')}`;
+      const stateKeys = Object.keys(obj[key]);
+      for (let i = 0; i < stateKeys.length; i++) {
+        const stateKey = stateKeys[i];
+        if (stateKey === 'neutral') {
+          console.log('obj[key][stateKey]', obj[key][stateKey]);
+          if (obj[key][stateKey] != null) {
+            const values = Object.entries(obj[key][stateKey]).map(([prop, value]) => {
+              if (value != null && value != "") {
+                return `${key}:${value}`
+              }
+            });
+            css += ` ${values.join(' ')}`;
+          }
+        } else {
+          if (obj[key][stateKey] != null) {
+            const flattenedValues = flattenObject(obj[key][stateKey], `${key}:${stateKey}`);
+            const prefixedValues = Object.entries(flattenedValues).map(([subKey, value]) =>{
+              if (value != null && value != "") {
+                return `${subKey}:${value}`
+              }
+              });
+            css += ` ${prefixedValues.join(' ')}`;
+          }
+        }
+      }
     } else if (key === 'base' && obj[key] != null) {
-      css += ` ${Object.values(obj[key]).join(' ')}`
+      const stateKeys = Object.keys(obj[key]);
+      for (let i = 0; i < stateKeys.length; i++) {
+        const stateKey = stateKeys[i];
+        if (stateKey === 'neutral') {
+          const values = Object.entries(obj[key][stateKey]).map(([prop, value]) => `${value}`);
+          css += ` ${values.join(' ').trim()}`;
+        } else {
+          console.log('obj[key][stateKey]', obj[key][stateKey]);
+          if (obj[key][stateKey] != null) {
+            const flattenedValues = flattenObject(obj[key][stateKey], `${stateKey}`);
+            const prefixedValues = Object.entries(flattenedValues).map(([subKey, value]) => `${stateKey}:${value}`);
+            css += ` ${prefixedValues.join(' ')}`;
+          }
+
+        }
+      }
     }
   }
-  css = [...new Set(css.split(' '))].join(' ')
+
+
+
+  css = [...new Set(css.split(' '))].join(' ').trim()
 
   dispatch({
     type: 'editor__item__infos',
@@ -310,7 +361,7 @@ export const editBlockFontContent = (value: any) => async (dispatch: any, getSta
 }
 
 function updateBlockFontContent(blocks: any, currentId: any, modified: any) {
-  console.log('updateBlockFontContent', blocks,modified,currentId);
+  console.log('updateBlockFontContent', blocks, modified, currentId);
   blocks.forEach((block: any) => {
     if (block.id === currentId) {
       block.font = modified
@@ -553,30 +604,30 @@ export const savePage = (projectId: any) => async (dispatch: any, getState: any)
     //let previewFrame = document.querySelector("#preview-frame");
     //if (previewFrame) {
     //  console.log('page','tail-editor-hym2q',page.id);
-      //let el = previewFrame?.contentWindow.document.querySelector('#' + page.id) as any;
-      //if (!el) return null;
-      try {
-       // let img = await takeScreenShot(el);
-        let requestObj = sdk.updateUIkit({
-          id: page.id,
-          name: page.name,
+    //let el = previewFrame?.contentWindow.document.querySelector('#' + page.id) as any;
+    //if (!el) return null;
+    try {
+      // let img = await takeScreenShot(el);
+      let requestObj = sdk.updateUIkit({
+        id: page.id,
+        name: page.name,
         //  image: img || null,
-          description: page.description,
-          templates: JSON.stringify(page),
-        }).promise;
-        requestObj
-          .then((response: any) => {
-            dispatch({
-              type: 'editor__item__info',
-              payload: {
-                prop: 'page',
-                value: page
-              },
-            });
-          })
-      } catch (e) {
-        console.log('Error [edit to kit]:', e);
-      }
+        description: page.description,
+        templates: JSON.stringify(page),
+      }).promise;
+      requestObj
+        .then((response: any) => {
+          dispatch({
+            type: 'editor__item__info',
+            payload: {
+              prop: 'page',
+              value: page
+            },
+          });
+        })
+    } catch (e) {
+      console.log('Error [edit to kit]:', e);
+    }
     //}
   } else {
     try {
@@ -823,9 +874,51 @@ export const updateProject = (value: any, key: any) => async (dispatch: any, get
     })
 }
 
-export const importBlock = () => async (dispatch: any, getState: any) => {
 
+
+
+function updateBlockIcon(blocks: any, currentId: any, modified: any) {
+  blocks.forEach((block: any) => {
+    if (block.id === currentId) {
+      block.icon = modified
+    }
+    if (block.blocks && block.blocks.length > 0) {
+      updateBlockIcon(block.blocks, currentId, modified);
+    }
+  });
 }
+
+
+export const editBlockIcon = (value: any) => async (dispatch: any, getState: any) => {
+  let editor = getState().editor;
+  let current = getState().editor.current;
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'current.icon': value
+    }
+  })
+  if (current.tag == 'document') {
+    editor.document.icon = value;
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document': editor.document
+      }
+    })
+  } else {
+    updateBlockIcon(editor.document.blocks, current.id, value);
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document.blocks': editor.document.blocks
+      }
+    })
+  }
+}
+
+
+
 function removeNestedObjectsKey(currentNode = {} as any, arrayKey: any = [], deleteKey = '') {
   delete currentNode[deleteKey]
   currentNode[arrayKey].forEach((obj: any) => {
@@ -897,4 +990,6 @@ export const getCurrentHTML = () => async (dispatch: any, getState: any) => {
     }
   })
 }
+
+
 

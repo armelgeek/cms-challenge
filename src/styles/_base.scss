@@ -177,7 +177,7 @@ body {
 }
 
 @for $i from 1 through 100 {
-  .z-#{$i} {
+  .windflow-level-#{$i} {
     z-index: $i;
   }
 }

@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import _ from 'lodash';
-import twClasses from "../../../../utils/scripts/tw.classes";
 import Options from './Options';
 
 const Height = ({ title, attr, data, updateCss }: any) => {
-    const [model, setModel] = useState(!_.isNull(data) && !_.isUndefined(data[attr]) ? data[attr] : {});
     return (
         <div className="flex-1 space-y-2 w-full">
             <div className="flex relative disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none min-w-0">

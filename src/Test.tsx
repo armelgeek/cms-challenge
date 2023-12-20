@@ -80,13 +80,7 @@ const Test = ({ children, setCurrent }: any) => {
       resizeTo(originalWidth * zoomFactor, originalHeight * zoomFactor, pxd);
     }
   };
-  const setMode = (mode: any) => {
-    setInfo({
-      prop: 'mode',
-      value: mode
-    })
-
-  }
+ 
   const head = () => {
     let fonts = jp.query(editor.page.json.blocks, '$..blocks..font');
     let uniqueFonts = [...new Set(fonts.filter(a => a))];
@@ -219,16 +213,7 @@ const Test = ({ children, setCurrent }: any) => {
           </div>
         </div>
         <div className="w-1/6">
-          {/**<div className="flex flex-row items-center gap-3 mr-3">
-            <div className='flex flex-row  border rounded-full gap-2 p-1 border-gray-300'>
-              <div onClick={() => setMode('base')} className={`cursor-pointer badge badge-${desktop.mode == 'base' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>ALL</div>
-              <div onClick={() => setMode('sm')} className={`cursor-pointer badge badge-${desktop.mode == 'sm' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>SM</div>
-              <div onClick={() => setMode('md')} className={`cursor-pointer badge badge-${desktop.mode == 'md' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>MD</div>
-              <div onClick={() => setMode('lg')} className={`cursor-pointer badge badge-${desktop.mode == 'lg' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>LG</div>
-              <div onClick={() => setMode('xl')} className={`cursor-pointer badge badge-${desktop.mode == 'xl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>XL</div>
-              <div onClick={() => setMode('xxl')} className={`badge badge-${desktop.mode == 'xxl' ? 'primary' : 'default'} px-3 py-1 border rounded-2xl`}>2XL</div>
-            </div>
-          </div>**/}
+          
           <div className="border-gray-200 dark:border-gray-600 w-64 border-l order-last bg-white dark:bg-gray-800  z-30 h-full relative">
             {editor.current ? (
               <>

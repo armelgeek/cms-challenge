@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useGetter } from '../../store';
 import { FiMenu } from 'react-icons/fi';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { FaPlusCircle } from 'react-icons/fa';
+import { FaEdit, FaPlusCircle } from 'react-icons/fa';
 
 const Tabs = () => {
   const tabs = useGetter('desktop', 'tabs', []);
@@ -74,12 +74,12 @@ const Tabs = () => {
         <div key={tab.label} title={tab.label} className={`w-56 mx-1 ${index === currentTab ? 'bg-white text-gray-400' : 'bg-primary-200'}  relative border-l border-t border-r border-primary-600 rounded-t px-2  flex items-center cursor-pointer h-8`}>
           
           <div 
-          contentEditable={true}
-          onBlur={(e: any) => {
+         // contentEditable={true}
+         /** onBlur={(e: any) => {
             //Todo: debouce 
             updateProject(e.currentTarget.textContent,'name');
-          }}
-          onClick={()=> openTab(index)} className={`truncate mx-3 text-sm bg-gray-700 w-52 text-white px-3 rounded-xl`}>{tab.label}</div><AiFillCloseCircle className="text-gray-700 absolute right-0 mx-2" onClick={() => removeTab(index)} />
+          }} */
+          onClick={()=> openTab(index)} className={`truncate mx-3 text-sm bg-gray-700 w-52 text-white px-3 rounded-xl`}>{tab.label}</div><FaEdit className='mr-2'></FaEdit><AiFillCloseCircle className="text-gray-700 absolute right-0 mx-2" onClick={() => removeTab(index)} />
         </div>
       ))}
       <div className={`relative  px-2  cursor-pointer`} onClick={createEmptyBlock}>

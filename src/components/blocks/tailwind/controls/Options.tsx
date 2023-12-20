@@ -23,7 +23,7 @@ const Options = ({ title, data, attr, updateCss }: any) => {
             {/** <span className="uppercase font-bold" style={{
                 fontSize: "10px"
             }}>{title || attr}</span> */}
-            <select className="select select-sm bg-white" onChange={(e) => {
+            <select value={selected} className="select select-sm bg-white" onChange={(e) => {
                 e.stopPropagation();
                 setSelected(e.target.value);
                 updateCss(e.target.value, attr);
@@ -34,7 +34,6 @@ const Options = ({ title, data, attr, updateCss }: any) => {
                         {
                             option(opt) != "" && (
                                 <option
-                                    selected={opt.hasOwnProperty('label') ? opt.value == selected : opt == selected}
                                     value={`${opt.hasOwnProperty('label') ? opt.value : opt}`}>
                                     {option(opt)}
                                 </option>
