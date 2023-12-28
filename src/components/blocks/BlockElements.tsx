@@ -26,7 +26,10 @@ const BlockElements = () => {
       <div className="relative">
         {editor.elements.map((group:any) => (
           <React.Fragment key={Math.random().toString(36).substring(7)}>
-          <div  className={`capitalize flex items-center cursor-pointer p-2  text-base ${gr === group.label ? 'bg-primary-500 text-white' : ''}`} onClick={() => setGr(gr === group.label ? null : group.label)}>
+          <div  className={`capitalize flex items-center cursor-pointer p-2  text-base ${gr === group.label ? 'bg-primary-500 text-white' : ''}`} onClick={(e) => {
+            
+            setGr(gr === group.label ? null : group.label)
+          }}>
             {group.label}
             <div className="absolute right-0 m-1">
             {gr === group.label ?  <MdOutlineExpandLess/> : <MdOutlineExpandMore/>}
@@ -34,7 +37,10 @@ const BlockElements = () => {
           </div>
           <div key={group.label} className="flex  bg-slate-100 flex-row flex-wrap justify-center cursor-pointer p-2" style={{ display: gr === group.label ? 'flex' : 'none' }}>
             {group.elements.map((element:any) => (
-              <div key={element.name} className="bg-white m-1 hover:bg-gray-100 flex flex-col items-center h-16 w-16 text-xs justify-center text-center text-gray-500 rounded hover:text-primary-600 shadow" onClick={() => createElement(element)}>
+              <div key={element.name} className="bg-white m-1 hover:bg-gray-100 flex flex-col items-center h-16 w-16 text-xs justify-center text-center text-gray-500 rounded hover:text-primary-600 shadow" onClick={(e) => {
+                
+                createElement(element)
+                }}>
                 <div className="material-icons text-3xl">
                   {element.icon}
                 </div>

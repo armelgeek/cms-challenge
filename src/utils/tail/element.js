@@ -179,7 +179,11 @@ export default class Element {
 
                 label: 'Media',
                 elements: [
-
+                    {
+                        id: 'iconify',
+                        name: 'Icon',
+                        icon: 'iconify'
+                    },
                     {
                         id: 'image',
                         name: 'Image',
@@ -411,6 +415,7 @@ export default class Element {
             case 'header': return this.Thead(options);
             case 'body': return this.TBody(options);
             case 'footer': return this.TFooter(options);
+            case 'iconify': return this.Iconify(options);
             default: return null;
         }
     }
@@ -1033,13 +1038,11 @@ export default class Element {
 
 
     Icon() {
-        this.label = 'Material Icon'
-        this.title = 'Material Icon'
+        this.label = 'Icon'
+        this.title = 'Icon'
         this.data = { icon: 'home' }
-        this.tag = "micon"
-        this.css.css = 'text-xl'
+        this.tag = "span"
         this.content = 'home'
-        this.css.container = 'material-icons'
         this.element = 'i'
         return this
     }
@@ -1047,12 +1050,55 @@ export default class Element {
     Iconify() {
         this.label = 'Iconify'
         this.title = 'Icon'
-        this.data = { icon: 'fa:home' }
-        this.tag = "iconify"
-        this.css.css = 'text-2xl'
-        this.content = ''
-        this.css.container = ''
-        this.element = 'IconifyIcon'
+        this.type = 'element'
+        this.tag = "i"
+        this.css.css = 'iconify',
+        this.cssObject = {
+                base: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xxl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xl: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                lg: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                md: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                sm: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                },
+                xs: {
+                    neutral: null,
+                    active: null,
+                    hover: null,
+                    focus: null
+                }
+            },
+            this.content = ''
+        this.element = 'iconify'
         return this
     }
 
@@ -1333,6 +1379,7 @@ export default class Element {
         this.type = 'number'
         return this
     }
+
 
     InputHidden() {
         this.inputElement()
@@ -4110,7 +4157,7 @@ export default class Element {
                                     active: null,
                                     hover: null,
                                     focus: null
-                                },                                            active: null,
+                                }, active: null,
 
                                 md: {
                                     neutral: null,

@@ -39,7 +39,7 @@ function HorizontallyBound(childDiv: any) {
 const BlockFloating = ({ floatRef, coords }: any) => {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const editor = useGetter('editor', 'data', []);
-  const [gr, setGr] = useState('structure');;
+  const [gr, setGr] = useState('structure');
   const moveBlock = useDispatch('editor', 'moveBlock');
   const duplicateBlock = useDispatch('editor', 'duplicateBlock');
   const navigateToParent = useDispatch('editor', 'navigateToParent');
@@ -95,11 +95,11 @@ const BlockFloating = ({ floatRef, coords }: any) => {
         left: coords.left
       }}
     >
-      <small className=" text-white  capitalize">{editor.current.tag == "document" ? "Body" : editor.current.title}</small>
+      <small className=" text-white capitalize">{editor.current.tag == "document" ? "Body" : editor.current.title}</small>
       {editor.current.type === 'container' && (
 
         <div title={'Add in current UI Kit'} className="text-white  hover:text-purple-300 text-sm" onClick={() => setShow(true, "Ajouter dans le UI Kit", 'add-to-kit')}>
-          <CgExtensionAdd size={18} />
+          <CgExtensionAdd size={18}  />
         </div>
       )}
       <div title={'Export code'} className="text-white  hover:text-purple-300 text-sm" onClick={showSourceCode}>

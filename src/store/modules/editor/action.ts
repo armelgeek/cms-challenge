@@ -228,11 +228,11 @@ export const updateBlockStyle = (obj: any) => async (dispatch: any, getState: an
         } else {
           if (obj[key][stateKey] != null) {
             const flattenedValues = flattenObject(obj[key][stateKey], `${key}:${stateKey}`);
-            const prefixedValues = Object.entries(flattenedValues).map(([subKey, value]) =>{
+            const prefixedValues = Object.entries(flattenedValues).map(([subKey, value]) => {
               if (value != null && value != "") {
                 return `${subKey}:${value}`
               }
-              });
+            });
             css += ` ${prefixedValues.join(' ')}`;
           }
         }
@@ -242,8 +242,12 @@ export const updateBlockStyle = (obj: any) => async (dispatch: any, getState: an
       for (let i = 0; i < stateKeys.length; i++) {
         const stateKey = stateKeys[i];
         if (stateKey === 'neutral') {
-          const values = Object.entries(obj[key][stateKey]).map(([prop, value]) => `${value}`);
-          css += ` ${values.join(' ').trim()}`;
+          if (obj[key][stateKey] != null) {
+            console.log('obj[key][stateKey]xx', obj[key][stateKey]);
+            const values = Object.entries(obj[key][stateKey]).map(([prop, value]) => `${value}`);
+            css += ` ${values.join(' ').trim()}`;
+          }
+
         } else {
           console.log('obj[key][stateKey]', obj[key][stateKey]);
           if (obj[key][stateKey] != null) {
@@ -599,6 +603,7 @@ export const addPage = () => async (dispatch: any, getState: any) => {
 export const savePage = (projectId: any) => async (dispatch: any, getState: any) => {
   if (!getState().editor.page) return
   let page = getState().editor.page;
+  console.log('page state', page);
   if (page.category == 'uikit') {
     console.log('page category', page);
     //let previewFrame = document.querySelector("#preview-frame");
@@ -650,6 +655,7 @@ export const savePage = (projectId: any) => async (dispatch: any, getState: any)
         })
         return savedPage
       } else {
+        console.log('it saved successfully',page.json.blocks);
         const savedPage = new Promise((resolve, reject) => {
           let requestObj = sdk.updatePage({ ...page, blocks: JSON.stringify(page.json.blocks), tags: JSON.stringify(page.tags) }, page.id).promise;
           requestObj
@@ -770,7 +776,7 @@ function duplicateBlockAction(blocks: any, currentId: any) {
   let duplicatedBlock: any;
   blocks.forEach((block: any, index: number) => {
     if (block.id === currentId) {
-      duplicatedBlock = { ...block, id: 'windflow-' + Math.random().toString(36).substring(7) };
+      duplicatedBlock = { ...block, id: 'windflow-' + Math.random().toString(36).substr(2, 5) };
       blocks.splice(index + 1, 0, duplicatedBlock);
     }
     if (block.blocks && block.blocks.length > 0) {
@@ -783,18 +789,20 @@ function duplicateBlockAction(blocks: any, currentId: any) {
 export const duplicateBlock = () => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
   let current = getState().editor.current;
-  console.log('editor', editor);
-  console.log('current', current);
   const { duplicatedBlock, blocks } = duplicateBlockAction(editor.document.blocks, current.id);
-
+  editor.document.blocks = blocks;
   dispatch({
     type: 'editor__item__infos',
     payload: {
-      'document.blocks': blocks,
+      'document.blocks': blocks
+    }
+  })
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
       'current': duplicatedBlock
     }
   })
-
 }
 function navigateToParentAction(blocks: any, currentId: any): any | null {
   for (const block of blocks) {
@@ -877,13 +885,14 @@ export const updateProject = (value: any, key: any) => async (dispatch: any, get
 
 
 
+
 function updateBlockIcon(blocks: any, currentId: any, modified: any) {
   blocks.forEach((block: any) => {
     if (block.id === currentId) {
-      block.icon = modified
+      block.data.icon = modified
     }
     if (block.blocks && block.blocks.length > 0) {
-      updateBlockIcon(block.blocks, currentId, modified);
+      updateBlockImageUrl(block.blocks, currentId, modified);
     }
   });
 }
@@ -892,29 +901,20 @@ function updateBlockIcon(blocks: any, currentId: any, modified: any) {
 export const editBlockIcon = (value: any) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
   let current = getState().editor.current;
+  console.log('current: ',current.id);
   dispatch({
     type: 'editor__item__infos',
     payload: {
-      'current.icon': value
+      'current.data.icon': value
     }
   })
-  if (current.tag == 'document') {
-    editor.document.icon = value;
-    dispatch({
-      type: 'editor__item__infos',
-      payload: {
-        'document': editor.document
-      }
-    })
-  } else {
-    updateBlockIcon(editor.document.blocks, current.id, value);
-    dispatch({
-      type: 'editor__item__infos',
-      payload: {
-        'document.blocks': editor.document.blocks
-      }
-    })
-  }
+  updateBlockIcon(editor.document.blocks, current.id, value);
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'document.blocks': editor.document.blocks
+    }
+  })
 }
 
 

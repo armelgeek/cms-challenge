@@ -252,7 +252,7 @@ var classes = {
         'min-h-0', 'min-h-max', 'min-h-fit', 'min-h-screen', 'min-h-full'
     ],
     maxHeight: ['max-h-none', ...setValue('max-h', false), 'max-h-min', 'max-h-max', 'max-h-fit', 'max-h-screen', 'max-h-full', 'max-h-px'],
-    semantics: ['article', 'aside', 'details', 'div', 'figcaption', 'figure', 'footer', 'form', 'header', 'hero', 'label', 'main', 'mark', 'nav', 'product', 'section', 'span', 'summary', 'time'],
+    semantics: ['article', 'aside', 'details', 'div', 'figcaption', 'figure', 'footer', 'form', 'header', 'label', 'main', 'mark', 'nav', 'section', 'span', 'summary', 'time'],
     textSize: [
         'text-xs',
         'text-sm',

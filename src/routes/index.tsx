@@ -2,7 +2,6 @@ import "../App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Editor from "../Editor";
 import UserLibrary from "../components/editor/UserLibrary";
-import FontPicker from "../FontPicker";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../Home";
 import PublicRoute from "./PublicRoute";
@@ -16,7 +15,7 @@ import Projects from "../pages/Projects";
 const Index = () => {
   return (
     <div className="relative ">
-      <Router>
+     <Router>
         <Switch>
           <PublicRoute path="/" exact component={Home} />
           <UserRoute path="/login" exact component={LoginRegisterPage} />

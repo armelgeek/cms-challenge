@@ -1,10 +1,12 @@
 import React, { memo, useCallback, useEffect, useRef, useState } from 'react'
-import icon from '../../../../utils/api/icon';
-import { useDispatch } from '../../../../store';
+import icon from '../../../utils/api/icon';
+import { useDispatch } from '../../../store';
 const ScrollItem = memo(({ setInfos, item, index }: any) => {
     return (
-        <div className="text-sm  lowercase suggestion-item" key={item + '--' + index} onClick={() => {
+        <div className="text-sm  lowercase suggestion-item" key={item + '--' + index} onClick={(e) => {
+            
           setInfos(item);
+          console.log('icon clicked', item);
         }}><span className="iconify-wrapper  text-2xl"><span className={`iconify`} data-icon={`${item}`}></span></span></div>
     )
 }, (prevProps: any, nextProps: any) => prevProps.item === nextProps.item && prevProps.index === nextProps.index)
@@ -50,15 +52,17 @@ const ScrollableList = ({ items, containerRef, setInfos }: any) => {
     );
 }
 const BlockIconify = () => {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(['mdi:love', 'mingcute:love-fill', 'mingcute:love-line', 'mdi:book-love', 'mdi:book-love-outline', 'mdi:head-love', 'mdi:head-love-outline', 'mdi:find-love', 'mdi:love-seat', 'mdi:love-seat-outline', 'iconoir:user-love', 'icon-park-outline:oval-love', 'icon-park:oval-love', 'game-icons:evil-love', 'game-icons:love-howl', 'game-icons:love-song', 'game-icons:self-love', 'mdi:robot-love', 'mdi:robot-love-outline', 'openmoji:love-hotel', 'twemoji:love-hotel', 'noto:love-hotel', 'fluent-emoji:love-hotel', 'fluent-emoji-flat:love-hotel', 'fluent-emoji-high-contrast:love-hotel', 'noto-v1:love-hotel', 'emojione:love-hotel', 'emojione-monotone:love-hotel', 'emojione-v1:love-hotel', 'streamline-emojis:love-hotel', 'game-icons:royal-love', 'mdi:love-letter', 'openmoji:love-letter', 'twemoji:love-letter', 'noto:love-letter', 'fluent-emoji:love-letter', 'fluent-emoji-flat:love-letter', 'fluent-emoji-high-contrast:love-letter', 'noto-v1:love-letter', 'emojione:love-letter', 'emojione-monotone:love-letter']);
     const editBlockIcon = useDispatch('editor', 'editBlockIcon');
     //editBlockIcon
     const containerRef = useRef();
     const searchIcon = (e: any) => {
+        
         if (e.key === 'Enter' && e.target.value.length > 2) {
             let requestObj = icon.iconFinder(e.target.value).promise;
             requestObj.then((response: any) => {
-                setItems(response.icons);
+                console.log('icons',response.icons);
+                setItems(response.icons || []);
             })
         }
     }

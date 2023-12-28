@@ -13,7 +13,7 @@ import EditorFooter from "../../Footer";
 import Test from "../../Test";
 import Tabs from "../desktop/Tabs";
 
-const BlockEditor = ({ref}:any) => {
+const BlockEditor = ({ref,customZoom}:any) => {
   const [state, setState] = useState({
     currentSize: null,
     mode: 'base',
@@ -163,7 +163,7 @@ const BlockEditor = ({ref}:any) => {
   if (!_.isEmpty(editor.page) && !_.isEmpty(editor.document)) {
     return (
       <div id="mainEditor">
-        <Test setCurrent={setCurrent}>
+        <Test setCurrent={setCurrent}  customZoom={customZoom}>
           <div id="BlockEditor" ref={ref}>
             {editor.document && (<BlockContainer
               doc={editor.document}
@@ -172,18 +172,18 @@ const BlockEditor = ({ref}:any) => {
               ajustCoords={ajustCoords}
             />)}
           </div>
-          <BlockFloating
+           <BlockFloating
             close={closeBFloating}
             floatRef={floatRef}
             coords={state.containerCoords}
             component={state.component ? 'opacity-100' : 'opacity-0'} />
 
-          {/**{editor.current && state.viewBlocks && (
+         {editor.current && state.viewBlocks && (
             <pre>
               {editor.current.tag}
               {editor.current}
             </pre>
-          )}**/}
+          )}
         </Test>
       </div>
     );

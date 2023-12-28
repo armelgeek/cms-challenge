@@ -7,7 +7,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
 
     return (
         <>
-            <div className="flex-1 space-y-3 m-3">
+            <div className="flex-1 space-y-3 m-1">
                 <div className="spacing-grid-controls">
                     <div className="relative row-start-1 col-start-1 col-span-5 row-span-5 rounded-xl bg-slate-200">
                         <button type="button" className='absolute focus:outline-none hover:text-gray-350 z-10 hover:z-20 active:z-20 block w-full top-0 text-primary-500 text-opacity-50 dark:text-gray-450'>
@@ -65,11 +65,11 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                                 <div className="h-2 w-2 border  mx-auto bg-primary-500 dark:bg-gray-900"></div>
                             </div>
                         </button>
-                        <span className="absolute bottom-0 right-0 m-1 text-xs transform scale-90 text-primary-500 dark:text-white text-opacity-60 dark:text-opacity-60 leading-3"> Padding </span>
+                        <span className="absolute -bottom-2 right-0 m-1 text-xs transform scale-90 text-primary-500 dark:text-white text-opacity-60 dark:text-opacity-60 leading-3"> Padding </span>
                     </div>
                     <div className="row-start-1 col-start-3 justify-self-center self-center">
                         <div className="relative inline-block my-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'marginTop'}
                                     title={''}
@@ -81,7 +81,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-3 col-start-5 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'marginRight'}
                                     title={''}
@@ -93,7 +93,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-5 col-start-3 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'marginBottom'}
                                     title={''}
@@ -105,7 +105,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-3 col-start-1 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'marginLeft'}
                                     title={''}
@@ -117,7 +117,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-2 col-start-3 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'paddingTop'}
                                     title={''}
@@ -129,7 +129,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-3 col-start-4 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'paddingRight'}
                                     title={''}
@@ -141,7 +141,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-4 col-start-3 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'paddingBottom'}
                                     title={''}
@@ -153,7 +153,7 @@ const Spacing = ({ title, data, attr, updateCss }: any) => {
                     </div>
                     <div className="row-start-3 col-start-2 justify-self-center self-center">
                         <div className="relative inline-block mx-1.5">
-                            <div className="w-10 flex">
+                            <div className="w-[38px] flex">
                                 <Options
                                     attr={'paddingLeft'}
                                     title={''}

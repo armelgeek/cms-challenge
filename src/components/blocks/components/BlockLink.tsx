@@ -24,7 +24,7 @@ const BlockLink = ({ link }: any) => {
                 {editor.current && (
                     <>
                         <label>Link</label>
-                        <input className="ml-2 p-1 rounded w-56 text-lg" value={state.link} onChange={(e) => updateValue(e.target.value, 'link')} />
+                        <input className="ml-2 p-1 rounded w-56 text-lg" value={state.link} onChange={(e) => {  updateValue(e.target.value, 'link')}} />
                     </>
                 )}
 
@@ -33,7 +33,7 @@ const BlockLink = ({ link }: any) => {
                 {editor.current && (
                     <>
                         <label>Anchor</label>
-                        <input className="ml-2 p-1 rounded w-56 text-lg" value={state.anchor} onChange={(e) => updateValue(e.target.value, 'anchor')} />
+                        <input className="ml-2 p-1 rounded w-56 text-lg" value={state.anchor} onChange={(e) => {  updateValue(e.target.value, 'anchor')}} />
                     </>
                 )}
             </div>

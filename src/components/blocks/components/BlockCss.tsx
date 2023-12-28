@@ -122,9 +122,11 @@ const BlockCss = () => {
         </div>
       </div>
       <span className="uppercase font-bold   my-2" style={{fontSize: '10px'}}>Style</span>
-      <textarea value={state.style} rows={10} onChange={(e: any) => updateValue(e.target.value, 'style')} className="text-sm textarea border font-mono w-full h-1/6 bg-white shadow p-1" />
+      <textarea value={state.style} rows={10} onChange={(e: any) => {
+          
+        updateValue(e.target.value, 'style')}} className="text-sm textarea border font-mono w-full h-1/6 bg-white shadow p-1" />
       <span className="uppercase font-bold   mt-2" style={{fontSize: '10px'}}>Semantic</span>
-      <select value={state.semantic} className="w-full mr-4 select select-sm" onChange={(e: any) => updateValue(e.target.value, 'semantic')}>
+      <select value={state.semantic} className="w-full mr-4 select select-sm" onChange={(e: any) =>{   updateValue(e.target.value, 'semantic')}}>
         <option value=""></option>
         {semantics.map(semantic => (
           <option key={semantic} selected={state.semantic == semantic} value={semantic}>{semantic}</option>

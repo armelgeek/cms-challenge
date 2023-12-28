@@ -77,7 +77,9 @@ export const mergeReducers = (moduleName: any, initialState: any, mutations: any
     },
 
     [`${moduleName}__item__infos`](state: any, updates: any) {
+      console.log('update',state);
       const updateNested = (currentState: any, keys: any, value: any) => {
+      
         const key = keys.shift();
         const updatedState = { ...currentState };
         if (keys.length === 0) {

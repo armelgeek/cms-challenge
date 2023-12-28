@@ -9,7 +9,7 @@ export function jsonToHTML(jsonData) {
         if (jsonData.style != "") {
             html += ` style="${jsonData.style}"`;
         }
-        if (jsonData.type != "") {
+        if (jsonData.type != "" && jsonData.type !="container" && jsonData.type !="element") {
             html += ` type="${jsonData.type}"`;
         }
         if (!_.isUndefined(jsonData.data.attributes)) {

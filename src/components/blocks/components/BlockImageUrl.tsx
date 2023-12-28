@@ -8,6 +8,7 @@ const BlockImageUrl = () => {
   const [value,setValue] = useState(editor?.current?.image?.url);
   const editBlockImageUrl = useDispatch('editor','editBlockImageUrl');
   const updateValue = useCallback((e:any)=>{
+    
       setValue(e.target.value);
       editBlockImageUrl(e.target.value);
 

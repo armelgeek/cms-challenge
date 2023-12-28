@@ -15,12 +15,12 @@ const EditorSidebarTabs = ({ children, setCurrentTab }: any) => {
     return (
         <>
             {editor.current && (
-                <div className="flex flex-col relative justify-around">
+                <div className="flex flex-col relative justify-around  mt-3 py-2">
                     <div className="flex flex-col  h-screen bg-white dark:bg-gray-800 relative">
-                        <div className="flex w-full border-b border-gray-200 dark:border-gray-600">
-                            <button className='flex items-center justify-center py-3 focus:outline-none text-xs leading-tight font-medium border-b -mb-px select-none text-gray-900 dark:text-white border-gray-300 dark:border-gray-400 flex-1'>Design</button>
-                            <button className='flex items-center justify-center py-3 focus:outline-none text-xs leading-tight font-medium -mb-px select-none text-gray-900 dark:text-white border-gray-300 dark:border-gray-400 flex-1'>Setting</button>
-                            <button className='flex items-center justify-center py-3 focus:outline-none text-xs leading-tight font-medium -mb-px select-none text-gray-900 dark:text-white border-gray-300 dark:border-gray-400 flex-1'>Animations</button>
+                        <div className="w-full flex rounded-md p-2 backdrop-filter backdrop-blur-lg bg-gray-200 bg-opacity-50 dark:bg-white dark:bg-opacity-5">
+                            <button className='bg-white flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80'>Design</button>
+                            <button className=' flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80'>Setting</button>
+                            <button className=' flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80'>Animations</button>
                         </div>
                         <div className=" h-full max-h-full overflow-y-auto overflow-x-hidden noscrollbar flex-1 pt-0">
                         <div className="relative z-10">

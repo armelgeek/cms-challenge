@@ -8,6 +8,7 @@ const BlockEditContent = () => {
     const editBlockContent = useDispatch('editor','editBlockContent');
     const [value, setValue] = useState(editor?.current?.content);
     const updateValue = useCallback((e:any)=>{
+        
         setValue(e.target.value);
         editBlockContent(e.target.value);
     

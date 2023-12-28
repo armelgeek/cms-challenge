@@ -11,27 +11,20 @@ import UserLibrary from './components/editor/UserLibrary';
 import Frame from 'react-frame-component';
 import jp from 'jsonpath';
 import Element from './utils/tail/element';
+import { FaMinus } from 'react-icons/fa';
+import { CgCloseR } from 'react-icons/cg';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+const desktopSizes: any = {
+  'xxl': { width: 1920, height: '100vh' },
+  'xl': { width: 1280, height: '100vh' },
+  'lg': { width: 1024, height: '100vh' },
+  'md': { width: 768, height: '100vh' },
+  'sm': { width: 640, height: '100vh' },
+  'xs': { width: 640, height: '100vh' },
+  'base': { width: 1024, height: '100vh' }
+};
 
-const zooming = (value: any, zoomLevel: any) => {
-  const zoomFactor = parseFloat(zoomLevel.replace('%', '')) / 100;
-  return value * zoomFactor;
-};
-const ResponsiveTest = ({ brands, resizeTo }: any) => {
-  return (
-    <select className='select w-52' onChange={(e: any) => {
-      const device = JSON.parse(e.target.value);
-      resizeTo(device.width, device.height, device.pixelRatio)
-    }}>
-      {brands.map((device: any, j: number) => (
-        <option key={j} value={JSON.stringify(device)}>
-          {device.name} - ({device.width} x {device.height})
-        </option>
-      ))}
-    </select>
-  );
-};
-const Test = ({ children, setCurrent }: any) => {
-  const zoomLevels = ["100%", "75%", "50%", "25%"];
+const Test = ({ children, setCurrent,customZoom }: any) => {
   const tabs = useGetter('desktop', 'tabs', []);
   const editor = useGetter('editor', 'data', []);
   const desktop = useGetter('desktop', 'data', []);
@@ -39,48 +32,19 @@ const Test = ({ children, setCurrent }: any) => {
   const exportBuild = useDispatch('desktop', 'exportBuild');
 
   const setInfo = useDispatch('desktop', 'setInfo');
-  const setInfoEditor = useDispatch('editor', 'setInfo');
-  const [isRotated, setIsRotated] = useState(false);
-  const [w, setW] = useState(zooming(1280, "75%"));
-  const [h, setH] = useState(zooming(800, "75%"));
-  const [originalWidth, setOriginalWidth] = useState(zooming(1280, "75%"));
-  const [originalHeight, setOriginalHeight] = useState(zooming(800, "75%"));
-  const [pxd, setPxd] = useState(1);
   const [choice, setChoice] = useState(0);
-  const toggleRotate = useCallback(() => {
-    setIsRotated(!isRotated);
-    if (!isRotated) {
-      setW(zooming(h, "75%"));
-      setH(zooming(w, "75%"));
-      setOriginalWidth(zooming(h, "75%"));
-      setOriginalHeight(zooming(w, "75%"));
-    } else {
-      setW(zooming(w, "75%"));
-      setH(zooming(h, "75%"));
-      setOriginalWidth(zooming(w, "75%"));
-      setOriginalHeight(zooming(h, "75%"));
-    }
-  }, [w, h, isRotated]);
+  const [showSideLeft, setShowSideLeft] = useState(true);
+  const [showSideRight, setShowSideRight] = useState(true);
 
-  const resizeTo = (width: any, height: any, pixelDestiny: any) => {
-    setW(width);
-    setH(height);
-    setOriginalWidth(width);
-    setOriginalHeight(height);
-    setPxd(pixelDestiny);
-    setInfoEditor({
-      prop: 'current',
-      value: null
-    })
-  };
 
-  const handleZoomChange = (zoomLevel: any) => {
-    const zoomFactor = parseFloat(zoomLevel.replace('%', '')) / 100;
-    if (zoomFactor !== w / originalWidth) {
-      resizeTo(originalWidth * zoomFactor, originalHeight * zoomFactor, pxd);
-    }
-  };
- 
+  const [currentSize, setCurrentSize] = useState(null as any);
+  // const [customZoom, setCustomZoom] = useState(window.innerHeight < 1024 ? 0.5 : 0.75);
+
+
+  const updatePreviewFrame = () => {
+    const { width, height } = desktopSizes[desktop.mode];
+    return { overflow: 'auto', fontSize: 32, height: height, width: width };
+  }
   const head = () => {
     let fonts = jp.query(editor.page.json.blocks, '$..blocks..font');
     let uniqueFonts = [...new Set(fonts.filter(a => a))];
@@ -89,6 +53,7 @@ const Test = ({ children, setCurrent }: any) => {
       <style>
         {`${uniqueFonts.length && `@import url('https://fonts.googleapis.com/css?family=${uniqueFonts.join('|')}');`}`}
       </style>
+
     );
   };
   const createElement = useCallback((el: any) => {
@@ -107,6 +72,7 @@ const Test = ({ children, setCurrent }: any) => {
         <head>
           <script src="http://localhost:5173/tailwind.css"></script>
           <link rel="stylesheet" href='http://localhost:5173/app.css'/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
         <body>
           <div id="root"></div>
@@ -141,7 +107,7 @@ const Test = ({ children, setCurrent }: any) => {
           </div>
 
         </div>  **/}
-
+      
         {tabs.length > 0 && <Tabs />}
 
         {/**<div className="flex flex-row gap-1 justify-center">
@@ -149,9 +115,16 @@ const Test = ({ children, setCurrent }: any) => {
             </div>
           **/}
       </div>
+      {!showSideLeft && (<div className='absolute z-50 left-3 top-0 bottom-0'>
+        <div className="flex flex-col items-center justify-center h-full">
+          <button className='btn btn-primary btn-sm' onClick={() => setShowSideLeft(true)}><BsArrowRight /></button>
+        </div>
+      </div>)}
       <div className="flex h-screen pt-3 px-2">
-
-        <div className='border-gray-200 dark:border-gray-600 w-1/6 border-r bg-white dark:bg-gray-800  z-30 h-screen'>
+        <div className={`${!showSideLeft ? 'hidden' : ''} relative border-gray-200 py-6 dark:border-gray-600 w-[200px] border-r bg-white dark:bg-gray-800  z-30 h-screen`}>
+          <div onClick={() => setShowSideLeft(false)} className="absolute z-40 right-2 top-2 cursor-pointer flex flex-row justify-end">
+            <CgCloseR />
+          </div>
           <div className="flex flex-col h-full relative justify-around">
             <div className="overflow-y-auto overflow-x-hidden noscrollbar select-none flex-1 flex flex-col">
               <div className="flex flex-col flex-1">
@@ -175,11 +148,14 @@ const Test = ({ children, setCurrent }: any) => {
                           <div className="text-xs text-gray-700 text-opacity-60 capitalize mb-1.5">{group.label}</div>
                           <div className="grid grid-cols-2 gap-1">
                             {group.elements.map((element: any) => (
-                              <div onClick={() => createElement(element)} className="p-3 bg-primary-500 hover:bg-primary-300 rounded-md text-white text-xs flex items-center transition ease-in duration-75 group cursor-pointer">
-                                <span className='icons group-hover:opacity-75 opacity-50 mr-1.5'>
+                              <div onClick={(e) => {
+                                
+                                createElement(element);
+                              }} className="px-2 py-2.5 bg-primary-500 hover:bg-primary-300 rounded-md text-white text-xs flex items-center transition ease-in duration-75 group cursor-pointer">
+                              {/** <span className='icons group-hover:opacity-75 opacity-50 mr-1.5'>
 
-                                </span>
-                                <span className='group-hover:opacity-100 opacity-75 leading-4 capitalize -my-0.5 truncate'> {element.name}</span>
+                                </span>*/  }
+                                <span className='group-hover:opacity-100 opacity-75 leading-4 capitalize -my-0.5 truncate text-xs'> {element.name}</span>
                               </div>
                             ))}
                           </div>
@@ -197,33 +173,35 @@ const Test = ({ children, setCurrent }: any) => {
           </div>
         </div>
         <div className="relative z-20 flex-1 flex flex-col items-center bg-gray-200 dark:bg-gray-700 overflow-hidden">
-          <div className="w-full h-full relative z-10 scrollbar overflow-scroll">
+          <div className="w-full h-[1080px] relative z-10 scrollbar overflow-scroll">
 
-            <div className="absolute top-2 left-2 z-20 grid items-center justify-center">
-              <IFrame head={head()} initialContent={initialContent()} id="preview-frame" style={{
-                width: w,
-                height: h,
-                maxHeight: h,
-                overflow: 'auto',
-                backgroundColor: 'white'
-              }}>
+            <div className="absolute top-2 left-1 right-2 z-20  items-center justify-center">
+              <IFrame head={head()} initialContent={initialContent()} className={`origin-top-left scale-${customZoom}`} id="preview-frame" style={updatePreviewFrame()}>
                 {children}
               </IFrame>
             </div>
           </div>
         </div>
-        <div className="w-1/6">
-          
-          <div className="border-gray-200 dark:border-gray-600 w-64 border-l order-last bg-white dark:bg-gray-800  z-30 h-full relative">
+        {!showSideRight && (<div className='absolute z-50 right-3 top-0 bottom-0'>
+          <div className="flex flex-col items-center justify-center h-full">
+            <button className='btn btn-primary btn-sm' onClick={() => setShowSideRight(true)}><BsArrowLeft /></button>
+          </div>
+        </div>)}
+        <div className={`${!showSideRight ? 'hidden' : ''} relative w-[230px] py-2 bg-slate-50`} >
+          <div onClick={() => setShowSideRight(false)} className="absolute z-40 left-2 top-2 cursor-pointer flex flex-row justify-end">
+            <CgCloseR />
+          </div>
+          <div className="border-gray-200 dark:border-gray-600 border-l order-last bg-white dark:bg-gray-800  z-30 h-full relative">
             {editor.current ? (
               <>
+
                 <EditorSidebarTabs setCurrentTab={setCurrentTab}>
                   <EditorSidebar tab={editor.sidebar.name} />
                 </EditorSidebarTabs>
               </>
             ) : (
               <div className="flex h-full w-full items-center justify-center text-xl">
-                Select a block
+                Select a block <span className="icon-[mdi--arrow-left] hover:icon-hover-[mdi--arrow-right]"></span>
               </div>
             )}
           </div>

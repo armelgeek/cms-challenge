@@ -24,7 +24,7 @@ import ShadowColor from './controls/ShadowColor';
 import CaretColor from './controls/CaretColor';
 import AccentColor from './controls/AccentColor';
 import BlockCss from '../components/BlockCss';
-import BlockIconify from './controls/BlockIconify';
+import BlockIconify from '../components/BlockIconify';
 import Group from './controls/Group';
 import SingleOptions from './controls/SingleOptions';
 import Spacing from './controls/Spacing';
@@ -58,7 +58,6 @@ const BlockTailwind = ({ css, cid }: any) => {
         css = editor.current.css.css
     }, [])
     const updateCss = useCallback((classe: any, attr: any) => {
-         console.log('desktop',desktop.mode);
         editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`] = {
             ...editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`],
             [attr]: classe
@@ -83,7 +82,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                     {twGroups.map((group) => (
                         <>
                             {isEnabled(group) && (
-                                <div key={group.label} className={` py-1 border-b border-gray-200 dark:border-gray-700 px-3 ${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={() => setControl(group)}>
+                                <div key={group.label} className={` py-1 border-b border-gray-200 dark:border-gray-700 px-3 ${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={(e) => {setControl(group)}}>
                                     <div className="text-gray-900 dark:text-white text-xs font-medium tracking-wide flex justify-between items-center -mb-3 cursor-pointer px-3 py-2.5 -mx-3 -mt-3">
                                         <div className={`flex items-center leading-7 text-sm  py-px  ${gr === group.label ? 'text-white' : ''}`}>
                                             <div className="icons  mr-1">

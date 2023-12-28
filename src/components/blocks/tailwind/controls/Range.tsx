@@ -38,6 +38,7 @@ const Range = ({ title, data, attr, updateCss }: any) => {
         }));
     }, [state]);
     const handleChange = (e: any) => {
+        
         let v = e.target.value * 1;
         updateStateAttributes({
             'selected': v

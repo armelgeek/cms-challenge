@@ -23,14 +23,14 @@ const Options = ({ title, data, attr, updateCss }: any) => {
             {/** <span className="uppercase font-bold" style={{
                 fontSize: "10px"
             }}>{title || attr}</span> */}
-            <select value={selected} className="select select-sm bg-white" onChange={(e) => {
+            <select value={selected} className="select px-2 select-sm bg-white" onChange={(e) => {
                 e.stopPropagation();
                 setSelected(e.target.value);
                 updateCss(e.target.value, attr);
             }}>
                 <option value="">-</option>
-                {options.map((opt: any) => (
-                    <>
+                {options.map((opt: any,index:number) => (
+                    <React.Fragment key={index}>
                         {
                             option(opt) != "" && (
                                 <option
@@ -39,7 +39,7 @@ const Options = ({ title, data, attr, updateCss }: any) => {
                                 </option>
                             )
                         }
-                    </>
+                    </React.Fragment>
                 ))}
 
             </select>

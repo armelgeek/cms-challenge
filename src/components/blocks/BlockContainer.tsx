@@ -13,6 +13,7 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
   const editableProps = {
     contentEditable: true,
     onBlur: (e: any) => {
+      
       editBlockContent(e.currentTarget.textContent);
     }
   }
@@ -22,20 +23,19 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
     css += " windflow-level-" + level;
     return css;
   };
-  console.log('desktop',desktop);
   const toggleBorder = () => {
     if (isEnter && (editor.current && editor.current.id == doc.id)) {
-      if(desktop.state=='neutral'){
+      if (desktop.state == 'neutral') {
         return 'border-primary-500';
-      }else{
+      } else {
         return 'border-green-500';
       }
-     
+
     } else {
       if (editor.current && editor.current.id == doc.id) {
-        if(desktop.state=='neutral'){
+        if (desktop.state == 'neutral') {
           return 'border-primary-500';
-        }else{
+        } else {
           return 'border-green-500';
         }
       } else {
@@ -47,20 +47,20 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
     key: doc.id,
     ref: refContainer,
     onMouseEnter: (e: any) => {
-      e.stopPropagation();
+      
       console.log('on hover');
       setIsEnter(true)
     },
     onMouseLeave: (e: any) => {
-      e.stopPropagation();
+      
       setIsEnter(false)
     },
     onClick: (e: any) => {
-      e.stopPropagation();
+      
       setCurrent(doc, refContainer.current?.offsetWidth)
     },
     id: doc.id,
-    className: `${classes()} ${isEnter ? (desktop.state == 'neutral' ? 'bg-primary-100': 'bg-green-100')  : 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
+    className: `${classes()} ${isEnter ? (desktop.state == 'neutral' ? 'bg-primary-100' : 'bg-green-100') : 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
   }
   const render = () => (
     <>
@@ -115,16 +115,50 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
     }
   }, [doc, refContainer.current])
   switch (doc.element) {
+
+    case "article":
+      return <article  {...props} >{render()}</article>;
+    case "aside":
+      return <aside  {...props}>{render()}</aside>;
+    case "header":
+      return <header  {...props}>{render()}</header>;
+    case "figcaption":
+      return <figcaption  {...props}>{render()}</figcaption>;
+    case "figure":
+      return <figure  {...props}>{render()}</figure>;
+
+    case "label":
+      return <label  {...props}>{render()}</label>;
+    case "mark":
+      return <mark  {...props}>{render()}</mark>;
+    case "section":
+      return <section  {...props}>{render()}</section>;
+    case "summary":
+      return <summary  {...props}>{render()}</summary>;
+    case "time":
+      return <time  {...props}>{render()}</time>;
+    case "details":
+      return <details  {...props}>{render()}</details>;
+    case "main":
+      return <main  {...props}>{render()}</main>;
+    case "footer":
+      return <footer  {...props}>{render()}</footer>;
+    case "form":
+      return <form  {...props}>{render()}</form>;
+    case 'nav':
+        return <nav {...props}>{render()}</nav>;
+    case 'span':
+          return <span {...props}>{render()}</span>;
     case 'div':
       return <div {...props}>{render()}</div>;
     case 'ul':
       return <ul {...props}>{render()}</ul>;
     case 'li':
-      return <li {...props} {...editableProps}>{render()}</li>;
+      return <li {...props}>{render()}</li>;
     case 'ol':
-      return <ol {...props} {...editableProps}>{render()}</ol>;
+      return <ol {...props}>{render()}</ol>;
     case "select":
-      return <select {...props} {...editableProps}>{render()}</select>;
+      return <select {...props}>{render()}</select>;
     case 'table':
       return <table {...props}>{render()}</table>;
     case 'thead':

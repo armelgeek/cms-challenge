@@ -13,6 +13,14 @@
  *  @negative Boolean => true = slider has negative values
  */
 const twgroups = [
+
+
+    {
+        label: 'Advanced', components: [
+            { name: 'icon', attr: 'icon', title: 'icon' },
+            { name: 'Css', attr: 'css', title: 'CSS' }
+        ]
+    },
     {
        
         label: 'layout', components: [
@@ -389,14 +397,6 @@ const twgroups = [
             { name: 'Options', attr: 'transformorigin', title: 'transform origin' }**/
         ]
     },
-
-
-    {
-        label: 'Advanced', components: [
-            { name: 'icon', attr: 'icon', title: 'icon' },
-            { name: 'Css', attr: 'css', title: 'CSS' }
-        ]
-    }
 
 ]
 

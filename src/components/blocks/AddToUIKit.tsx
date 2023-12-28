@@ -3,7 +3,6 @@ import { useGetter } from '../../store'
 
 const AddToUIKit = ({ uiks, setInfos }: any) => {
     const desktop = useGetter('desktop', 'data', []);
-    console.log('desktop.library',desktop.library);
     return (
         <>
             <label className='font-bold'>Nom</label>
@@ -14,7 +13,7 @@ const AddToUIKit = ({ uiks, setInfos }: any) => {
             }} />
             <label  className='font-bold'>Category</label>
             <select className="select" onChange={(e: any) => {
-                e.stopPropagation();
+                
                 setInfos({
                     'library.id': uiks[e.target.value].category_kit_id,
                     'library.templates': uiks[e.target.value].json ? uiks[e.target.value].json.templates : []
