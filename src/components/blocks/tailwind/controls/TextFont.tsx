@@ -2,14 +2,21 @@ import React, { useState } from 'react'
 import _ from 'lodash';
 import FontPicker from 'react-fontpicker-ts'
 import classes from '../../../../utils/scripts/tw.classes';
-import { useDispatch } from '../../../../store';
+import { useDispatch, useGetter } from '../../../../store';
 const TextFont = ({ title, data, attr }: any) => {
   const fonts = classes.fontfamily;
+  const editor = useGetter('editor', 'data', []);
   const editBlockFontContent = useDispatch('editor', 'editBlockFontContent');
   const [fontFamily, setFontFamily] = useState(!_.isNull(data) && !_.isUndefined(data) ? data : '');
   const handleChange = (e: any) => {
     setFontFamily(e.target.value);
     editBlockFontContent(e.target.value);
+    if (editor.selectedBlocks.length > 0) {
+      for (let index = 0; index < editor.selectedBlocks.length; index++) {
+          const element = editor.selectedBlocks[index];
+          editBlockFontContent(e.target.value,element)
+      }
+    }
   };
   return (
     <div className="flex relative disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none min-w-0">

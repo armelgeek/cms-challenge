@@ -22,7 +22,7 @@ const twgroups = [
         ]
     },
     {
-       
+
         label: 'layout', components: [
             { name: 'Display', attr: 'display', title: 'Display' },
 
@@ -193,15 +193,18 @@ const twgroups = [
      },**/
     {
         label: 'background', components: [
+            { name: 'Partial', title: 'Color' },
             { name: 'Color', attr: 'bgcolor', title: 'Color' },
-            /** { name: 'Range', attr: 'bgOpacity', title: 'opacity' },
-             { name: 'Options', attr: 'bgattachments', title: 'Bg Attachement' },
-             { name: 'Options', attr: 'bgclips', title: 'Bg Clips' },
-             { name: 'Options', attr: 'bgorigin', title: 'Bg Origin' },
-             { name: 'Options', attr: 'bgpositions', title: 'Bg Position' },
-             { name: 'Options', attr: 'bgrepeats', title: 'Bg Repeat' },
-             { name: 'Options', attr: 'bgsizes', title: 'Bg Size' },
-             { name: 'Options', attr: 'blur', title: 'filter blur' } */
+            { name: 'Partial', title: 'Image' },
+            { name: 'BgImage', attr: 'background', title: 'Image' },
+            { name: 'Partial', title: 'Options' },
+            { name: 'SingleOptions', attr: 'bgOpacity', title: 'opacity' },
+            { name: 'SingleOptions', attr: 'bgattachments', title: 'Attachement' },
+            { name: 'SingleOptions', attr: 'bgclips', title: 'Clip' },
+            { name: 'SingleOptions', attr: 'bgorigin', title: 'Origin' },
+            { name: 'SingleOptions', attr: 'bgpositions', title: 'Position' },
+            { name: 'SingleOptions', attr: 'bgrepeats', title: 'Repeat' },
+            { name: 'SingleOptions', attr: 'bgsizes', title: 'Size' }
         ]
     },
     /** {
@@ -224,6 +227,11 @@ const twgroups = [
             { name: 'DividerWidth' },
             { name: 'SingleOptions', attr: 'dividerStyle', title: 'Style' },
             { name: 'DivideColor', attr: 'dividecolor' },
+            { name: 'Partial', title: 'Outline' },
+            { name: 'SingleOptions', attr: 'outline', title: 'Outline' },
+            { name: 'OutlineColor', attr: 'outlinecolor' },
+              { name: 'SingleOptions', attr: 'outlinestyle', title: 'Style' },
+              { name: 'SingleOptions', attr: 'outlineoffset', title: 'Offset' }
             /**  { name: 'Range', attr: 'border', title: 'all' },
               { name: 'Range', attr: 'borderTop', title: 'top' },
               { name: 'Range', attr: 'borderRight', title: 'right' },
@@ -377,11 +385,11 @@ const twgroups = [
     {
         label: 'transform', components: [
             { name: 'Scale' },
-            { name: 'SingleOptions', attr: 'rotate',title: 'Rotate', required: 'transform' },
-            { name: 'Move'},
-            { name: 'Skew'},
+            { name: 'SingleOptions', attr: 'rotate', title: 'Rotate', required: 'transform' },
+            { name: 'Move' },
+            { name: 'Skew' },
             { name: 'Partial', title: 'Transform origin' },
-            {name: 'Position', attr: 'transformorigin', title: 'transform', selector: 'origin'}
+            { name: 'Position', attr: 'transformorigin', title: 'transform', selector: 'origin' }
             /**{ name: 'Options', attr: 'transition', title: 'transition type' },
             { name: 'Options', attr: 'transitionDuration', title: 'transition dur.' },
             { name: 'Options', attr: 'transitionTiming', title: 'timing function' },

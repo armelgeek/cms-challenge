@@ -164,9 +164,9 @@ function filterBlocksRecursive(blocks: any, currentId: any) {
   });
 }
 
-export const deleteBlock = () => async (dispatch: any, getState: any) => {
+export const deleteBlock = (curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   let filteredBlocks = filterBlocksRecursive(editor.document.blocks, current.id);
   dispatch({
     type: 'editor__item__infos',
@@ -191,9 +191,9 @@ function updateStyles(blocks: any, currentId: any, css: any, obj: any) {
 }
 
 
-export const updateBlockStyle = (obj: any) => async (dispatch: any, getState: any) => {
+export const updateBlockStyle = (obj: any, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   let css = '';
   let keys = Object.keys(obj);
 
@@ -336,9 +336,9 @@ function updateBlockContent(blocks: any, currentId: any, modified: any) {
   });
 }
 
-export const editBlockFontContent = (value: any) => async (dispatch: any, getState: any) => {
+export const editBlockFontContent = (value: any, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -379,9 +379,9 @@ function updateBlockFontContent(blocks: any, currentId: any, modified: any) {
 
 
 
-export const editBlockLevel = (value: any) => async (dispatch: any, getState: any) => {
+export const editBlockLevel = (value: any, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -421,9 +421,9 @@ function updateBlockLevel(blocks: any, currentId: any, modified: any) {
 
 
 
-export const editBlockType = (value: any) => async (dispatch: any, getState: any) => {
+export const editBlockType = (value: any, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -462,9 +462,10 @@ function updateBlockType(blocks: any, currentId: any, modified: any) {
 }
 
 
-export const editBlockImageUrl = (value: any) => async (dispatch: any, getState: any) => {
+
+export const editBlockImageUrl = (value: any, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -502,6 +503,49 @@ function updateBlockImageUrl(blocks: any, currentId: any, modified: any) {
   });
 }
 
+
+export const editBlockBackgroundImage = (value: any, curr = null) => async (dispatch: any, getState: any) => {
+  let editor = getState().editor;
+  let current = curr != null ? curr : getState().editor.current;
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'current.background.url': value,
+      'current.content': ''
+    }
+  })
+  if (current.tag == 'document') {
+    editor.document.background.url = value;
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document': editor.document
+      }
+    })
+  } else {
+    updateBlockBackgroundImage(editor.document.blocks, current.id, value);
+    dispatch({
+      type: 'editor__item__infos',
+      payload: {
+        'document.blocks': editor.document.blocks
+      }
+    })
+  }
+}
+
+
+function updateBlockBackgroundImage(blocks: any, currentId: any, modified: any) {
+  blocks.forEach((block: any) => {
+    if (block.id === currentId) {
+      block.background.url = modified,
+        block.content = ''
+    }
+    if (block.blocks && block.blocks.length > 0) {
+      updateBlockBackgroundImage(block.blocks, currentId, modified);
+    }
+  });
+}
+
 function modifyBlockProperty(blocks: any[], currentId: any, modified: any, property: string) {
   blocks.forEach((block: any) => {
     if (block.id === currentId) {
@@ -524,9 +568,9 @@ function modifyBlockProperty(blocks: any[], currentId: any, modified: any, prope
 
 
 
-export const updateBlockProperty = (value: any, key: string) => async (dispatch: any, getState: any) => {
+export const updateBlockProperty = (value: any, key: string, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   let attr = 'current.' + key;
   dispatch({
     type: 'editor__item__infos',
@@ -555,9 +599,9 @@ export const updateBlockProperty = (value: any, key: string) => async (dispatch:
 
 
 
-export const updateBlockDataContent = (value: any, key: string) => async (dispatch: any, getState: any) => {
+export const updateBlockDataContent = (value: any, key: string, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
+  let current = curr != null ? curr : getState().editor.current;
   let attr = 'current.data.' + key;
   let dttr = 'current.content';
   dispatch({
@@ -655,7 +699,7 @@ export const savePage = (projectId: any) => async (dispatch: any, getState: any)
         })
         return savedPage
       } else {
-        console.log('it saved successfully',page.json.blocks);
+        console.log('it saved successfully', page.json.blocks);
         const savedPage = new Promise((resolve, reject) => {
           let requestObj = sdk.updatePage({ ...page, blocks: JSON.stringify(page.json.blocks), tags: JSON.stringify(page.tags) }, page.id).promise;
           requestObj
@@ -772,35 +816,62 @@ export const moveBlock = (currentId: any, direction: any) => async (dispatch: an
 
 }
 
-function duplicateBlockAction(blocks: any, currentId: any) {
-  let duplicatedBlock: any;
+
+function duplicateBlockAction(blocks: any, current: any, duplicatedBlock: any) {
+
+
   blocks.forEach((block: any, index: number) => {
-    if (block.id === currentId) {
-      duplicatedBlock = { ...block, id: 'windflow-' + Math.random().toString(36).substr(2, 5) };
+    if (block.id === current.id) {
       blocks.splice(index + 1, 0, duplicatedBlock);
     }
     if (block.blocks && block.blocks.length > 0) {
-      duplicateBlockAction(block.blocks, currentId);
+      duplicateBlockAction(block.blocks, current, duplicatedBlock);
     }
   });
-  return { duplicatedBlock, blocks };
 }
 
-export const duplicateBlock = () => async (dispatch: any, getState: any) => {
-  let editor = getState().editor;
+const duplicateData = (current: any) => {
+  const duplicating = (block: any): any => {
+    const duplicate = { ...block };
+    duplicate.id = randomID('windflow');
+    if (duplicate.blocks && duplicate.blocks.length > 0) {
+      duplicate.blocks = duplicate.blocks.map(duplicating);
+    }
+    return duplicate;
+  };
+  const duplicatedBlock = duplicating(current);
+  return duplicatedBlock;
+};
+export const copyBlock = () => (dispatch:any,getState:any) => {
   let current = getState().editor.current;
-  const { duplicatedBlock, blocks } = duplicateBlockAction(editor.document.blocks, current.id);
-  editor.document.blocks = blocks;
   dispatch({
     type: 'editor__item__infos',
     payload: {
-      'document.blocks': blocks
+      'copiedObject':  duplicateData(current)
     }
   })
+}
+export const pasteBlock = () => (dispatch:any,getState:any) => {
+  let editor = getState().editor;
+  let current = getState().editor.current;
+  let copiedObject = getState().editor.copiedObject;
+  duplicateBlockAction(editor.document.blocks, current, copiedObject);
   dispatch({
     type: 'editor__item__infos',
     payload: {
-      'current': duplicatedBlock
+      'document.blocks':  editor.document.blocks
+    }
+  })
+}
+export const duplicateBlock = (curr = null) => async (dispatch: any, getState: any) => {
+  let editor = getState().editor;
+  let current = curr!=null ? curr:getState().editor.current;
+  duplicateBlockAction(editor.document.blocks, current, duplicateData(current));
+
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'document.blocks': editor.document.blocks
     }
   })
 }
@@ -862,8 +933,17 @@ export const copyStyleBlock = () => async (dispatch: any, getState: any) => {
 export const pasteStyleBlock = () => async (dispatch: any, getState: any) => {
   let current = getState().editor.current;
   let editor = getState().editor;
-  let mergedBlockCss = mergeCSSObjects(editor.current.cssObject, editor.copiedCssObject);
+  let selectedBlocks = getState().editor.selectedBlocks
+  let mergedBlockCss = mergeCSSObjects(current.cssObject, editor.copiedCssObject);
   dispatch(updateBlockStyle(mergedBlockCss));
+  if (selectedBlocks.length > 0) {
+    for (let index = 0; index < selectedBlocks.length; index++) {
+      const element = selectedBlocks[index];
+      let elementCSS = mergeCSSObjects(element.cssObject, editor.copiedCssObject);
+      dispatch(updateBlockStyle(elementCSS, element));
+    }
+    dispatch(resetSelectedBlock());
+  }
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -892,16 +972,16 @@ function updateBlockIcon(blocks: any, currentId: any, modified: any) {
       block.data.icon = modified
     }
     if (block.blocks && block.blocks.length > 0) {
-      updateBlockImageUrl(block.blocks, currentId, modified);
+      updateBlockIcon(block.blocks, currentId, modified);
     }
   });
 }
 
 
-export const editBlockIcon = (value: any) => async (dispatch: any, getState: any) => {
+export const editBlockIcon = (value: any, curr = null) => async (dispatch: any, getState: any) => {
   let editor = getState().editor;
-  let current = getState().editor.current;
-  console.log('current: ',current.id);
+  let current = curr != null ? curr : getState().editor.current;
+  console.log('current: ', current.id);
   dispatch({
     type: 'editor__item__infos',
     payload: {
@@ -991,5 +1071,32 @@ export const getCurrentHTML = () => async (dispatch: any, getState: any) => {
   })
 }
 
+function manageObjectInArray(arr: any, object: any) {
+  const index = arr.findIndex((item: any) => item.id === object.id);
+  if (index === -1) {
+    arr.push(object);
+  } else {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
 
+export const toggleSelectedBlock = (doc: any) => async (dispatch: any, getState: any) => {
 
+  let alreadySelected = getState().editor.selectedBlocks
+  let data = manageObjectInArray(alreadySelected, doc);
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'selectedBlocks': data
+    }
+  })
+}
+export const resetSelectedBlock = () => async (dispatch: any, getState: any) => {
+  dispatch({
+    type: 'editor__item__infos',
+    payload: {
+      'selectedBlocks': []
+    }
+  })
+}

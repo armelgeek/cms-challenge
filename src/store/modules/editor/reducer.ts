@@ -29,6 +29,8 @@ const initialState = {
     show: true,
     name: 'elements'
   },
+  selectedBlocks:[],
+  copiedObject: null,
   copiedCssObject:null
 };
 const mutations = {};

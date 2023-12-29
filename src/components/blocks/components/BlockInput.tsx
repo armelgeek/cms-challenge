@@ -20,6 +20,12 @@ const BlockInput = () => {
         }
 
         updateBlockProperty(value, key);
+        if (editor.selectedBlocks.length > 0) {
+            for (let index = 0; index < editor.selectedBlocks.length; index++) {
+              const element = editor.selectedBlocks[index];
+              updateBlockProperty(value, type, element);
+            }
+          }
     }, [])
     useEffect(() => {
         setState({

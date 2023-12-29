@@ -31,6 +31,7 @@ const AddToUIKit = ({ uiks, setInfos }: any) => {
                 className="input bg-slate-100"
 
                 onChange={(e) => {
+                    e.stopPropagation();
                     setInfos({
                         'library.description': e.target.value,
                     })

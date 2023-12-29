@@ -31,7 +31,7 @@ const BlockEditContent = () => {
                     />
                 </>
             )}
-            {(editor.current.element == 'p'  || editor.current.element == 'li'  || editor.current.element == 'h') && (
+            {(editor.current.element == 'span'  ||editor.current.element == 'p'  || editor.current.element == 'li'  || editor.current.element == 'h') && (
                 <div className="w-full flex flex-row justify-center">
                         <textarea
                             className="p-1 h-40  text-base input w-96"

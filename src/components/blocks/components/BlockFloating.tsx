@@ -16,11 +16,14 @@ import {
   FaUpload
 } from 'react-icons/fa';
 import { RiPaintFill } from "react-icons/ri";
-import { CgExtensionAdd } from "react-icons/cg";
+import { CgCopy, CgDuplicate, CgExtensionAdd } from "react-icons/cg";
 import Modal from '../Modal';
-import { MdDynamicForm } from "react-icons/md";
+import { MdCopyAll, MdDynamicForm } from "react-icons/md";
 import { GrFormEdit } from "react-icons/gr";
 import Element from '../../../utils/tail/element';
+import { FaPaste } from 'react-icons/fa6';
+import { FiCopy } from 'react-icons/fi';
+import { PiCopy } from 'react-icons/pi';
 
 function HorizontallyBound(childDiv: any) {
   let el = document.querySelector("#preview-frame").contentWindow.document.querySelector('#root') as any;
@@ -35,21 +38,21 @@ function HorizontallyBound(childDiv: any) {
     return false;
   }
 }
-
 const BlockFloating = ({ floatRef, coords }: any) => {
   const [isPopUpOpen, setPopUpOpen] = useState(false);
   const editor = useGetter('editor', 'data', []);
   const [gr, setGr] = useState('structure');
   const moveBlock = useDispatch('editor', 'moveBlock');
   const duplicateBlock = useDispatch('editor', 'duplicateBlock');
-  const navigateToParent = useDispatch('editor', 'navigateToParent');
-  const setCurrentTab = useDispatch('editor', 'showSidebar');
   const deleteBlock = useDispatch('editor', 'deleteBlock');
   const setInfo = useDispatch('desktop', 'setInfo');
   const setInfos = useDispatch('desktop', 'setInfos');
   const copyStyleBlock = useDispatch('editor', 'copyStyleBlock');
   const pasteStyleBlock = useDispatch('editor', 'pasteStyleBlock');
+  const copyBlock = useDispatch('editor', 'copyBlock');
+  const pasteBlock = useDispatch('editor', 'pasteBlock');
   const getCurrentHTML = useDispatch('editor', 'getCurrentHTML');
+  const resetSelectedBlock = useDispatch('editor', 'resetSelectedBlock');
   const setShow = useCallback((value: any, title: string, type: string) => {
     if (type == null) {
       setInfos({
@@ -83,9 +86,29 @@ const BlockFloating = ({ floatRef, coords }: any) => {
     getCurrentHTML();
     setShow(true, "Code source", 'sourcecode');
   }, [])
-  let bound = HorizontallyBound(floatRef.current);
-  console.log('bound', gr);
-  console.log('editor.current', editor.current);
+  const deleteElement = useCallback(() => {
+    deleteBlock();
+    if (editor.selectedBlocks.length > 0) {
+      for (let index = 0; index < editor.selectedBlocks.length; index++) {
+        const element = editor.selectedBlocks[index];
+        deleteBlock(element)
+      }
+      resetSelectedBlock();
+
+    }
+  }, [editor])
+  const duplicateElement = useCallback(() => {
+    duplicateBlock();
+    if (editor.selectedBlocks.length > 0) {
+      for (let index = 0; index < editor.selectedBlocks.length; index++) {
+        const element = editor.selectedBlocks[index];
+        duplicateBlock(element)
+      }
+      resetSelectedBlock();
+    }
+  }, [editor])
+
+  //  let bound = HorizontallyBound(floatRef.current);
   return editor.current ? (
     <div
       ref={floatRef}
@@ -99,7 +122,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
       {editor.current.type === 'container' && (
 
         <div title={'Add in current UI Kit'} className="text-white  hover:text-purple-300 text-sm" onClick={() => setShow(true, "Ajouter dans le UI Kit", 'add-to-kit')}>
-          <CgExtensionAdd size={18}  />
+          <CgExtensionAdd size={18} />
         </div>
       )}
       <div title={'Export code'} className="text-white  hover:text-purple-300 text-sm" onClick={showSourceCode}>
@@ -129,7 +152,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
               <FaEdit size={12} />
             </div>
           )}
-          {(editor.current.element == 'h' || editor.current.element == 'p' || editor.current.element == 'li') && (
+          {(editor.current.element == 'span' || editor.current.element == 'h' || editor.current.element == 'p' || editor.current.element == 'li' || editor.current.element == 'a') && (
             <div className="text-white  hover:text-purple-300 text-sm" onClick={() => setShow(true, "Editer le contenu", editor.current.element)}>
               <FaEdit size={12} />
             </div>
@@ -156,16 +179,27 @@ const BlockFloating = ({ floatRef, coords }: any) => {
                   </div>
                 )}
               </>)}
-
-          <div className="text-white  hover:text-purple-300 text-sm" onClick={deleteBlock}>
-            <FaTrash size={12} />
+          {(typeof editor.copiedObject === 'object' &&
+            !Array.isArray(editor.copiedObject) &&
+            editor.copiedObject !== null) ? (
+            <div title="paste  block" className="text-white  hover:text-purple-300 text-sm" onClick={pasteBlock}>
+              <FaPaste size={14} />
+            </div>
+          ) : (
+            <div title="copy  block" className="text-white  hover:text-purple-300 text-sm" onClick={copyBlock}>
+              <FiCopy size={14} />
+            </div>
+          )}
+          
+          <div title="Duplicate Block" className="text-white  hover:text-purple-300 text-sm" onClick={duplicateElement}>
+            <MdCopyAll size={14} />
           </div>
-          <div className="text-white  hover:text-purple-300 text-sm" onClick={duplicateBlock}>
-            <FaCopy size={12} />
+          <div title="Delete Block" className="text-white  hover:text-purple-300 text-sm" onClick={deleteElement}>
+            <FaTrash size={12} />
           </div>
         </>
       )}
-      {editor.current.type === 'container' && (
+      {/**{editor.current.type === 'container' && (
         <div className="text-white  hover:text-purple-300 text-sm" onClick={(e) => {
           setPopUpOpen(!isPopUpOpen);
         }}>
@@ -174,7 +208,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
       )}
 
 
-      {/**{state.icons.map((icon, index) => (
+      {state.icons.map((icon, index) => (
         <div key={index} className="text-white  hover:text-purple-600 text-sm" onClick={() => {
           // showDialog(icon)
         }}>

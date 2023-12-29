@@ -67,6 +67,9 @@ export default class Element {
         this.image = {
             url: null
         }
+        this.background ={
+            url: null
+        }
         this.type = 'element'
         this.tag = 'element'
         this.editable = false

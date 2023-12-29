@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect, useRef, memo } from 'react'
 import _ from 'lodash';
 import classes from '../../../utils/scripts/tw.classes';
 import { useDispatch, useGetter } from '../../../store';
-import { flattenClasses, searchClass } from  '../../../utils/scripts/tw.classes';
+import { flattenClasses, searchClass } from '../../../utils/scripts/tw.classes';
 import { FaMinusCircle } from 'react-icons/fa';
 const classList = flattenClasses();
 console.log('classList', classList);
@@ -72,14 +72,35 @@ const BlockCss = () => {
       [attr]: classe
     };
     updateBlockStyle(editor.current.cssObject);
-
-  }, [editor.current, desktop.mode,desktop.state])
+    if (editor.selectedBlocks.length > 0) {
+      for (let index = 0; index < editor.selectedBlocks.length; index++) {
+        const element = editor.selectedBlocks[index];
+        element.cssObject[`${desktop.mode}`][`${desktop.state}`] = {
+          ...element.cssObject[`${desktop.mode}`][`${desktop.state}`],
+          [attr]: classe
+        };
+        updateBlockStyle(element.cssObject, element);
+      }
+    }
+  }, [editor.current, desktop.mode, desktop.state, editor.selectedBlocks])
   const updateBlockProperty = useDispatch('editor', 'updateBlockProperty');
   const updateValue = useCallback((value: any, type: any) => {
     if (type != 'style') {
       updateBlockProperty(value, 'element');
+      if (editor.selectedBlocks.length > 0) {
+        for (let index = 0; index < editor.selectedBlocks.length; index++) {
+          const element = editor.selectedBlocks[index];
+          updateBlockProperty(value, 'element', element);
+        }
+      }
     }
     updateBlockProperty(value, type);
+    if (editor.selectedBlocks.length > 0) {
+      for (let index = 0; index < editor.selectedBlocks.length; index++) {
+        const element = editor.selectedBlocks[index];
+        updateBlockProperty(value, type, element);
+      }
+    }
   }, [])
   useEffect(() => {
     setState({
@@ -102,7 +123,7 @@ const BlockCss = () => {
   }, [])
   return (
     <div className="flex flex-col w-full h-full items-start bg-bluegray-200">
-      <span className="uppercase font-bold  my-2" style={{fontSize: '10px'}}>CSS</span>
+      <span className="uppercase font-bold  my-2" style={{ fontSize: '10px' }}>CSS</span>
       <div className="tag-input-sg-container  w-full">
         <input type="text" value={text} className="w-full input-sm  rounded-md  border-gray-200 focus:outline-0 focus:shadow-none focus:focus-within:ring-0 text-sm" placeholder='Search class' onChange={(e) => handleSearh(e.target.value)} />
         <div className="suggestions-container" ref={containerRef} style={{
@@ -121,12 +142,13 @@ const BlockCss = () => {
           })}
         </div>
       </div>
-      <span className="uppercase font-bold   my-2" style={{fontSize: '10px'}}>Style</span>
+      <span className="uppercase font-bold   my-2" style={{ fontSize: '10px' }}>Style</span>
       <textarea value={state.style} rows={10} onChange={(e: any) => {
-          
-        updateValue(e.target.value, 'style')}} className="text-sm textarea border font-mono w-full h-1/6 bg-white shadow p-1" />
-      <span className="uppercase font-bold   mt-2" style={{fontSize: '10px'}}>Semantic</span>
-      <select value={state.semantic} className="w-full mr-4 select select-sm" onChange={(e: any) =>{   updateValue(e.target.value, 'semantic')}}>
+
+        updateValue(e.target.value, 'style')
+      }} className="text-sm textarea border font-mono w-full h-1/6 bg-white shadow p-1" />
+      <span className="uppercase font-bold   mt-2" style={{ fontSize: '10px' }}>Semantic</span>
+      <select value={state.semantic} className="w-full mr-4 select select-sm" onChange={(e: any) => { updateValue(e.target.value, 'semantic') }}>
         <option value=""></option>
         {semantics.map(semantic => (
           <option key={semantic} selected={state.semantic == semantic} value={semantic}>{semantic}</option>

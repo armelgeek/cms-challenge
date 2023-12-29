@@ -21,7 +21,7 @@ const desktopSizes: any = {
   'md': { width: 768, height: '100vh' },
   'sm': { width: 640, height: '100vh' },
   'xs': { width: 640, height: '100vh' },
-  'base': { width: 1024, height: '100vh' }
+  'base': { width: 1280, height: 3200 }
 };
 
 const Test = ({ children, setCurrent,customZoom }: any) => {

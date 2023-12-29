@@ -18,6 +18,8 @@ const BlockElement = (props: any) => {
   const editor = useGetter('editor', 'data', []);
   const forceUpdate = useForceUpdate();
   const editBlockContent = useDispatch('editor', 'editBlockContent');
+  const toggleSelectedBlock = useDispatch('editor', 'toggleSelectedBlock');
+  const resetSelectedBlock = useDispatch('editor', 'resetSelectedBlock');
   const [isEnter, setIsEnter] = useState(false);
   const refElement = useRef(null);
   const classes = () => {
@@ -37,6 +39,7 @@ const BlockElement = (props: any) => {
     return cls
   }
   const getStyle = (block: any) => {
+
     let stl = {} as any;
 
     if (block.style !== '') {
@@ -52,33 +55,26 @@ const BlockElement = (props: any) => {
       stl['fontFamily'] = block.font;
     }
 
+    if (block.background && block.background.url !== '') {
+      stl['backgroundImage'] = `url(${block.background.url})`;
+    }
     return stl;
   };
-
+  editor
   const toggleBorder = () => {
-    if (isEnter && (editor.current && editor.current.id == props.element.id)) {
-      if (props.state == 'neutral') {
-        return 'border-primary-500';
-      } else {
-        return 'border-green-500';
-      }
-
+    const isSelected = editor.selectedBlocks && editor.selectedBlocks.some((block:any) => block.id === props.element.id);
+    if (isEnter && (editor.current && editor.current.id === props.element.id)) {
+      return isSelected ? 'border-2 border-dashed border-red-500' : 'border-2 border-dashed border-primary-500';
+    } else if (editor.current && editor.current.id === props.element.id) {
+      return isSelected ? 'border-2 border-dashed border-red-500' : 'border-2 border-dashed border-green-500';
     } else {
-      if (editor.current && editor.current.id == props.element.id) {
-        if (props.state == 'neutral') {
-          return 'border-primary-500';
-        } else {
-          return 'border-green-500';
-        }
-
-      } else {
-        return 'border-transparent';
-      }
+      return isSelected ? 'border-2 border-dashed border-red-500' : 'border-none border-dashed border-transparent';
     }
-  }
+  };
 
+  console.log('tootle element', editor.selectedBlocks);
   useEffect(() => {
-      forceUpdate();
+    forceUpdate();
     props.ajustCoords(props.element, refElement?.current?.offsetWidth);
   }, [props.element])
   const renderElement = () => {
@@ -86,23 +82,29 @@ const BlockElement = (props: any) => {
       ref: refElement,
       'style': getStyle(props.element),
       'id': props.element.id,
-      className: `relative border  ${isEnter ? (props.state == 'neutral' ? 'bg-primary-100' : 'bg-green-100') : 'bg-white'} ${classes()} ${toggleBorder()}`,
+      className: `${classes()} ${toggleBorder()}`,
       onMouseEnter: (e: any) => {
-        
+        e.stopPropagation();
         setIsEnter(true);
       },
       onMouseLeave: (e: any) => {
-        
+        e.stopPropagation();
         setIsEnter(false);
       },
       onClick: (e: any) => {
-        
+        e.stopPropagation();
         props.setCurrent(props.element, refElement.current?.offsetWidth)
+        if (e.ctrlKey) {
+          toggleSelectedBlock(props.element);
+        } else {
+          resetSelectedBlock();
+        }
       }
     };
     const editableProps = {
       contentEditable: true,
       onBlur: (e: any) => {
+        e.stopPropagation();
         editBlockContent(e.currentTarget.textContent);
       }
     }
@@ -152,7 +154,7 @@ const BlockElement = (props: any) => {
             src={props.element.src + props.element.content}
             className={classes()}
             onClick={(e) => {
-              
+              e.stopPropagation();
               props.setCurrent(props.element, refElement.current)
             }}
             data-element-tag={props.element.tag}>
@@ -185,8 +187,11 @@ const BlockElement = (props: any) => {
         return <main  {...commonProps}>{props.element.content}</main>;
       case "footer":
         return <footer  {...commonProps}>{props.element.content}</footer>;
-      case "a":
-        return <a  {...commonProps}>{props.element.content}</a>;
+      case "a": {
+        let href = !_.isUndefined(props.element.href) ? props.element.href : '';
+        console.log('href', href);
+        return <a  {...commonProps}>{props.element.content}</a>
+      }
       case "hr":
         return <hr  {...commonProps} />;
 

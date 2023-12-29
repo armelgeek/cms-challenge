@@ -14,9 +14,11 @@ import { useParams } from 'react-router-dom';
 import AddToUIKit from './components/blocks/AddToUIKit';
 import { PiFlowerLotusFill } from 'react-icons/pi';
 import { FaCheckCircle, FaForward, FaPlay, FaRedo, FaUndo, FaSave } from 'react-icons/fa';
+import BlockLink from './components/blocks/components/BlockLink';
+import toast from 'react-hot-toast';
 
 const Editor = memo(() => {
-    const { id } = useParams();
+    const { id }:any = useParams();
 
     const ref = useRef(null);
     const [customZoom, setCustomZoom] = useState('100');
@@ -74,6 +76,10 @@ const Editor = memo(() => {
     }, [desktop.modal.type, ref])
     useEffect(() => {
         getProject(id);
+        //window.setInterval( ()=> {
+            //toast.success('Auto saved !')
+          //savePage(id);
+        //},30000)
     }, [id])
     useEffect(() => {
         fetchUIKit();
@@ -168,12 +174,16 @@ const Editor = memo(() => {
                 {desktop.modal.type == 'img' && (
                     <BlockChooseImage />
                 )}
-                {(desktop.modal.type == 'li' || desktop.modal.type == 'youtube' || desktop.modal.type == 'video' || desktop.modal.type == 'h' || desktop.modal.type == 'p') && (
+                {(desktop.modal.type == 'span' || desktop.modal.type == 'li' || desktop.modal.type == 'youtube' || desktop.modal.type == 'video' || desktop.modal.type == 'h' || desktop.modal.type == 'p') && (
                     <BlockEditContent />
                 )}
+                {( desktop.modal.type == 'a' && (
+                    <BlockLink/>
+                ))}
                 {(desktop.modal.type == 'input') && (
                     <BlockInput />
                 )}
+               
                 {desktop.modal.type == 'sourcecode' && (
                     <BlockSourceCode />
                 )}

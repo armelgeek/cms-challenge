@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 const BlockIcon = ({ icon, commonProps, id }: any) => {
     const [isVisible, setIsVisible] = useState(true);
-
     useEffect(() => {
         let previewFrame = document.querySelector("#preview-frame");
         if (previewFrame) {
             let el = previewFrame?.contentWindow.document.querySelector('#' + id) as any;
-
+  
             if (el) {
                 Object.keys(commonProps).forEach((attr) => {
                     if(attr == 'className' || attr == 'classname'){

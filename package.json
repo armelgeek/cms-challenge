@@ -92,6 +92,7 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.45.0",
     "react-hooks-use-previous": "^1.0.0-rc2",
+    "react-hot-toast": "^2.4.1",
     "react-i18nify": "^6.1.1",
     "react-icons": "^4.10.1",
     "react-imask": "6.0.5",

@@ -55,8 +55,6 @@ const BlockEditor = ({ref,customZoom}:any) => {
   const mainEditor = useRef();
   const blockEditor = useRef();
   const setInfo = useDispatch('editor', 'setInfo');
-  const deleteBlock = useDispatch('editor', 'deleteBlock');
-  const setDesktopInfo = useDispatch('desktop', 'setInfo');
   const floatRef = useRef(null);
   const updateStateAttributes = useCallback((updates: any) => {
     setState((prevState: any) => ({

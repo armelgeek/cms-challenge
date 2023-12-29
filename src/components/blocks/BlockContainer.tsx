@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import _ from 'lodash';
 import BlockElement from "./BlockElement";
 import { useDispatch, useGetter } from "../../store";
 import BlockIFrame from "./components/BlockIFrame";
@@ -10,10 +11,12 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
   const editor = useGetter('editor', 'data', []);
   const desktop = useGetter('desktop', 'data', []);
   const editBlockContent = useDispatch('editor', 'editBlockContent');
+  const toggleSelectedBlock = useDispatch('editor', 'toggleSelectedBlock');
+  const resetSelectedBlock = useDispatch('editor', 'resetSelectedBlock');
   const editableProps = {
     contentEditable: true,
     onBlur: (e: any) => {
-      
+
       editBlockContent(e.currentTarget.textContent);
     }
   }
@@ -24,43 +27,61 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
     return css;
   };
   const toggleBorder = () => {
-    if (isEnter && (editor.current && editor.current.id == doc.id)) {
-      if (desktop.state == 'neutral') {
-        return 'border-primary-500';
-      } else {
-        return 'border-green-500';
-      }
-
+    const isSelected = editor.selectedBlocks && editor.selectedBlocks.some((block:any) => block.id === doc.id);
+    if (isEnter && editor.current && editor.current.id === doc.id) {
+      return isSelected ? 'border-2 border-dashed border-red-500' : desktop.state === 'neutral' ? 'border-2 border-dashed border-primary-500' : 'border-2 border-dashed border-green-500';
+    } else if (editor.current && editor.current.id === doc.id) {
+      return isSelected ? 'border-2 border-dashed border-red-500' : desktop.state === 'neutral' ? 'border-2 border-dashed border-primary-500' : 'border-2 border-dashed border-green-500';
     } else {
-      if (editor.current && editor.current.id == doc.id) {
-        if (desktop.state == 'neutral') {
-          return 'border-primary-500';
-        } else {
-          return 'border-green-500';
-        }
-      } else {
-        return 'border-transparent';
-      }
+      return isSelected ? 'border-2 border-dashed border-red-500' : 'border-none border-dashed border-transparent';
     }
-  }
+  };
+  console.log('tootle element',editor.selectedBlocks);
+  const getStyle = (block: any) => {
+
+    let stl = {} as any;
+    if (!_.isUndefined(block.style) && block.style !== '') {
+      stl = block.style.split(';').reduce((acc: any, rule: any) => {
+        const [property, value] = rule.split(':');
+        if (property && value) {
+          acc[property.trim()] = value.trim();
+        }
+        return acc;
+      }, {});
+    }
+    if (block.font !== '') {
+      stl['fontFamily'] = block.font;
+    }
+
+    if (block.background && block.background.url !== '') {
+      stl['backgroundImage'] = `url(${block.background.url})`;
+    }
+    return stl;
+  };
   const props = {
     key: doc.id,
     ref: refContainer,
+    style: getStyle(doc),
+    id: doc.id,
     onMouseEnter: (e: any) => {
-      
+      e.stopPropagation();
       console.log('on hover');
       setIsEnter(true)
     },
     onMouseLeave: (e: any) => {
-      
+      e.stopPropagation();
       setIsEnter(false)
     },
     onClick: (e: any) => {
-      
+      e.stopPropagation();
       setCurrent(doc, refContainer.current?.offsetWidth)
+      if (e.ctrlKey) {
+        toggleSelectedBlock(doc);
+      } else {
+        resetSelectedBlock();
+      }
     },
-    id: doc.id,
-    className: `${classes()} ${isEnter ? (desktop.state == 'neutral' ? 'bg-primary-100' : 'bg-green-100') : 'bg-white'} relative cursor-pointer border ${toggleBorder()}`
+    className: `${classes()} ${toggleBorder()}`
   }
   const render = () => (
     <>
@@ -146,9 +167,9 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
     case "form":
       return <form  {...props}>{render()}</form>;
     case 'nav':
-        return <nav {...props}>{render()}</nav>;
+      return <nav {...props}>{render()}</nav>;
     case 'span':
-          return <span {...props}>{render()}</span>;
+      return <span {...props}>{render()}</span>;
     case 'div':
       return <div {...props}>{render()}</div>;
     case 'ul':

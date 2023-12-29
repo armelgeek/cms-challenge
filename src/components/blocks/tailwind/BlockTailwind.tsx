@@ -40,6 +40,7 @@ import Move from './controls/Move';
 import Skew from './controls/Skew';
 import { Origin } from './controls/Origin';
 import Display from './controls/Display';
+import BlockBgImage from './controls/BgImage';
 const BlockTailwind = ({ css, cid }: any) => {
     const [gr, setGr] = useState('');
     const [controls, setControls] = useState(null) as any;
@@ -47,7 +48,6 @@ const BlockTailwind = ({ css, cid }: any) => {
     const desktop = useGetter('desktop', 'data', []);
     const setInfo = useDispatch('editor', 'setInfo');
     const updateBlockStyle = useDispatch('editor', 'updateBlockStyle');
-    console.log('editor', editor);
     const setControl = useCallback((group: any) => {
         setGr(group.label);
         setInfo({
@@ -65,7 +65,17 @@ const BlockTailwind = ({ css, cid }: any) => {
         if (cid === editor.current.id) {
             updateBlockStyle(editor.current.cssObject);
         }
-    }, [editor.current, desktop.mode,desktop.state])
+        if (editor.selectedBlocks.length > 0) {
+            for (let index = 0; index < editor.selectedBlocks.length; index++) {
+                const element = editor.selectedBlocks[index];
+                element.cssObject[`${desktop.mode}`][`${desktop.state}`] = {
+                    ...element.cssObject[`${desktop.mode}`][`${desktop.state}`],
+                    [attr]: classe
+                };
+                updateBlockStyle(element.cssObject, element);
+            }
+        }
+    }, [editor.current, desktop.mode, desktop.state,editor.selectedBlocks])
     const isEnabled = (group: any) => {
         if (group.filter) {
             return group.filter.includes(editor.current.tag)
@@ -82,7 +92,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                     {twGroups.map((group) => (
                         <>
                             {isEnabled(group) && (
-                                <div key={group.label} className={` py-1 border-b border-gray-200 dark:border-gray-700 px-3 ${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={(e) => {setControl(group)}}>
+                                <div key={group.label} className={` py-1 border-b border-gray-200 dark:border-gray-700 px-3 ${gr === group.label ? 'bg-primary-500 text-white' : ''} flex flex-row justify-between items-center capitalize cursor-pointer py-1 text-gray-700 text-base`} onClick={(e) => { setControl(group) }}>
                                     <div className="text-gray-900 dark:text-white text-xs font-medium tracking-wide flex justify-between items-center -mb-3 cursor-pointer px-3 py-2.5 -mx-3 -mt-3">
                                         <div className={`flex items-center leading-7 text-sm  py-px  ${gr === group.label ? 'text-white' : ''}`}>
                                             <div className="icons  mr-1">
@@ -99,8 +109,8 @@ const BlockTailwind = ({ css, cid }: any) => {
             )}
             {controls != null && (
                 <>
-                    <div className="bg-white  text-gray-500  top-0 absolute w-full z-10 left-0 right-0 bottom-0">
-                        <div className="text-gray-900 sticky top-0 z-40 bg-primary-500  dark:text-white text-xs font-medium tracking-wide flex justify-between items-center cursor-pointer py-1 px-3">
+                    <div className="bg-white  text-gray-500  top-0 absolute w-full z-10 left-0 right-0 bottom-0 h-full max-h-full">
+                        <div className=" text-gray-900 sticky top-0 z-40 bg-primary-500  dark:text-white text-xs font-medium tracking-wide flex justify-between items-center cursor-pointer py-1 px-3">
                             <div className="flex flex-row  text-sm items-center capitalize leading-7 py-px   text-white dark:text-gray-400 mr-1" onClick={() => {
                                 setControls(null);
                                 setInfo({
@@ -109,7 +119,7 @@ const BlockTailwind = ({ css, cid }: any) => {
                                 })
                             }}><FaAngleLeft className={'mr-1'} /> {gr}</div>
                         </div>
-                        <>
+                        <div className='w-full h-full max-h-full overflow-auto pb-20'>
                             {controls.map((c: any) => <div className={`p-3 capitalize ${c.hasOwnProperty('group') ? 'float-left my-4 mx-1' : 'py-1 px-2 flex flex-col clear-both'}`}>
                                 <div key={Math.random() + '_' + editor.current.id}>
                                     {c.name == 'icon' && (
@@ -455,10 +465,17 @@ const BlockTailwind = ({ css, cid }: any) => {
                                             updateCss={updateCss}
                                         />
                                     )}
-
+                                    {c.name == "BgImage" && (
+                                        <BlockBgImage
+                                            attr={c.attr}
+                                            title={c.title}
+                                            data={editor.current.cssObject[`${desktop.mode}`][`${desktop.state}`]}
+                                            updateCss={updateCss}
+                                        />
+                                    )}
                                 </div>
                             </div>)}
-                        </>
+                        </div>
                     </div>
                 </>
             )}

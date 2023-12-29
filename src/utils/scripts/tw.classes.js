@@ -1446,6 +1446,13 @@ var classes = {
         'sm',
         'base',
 
+    ],
+    stroke: [
+        'none',
+        'full',
+        'sm',
+        'base',
+
     ]
 }
 

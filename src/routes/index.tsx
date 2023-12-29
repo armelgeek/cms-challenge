@@ -1,4 +1,5 @@
 import "../App.css";
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Editor from "../Editor";
 import UserLibrary from "../components/editor/UserLibrary";
@@ -15,7 +16,11 @@ import Projects from "../pages/Projects";
 const Index = () => {
   return (
     <div className="relative ">
-     <Router>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
+      <Router>
         <Switch>
           <PublicRoute path="/" exact component={Home} />
           <UserRoute path="/login" exact component={LoginRegisterPage} />
@@ -23,7 +28,7 @@ const Index = () => {
           <UserRoute path="/forgot-password" exact component={ForgotResetPassword} />
           <PrivateRoute path="/project/add" exact component={AddProject} />
           <PrivateRoute path="/projects" exact component={Projects} />
-          
+
           <Route path="/editor/:id" exact component={Editor} />
           <Route path="/uikit" exact component={UserLibrary} />
         </Switch>
