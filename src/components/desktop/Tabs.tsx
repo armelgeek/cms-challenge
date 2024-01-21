@@ -69,9 +69,9 @@ const Tabs = () => {
     }
   }, [currentTab])
   return (
-    <div className="h-8 items-center border-b bg-white  border-gray-300 w-screen flex flex-wrap">
+    <div className="h-8 items-center mt-2 border-b bg-white  border-gray-300 w-screen flex flex-wrap">
       {tabs.map((tab: any, index: number) => (
-        <div key={tab.label} title={tab.label} className={`w-56 mx-1 ${index === currentTab ? 'bg-white text-gray-400' : 'bg-primary-200'}  relative border-l border-t border-r border-primary-600 rounded-t px-2  flex items-center cursor-pointer h-8`}>
+        <div key={tab.label} title={tab.label} className={`w-56 mx-1 ${index === currentTab ? 'bg-primary-500' : 'bg-white'}  relative border-l border-t border-r border-blue-600 rounded-t px-2  flex items-center cursor-pointer h-8`}>
 
           <div
             // contentEditable={true}
@@ -79,7 +79,7 @@ const Tabs = () => {
                //Todo: debouce 
                updateProject(e.currentTarget.textContent,'name');
              }} */
-            onClick={() => openTab(index)} className={`truncate mx-3 text-sm bg-gray-700 w-52 text-white px-3 rounded-xl`}>{tab.label}</div>
+            onClick={() => openTab(index)} className={`truncate mx-3 text-sm  w-52  ${index === currentTab ? 'text-white ' : 'text-gray-800'}  px-3 rounded-xl`}>{tab.label}</div>
          
           <AiFillCloseCircle className="text-gray-700 absolute right-0 mx-2" onClick={() => removeTab(index)} />
         </div>

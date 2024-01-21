@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, Children } from 'react';
-import { devices } from './utils/tail/devices';
 import { FaEye, FaFileExport, FaRedo, FaRetweet, FaSave, FaUndo } from 'react-icons/fa';
 import IFrame, { FrameContext } from '@uiw/react-iframe';
 import Tabs from './components/desktop/Tabs';
@@ -14,6 +13,7 @@ import Element from './utils/tail/element';
 import { FaMinus } from 'react-icons/fa';
 import { CgCloseR } from 'react-icons/cg';
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
+import Pages from './components/desktop/Pages';
 const desktopSizes: any = {
   'xxl': { width: 1920, height: '100vh' },
   'xl': { width: 1280, height: '100vh' },
@@ -70,7 +70,7 @@ const Test = ({ children, setCurrent,customZoom }: any) => {
     return `<!DOCTYPE html>
       <html>
         <head>
-          <script src="http://localhost:5173/tailwind.css"></script>
+          <script src="http://localhost:5173/tailwind.js"></script>
           <link rel="stylesheet" href='http://localhost:5173/app.css'/>
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
         </head>
@@ -132,7 +132,7 @@ const Test = ({ children, setCurrent,customZoom }: any) => {
                   <div className="w-full flex rounded-md p-2 backdrop-filter backdrop-blur-lg bg-gray-200 bg-opacity-50 dark:bg-white dark:bg-opacity-5">
                     <button type="button" onClick={() => setChoice(0)} className={`${choice == 0 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Layers</span></button>
                     <button type="button" onClick={() => setChoice(1)} className={`${choice == 1 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Elements</span></button>
-                    <button type="button" onClick={() => setChoice(2)} className={`${choice == 2 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Layouts</span></button>
+                    <button type="button" onClick={() => setChoice(2)} className={`${choice == 2 ? 'bg-white' : ''} flex items-center justify-center gap-1 w-full text-xs focus:outline-none focus:shadow-none leading-4 py-1 px-2 rounded min-w-0 text-gray-900 dark:text-white dark:bg-opacity-10 text-opacity-80`}><span >Pages</span></button>
                   </div>
                 </div>
                 <div className="divide-y divide-gray-200 dark:divide-white dark:divide-opacity-5 flex-1 mb-32">
@@ -163,7 +163,8 @@ const Test = ({ children, setCurrent,customZoom }: any) => {
                   )}
                   {choice == 2 && (
                     <div className="px-3">
-                      <UserLibrary />
+                      <Pages/>
+                      {/**<UserLibrary />**/}
                     </div>
                   )}
 
@@ -172,7 +173,7 @@ const Test = ({ children, setCurrent,customZoom }: any) => {
             </div>
           </div>
         </div>
-        <div className="relative z-20 flex-1 flex flex-col items-center bg-gray-200 dark:bg-gray-700 overflow-hidden">
+        <div className="relative z-20 flex-1 flex flex-col items-center bg-white dark:bg-gray-700 overflow-hidden">
           <div className="w-full h-[1080px] relative z-10 scrollbar overflow-scroll">
 
             <div className="absolute top-2 left-1 right-2 z-20  items-center justify-center">

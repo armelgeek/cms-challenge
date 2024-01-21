@@ -29,9 +29,9 @@ const BlockContainer = ({ doc, level, setCurrent, ajustCoords }: any) => {
   const toggleBorder = () => {
     const isSelected = editor.selectedBlocks && editor.selectedBlocks.some((block:any) => block.id === doc.id);
     if (isEnter && editor.current && editor.current.id === doc.id) {
-      return isSelected ? 'border-2 border-dashed border-red-500' : desktop.state === 'neutral' ? 'border-2 border-dashed border-primary-500' : 'border-2 border-dashed border-green-500';
+      return isSelected ? 'border-2 border-dashed border-red-500' : desktop.state === 'neutral' ? 'border-2 border-dashed border-blue-500' : 'border-2 border-dashed border-green-500';
     } else if (editor.current && editor.current.id === doc.id) {
-      return isSelected ? 'border-2 border-dashed border-red-500' : desktop.state === 'neutral' ? 'border-2 border-dashed border-primary-500' : 'border-2 border-dashed border-green-500';
+      return isSelected ? 'border-2 border-dashed border-red-500' : desktop.state === 'neutral' ? 'border-2 border-dashed border-blue-500' : 'border-2 border-dashed border-green-500';
     } else {
       return isSelected ? 'border-2 border-dashed border-red-500' : 'border-none border-dashed border-transparent';
     }

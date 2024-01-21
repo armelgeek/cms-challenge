@@ -64,7 +64,7 @@ const BlockElement = (props: any) => {
   const toggleBorder = () => {
     const isSelected = editor.selectedBlocks && editor.selectedBlocks.some((block:any) => block.id === props.element.id);
     if (isEnter && (editor.current && editor.current.id === props.element.id)) {
-      return isSelected ? 'border-2 border-dashed border-red-500' : 'border-2 border-dashed border-primary-500';
+      return isSelected ? 'border-2 border-dashed border-red-500' : 'border-2 border-dashed border-blue-500';
     } else if (editor.current && editor.current.id === props.element.id) {
       return isSelected ? 'border-2 border-dashed border-red-500' : 'border-2 border-dashed border-green-500';
     } else {

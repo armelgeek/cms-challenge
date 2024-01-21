@@ -112,7 +112,7 @@ const BlockFloating = ({ floatRef, coords }: any) => {
   return editor.current ? (
     <div
       ref={floatRef}
-      className={`z-50 h-6 bg-slate-950 border border-b-0 font-bold  border-primary-500 flex items-center gap-3 absolute z-highest justify-center  px-2 cursor-pointer`}
+      className={`z-50 h-6 bg-slate-950 border border-b-0 font-bold  border-blue-500 flex items-center gap-3 absolute z-highest justify-center  px-2 cursor-pointer`}
       style={{
         top: coords.top,
         left: coords.left

@@ -87,13 +87,19 @@ export const getProject = (id: any) => async (dispatch: any, getState: any) => {
           value: []
         }
       })
-     
+
       if (!_.isUndefined(response.pages) && response.pages.length > 0) {
         let pages = response.pages;
-
+        dispatch({
+          type: 'desktop__item__info',
+          payload: {
+            prop: 'pages',
+            value: pages
+          },
+        })
         for (let index = 0; index < pages.length; index++) {
           const peg = pages[index];
-         
+
           openBlock(peg, dispatch);
         }
       }

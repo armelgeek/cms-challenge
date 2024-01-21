@@ -8,6 +8,7 @@ const initialState = {
     message: '',
     filter: '',
     tabs: [],
+    pages: [],
     galleryFilter: null,
     library: {
         id: 'null',

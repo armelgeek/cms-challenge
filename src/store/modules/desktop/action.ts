@@ -81,6 +81,13 @@ export const addTab = (payload: any) => async (dispatch: any, getState: any) => 
     dispatch({
       type: 'desktop__item__info',
       payload: {
+        prop: 'pages',
+        value: [...desktop.pages, payload]
+      },
+    })
+    dispatch({
+      type: 'desktop__item__info',
+      payload: {
         prop: 'currentTab',
         value: tabs.length - 1
       },
@@ -200,14 +207,14 @@ export const addToUKit = () => async (dispatch: any, getState: any) => {
 
 export const exportBuild = () => async (dispatch: any, getState: any) => {
   let editor = getState().desktop;
-  let tabs = editor.tabs
+  let pages = editor.pages
   let shw = '';
-  for (let i = 0; i < tabs.length; i++) {
-    if (tabs[i].type == 'editor') {
-      shw += `---------------start ${tabs[i].label}.html---------------\n`;
-      shw += jsonToHTML(tabs[i].object.json.blocks);
+  for (let i = 0; i < pages.length; i++) {
+    if (pages[i].type == 'editor') {
+      shw += `---------------start ${pages[i].label}.html---------------\n`;
+      shw += jsonToHTML(pages[i].object.json.blocks);
       shw += `\n`;
-      shw += `---------------end ${tabs[i].label}.html---------------\n`;
+      shw += `---------------end ${pages[i].label}.html---------------\n`;
     }
   }
   console.log('export build', shw);
